@@ -1,0 +1,36 @@
+Grigory Kislin [2:58 PM]
+joined #hw0.
+
+Grigory Kislin [3:06 PM]
+Обсуждение, вопросы по Вводному занятию стажировки https://github.com/JavaOPs/topjava
+*Свои решения не выкладывать до первого урока (можно в личку).*
+Если нет проверки ДЗ, то свои решения на проверку присылать не надо.
+Доплатить за проверку домашних заданий можно в личном кабинете http://javaops.ru/auth/profile
+GitHub
+JavaOPs/topjava
+topjava - Java Enterprise: Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery
+Java Online Projects
+Онлайн обучение и стажировки Java Web, Spring/JPA, Enterprise. От новичков до эксперта. БЕСПЛАТНОЕ вступительное занятие, помощь в трудоустройстве
+Онлайн обучение Java Web, Spring/JPA, Enterprise. От новичков до эксперта. Совместная разработка проектов. БЕСПЛАТНОЕ вступительное занятие. Стажировки и помощь в трудоустройстве. Получи опыт работы его в реальном Spring/JPA Enterprise проекте
+http://javaops.ru/static/img/javaEE.png
+
+Andrey [10:18 PM]
+joined #hw0 along with 12 others.
+
+Ma3stro [6:07 PM]
+Что делать, если уже выполнил hw0?:)
+
+Dmitry Neustupov [8:11 AM]
+joined #hw0.
+
+Dmitry Neustupov [8:12 AM]
+@Ma3stro ждать )
+
+vvviiit [1:23 PM]
+joined #hw0 along with Andrey.
+
+roma [9:39 AM]
+Лучше не ждать, а почитать спринг ин эктион, поковыряться в jquery и sql
+
+Constantine [9:37 PM]
+joined #hw0 along with micredis.

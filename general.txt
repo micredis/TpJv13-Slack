@@ -1,0 +1,62 @@
+Grigory Kislin [2:39 PM]
+joined #general along with 4 others.
+
+Tanya [7:29 AM]
+всем привет (edited)
+
+Dmitriy_T [8:47 AM]
+Привет)
+
+Alex Gor [1:16 PM]
+joined #general.
+
+Grigory Kislin [4:11 PM]
+Всем привет! Буду благодарен за репост (обновил ссылки):
+VK: https://vk.com/javawebinar?w=wall-58538268_1059
+Facebook: https://www.facebook.com/groups/javaops/permalink/376089392818209/
+Facebook
+Log into Facebook | Facebook
+Log into Facebook to start sharing and connecting with your friends, family, and people you know.
+
+VictorStatko [8:40 PM]
+joined #general along with Denys.
+
+Denys [1:37 AM]
+Привет всем, возвращаюсь к вам ещё с 7го проекта и джава-раш = ) В прошлый раз не осилил пройти до конца так как резко жизнь метнула на позицию ПМа в маленькой ИТ компании, на данный момент устроился QA уже в другой фирме и возвращаюсь на путь добра :slightly_smiling_face: (edited)
+
+Sergey Lem [7:25 AM]
+joined #general along with 11 others.
+
+Reomor [8:06 PM]
+салют)
+
+Bogdan [9:53 PM]
+Привет всем! Я с Topjava12, много пропустил, поэтому иду на повтор. 13е для меня счастливое. )
+
+nmatkheev [9:01 AM]
+Здравствуйте коллеги, на 12й выпуск не хватило времени, надеюсь 13й осилю)
+
+Igor Ivanov [7:31 PM]
+Yo
+
+roma [2:44 PM]
+Всем привет друзья )
+
+Grigory Kislin [6:59 PM]
+welcome:)
+
+roma [3:03 PM]
+Ребята я буду работать с проектом с двух разных компов обязательно что бы версии Tomcat, git, JDK 8 - были одинаковые?
+
+Shtramak [3:09 PM]
+Насчет git и JDK8 точно не принципиально... с Tomcat может что-то вылезти, но не должно )
+
+roma [3:29 PM]
+спасибо )
+
+Igor Ivanov [4:23 PM]
+Не проще ли spring-boot? И томкат отдельный не нужен
+
+Ma3stro [6:06 PM]
+На проекте здесь не используется springboot
+Вся работа и патчи будут без него

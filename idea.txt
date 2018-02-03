@@ -1,0 +1,15 @@
+Grigory Kislin [3:43 PM]
+joined #idea.
+
+Grigory Kislin [3:44 PM]
+set the channel topic: https://github.com/JavaOPs/topjava/wiki/IDEA
+
+Grigory Kislin [3:44 PM]
+Канал для помощи с IDEA
+WIKI: https://github.com/JavaOPs/topjava/wiki/IDEA
+GitHub
+JavaOPs/topjava
+topjava - Java Enterprise: Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery
+
+anton.potemkin [6:20 AM]
+joined #idea along with 8 others.

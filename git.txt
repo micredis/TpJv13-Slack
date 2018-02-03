@@ -1,0 +1,15 @@
+Grigory Kislin [3:42 PM]
+joined #git.
+
+Grigory Kislin [3:43 PM]
+set the channel topic: https://github.com/JavaOPs/topjava/wiki/git
+
+Grigory Kislin [3:43 PM]
+Канал для помощи с git
+WIKI: https://github.com/JavaOPs/topjava/wiki/git
+GitHub
+JavaOPs/topjava
+topjava - Java Enterprise: Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery
+
+Katherine [3:09 PM]
+joined #git along with 6 others.
