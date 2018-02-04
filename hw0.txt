@@ -34,3 +34,6 @@ roma [9:39 AM]
 
 Constantine [9:37 PM]
 joined #hw0 along with micredis.
+
+Tanya [5:08 AM]
+не ждите, изучайте ссылки в уроке, попробуйте собрать простой petclinic (edited)
