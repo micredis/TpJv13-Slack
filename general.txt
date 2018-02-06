@@ -69,3 +69,25 @@ Bogdan [1:27 PM]
 
 Shtramak [4:14 PM]
 JavaRush++ ))) Привет!
+
+Grigory Kislin [6:33 PM]
+всем привет! рад, что с нами:)
+чтобы не терять времини- делайте вводное задание
+https://github.com/JavaOPs/topjava#%D0%92%D0%B2%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5-%D0%B7%D0%B0%D0%BD%D1%8F%D1%82%D0%B8%D0%B5
+
+и посмотрите ресурсы: https://github.com/JavaOPs/topjava#%D0%9F%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B5-%D1%80%D0%B5%D1%81%D1%83%D1%80%D1%81%D1%8B
+- ДЗ первого урока будет созданием небольшого CRUD приложения (в памяти, без DB) на JSP и сервлетах
+- начиная с 8го занятия будет базовый  javasrript (jQuery) и bootstrap(css). лучше заранее почитать посмотреть
+GitHub
+JavaOPs/topjava
+topjava - Java Enterprise: Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery
+
+mrLanu [11:48 PM]
+Всем привет)
+
+Max Karavaev [2:04 PM]
+Привет!
+Кто что может сказать про EclipseLink? Насколько он достоин внимания? В некоторых источниках пишут, что это рекомендумая реализация JPA.
+
+Евгений Глушков [3:37 PM]
+Всем здравствуйте, я тоже с TopJava12 у меня под конец стажировки сын родился. Так что тоже пришлось пропустить несколько занятий, но наверстаю.
