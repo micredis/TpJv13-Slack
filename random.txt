@@ -42,6 +42,12 @@ Max Karavaev [3 hours ago]
 Igor Ivanov [1 hour ago]
 Я вообще не морочился с этим и сделал через javascript - datatables. Там можно указать сколько строк на странице. Этот вариант не подходит если много книг, но мы решали конкретную задачу... (edited)
 
+Pavel Zaitcev [2 days ago]
+Добрый день. Используя hibernate в запросе оперировать методами SetFirstResult()/SetMaxResult(). Сдвигать эти значения (точнее значение - так как второе, размер страницы - постоянное) в зависимости от страницы.
+
+
+Nail [1 day ago]
+PageRequest и PaggingAndSortingRepository
 
 saudabaew [1:35 PM]
 Кто может пояснить пятое замечание к HW0:
