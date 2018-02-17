@@ -375,6 +375,9 @@ Darkhan [1:20 PM]
 Edgar [3:14 PM]
 Приветствую народ) разбавлю Сибирью :slightly_smiling_face: Томск
 
+micredis [7:12 PM] private message to Edgar
+Привет томичам! А я родился и прожил первые 6,5 лет в Томске (и потом в 14 лет еще полгода; учился в 47 школе). Жил на переулке Новом. А бабушка у меня там до сих пор живет на Ивана Черных, ей 93 года. Как и большинство близких родственников по линиям обоих родителей. А сейчас живу в Мариуполе (но в анкете указано Киев :slightly_smiling_face:). Это моя вторая попытка стажировки. Но есть шансы и на третью -- в конце апреля -- начале мая у меня должен родиться сын :blush:
+
 Vitaly M. [3:50 PM]
 Всем привет!
 Подскажите как оценить  Time complexity для написанного кода в IDEA ?
@@ -400,3 +403,13 @@ IDEs Support (IntelliJ Platform) | JetBrains
 Couldn't find WEB-INF and web.xml
 Hello! I cant find WEB-INF in my web application. I thought that IDEA will generate this folder automatically. So, could you help me. 
 https://p7.zdassets.com/hc/settings_assets/787891/200177531/duv7LrG3AHpIlTE2sQJ1hQ-Screen_Shot_2016-01-21_at_12.56.54.png
+
+
+lives352 [6:24 PM]
+Всем привет, тут все со стажировки JavaRush?
+
+mrLanu [7:00 PM]
+Нет, не все. Некоторые из IBM))
+
+Darkhan [7:19 PM]
+:raised_hand_with_fingers_splayed: я с JavaRush @lives352
