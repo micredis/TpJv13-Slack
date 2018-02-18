@@ -13,3 +13,6 @@ topjava - Java Enterprise: Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson
 
 anton.potemkin [6:20 AM]
 joined #idea along with 8 others.
+
+Andrew Manik [10:11 AM]
+Подскажите, пожалуйста, как получить бесплатный ключ для IDA? Или еще рано?
