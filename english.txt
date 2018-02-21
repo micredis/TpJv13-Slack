@@ -28,3 +28,13 @@ I think more sensible would be make it a “bla-bla” channel, for english prac
 
 micredis [2:18 PM]
 joined #english along with Bogdan.
+
+
+Mikhail Makar [3:12 PM]
+Hi everybody!)
+
+mrLanu [4:35 PM]
+What's up guys)
+
+pro [5:17 PM]
+Possibly someone has worked with JSF and can answer - why server swears on updating primefaces-extensions dependency from 6.1.1 upto 6.2.RC1?  (quote: Critical error during deployment: : com.sun.faces.config.ConfigurationException: java.lang.Exception: No Function Found on type: org.primefaces.util.ComponentUtils with signature: java.lang.String escapeSelector(java.lang.String))
