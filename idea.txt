@@ -30,3 +30,13 @@ https://stepik.org/course/2403
 
 Andrew Manik [7:19 PM]
 спасибо, разобрался
+
+
+Jan [3:46 PM]
+Всем, привет. Кто-то пользуется Vim editor в IDEA - https://www.jetbrains.com/help/idea/using-intellij-idea-as-the-vim-editor.html ? (edited)
+jetbrains.com
+Using IntelliJ IDEA as the Vim Editor - Help | IntelliJ IDEA
+How to use Vim with IntelliJ IDEA
+
+Yuri [2:51 PM]
+@суса

@@ -38,3 +38,74 @@ What's up guys)
 
 pro [5:17 PM]
 Possibly someone has worked with JSF and can answer - why server swears on updating primefaces-extensions dependency from 6.1.1 upto 6.2.RC1?  (quote: Critical error during deployment: : com.sun.faces.config.ConfigurationException: java.lang.Exception: No Function Found on type: org.primefaces.util.ComponentUtils with signature: java.lang.String escapeSelector(java.lang.String))
+
+
+Alex83 [9:38 AM]
+Hello! Nice channel, everybody needs practice in english (edited)
+
+pro [11:22 AM]
+@Alex83 Salute you;  channel is indeed necessary, and verily everyone of us needs to practise english, but from my eyes drops tears because of such a .LAZY conversation
+
+Ilya [11:36 AM]
+@pro I can’t get a pun) Explain, pls )
+
+pro [12:08 PM]
+@Ilya i meaned, that in this channel there are lot of people, but they do not particularly try to form their thoughts in the manner that is provided here.. therefore the dialogue freezes, even to death
+
+Ilya [12:26 PM]
+@pro oh, gosh) I thought u joked by .LAZY reference. Like .LAZY initialisation or smth ) I think i should take a break from learning, cause I’m starting to think like “JAVA IS EVERYWHERE!!! Watch out! It is coming for your soul” %)
+
+pro [12:49 PM]
+@Ilya people who communicates with me, notes the same thing that you did - that java is almost everywhere in my thoughts, but i don't care, cause i consolidate my knowledge in such a manner.. and i deliberately wrote that word as a constant (edited)
+
+VladimirGlinskikh [12:19 AM]
+Ahoy! Write to who and where teaches English.
+
+mrLanu [12:24 AM]
+YouTube, Udemy, iHeartRadio etc. (edited)
+And Uber :grin:
+
+mrLanu [12:38 AM]
+Actually the best practise to improve your english skill is to get some native english lover))
+Or buy a dog somewhere from UK
+
+VladimirGlinskikh [12:52 AM]
+https://puzzle-english.com/p/1592958
+Puzzle English
+Учим английский онлайн с Puzzle English: бесплатное изучение английского самостоятельно
+Как самостоятельно выучить английский язык с нуля? Повысить уровень владения английским с начинающего до разговорного? Онлайн, бесплатно - только с Puzzle-English.com
+https://puzzle-english.com/wp-content/themes/english/images/0_ok.png
+
+pro [10:04 AM]
+@mrLanu you really think it's possible to teach dog english, because he is from UK? he'll faster learn you barking, i think..
+
+Ilya [10:08 AM]
+How about channel for memes in english ?) it’s two goals for one strike - having fun and english practice )
+
+pro [10:29 AM]
+@Ilya if only this shouldn't interfere with the Main Task that we have already set on this internship)) (edited)
+
+Ilya [10:38 AM]
+https://9gag.com/gag/avOG2AM
+9GAG
+- Just some guy teaching I.T in Ghana, West Africa.
+More memes, funny videos and pics at 9GAG
+https://images-cdn.9gag.com/photo/avOG2AM_700b.jpg
+
+pro [10:55 AM]
+@Ilya real resolution touch screen
+
+Dmitry Neustupov [11:00 AM]
+@pro long response time
+
+Ilya [11:02 AM]
+@Dmitry Neustupov lifelong response time )
+
+pro [11:17 AM]
+i can only imagine what he may do, if you give him css-editor
+
+Jan [11:56 AM]
+I'd recommend the https://www.duolingo.com/. You are able to use desktop and mobile version as well not only for English. (edited)
+Duolingo
+Learn a language for free
+Learn languages by playing a game. It's 100% free, fun, and scientifically proven to work.
