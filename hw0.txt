@@ -1109,3 +1109,141 @@ Grigory Kislin [3:56 AM]
 > а как на счёт рекурсивного подхода?
 да, тоже вариант
 @vladmeh рано еще решения смотреть. убрал ссылку (edited)
+
+
+V-E-S-T [6:12 PM]
+в один стрим у меня пока выходит жёсткий хардкод в одну строку......
+
+Ivan A [7:22 PM]
+пакет package main.java.ru.javawebinar.topjava
+а в классах пакет ru.javawebinar.topjava
+что переименовывать
+?
+
+Grigory Kislin [7:23 PM]
+@Ivan A ты неверно проект подтянул
+удали .idea и .iml и открой либо папку, либо pom.xml
+
+Ivan A [7:28 PM]
+спс
+
+Nedfrench [7:58 PM]
+Всем добрый вечер!
+Подскажите пож-та,
+"должны возвращаться только записи между startTime и endTime ", т.е. должны возвращаться все записи между startTime и endTime вне зависимости от даты?
+
+Mikhail Makar [20 hours ago]
+Добрый, нет, дату тоже нужно учитывать, она передается в объекте!
+
+
+Mikhail Makar [20 hours ago]
+Погляди в демо приложения
+http://topjava.herokuapp.com/meals
+
+
+Nedfrench [20 hours ago]
+В демо добавил две записи такие как в mealList(Завтраки 30.05 и 31.05), после этого в фильтре в демо указал только время с 7.00 до 12.00. В итоге отобрались эти два завтрака.
+
+
+Nedfrench [20 hours ago]
+Vladimir [7:26 PM]
+UserMealWithExceed{dateTime=2015-05-30T10:00, description='Завтрак', calories=500, exceed=false}
+UserMealWithExceed{dateTime=2015-05-31T10:00, description='Завтрак', calories=1000, exceed=true}
+Все верно?
+
+Alexander Melnichuk [7:27 PM]
+Вроде да. У меня так же получилось.
+
+
+Nedfrench [20 hours ago]
+Вчера коллеги писали
+
+
+Mikhail Makar [20 hours ago]
+Да, у меня также, проверку прошел!
+
+
+Ivan A [8:03 PM]
+если fork сделал с JavaWebinar/topjava, то Prepare_ to_ HW0.patch накатывать не надо?
+
+Dmitry Makarov [20 hours ago]
+Надо. Патч накатишь, создай ветку HW0 и в ней делай ДЗ.
+
+
+Ivan A [20 hours ago]
+JavaWebinar/topjava так я от туда fork сделал, а там уже патч этот накатан
+
+
+Nedfrench [20 hours ago]
+Так Prepare_ to_ HW0 уже закоммичен в JavaWebinar/topjava.
+Зачем еще раз накатывать?
+
+
+Nedfrench [20 hours ago]
+Остается только "создай ветку HW0 и в ней делай ДЗ."
+
+
+Ivan A [20 hours ago]
+пасиб
+
+
+Dmitry Makarov [20 hours ago]
+я другой репозиторий клонировал
+>Сделать Fork ЭТОГО проекта (https://github.com/JavaOPs/topjava)
+(edited)
+
+
+Igor Ivanov [11:25 PM]
+после того как закончил hw0 надо писать Григорию чтобы проверил?
+
+mrLanu [11:26 PM]
+@Igor Ivanov, если заплатил за проверку ДЗ, то нужно отсылать его @Tanya
+
+Igor Ivanov [11:29 PM]
+ах, просто в видео было про проверку. а если не заплатил то просто пушим на гх и ждем когда Григорий поделиться решением и ждем след задания?
+
+mrLanu [11:30 PM]
+Всё правильно
+
+Igor Ivanov [11:31 PM]
+@mrLanu спасибо
+
+Andrii [12:20 AM]
+Добрый вечер. Подскажите, плиз,  как верно вывести результат в консоль?
+У меня вот что получается ru.javawebinar.topjava.model.UserMealWithExceed@3d494fbf
+ru.javawebinar.topjava.model.UserMealWithExceed@1ddc4ec2
+
+Tanya [12:21 AM]
+переопредели toString в UserMealWithExceed
+
+Andrii [16 hours ago]
+Спасибо! Сработало :smiley:
+
+
+pro [6 hours ago]
+@Tanya то есть, можно добавлять свои методы в любой класс, не ограничиваясь только изменением метода getFilteredWithExceeded? (edited)
+
+
+Artem Murk [6 hours ago]
+@Tanya тоже интересует данный вопрос заданный @pro . А поля можно изменять?:upside_down_face:
+
+
+goodhoopoe [6 hours ago]
+Замечания к HW0
+1: Код проекта менять можно! Одна из распространенных ошибок как в тестовых заданиях на собеседовании, так и при работе на проекте, что ничего нельзя менять. Конечно при правках в рабочем проекте обязятельно нужно проконсультироваться/проревьюится у авторов кода (находится по истории VCS)
+
+
+goodhoopoe [6 hours ago]
+поэтому почему нет?
+
+goodhoopoe [6 hours ago]
+зачем костылить tostring прямо в функции, если можно просто заоверрайдить в классе и удобно использовать? у нас же не гестапо тут ))
+
+
+
+pro [5 hours ago]
+мне лично tostring не сильно нужен)) я бы приделал вложенный класс, или, скажем, сеттеры к полям которые находятся в userMeal
+
+
+pro [5 hours ago]
+или, на худой конец, вообще параметризацию некоторых полей бы переделал)) (edited)
