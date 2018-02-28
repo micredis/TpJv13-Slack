@@ -167,3 +167,27 @@ Yevhen Maksymovych [12:59 PM]
 
 Dmitriy Kozin [1:11 PM]
 Ну мало ли.. (вдруг @Grigory Kislin заглянет) :grin:
+
+
+Dmitriy Kozin [4:44 PM]
+Ответ на мой вопрос тоже оказался в духе картинки с совой: правильное решение - использовать Hibernate Multi-tenancy...
+
+Grigory Kislin [4:58 PM]
+@Dmitriy Kozin вопрос скорее по администрированию/развертыванию/devop... увы не подскажу
+
+pro [6:23 PM]
+set the channel purpose: Если бы StreamAPI была девушкой, я бы, наверное, влюбился
+
+aleksey [6:31 PM]
+Что-то меня бы беспокоила её многопоточность.
+pro
+@pro set the channel purpose: Если бы StreamAPI была девушкой, я бы, наверное, влюбился
+
+Dmitriy Kozin [10:18 AM]
+Другой интересный вопрос - вброс. Spring Data имеет собственную реализацию JPA или работает со сторонними (Hibernate, OpenJPA)?
+
+Yevhen Maksymovych [10:22 AM]
+ну, если говорить о спринг дата, то внутри spring-boot-starter-data-jpa сидит хибернейт
+
+Grigory Kislin [12:45 PM]
+Spring Data это просто надстройка над JPA. а JPA - спецификация orm. на 4-м занятии все разберем (edited)

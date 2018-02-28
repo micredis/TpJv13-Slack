@@ -1777,3 +1777,117 @@ Anton Kiselev [3:45 PM]
 
 danissimo [3:52 PM]
 Дайте ссылку на lessons с предыдущего цикла (topjava12)
+
+
+Grigory Kislin [4:55 PM]
+@danissimo в личку. уже:)
+
+realcorwin [5:25 PM]
+Можете меня поздравить: только что прошёл сертификацию на Java SE Programmer (Score: 86%) :sweat_smile:
+
+LeoJames [5:26 PM]
+:+1:
+
+pro [5:30 PM]
+@realcorwin oracle сертификацию? и какой тебе бейджик повесили, сверкани, глянуть охота))
+@realcorwin красава, тоже хотю там сдать экзамен
+
+mrLanu [5:38 PM]
+@realcorwin 250$ ?
+
+LeoJames [5:39 PM]
+150 же
+
+mrLanu [5:41 PM]
+Это китайский :grin:
+
+realcorwin [5:55 PM]
+изначально 212 евро. моя фирма - партнёр Oracle, поэтому со скидкой - 159 евро. Но оказалось, что ещё НДС надо заплатить - так что в итоге получилось 190 евро.
+
+pro [5:57 PM]
+@realcorwin молорик, надо Григорию подсказать чтоб на джавараш бейджинговую систему приделал
+
+Jan [6:12 PM]
+Подскажите а есть какие-то упоминание у Нас на курсе о QueryDSL и JooQ ? Даже тут уже тренд поддержали https://www.thoughts-on-java.org/getting-started-with-jooq ?
+Thoughts on Java
+Getting Started with jOOQ - Building SQL Queries in Java
+jOOQ provides you with a Java DSL that enables you to build SQL queries in a comfortable and type-safe way. Here is all you need to get started.
+https://www.thoughts-on-java.org/wp-content/uploads/2018/02/Java-SQL-1.png
+Хотя весь портал о ссылке, посвящен Хибернейту
+ну и про MyBatis - такой же вопрос
+
+Vladimir [7:13 PM]
+всем приветы!
+а что значит  "По ходу видео сделать Apply Patch... скаченного патча Prepare_ to_ HW0.patch" ? а то я просто склонировал hw0
+посмотрел видео Кислина на скорости х2, хех, такой Дроздов по Джаве )))
+Гриша, а как у тебя с английским, а то ты так смешно произносишь некоторые слова?
+и кстати, кто видел, где лежит ключ для идеи на 6 месяцев
+?
+и тоже - не совсем понятно про это:
+Закоммитить и запушить изменения (commit + push)
+Сделать ветку домашнего задания
+Выполнить задание и залить на GitHub (commit + push)
+Переключиться в основную ветку проекта master.
+как это делать умею, но не понятно
+
+Yevhen Maksymovych [7:40 PM]
+по поводу сертификации на кор - никто не пользовался сервисом https://www.myexamcloud.com/onlineexam/viewExam.html?t=Uc1TNwrGb08=
+MyExamCloud
+MyExamCloud Free 1Z0-808 Java SE 8 Programmer I Practice Mock Exam online exam
+The MyExamCloud OCAJP 8 1Z0-808 Practice Mock Exam online test covers real exam topics for Java SE 8 Programmer I exam (1Z0-808). It is part of MyExamCloud&#39;s OCAJP 8 (1Z0-8...
+Exam Category
+Certification Exams
+Exam Type
+Practice Exam
+?
+интересно, насколько там соответствует реальному экзамену
+20 баксов вроде ерунда, но выбрасывать тоже жалко
+
+Андрущенко Игорь [8:00 PM]
+Коллеги, всем привет. Подскажите пожалуйста мы тут обсуждаем нулевое ДЗ или есть отдельный канал?
+
+dmitry_ov [8:04 PM]
+есть канал #hw0
+Андрущенко Игорь
+Коллеги, всем привет. Подскажите пожалуйста мы тут обсуждаем нулевое ДЗ или есть отдельный канал?
+
+Андрущенко Игорь [8:05 PM]
+Спасибо
+
+realcorwin [8:41 PM]
+Евгений, я пользовался тестами от Whizlabs. Рекомендую. Еще все хвалят тесты от Enthuware. Я скачивал пробный пакет - хорошие вопросы.
+
+Jury Mironov [9:23 PM]
+а программа стажировки 12 отличается от 13?
+
+Grigory Kislin [1:00 AM]
+> а программа стажировки 12 отличается от 13?
+чтото зарефакторится. обновятся версии. планирую перейти на botstrap 4. может еще что-то будет:)
+
+pro [10:52 AM]
+@Grigory Kislin сделал без цикла HW0, все конвертации на StreamAPI, только еще не глянул как работает встроенный в него forEach.. возможно там встроенный цикл
+
+vch [10:54 AM]
+@pro forEach - это и есть цикл...
+
+pro [10:56 AM]
+@vch тот forEach, который в стриме? эх, я так надеялся что он по другому работает, только называется forEach))
+
+Andrew [11:11 AM]
+@pro ты про этот ? void forEach(Consumer<? super T> action);
+А что тут ты хотел посмотреть ?
+
+pro [11:56 AM]
+@Andrew да, про этот; похоже, он не использует цикла, работает через интерфейсы
+
+Slav [12:32 PM]
+uploaded this image: winumor-min.png 
+
+
+LeoJames [2:46 PM]
+uploaded and commented on this image: 399486.jpg 
+
+Освоил только до 2
+
+Yevhen Maksymovych [2:51 PM]
+антоха логвинов-то как похорошел
