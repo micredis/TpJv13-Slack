@@ -1,0 +1,33 @@
+Dmitrii Kurilchik [12:40 AM]
+joined #hw1 along with 2 others.
+
+Grigory Kislin [3:20 AM]
+set the channel topic: https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson01.md
+
+Grigory Kislin [3:23 AM]
+Занятие 1: https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson01.md
+Днем вышлю письмо (продублирую ссылку на занятие) (edited)
+
+Tanya [3:25 AM]
+joined #hw1 along with 16 others.
+
+AntonY [6:27 AM]
+@Grigory Kislin спасибо. Курс действительно очень интенсивный. Я еще не успел закрыть 100500 вкладок с урока HW0, а тут еще больше :slightly_smiling_face:
+
+Vladimir Glinskikh [7:15 AM]
+@AntonY Толи еще будет, ой ёёй. :slightly_smiling_face:
+
+Tamerlan [9:58 AM]
+Добрый день! Вебинар уже прошел?
+
+vch [9:59 AM]
+@Tamerlan вебинаров не будет. Есть заранее записанные видео, которые можно смотреть в любое время.
+
+Tamerlan [10:00 AM]
+@vch Спасибо! А где посмотреть можно будет подскажите
+
+vch [10:00 AM]
+см. https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson01.md (edited)
+
+Tamerlan [10:01 AM]
+Спасибо!
