@@ -220,3 +220,4 @@ Yevhen Maksymovych [4:51 PM]
 о, разобрался
 вопрос снят :slightly_smiling_face:
 @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+и депендя jackson-datatype-jdk8
