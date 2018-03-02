@@ -191,3 +191,32 @@ Yevhen Maksymovych [10:22 AM]
 
 Grigory Kislin [12:45 PM]
 Spring Data это просто надстройка над JPA. а JPA - спецификация orm. на 4-м занятии все разберем (edited)
+
+
+Yevhen Maksymovych [4:31 PM]
+ребят, помогите, как десериализовать LocalDateTime из json'а?
+
+goodhoopoe [4:32 PM]
+а в чем проблема? или ты в целом ищешь пример как кто делает?*
+
+Yevhen Maksymovych [4:33 PM]
+у меня вот какая ошибка выпадает: Cannot construct instance of `java.time.LocalDateTime` (no Creators, like default construct, exist)
+пишут, что надо добавить депендю jackson-datatype-jsr310
+но у меня хоть с ней, хоть без нее ошибка падает
+не хочется делать кастомный маппер, если эта штука как-то нативно может работаь
+пишут, что ещё надо добавить аннотацию к дате
+@DateTimeFormat(iso = DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+но у меня с такой не компилится, ругается, что attribute value must be constant
+
+
+goodhoopoe [4:41 PM]
+да, я тоже нагуглил, что-то типа что аннотации спасут, но я кривоглазый, не сразу увидел, что ты про localdatetime
+
+Yevhen Maksymovych [4:43 PM]
+поменял LocalDateTime на простой Date - проканало всё, но осадочек остался
+
+
+Yevhen Maksymovych [4:51 PM]
+о, разобрался
+вопрос снят :slightly_smiling_face:
+@JsonDeserialize(using = LocalDateTimeDeserializer.class)

@@ -83,3 +83,7 @@ mrLanu [8:36 PM]
 Артём Емельяненко [5:10 AM]
 .patch это стандартный git файл, к идее никакого отношения не имеет. Можно работать из консоли и создавать или применять патчи (edited)
 https://mijingo.com/blog/creating-and-applying-patch-files-in-git (edited)
+
+
+Andrii [4:48 PM]
+Подскажите, не пойму, сделал apply все патчи урока Lesson01 в master, теперь у меня дублируется метод getFilteredWithExceededInOnePass, только под разной реализацией. Мне нужно было apply сделать, только одной реализации или все верно и можно commit/push ?

@@ -31,3 +31,174 @@ vch [10:00 AM]
 
 Tamerlan [10:01 AM]
 Спасибо!
+
+
+Andrey Fedkin [9:00 PM]
+uploaded and commented on this image: error1.png 
+
+После патча 1_0_fix возникает такая ошибка. Что делать - менять вручную или в дальнейшем это будет изменено с помощью остальных патчей?
+
+Andrey Fedkin [9:24 PM]
+и еще вопрос по поводу коммитов - делать коммит после каждого патча или после всех патчей ?
+
+dyakoven [9:34 PM]
+коммитить желательно после каждого патча, так удобнее откатывать при необходимости. пушить можешь уже все вместе
+
+Mikhail Makar [9:51 PM]
+Кстати, у всех получилось в Tomcat добавить строчку:
+<user username="tomcat" password="tomcat" roles="tomcat,manager-gui,admin-gui"/>
+У меня вот не даёт настройки поменять?
+Всё, разобрался!
+
+Mikhail Makar [11:14 PM]
+Если у кого будет проблема с запуском Tomcat из консоли, ошибка типа:
+"Neither the JAVA_HOME nor the JRE_HOME environment variable is defined
+At least one of these environment variable is needed to run this program"
+
+То вот годная статейка, в которой рассказывают как победить её:
+http://thetekst.blogspot.ru/2012/02/tomcat-windows-x64.html
+thetekst.blogspot.ru
+Устанавливаем Tomcat для Windows x64
+Скачиваем Tomcat разархивируем его на c:\Program Files\apache-tomcat-7.0.25\ Если запустить командную строку ( cmd ) и написать там: c...
+http://1.bp.blogspot.com/-3w4X78RWSOI/TzUDtVMrifI/AAAAAAAAAkc/nGJrXFQKP9k/w1200-h630-p-k-no-nu/10%252C02%252C12%252815-17-52%2529.png
+
+aleksey [11:31 PM]
+Почему хотя jsp и являются по сути сервлетом, они никак не конфигурируются в web.xml? и вообще нигде никак не описываются, просто происходит редирект и все. В спринге же в сервлет диспатчере конфигурация происходит в явном виде.
+
+Edgar Zed [13 hours ago]
+JSP задумывались только как view и никакой особой бизнес-логики в себе не должны содержать, но в web.xml инит-параметры им можно дать
+```<servlet>
+  <servlet-name>init</servlet-name>
+  <jsp-file>/init.jsp</jsp-file>
+  <init-param>
+      <param-name>test</param-name>
+      <param-value>me</param-value>
+  </init-param>
+</servlet>```
+и потом достать из pageContext например (edited)
+
+
+Mikhail Makar [12:13 AM]
+Кстати, артифакты нужно коммитить, или мгнорировать их?
+В Патче 1.4 появляется
+
+Dmitry Makarov [12:31 AM]
+ненужно
+
+Mikhail Makar [12:33 AM]
+То есть коммитить нужно именно файлы, которые мы в дальнейшем будем пушить, так?
+
+Dmitry Makarov [12:48 AM]
+да
+
+saudabaew [5:27 AM]
+у кого нибудь есть проблемы с записью в лог-файл? у меня на консоль выводит, а в файл не пишет.
+
+Dmitry Makarov [5:43 AM]
+переменную окружения объявил? ребутнулся?
+
+saudabaew [6:07 AM]
+ага
+Блин. Сейчас пытаюсь установить grails, там тоже надо добавлять переменные среды. Но тоже не работает, хотя вроде ничего сложного нет. Может что то с виндой...
+Перезагрузил винду, grails заработал. Щас проверю логи в проекте
+
+saudabaew [6:16 AM]
+о, в лог-файл тоже начал писать. эх, Билл)
+
+pro [6:22 AM]
+@Mikhail Makar переменные аля_HOME всегда желательно держать во внимании, у меня, бывало, прописанный в интеллидж сервер (в edit configurations) игнорировался, а вместо него стартовал тот, на который указывала переменная сервер_HOME, у которого в каталоге "деплой" находился артефакт более ранней версии того самого приложения, которое я правил, и я очень удивлялся, почему правки не срабатывают)
+
+Jury Mironov [10:49 AM]
+Патч 1_3_HW0_optional2 не накатывается. Я его после fix патча применяю. Вылезает разрешение ошибок, как сказать ему что запихни уже весь код из патча и успокойся? После применения не меняется код. Или надо после  патчей stream и cycle? (edited)
+
+Katherine [6 hours ago]
+Откати ветку master так, чтобы в ней был только один твой коммит - Prepare to HW0. Патчи надо применять в master. А твой код остается рядом в отдельных ветках.
+
+
+Katherine [6 hours ago]
+А еще лучше - откати ее до самого начала и накатывай патчи, начиная с нулевого. И следи за тем, чтобы при применении патча стояли галочки на всех файлах, в которых патч делает изменения. И при коммите тоже за галками следи.
+
+
+Jury Mironov [6 hours ago]
+я так и откатил, код в патче optinal2 отличается от кода чистого мастера, как я понял
+
+
+Jury Mironov [6 hours ago]
+все патчи кроме него нормально применяются
+
+
+Katherine [6 hours ago]
+Последовательно применяй. 1_0 - коммит в master, 1_1 - коммит в master
+
+
+Aliaksei Zayats [5 hours ago]
+именно последовательно, как как один патч зависит от предыдущего.. сам вчера промучался
+
+Grigory Kislin [42 minutes ago]
+https://github.com/JavaOPs/topjava/wiki/git#%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-%D0%BF%D0%B0%D1%82%D1%87%D0%B0%D0%BC%D0%B8-%D0%BD%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5
+GitHub
+JavaOPs/topjava
+topjava - Java Enterprise: Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery
+
+
+Rostyslav [11:20 AM]
+Коммит  после патча именовать как и сам патч для удобства чтения, или банально HW0? Как кто делает?
+
+Katherine [5 hours ago]
+Именовать для удобства чтения.
+
+
+
+Grigory Kislin [41 minutes ago]
+я так делаю:) только не коммит именовать, а комментарий к коммиту (edited)
+
+
+dmitry_ov [12:49 PM]
+Patch не накатывается
+
+https://github.com/JavaOPs/topjava/wiki/Git#patch-%D0%BD%D0%B5-%D0%BD%D0%B0%D0%BA%D0%B0%D1%82%D1%8B%D0%B2%D0%B0%D0%B5%D1%82%D1%81%D1%8F-%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%B0%D0%B3%D0%B0%D0%B5%D1%82-merge (edited)
+Jury Mironov
+Патч 1_3_HW0_optional2 не накатывается. Я его после fix патча применяю. Вылезает разрешение ошибок, как сказать ему что запихни уже весь код из патча и успокойся? После применения не меняется код. Или надо после  патчей stream и cycle?
+GitHub
+JavaOPs/topjava
+topjava - Java Enterprise: Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery
+
+Pavel Zaitcev [12:56 PM]
+Для удовлетворения требования 1.2.2 рекомендую посмотреть ссылку, данную там же, чуть ниже: "JSTL LocalDateTime format" https://stackoverflow.com/questions/35606551/jstl-localdatetime-format . Очень упрощает вывод LocalDateTime в нужном формате через JSTL.
+stackoverflow.com
+JSTL LocalDateTime format
+I want to format my java 8 LocalDateTime object in "dd.MM.yyyy" pattern. Is there any library to format ? I tried code below but got convertion exception. <fmt:parseDate value="${date}" pattern...
+
+Джони [3:26 PM]
+uploaded and commented on this image: изображение.png 
+
+Привет, коллеги) помогите разобраться с проблемкой:
+накатывал патчи попорядку и после каждой накатки делал в GIT команду "git add .", а затем в idea делал комит. и всё вроде хорошо...
+НО когда сделал push, на сайте в аккаунте гитхаба комиты не отобразились... подскажите в чём может быть проблема?
+
+goodhoopoe [3:29 PM]
+https://github.com/Zondr/topjava/commits/master
+GitHub
+Zondr/topjava
+topjava - Java Enterprise: Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery
+
+goodhoopoe [3:29 PM]
+uploaded this image: image.png 
+
+
+goodhoopoe [3:29 PM]
+хэши коммитов совпадают
+
+saudabaew [3:36 PM]
+commented on Джони’s file изображение.png
+На самом гитхабе в ветке мастер смотрел?
+
+Джони [3:44 PM]
+@goodhoopoe @saudabaew сорян, я на гитхабе был на странице вводного задания, вот и не обновлялось)))))
+
+goodhoopoe [3:44 PM]
+бгг
+бывает )
+
+Джони [3:45 PM]
+надо проветриться..)

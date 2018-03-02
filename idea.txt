@@ -81,3 +81,26 @@ Artem Murk
 
 Artem Murk [3:19 PM]
 Он всемогущ) буду гуглить
+
+
+mrLanu [10:56 PM]
+Вопрос. Если в какой нибуть папке в проекте нету хотя бы одного файла и в ней создать еще папку, папки объединяются через точку... есть другой способ избежать этого ?
+
+Constantine [18 hours ago]
+Можно поменять настройки проекта.
+https://stackoverflow.com/questions/22001171/how-to-expand-folded-package-chain-in-intellij-idea
+stackoverflow.com
+How to expand folded package chain in Intellij IDEA?
+Intellij IDEA automatically chain packages together if the intermediate ones are otherwise empty. It is a nice feature in general. However, sometimes you don't want them to be chained, especially w...
+ 
+
+
+mrLanu [18 hours ago]
+Благодарю.
+
+
+ivanpobeguts [11:29 PM]
+Некоторые настройки в IDEA, нашёл для себя несколько полезных: https://habrahabr.ru/post/206714/ (edited)
+Хабрахабр
+Настройка IDEA для чистокодеров
+Я люблю две вещи: Intellij IDEA и чистый код (Clean Code). IDEA создана для чистого кода. Многие настройки по умолчанию уже стимулируют вас писать как надо.
