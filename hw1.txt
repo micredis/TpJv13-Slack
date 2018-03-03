@@ -202,3 +202,161 @@ goodhoopoe [3:44 PM]
 
 Джони [3:45 PM]
 надо проветриться..)
+
+
+Andrii [6:26 PM]
+Подскажите, не пойму, сделал apply все патчи урока Lesson01 в master, теперь у меня дублируется метод getFilteredWithExceeded, только под разной реализацией. Мне нужно было apply сделать, только одной реализации или все верно и можно commit/push ?
+
+Ma3stro [6:32 PM]
+Всё правильно, пока у нас несколько реализаций этого метода
+
+roma [6:35 PM]
+народ реализация getMealWithExceeded в один проход не доходит только до моего маленького мозга (особенно рекурсия)?
+
+Sergey Mitrichev [12 hours ago]
+просто плюсану, чтобы тебе не было одиноко :slightly_smiling_face:
+
+
+Sergey Mitrichev [12 hours ago]
+что, кстати, больше непонятно? рекурсия или один проход?
+
+
+roma [5 hours ago]
+Просто с ходу не понятно ни то ни другое - вчера поковырялся немного - что то понял ) - в рекурсию не лазал - не люблю я ее
+
+
+Aleksey Vra [7:19 PM]
+как для линукса правильно добавить переменную окружения?
+добавил в bashrc строчку TOPJAVA_ROOT="/media/vra/topjava"
+и в консоли по команде "exploded" переменная отоброжается, но в проекте логи только в консоль idea идут, не пойму в чем проблема
+
+aleksey [19 hours ago]
+Если не ошибаюсь то в ~/.profile нужно определять переменные окружения. Тогда они будут видны не только в терминале
+
+
+Aleksey Vra [18 hours ago]
+спасибо, помогло:slightly_smiling_face:
+
+
+qf05 [8:58 PM]
+пока вместо DateFormatter использовал fn:replace вывод мне нравится)))
+Но сейчас буду переделывать...
+Подскажите, а что вообще означает Optional в домашнем задании, это просто типа часть вторая усложненная или это дополнительное задание?
+
+Dmitry Neustupov [9:07 PM]
+@qf05 дополнительная, усложнённая, вторая часть )
+
+Kirilo [1:52 AM]
+а на сервлеты ссылочка битая... Совсем не так, как в видео...
+https://github.com/JavaOPs/basejava/blob/master/lesson/lesson15.md#%D0%A1%D0%B5%D1%80%D0%B2%D0%BB%D0%B5%D1%82%D1%8B
+GitHub
+JavaOPs/basejava
+Contribute to basejava development by creating an account on GitHub.
+
+Aleksey Vra [3:59 AM]
+@Kirilo на этом сайте все ссылки переехали https://devcolibri.com/%d0%ba%d0%b0%d0%ba-%d1%81%d0%be%d0%b7%d0%b4%d0%b0%d1%82%d1%8c-servlet-%d0%bf%d0%be%d0%bb%d0%bd%d0%be%d0%b5-%d1%80%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be/ (edited)
+
+Andrew [5:56 AM]
+ребята кто как реализует подсветку текста  "красный-зеленый" в таблице ?
+
+Andrew [6:24 AM]
+может есть варианты кроме c:if (jstl).
+
+Aleksey Vra [7 hours ago]
+я сделал через тернарный оператор, цвет задавал в теге <tr>
+там где цвет указать надо написал тернарный jstl
+
+
+
+Andrew [7 hours ago]
+@Aleksey Vra да так поменьше дублирующего кода)
+
+
+roma [9:48 AM]
+Есть кто живой?
+
+Dmitry Neustupov [10:09 AM]
+@roma есть
+
+pro [10:09 AM]
+что надо
+
+Andrew [10:25 AM]
+@pro хех, четко и по делу))
+
+Fedor [10:26 AM]
+Привет! Я правильно понял, ветку HW1 делаем из ветки master после накатки всех патчей?
+
+Dmitry Makarov [3 hours ago]
+Да. На мастер накатываются патчи, потом создается ветка HW1. (edited)
+
+
+Andrew [10:28 AM]
+угу
+
+Aleksei Kirillov [10:36 AM]
+Привет! А кто как понимает пункт "Сделать отображения списка еды в JSP, цвет записи в таблице зависит от параметра exceed (красный/зеленый)."? 
+Параметр exceed - это поле в MealWithExceed?
+Где тогда задается порог caloriesPerDay для getFilteredWithExceeded?
+
+Dmitry Neustupov [3 hours ago]
+Параметр exceed - это поле в MealWithExceed? - Да
+
+
+Andrew [3 hours ago]
+читай выше, это уже обсуждали
+
+
+Aleksei Kirillov [3 hours ago]
+в ветке hw1? Что-то не найду
+
+
+Andrew [3 hours ago]
+Я уже задавал вопрос по поводу раскраски текста в таблице один человек ответил
+
+
+Andrew [3 hours ago]
+читай внимательно
+
+
+Aleksei Kirillov [3 hours ago]
+про тернарый оператор я видел. А где задается порог для определения красный-зеленый?
+
+
+Andrew [3 hours ago]
+Создай клас положи туда list<MealWithExceed> а как ты его инициализируешь какая разница...
+
+
+Andrew [3 hours ago]
+мы пока без БД работаем
+
+
+Dmitry Neustupov [3 hours ago]
+Где тогда задается порог caloriesPerDay для getFilteredWithExceeded? - На данный момент, там, где удобно. Можно вручную каждый раз прописывать, можно переменную завести и к ней обращаться.
+
+
+Aleksei Kirillov [3 hours ago]
+ок, спасибо!
+
+
+Mikhail Makar [10:45 AM]
+Ребят, есть такие кто уже дз осилил?
+
+Ilya [11:17 AM]
+только первую часть, без опшинал
+
+Vladimir [11:49 AM]
+всем привет! кажись я что-то пропустил. дайте пожалуйста ссылку на видео вступительного занятия, везде говорится про это видео, но ссылки на видео я  в упор не вижу
+
+roma [12:15 PM]
+@Vladimir зайди в hw0 (в слаке) - там ссылка сверху есть ну или https://github.com/JavaOPs/topjava
+GitHub
+JavaOPs/topjava
+topjava - Java Enterprise: Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery
+
+Grigory Kislin [1:01 PM]
+ссылки на devcolibri  в уроке поправил
+https://devcolibri.com/jstl-для-написания-jsp-страниц/
+
+Jury Mironov [1:51 PM]
+В материале по первому заданию есть объяснение, как запилить сервлет с выводом листа? Я что-то не нашел. Я все делал через спинг и в сервлетах я 0 (edited)

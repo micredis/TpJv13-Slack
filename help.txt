@@ -130,3 +130,17 @@ Jan [4:07 PM]
 
 Grigory Kislin [4:11 PM]
 все по записи... в конце планирую сделать общий вебинар: что дальше + ответы на вопросы
+
+
+Oleg K [6:34 PM]
+uploaded and commented on this image: Screenshot from 2018-03-02 19-25-30.png 
+
+Как попасть на страничку javawebinar.ru/basejava/, упоминаемую в видео 6. WAR. Веб-контейнер Tomcat. Сервлеты?
+
+Grigory Kislin [12:52 PM]
+@Oleg K http://javaops.ru/reg/basejava
+ссылки уроков basejava: https://github.com/JavaOPs/basejava (edited)
+Java Online Projects
+Онлайн обучение Java/Spring/JPA. Практика, проекты, стажировки
+Онлайн обучение Java Web, Spring/JPA, Enterprise. От новичков до эксперта. Совместная разработка проектов. БЕСПЛАТНОЕ вступительное занятие. Стажировки и помощь в трудоустройстве. Получи опыт работы его в реальном Spring/JPA Enterprise проекте
+http://javaops.ru/static/img/javaEE.png

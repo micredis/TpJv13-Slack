@@ -1851,3 +1851,16 @@ Grigory Kislin [4:03 PM]
 GitHub
 JavaOPs/topjava
 topjava - Java Enterprise: Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery
+
+Fedor [4 hours ago]
+Я правильно понял, ветку HW1 делаем из ветки master после накатки всех патчей?
+
+
+Vladimir [11:36 AM]
+всем привет! кажись я что-то пропустил. дайте пожалуйста ссылку на видео вступительного занятия, везде говорится про это видео, но ссылки на видео я  в упор не вижу
+
+Dmitry Neustupov [12:09 PM]
+@Vladimir у канала сверху ссылка. продублирую -https://github.com/JavaOPs/topjava
+GitHub
+JavaOPs/topjava
+topjava - Java Enterprise: Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery
