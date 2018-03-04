@@ -162,3 +162,50 @@ pro [13 hours ago]
 Grigory Kislin [12:47 PM]
 по поводу apply patch: так удобнее
 при первом Apply надо выбрать имя локального ченджлиста Name: Default. Все остальные патчи (если имя не менять) будут также в него попадать.
+
+
+Andrew Manik [2:38 PM]
+Подскажите, у меня почему-то не push'ится на GitHub. Т.е. я, конечно прочитал:
+Push failed
+            Failed with error: HttpRequestException encountered.
+            HttpRequestException encountered.
+            unable to read askpass response from 'C:\Users\Andre\.IntelliJIdea2018.1\system\tmp\intellij-git-askpass.bat'
+            failed to execute prompt script (exit code 1)
+            could not read Username for 'https://github.com': No error
+Но решение так и не нашел.
+GitHub
+Build software better, together
+GitHub is where people build software. More than 28 million people use GitHub to discover, fork, and contribute to over 79 million projects.
+
+Andrew Manik [2:48 PM]
+При том, что HW0 запушил нормльно, у меня есть подозрение, что я накосячил, когда проходил какой-то Turotial про git, но поправить не получается
+
+Aliaksei Zayats [3:12 PM]
+РЕБЯТА подскажите: когда я запускаю какойто патч, я пытаюсь закоммитить\запушить, но пишет что нету никакиз изменений, нечего пушить. Видимо чтото не так делаю с changelist. после применения патча у меня выскакивает окошко: this file does not belong to the active changelist:......
+и 4 опции, из которой я выбираю 2ю:
+Shelve changes
+Move changes to active changelist("Default")
+Switch to changelist(1_4_switch to war)
+Ignore
+_____________________________________
+мне выскочила строка сверху с предложением добавить изменения в active changelist
+и изменения нашлись Идеей, но как сделать по умолчанию чтобы они были видны для коммита?
+
+realcorwin [7:06 PM]
+делай всё время, если спрашивать будет, Move changes to active changelist("Default"). если что сделай это changelist активным (set active). Должно коммитить. Остальные (пустые) потом можешь вообще удалить.
+
+Grigory Kislin [3:42 PM]
+@Andrew Manik а если не через idea, а консоль сделать git push?
+
+Andrew Manik [1 hour ago]
+Отдельно сам git работал, похоже действительно, когда я проходил туторы по гиту "перебил" globals, да еще дополнительно androidStudio установил и еще кучу глупостей натворил (которые вспомнить не могу). 
+
+А дальше сделал как не надо: снес всё IntelliJ  и androidStudio. Снова поставил IntelliJ, а проблема осталась... И теперь странность: обновил зависимости Maven и все заработало.  
+
+Теперь я все шаги записываю:)
+
+
+Grigory Kislin [3:43 PM]
+@Aliaksei Zayats
+я в урок вставил:
+При первом Apply удобнее выбрать имя локального ченджлиста Name: Default. Далее все остальные патчи также будут в него попадать.
