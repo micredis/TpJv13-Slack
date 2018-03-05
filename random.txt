@@ -221,3 +221,11 @@ Yevhen Maksymovych [4:51 PM]
 вопрос снят :slightly_smiling_face:
 @JsonDeserialize(using = LocalDateTimeDeserializer.class)
 и депендя jackson-datatype-jdk8
+
+
+Grigory Kislin [1:04 PM]
+json с аннотациями мы позже будем прикручивать
+счас просто формой+post делаем (edited)
+
+Vladimir [9:51 PM]
+uploaded this image: Чуточка флуда 
