@@ -151,3 +151,13 @@ Dmitriy Kozin [5:22 PM]
 
 aleksey [6 minutes ago]
 class создает инстанс объекта, а type опредяляет тип объекта, это может быть как супркласс, так и  абстрактный класс, так и интерфейс, как я понял.
+
+Dmitriy Kozin [1 hour ago]
+Спс!
+
+
+Constantine [1 hour ago]
+Так и есть, вот здесь чуть детальнее:  https://stackoverflow.com/questions/28970589/diffrence-between-class-and-type-attribute-in-jsp/28970638#28970638
+stackoverflow.com
+Diffrence Between 'class' and 'type' attribute in jsp
+In jsp I have found - <jsp:useBean id="user" class="com.test.UserDetails" /> By which I mean (Please correct me If I am wrong) - if a UserDetails instance is already exists then it will...
