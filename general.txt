@@ -2173,3 +2173,52 @@ Dmitriy Kozin [1 hour ago]
 
 Dmitriy Kozin [4:03 PM]
 uploaded this image: Новая_заметка_030518_050253_PM.jpg 
+
+
+Vladimir [8:58 PM]
+пул делал?
+
+Grigory Kislin [12:07 AM]
+@alexey Ctrl+T - вытянуть через pull
+
+dmitry_ov [12:54 AM]
+Коллеги, где размещаете хранилище данных по hw1 ?
+В сервлете норм ? (edited)
+
+Dmitry Makarov [20 hours ago]
+Например в MealDAO. Сервлет не подходит для этой цели (edited)
+
+
+Mikhail Makar [20 hours ago]
+Я в MealDaoImpl их положил
+
+
+realcorwin [12:56 AM]
+ну есть же лист meals. из него читаем, в него кидаем
+
+Andrew [9:51 AM]
+Ребят подскажите компьютерная версия slack не конектиться в chrome
+
+dmitry_ov [11 hours ago]
+Не понятно о чем вопрос.
+Есть версия компьютерная, есть web версия.
+Какую удобнее, ту используешь (edited)
+
+
+Andrew [10 hours ago]
+Компьютерная версия не подключается
+
+
+Andrew [10 hours ago]
+В чем может быть проблема
+
+
+Andrew [11:06 AM]
+Настроил двойную аутентификацию и все равно нет конекта, перегрузил комп и бинго, я не понимаю windows
+
+pro [6 hours ago]
+обычно понимание приходит, когда ты пишешь это; попробуй написать свою ОС типа windows и ты рано или поздно доберешься до причин
+
+
+realcorwin [2:41 PM]
+семь бед - один reset :slightly_smiling_face:

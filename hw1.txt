@@ -1774,3 +1774,698 @@ Vladimir [5:51 PM]
 
 alexey [6:53 PM]
 Народ может кто пояснит!? что бы получить данные из сервлета и избежать <%%> мы можем воспользоваться JSTL. и для этого должны воспользоваться конструкцией типа <c:out value="${контекст.переменная}" />. А при передаче переменной из сервлета мы какой контекст используем? Иными словами как из JSP обратиться к переменной сервлета?
+
+
+ilya t. [1 day ago]
+<p><a href="UserController?action=insert">Add User</a></p> ты случайно не это имеешь ввиду, переменную сервлета до параметра action? у меня здесь ссылка на UserController не работает, думал зависит от <display-name> в web но видимо нет (edited)
+
+
+alexey [1 day ago]
+да я просто не понимаю как в JSP принять атрибут, когда в сервлете делаешь request.setAttribute.
+
+
+ilya t. [1 day ago]
+аа, ну у тебя должны быть равны имя атрибута и в jsp итем типа такого req.setAttribute("listOfAllMeals", list); и в jsp <c:forEach items="${listOfAllMeals}" var="meal">
+
+
+ilya t. [1 day ago]
+у меня так выводит
+
+
+alexey [1 day ago]
+а если не список а переменную просто?
+
+
+Aleksey Vra [1 day ago]
+так же
+request.setAttribute("meal", meal);
+<input type="text" ... value="${requestScope.mea}" hidden/>
+
+
+Aleksey Vra [1 day ago]
+можно и без requestScope
+
+
+Anton Kiselev [8:06 PM]
+Поясните, плиз. Заполняю форму на addMeal, -> doPost создает new Meal() ->добавляет в список, обновляет -> и передает опять в meal.jsp который все это дело выводит, так?
+
+Dmitriy Kozin [1 day ago]
+Так. Только вначале преобразует Meal в MealWithExceed
+
+
+Anton Kiselev [1 day ago]
+@Dmitriy Kozin да. так. просто у меня после обновления весь список затирается
+
+
+Dmitriy Kozin [1 day ago]
+Он должен затираться после редеплоя.
+
+
+Dmitriy Kozin [1 day ago]
+После `doPost` ставь `response.sendRedirect("meals");` , а не `...forward....` (edited)
+
+
+Anton Kiselev [1 day ago]
+@Dmitriy Kozin понял, спасибо
+
+
+Alex83 [8:10 PM]
+Господа, а возможно использовать встроенным томкатом?
+И просто депенденси добавить в мавен?
+
+vch [8:15 PM]
+@Alex83 А на 6 занятии не оно будет? `•Конфигурирование Tomcat через maven plugin`
+
+Alexander Sinayko [8:17 PM]
+Ну лично я предпочитаю embended tomcat в spring boot. Все вместе без головной боли, но к чему этот вопрос? Хочется новых ощущений или же сложности какие? Или же узнать теоретически возможно ли это?
+
+Alex83 [1 day ago]
+Не хочется качать томкат. Хочу запустить и сразу пойти в локалхост
+
+
+Ma3stro [8:24 PM]
+added this Plain Text snippet: Untitled 
+Где правильно объявить list для crud манипуляций с едой? Я объявил его в имплементации crud интерфейса, но работать сие отказывается. При такой реализации у меня теперь не работает даже отображение стандартное, но почему?
+Например:
+```public class ImplMealDao implements MealDao {
+  private List<Meal> list;
+  @Override
+Dmitriy Kozin [8:27 PM]
+Есть несколько моментов. `List` это интерфейс и просто так в него ничего положить или удалить нельзя. Для этого как минимум инициализировать например `ArrayList'ом`.
+vch [8:27 PM]
+А где реализация `addMeal` ?
+Dmitriy Kozin [8:28 PM]
+А во вторых лучше воспользоваться `Map` в которой ключем будет id-шник, а значением сам объект.
+
+Ma3stro [8:29 PM]
+addMeal у меня пока что реализован как list.add(meal)
+
+mrLanu [1 day ago]
+Я к примеру сделал отдельный класс сингелтон, в него запихнул потокобезопасную МАПу, ключ в ней id. Там и начальные даные захардкодил... получилась имитация БД
+
+
+Ma3stro [8:34 PM]
+Да, кажется, работа с мапой выглядит целесообразней. Буду пробовать
+
+pro [8:36 PM]
+лучше б я не пробовал того о чем ты сейчас написал)) тебе прийдется пересчитывать все калории/день чтобы на вьюшку отправлять корректную мапу, но у тебя в ютил классе все настроено для работы со списком))
+
+mrLanu [1 day ago]
+Так в дао можно еще метод положить который вернет лист из мапы
+
+
+
+mrLanu [1 day ago]
+Список еды то что в мапе это как бы БД, а еда с exceeded это уже сервис, на мой взгляд
+
+
+
+pro [1 day ago]
+можно и так сделать, спасибо))
+
+
+pro [1 day ago]
+как раз отдебажил свои костыли которые я наделал в ютил классе, и он сам начал нормально считать все))
+
+
+dmitry_ov [10:09 PM]
+Подскажите как из JSP страницы передать UserMeal в сервлет ?
+
+aleksey [23 hours ago]
+На странице создаешь html form, через нее отсылаешь сервлету где она обрабатывается в doPost сервлета
+
+
+dmitry_ov [23 hours ago]
+Есть пример формы ?
+
+
+dmitry_ov [23 hours ago]
+html формы которая шлет данные в запросе в сервлет
+
+
+aleksey [23 hours ago]
+Тебе конкретную из домашнего задания?
+
+
+Aleksey Vra [23 hours ago]
+например
+```<form method="post" ...
+<input type="text" ... value="${requestScope.meal.id}" hidden/>```
+в сервелете ловим id, например req.getParameter("id")
+
+
+dmitry_ov [23 hours ago]
+Нашел пример
+
+
+dmitry_ov [23 hours ago]
+<form action="meals.jsp" method="post">
+
+   Name: <input type="text" name="firstName">
+
+    <input type="submit">
+</form>
+
+
+dmitry_ov [23 hours ago]
+А как настроить <form action= ?
+
+
+dmitry_ov [23 hours ago]
+Что бы в сервлет приходили данные
+
+
+Aleksey Vra [23 hours ago]
+в конце формы кнопку добавить submit
+
+Aleksey Vra [23 hours ago]
+```<input type="submit" value="Submit"/>```
+
+dmitry_ov [23 hours ago]
+Как форма поймет на какой url отправлятся ?
+
+
+aleksey [23 hours ago]
+в action url твоего сервлета (edited)
+
+
+Aleksey Vra [23 hours ago]
+action="meals"
+meals перехватывается (web.xml) и отправляет на сервелет
+
+aleksey [23 hours ago]
+<form action=URL method="post">
+
+dmitry_ov [23 hours ago]
+Да!!
+
+
+dmitry_ov [23 hours ago]
+Пришло в doPost
+
+
+dmitry_ov [23 hours ago]
+Спасибо парни
+
+
+aleksey [23 hours ago]
+обращайся=)
+
+
+dmitry_ov [23 hours ago]
+Писал <form action=“/meals” method=“post”>
+
+Не мог понять в чем проблема
+
+
+Aleksey Vra [22 hours ago]
+я вот постоянно путаюсь где писать / а где нет,
+та же ерунда в sendRedirect и getRequestDispatcher
+
+
+dmitry_ov [10:58 PM]
+делаю форму так 
+https://gist.github.com/ovcharenkodi/ffc42221433569145904c44c5cee7011
+
+dmitry_ov [10:58 PM]
+shared this HTML snippet: _.html 
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+  <title>Title</title>
+</head>
+<body>
+​
+<form action="meals" method="post">
+  Name: <input type="text" name="firstName" value="${name}" >
+  <input type="submit">
+</form>
+​
+</body>
+</html>
+Collapse 
+
+Aleksey Vra [10:58 PM]
+запустил таки на хероку наконец то после часа плясок с бубном https://hw1app.herokuapp.com/ ))
+
+dmitry_ov [10:59 PM]
+в doPost получаю request.getParameter(“name”) и  приходит null 
+Что делаю не правильно? (edited)
+
+Aleksey Vra [22 hours ago]
+в doPost попробуй получить мапу со всеми параметрами и посмотри что получаешь
+``` request.getParameterMap()```
+
+
+Aleksey Vra [22 hours ago]
+```name="firstName"```
+
+
+Aleksey Vra [22 hours ago]
+вот имя переменной (edited)
+
+
+dmitry_ov [22 hours ago]
+Точно !
+
+
+dmitry_ov [22 hours ago]
+@Aleksey Vra Спасибо большое (edited)
+
+
+Jury Mironov [10:52 AM]
+Сколько накатали..
+"4 Хранить нужно Meal и конвертировать ее в MealWithExceed когда отдаем список на отображение в JSP. Иначе при редактировании любой записи или изменении юзером своей нормы caloriesPerDay нужно будет пересчитывать все записи юзера."
+А у нас есть варианты? У нас есть метод из прошлого дз, который делает подсчет калорий. Он сам и конвертирует (edited)
+
+Jury Mironov [10:55 AM]
+Можно в CRUD не делать счетчик id, а просто использовать лист? А порядковый номер в листе и будет id. Можно сделать 100500 записей, удалить 100499 и будет у нас одна запись с id 100500:face_with_rolling_eyes:
+
+dustnfox [10 hours ago]
+Если без id, то порядковый номер записи в листе может меняться при удалении. Учитывая, что с DAO работает больше одного потока получится лажа. У тебя есть лист с одним meal. Ты его получил и отправил на фронт. Порядковый номер у него - 1. Теперь с фронта прилетает запрос на удаление meal с порядковым номером 1 из листа. Нет никакой гарантии, что за это время другой поток уже не удалил его из листа и не добавил новый meal. И он тоже будет с порядковым номером 1 в листе. То есть обрабатывая запрос на удаление ты дропнешь не тот объект, который имелся в виду при запросе.
+
+
+
+Jury Mironov [10 hours ago]
+Понятно, спасибо
+
+
+dustnfox [10 hours ago]
+не за что. Еще нужно иметь в виду, что при добавлении объекта, id в хранилище нужно увеличивать и тут тоже про многопоточность забывать не следует ибо инкремент через ++ - не одна операция, а целых три. Чтение из ОЗУ/кэша, сложение с единицей и запись в ОЗУ/кэш. И соответственно посреди все этой истории ОС может переключить контекст исполнения.
+
+
+Jury Mironov [10 hours ago]
+Да, вот сижу и думаю, че делать с этим
+
+dustnfox [10 hours ago]
+https://docs.oracle.com/javase/tutorial/essential/concurrency/
+Но там много букаф. Можешь что-то поискать в гугле, чтобы покороче. По поводу этого вагон всего написан. 
+Еще есть хороший канал: https://www.youtube.com/playlist?list=PL0GA_yfxrLGW7QuY418WgBPMx7GN1TchC
+Там товарищ наглядно показывает, как это делать и  главное ЗАЧЕМ это делать, наглядно демонстрируя в коде к чему может привести недостаточная синхронизация многопоточных приложений. Но, к сожалению, на английском это все.
+docs.oracle.com
+Lesson: Concurrency (The Java™ Tutorials > Essential Classes)
+This Java tutorial describes exceptions, basic input/output, concurrency, regular expressions, and the platform environment
+ YouTube
+Java: Multi-threading - YouTube
+By Cave of Programming
+ 
+ 
+
+
+Jury Mironov [9 hours ago]
+спасибо
+
+
+Ma3stro [3:02 PM]
+Кто как получал дату при вводе из jsp?
+И какой тип использовать - text с парсингом или date/datetime-local?
+
+Aleksey Vra [6 hours ago]
+```<fmt:parseDate...>
+<fmt:formatDate...>```
+или
+```<javatime:parseLocalDateTime...
+<javatime:format...```
+
+
+Ma3stro [6 hours ago]
+Я не про это) Я уже реализую crud и разбираюсь с вводом даты
+
+
+Aleksey Vra [6 hours ago]
+форма ввода даты? на странице с ДЗ ссылка есть на html формы
+
+
+Ma3stro [6 hours ago]
+Разобрался!) (edited)
+
+
+Baravader [3:36 PM]
+Ребятки,подскажите, что то не догнал я
+Делал fork проекта JavaOPs/topjava это было HW0,a HW1 уже на проекте JavaWebinar/topjava, его тоже форкать и всё переделывать под него? Или так и продолжать через JavaOPs и всё будет кульком?
+
+Ma3stro [5 hours ago]
+JavaWebinar уже не нужно форкать. Этот проект ведется параллельно для наглядности, в крайнем случае можно будет оттуда форкнуться если каким-то образом потеряешь текущий проект и будет лень накатывать все патчи
+
+
+Baravader [5 hours ago]
+Благобдарю!
+
+
+Ma3stro [3:39 PM]
+uploaded and commented on this image: Screenshot_1.png 
+
+У меня почему-то при добавлении новой записи (через crud) id становится в несколько раз больше последней записи...
+
+dmitry_ov [3:46 PM]
+Коллеги : как хранение данных  организовываете ?
+В MealsUtil реализуете CRUD интерфейс ?
+
+vch [3:48 PM]
+@dmitry_ov А причём тут util? По идее это полноценный DAO слой уже у нас должен быть
+
+dmitry_ov [5 hours ago]
+Где инициализировать dao ?
+
+
+vch [5 hours ago]
+@dmitry_ov Ты про заполнение начальной базы? Можно в конструкторе имплементации dao-класса.
+
+
+dmitry_ov [5 hours ago]
+Мне не ясно где разместить dao так что бы сервлеты могли обращатся в процессе работы
+
+
+dmitry_ov [5 hours ago]
+я со своей колокольни начинающего понимаю так:  После точки входа в программу надо объявить класс хранилище, создать на него ссылку, к этой ссылке обращаться из сервлетов
+
+
+dmitry_ov [5 hours ago]
+Вот где точка входа в получившемся  после 1-го урока приложении - мне не ясно
+
+
+dmitry_ov [5 hours ago]
+приложение создает 2 сервлета, которые работают сами по себе.
+Как можно между ними  общие данные расшарить я хз(
+
+
+vch [5 hours ago]
+@dmitry_ov Да пока без разницы. Можно прямо в сервлете создать экземпляр dao-класса (как член класса). У нас же только 1 сервлет будет использовать это dao пока. Но если хочешь по модному - то синглтон сделай. С ленивой инициализацией.
+
+
+vch [5 hours ago]
+@dmitry_ov Вроде meal dao нужно только в 1 сервлете?..
+
+
+dmitry_ov [5 hours ago]
+Вроде да
+
+dmitry_ov [5 hours ago]
+Но разве между запросами к приложению сервлеты не убиваются ?
+
+
+dmitry_ov [5 hours ago]
+имхо сервлет создается только при обращении к tomcat
+
+
+dmitry_ov [5 hours ago]
+Я не прав?
+
+vch [5 hours ago]
+@dmitry_ov Нет. Сервлет создаётся 1 раз. И все запросы попадают в него. Т.е. 1 объект сервлета используется в многопоточном режиме. И он не уничтожается в процессе работы.
+ 
+
+
+vch [5 hours ago]
+Но я бы синглтон сделал. Через enum. Тем более что всё равно dao по ТЗ надо оборачивать в интерфейс, никакой util тут не прокатит.
+
+
+Dmitriy Kozin [5 hours ago]
+Для тех кто был на basejava создание CRUD не проблема. Создавать синглтон не вижу смысла, ибо сами же говорите - сервлет создается один раз. А объект какого-либо круда (стораджа) можно параметризировать и использовать для хранения других объектов. (edited)
+
+
+Dmitriy Kozin [5 hours ago]
+Или тех же объектов но в другом аспекте...
+
+
+pro [4:10 PM]
+ни у кого не было такой байды: после редактирования записи(meal) меняется кодировка, и отображение описания(description) в консоли/браузере наламывается; где можно вправить кодировку? (в идее file->settings->encoding всюду{в трех полях} проставил utf-8, не помогло)
+
+Aleksey Vra [5 hours ago]
+у меня в консоли идеа слетала кодировка получаемых параметров, добавил
+```request.setCharset("UTF-8");```
+
+
+vch [5 hours ago]
+@pro раздел "Вопросы по HW1" пункт 3 не помогает?
+
+
+pro [5 hours ago]
+спасиб, сейчас попробую; гляну, что там за вопросы, я упустил их, видимо
+
+
+pro [5 hours ago]
+спасибо, парни; добавил первой строчкой в метод request.setCharacterEncoding("UTF-8"); и все ок
+
+
+Aleksey Vra [4 hours ago]
+с названием метода немного ошибся )
+
+
+Dmitriy Kozin [4:34 PM]
+Я перед следующим занятием чувствую себя как человек, купивший билет спортлото перед розыгрышем.. Сколько угадал правильно реализаций? 3 из 20? 15 из 30? 10 из 10?
+
+vch [4 hours ago]
+Неужели даже 13 типичную ошибку не допустил? Почти все прокалываются на ней. В HW2, впрочем, тоже.
+
+
+Dmitriy Kozin [3 hours ago]
+Я просто синхронизировал метод возврата и приращения идшника (волатильного) при сохранении элемента. Как ее еще опотокобезопасить я не знаю..
+
+
+vch [3 hours ago]
+@Dmitriy Kozin намекаю - вставки/удаления и т.п. операции тоже требуют внимания.
+
+
+Dmitriy Kozin [3 hours ago]
+Заменил Map на ConcurentMap  :nerd_face:
+
+
+Tanya [1 hour ago]
+> 12 volatile при ++ не помогает от многопоточности. Почему?
+(edited)
+
+
+vch [1 hour ago]
+@Tanya там у него обернуто synchronized. Некрасиво, но вроде должно сработать.
+
+
+Tanya [1 hour ago]
+ConcurentMap + synchronized + volatile?
+
+
+vch [1 hour ago]
+Новый вариант с ConcurrentMap я не видел, надеюсь её не пришлось синхронизировать...
+
+
+Dmitriy Kozin [31 minutes ago]
+Volatile не помогает при многопоточности, он гарантирует, что измененная переменная не останется в кэше. Синхронизед только на выдачу идшников объектам при сохранении. ConcurentMap должен защитить при удалении / вставке.. Как то так..
+
+
+Dmitry Makarov [4:52 PM]
+@Ma3stro так сложно сказать. Нужно дебажить строку в которой создается айди. Судя по номерам коллекция пробегается 3 раза (edited)
+
+mrLanu [5:34 PM]
+Всем привет. Кто подскажет ? Есть class Tools который расширяют два класса class Hummer & class Saw. Есть class Carpenter у которого имеется private Tools tools поле. Как это все запихнуть в таблицы хибернейтом. Лично для меня непонятно поле tools которое может хранить 2 класса...:thinking_face:
+
+vch [4 hours ago]
+@mrLanu И это всё нужно для выполнения HW1 ???
+
+
+mrLanu [4 hours ago]
+Мне да
+
+
+dmitry_ov [4 hours ago]
+" у которого имеется private Tools tools поле."
+
+one-to-one связь ?
+
+
+dmitry_ov [4 hours ago]
+всего 4 таблицы в БД понадобиться
+
+
+dmitry_ov [4 hours ago]
+для всех сущностей
+
+dmitry_ov [4 hours ago]
+Tools не будет хранить 2 класса
+
+
+Yevhen Maksymovych [3 hours ago]
+у карпентера объявляешь поле List<Tool> tools и аннотируешь его @OneToMany
+
+
+mrLanu [3 hours ago]
+Благодарю, буду размышлять)
+
+
+Dmitriy Kozin [3 hours ago]
+Есть два варианта - хранить в разных таблицах и создавать поля для каждого дополнительного поля в расширенных классах (3 таблицы получится - Тулзы, Пилы, Молотки), либо одна таблица, но с "пересечением" всех полей всех классов, +1 поле для указания типа класса.
+
+
+mrLanu [3 hours ago]
+Я пока сделал по второму
+
+
+mrLanu [3 hours ago]
+Но сильный осадок у меня
+
+Dmitriy Kozin [3 hours ago]
+Это удобно, если у классов одинаковые поля..
+
+
+mrLanu [3 hours ago]
+В том то и дело, что они только пока одинаковы... буду думать над первым вариантом
+
+
+dmitry_ov [3 hours ago]
+@mrLanu Если ты реализуешь иерархию категорий, то в одной таблице хранить и надо.
+Каждая запись хранит id  своего родителя. Корневой элемент  в качестве id родителя хранит null (edited)
+
+
+
+mrLanu [3 hours ago]
+Короче мне походу не помешало бы подучить БД и запросы на выборку... всем спасибо
+
+
+dmitry_ov [5:36 PM]
+Это в hw1 ? :astonished:
+
+Mikhail Makar [6:39 PM]
+Кто как дату парсил в методе Post?
+
+Ma3stro [6:46 PM]
+Принимал строку (type="datetime-local"), а затем сплитом парсил и строил LocalDateTime (edited)
+
+Ivan A [7:07 PM]
+"""<c:forEach items="&{mealsWithExceeded}" var="meal" >
+       <tr>
+           <td>
+               <c:out value="${meal.getDateTime()}"/>
+           </td>
+       </tr>
+
+   </c:forEach>"""
+~~~"""<c:forEach items="&{mealsWithExceeded}" var="meal" >
+      <tr>
+          <td>
+              <c:out value="${meal.getDateTime()}"/>
+          </td>
+      </tr>
+
+  </c:forEach>"""~~~
+короч пишет javax.el.MethodNotFoundException: Method not found: class java.lang.String.getDateTime()
+хотя в MealWithExceed стяот шеттеры
+
+vch [7:08 PM]
+@Ivan A апостроф, тот который у буквы `ё`
+
+Ivan A [7:08 PM]
+геттеры
+да я понял
+уже час бьюсь, поставил геттеры в MealWithExceed
+и все равно выводит ошибку метод не найден
+
+Mikhail Makar [7:10 PM]
+Попроуй так     <c:set var="meals" value="${requestScope.meal}" />
+где meal это твой список mealsWithExceeded
+
+Ivan A [7:14 PM]
+это в foreach
+вставлять?
+теперь выдает class java.util.Arrays$ArrayList.getDateTime()
+
+Mikhail Makar [7:17 PM]
+нет, до
+
+Andrew [7:19 PM]
+поменяй инициализацию
+сделай ее не через Arrays.as
+И лучше в EL обращении использовать ${meal.имя_поля} а не вызывать гетер
+
+Ivan A [7:30 PM]
+он почемуто читает как String когда проходит по циклу
+а не MealWithExceed
+
+Andrew [7:33 PM]
+<c:forEach var="meal" items="${requestScope.get('mealList')}">
+mealList - атрибут реквеста или сессии
+
+Ivan A [7:38 PM]
+спасибо
+бро
+битый час сидел из за этого
+
+Andrew [7:38 PM]
+Обидно)
+я сегодня вместо того чтобы красотой дз занятся целый день со слаком провозился((
+
+Aleksey Vra [7:54 PM]
+народ, код выделяется 3мя символами ` тот что над ё
+
+Yevhen Maksymovych [7:58 PM]
+но ведь скоп реквеста и так доступен, достаточно указать ${mealList}
+Andrew
+<c:forEach var="meal" items="${requestScope.get('mealList')}">
+
+realcorwin [8:07 PM]
+кто-нибудь встречал понятный и подробный текст про всем request, response, attribute, scope, forward, get, redirect и прочая и прочая? где когда используется что, для чего и почему.
+
+Andrew [8:09 PM]
+Встречали in English
+Head First servlets and JSP O'Reily
+
+Yevhen Maksymovych [8:11 PM]
+уии, я тоже на хероку задеплоил
+
+mrLanu [1 hour ago]
+Класно
+
+
+Yevhen Maksymovych [8:11 PM]
+https://javaops-hw01.herokuapp.com/
+
+Andrew [8:12 PM]
+@Yevhen Maksymovych и как оно сложно?)
+
+Yevhen Maksymovych [8:13 PM]
+да не, создал вилку, добавил зависимость в мавен, бросил в корень файл с параметрами запуска, и задеполил прямо из гита
+
+vch [8:13 PM]
+@Yevhen Maksymovych `java.lang.NumberFormatException: For input string: ""`
+В первые 5 секунд тестирования... Невезучий я.
+
+Yevhen Maksymovych [8:16 PM]
+@vch, я знаю, тем нет никакой проверки на корректность введенных данных кроме маски на инпутах, все на коленке собрано
+
+realcorwin [8:22 PM]
+когда читаю, выражение "на хероку", начинаю непроизвольно улыбаться :slightly_smiling_face: "вот на хероку ты всё это задеплоил, а?!" :slightly_smiling_face:
+
+Yevhen Maksymovych [8:23 PM]
+чисто проверить, как система работает :slightly_smiling_face:
+
+realcorwin [8:24 PM]
+@Andrew хорошая идея с head first, поищу сейчас её на русском. а что-нибудь посерьёзнее кто-нибудь знает?
+
+mrLanu [1 hour ago]
+Посерьезнее  в документации:)
+
+
+realcorwin [8:33 PM]
+куча книг и курсов - на английском. на русском - почти одно старьё
+
+vch [8:34 PM]
+@realcorwin А что такого серьёзного изменилось в сервлетах за последние 10 лет?
+
+realcorwin [8:37 PM]
+да там не десять...
+
+Andrew [8:42 PM]
+Нужно нам привыкать, что первый язык программирования Английский.
+
+aleksey [8:45 PM]
+сейчас где-то взгрустнул 1С ник
+
+realcorwin [8:46 PM]
+нашёл на немецком :slightly_smiling_face:
+
+realcorwin [8:52 PM]
+забавно называется цикл head first на немецком - "с головы до ног" :slightly_smiling_face:
+
+Dmitriy Kozin [9:09 PM]
+Да она есть на русском.
+
+realcorwin [9:10 PM]
+можешь поделиться?

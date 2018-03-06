@@ -15,3 +15,7 @@ Subscribed #project_change to JavaWebinar/topjava
 
 Rostyslav [5:14 PM]
 joined #project_change along with 7 others.
+
+
+zhuchokdimon [4:15 PM]
+Всем привет! По проекту вопрос: то есть нужно сначала подогнать проект так, как сейчас на гитхабе на JavaWebinar, а потом...?
