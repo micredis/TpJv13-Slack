@@ -2469,3 +2469,336 @@ Dmitriy Kozin [9:09 PM]
 
 realcorwin [9:10 PM]
 можешь поделиться?
+
+
+Grigory Kislin [1:37 AM]
+@realcorwin
+https://devcolibri.com/как-создать-servlet-полное-руководство/
+http://java-course.ru/student/book1/servlet/
+forward и redirect в видео есть (edited)
+
+saudabaew [8:45 AM]
+7 Работать с CRUD надо через интерфейс. - что это значит?
+
+dustnfox [8 hours ago]
+Объявить интерфейс. Далее все реализации CRUD (память, SQL и пр.) будут реализовывать этот интерфейс. Чтобы каждый раз при изменении DAO не  переписывать сервлет в нем нужно объявлять именно интерфейс, а не конкретную его реализацию.
+
+
+
+saudabaew [7 hours ago]
+спасибо!
+
+
+saudabaew [7 hours ago]
+И еще, я правильно понимаю, что вместо volatile переменной с дополнительными блоками синхронизации, можно использовать AtomicInteger в качестве счетчика id?
+
+
+Pavel Zaitcev [7 hours ago]
+при инкременте volatile счетчика происходит несколько операций. А неатомарные операции volatile - несинхронизированы. AtomicInteger же -  потокобезопасен.
+
+
+Mikhail Makar [10:21 AM]
+Кто как победил вот этот момент:
+16 после операции delete в браузере должен быть url http:\\localhost:8080\topjava\meals
+
+Dmitriy Kozin [6 hours ago]
+`response.sendRedirect("meals");`
+
+
+Yevhen Maksymovych [6 hours ago]
+или делит делаешь постом и в action укажи "meal"
+
+
+Yevhen Maksymovych [6 hours ago]
+*meals
+
+
+Dmitriy Kozin [6 hours ago]
+Гетом. Делать пост с параметром нет смысла.. (edited)
+
+
+Yevhen Maksymovych [6 hours ago]
+это почему нет смысла? отправляем постом ид удаляемого элемента, сервлетом удаляем, и перенаправляем обратно на милз
+
+
+Dmitriy Kozin [6 hours ago]
+Получается что нужно делать скрытую форму, со скрытыми полями ид и акшионом на каждый элемент. Проще гетом ?id=1&action=delete..
+
+
+Yevhen Maksymovych [6 hours ago]
+это наоборот куда логичнее. действия выполняются постом, переход по ссылкам - гетом
+
+Yevhen Maksymovych [6 hours ago]
+"?id=1&action=delete" и пользователь таком образом может свободно удалить что-то в базе, что не должен, подставив там произвольный ид :slightly_smiling_face:
+
+
+Dmitriy Kozin [6 hours ago]
+Тогда можно и метод HTTP DELETE сделать и он уйдет в doDelete
+
+
+Dmitriy Kozin [6 hours ago]
+Пост не защищает от аналогичных действий пользователя. Можно запустить PostMan и любой запрос сформировать.
+
+
+Yevhen Maksymovych [6 hours ago]
+борьба идеологий :slightly_smiling_face: ну, ок, в реальной жизни этот делит бы бы jquery запросом, который пришёл бы постом
+
+
+Dmitriy Kozin [6 hours ago]
+Это уже на сервере проверяется имеет ли пользователь право делать такие запросы..
+
+
+Dmitriy Kozin [6 hours ago]
+А апдейт делать PUT ом в doPut :grin:
+
+
+aleksey [3 hours ago]
+только формы нынче не поддерживают put, delete методы
+
+
+Dmitriy Kozin [2 hours ago]
+`<input type="hidden" name="_method" value="DELETE">` вот так вроде должно работать. Через POST..
+
+
+aleksey [2 hours ago]
+Да, можно, но немного похоже на хак=)
+
+
+Mikhail Makar [10:21 AM]
+?
+
+Artem Murk [11:13 AM]
+Не пойму что я делаю не так при передаче атрибутов в JSP из Сервлет. При деплое в Томкат могу отобразить только toString моего meals(каждого значения mealList). IDEA не отображает что я передаю какой то атрибут, т.е. не видит вообще переменную. При попытке вывести что то наподобие meals.description выдает сразу ошибку. (edited)
+
+Yevhen Maksymovych [5 hours ago]
+не понял, у тебя jsp не видит атрибуты твоего mealList'а, или сервлет не видит то, что ты присылаешь ему из jsp-страницы?
+
+
+Artem Murk [5 hours ago]
+jsp не видит атрибуты, хотя как задеплоил в Томкат вывод получается только ТуСтрингом,
+
+
+dustnfox [5 hours ago]
+Геттеры есть у MealWithExceed? (edited)
+
+
+Dmitriy Kozin [5 hours ago]
+`<jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealWithExceed"/>` вот такая конструкция, внутри цикла подскажет идее и jsp что ты используешь определенный объект. После этого появятся свойства. И геттеры нужны.
+
+Artem Murk [5 hours ago]
+О, сейчас попробую. Геттеров нет, сделаю
+
+Yevhen Maksymovych [5 hours ago]
+но у тебя и не выведет meals.description
+
+Yevhen Maksymovych [5 hours ago]
+meals - это же лист
+
+
+Yevhen Maksymovych [5 hours ago]
+откуда у него description
+
+Yevhen Maksymovych [5 hours ago]
+description есть у meal'а который сидит в meals
+
+Yevhen Maksymovych [5 hours ago]
+а у meals, понятное дело, есть туСтринг, сайз и чего там ещё
+
+Yevhen Maksymovych [5 hours ago]
+а дескрипшена нет, такие дела
+
+Yevhen Maksymovych [5 hours ago]
+а, сорри, заметил, что meals - это у тебя элемент mealList'а
+
+
+Artem Murk [5 hours ago]
+Я передавал MealWithExceed, а смотрел в Meal. Затупил. Но все равно мне приятно когда jstl видит объекты и различает что к нему пришло. Сейчас попробую как Дмитрий посоветовал прописать Бин
+
+
+Yevhen Maksymovych [5 hours ago]
+какое-то нелогичное название для элемента, не по java naming conventions (edited)
+
+Dmitriy Kozin [5 hours ago]
+Женя, ты сейчас вообще о чем? )
+
+Artem Murk [5 hours ago]
+если уж полное то     <c:forEach items="${MealWithExceedList}" var="meal">
+
+Yevhen Maksymovych [5 hours ago]
+ну, это я как обычно по верхам прочёл ))
+
+
+Yevhen Maksymovych [5 hours ago]
+за вот это зацепился " При попытке вывести что то наподобие meals.description выдает сразу ошибку"
+
+
+Yevhen Maksymovych [5 hours ago]
+а потом дочитал вопрос до начала )))
+
+
+Yevhen Maksymovych [5 hours ago]
+а как в слаке вставить кусок цитаты?
+
+
+Yevhen Maksymovych [5 hours ago]
+>тест
+
+Yevhen Maksymovych [5 hours ago]
+>>>тест 2
+
+Dmitriy Kozin [5 hours ago]
+Как ты так сделал?
+
+
+Yevhen Maksymovych [5 hours ago]
+ух ты, как я могу!  >При попытке вывести что то наподобие meals.description выдает сразу ошибку
+
+
+Yevhen Maksymovych [5 hours ago]
+а, вот так уже не выходит
+
+
+Yevhen Maksymovych [5 hours ago]
+а вот так? >>>При попытке вывести что то наподобие meals.description выдает сразу ошибку
+
+
+Yevhen Maksymovych [5 hours ago]
+короче, знак больше перед фразой
+
+Yevhen Maksymovych [5 hours ago]
+но только с новой строки если
+
+
+Artem Murk [5 hours ago]
+Всем спасибо, помогло!
+
+Artem Murk [5 hours ago]
+Можно ли как то бины выносить в отдельный файл, дабы они не засоряли мою JSP(на будущее спрашиваю).
+
+
+Dmitriy Kozin [5 hours ago]
+Я не знаю... В заголовок можно выносить, но дело в том, что у тебя переменная meal появляется в контексте цикла только...
+
+
+Dmitriy Kozin [5 hours ago]
+Переменные скоупа реквеста можно вынести в заголовок. В принципе можно обозначить прилетевшую meals как List<MealWithExceed> но что с ней будет в цикле не знаю..
+
+
+Dmitriy Kozin [5 hours ago]
+Может и сработать кстати..
+
+Artem Murk [5 hours ago]
+Ок, спасибо, буду иметь в виду. До этого пользовался Спринговским Сервлетом ModelAndView, проьлем таких не было.
+
+
+Artem Murk [5 hours ago]
+@Dmitriy Kozin а как можно указать что у List в котором MealWithExceed?
+
+
+Dmitriy Kozin [5 hours ago]
+Артем, не понял вопрос..
+
+
+Artem Murk [5 hours ago]
+Ты сказал что переменную скоупа реквеста можно вынести в заголовок. Я так понимаю что можно указать что у неё тип Лист. Ты также написал что можно как то её Дженерифицировать <MealWtihExceed>
+
+
+Dmitriy Kozin [5 hours ago]
+Да. Так лист и узнает что внутри лежат МилзыВичЭксид
+
+
+Dmitriy Kozin [5 hours ago]
+Стоп! В дженерик нужно прописать полный класснэйм - `ru.artem.mealapp.model.MealsWithExeeed`. Вспомнил )
+
+
+Dmitriy Kozin [5 hours ago]
+Напиши если сработает вся эта конструкция (в цикле появится переменная указанного типа). Мне лень у себя проверять )
+
+
+Artem Murk [5 hours ago]
+Шикарно,, работает)
+
+Artem Murk [5 hours ago]
+Спасибо!
+
+Dmitriy Kozin [5 hours ago]
+Блин, ты меня возбудил.. Пойду у себя переделаю..
+
+Artem Murk [5 hours ago]
+хахаха, ок)ъ
+
+Dmitriy Kozin [5 hours ago]
+Ххха! Точно, работает.. Круто! )
+
+
+
+Dmitry Makarov [5 hours ago]
+@Yevhen Maksymovych > должен быть в начале строки
+>вот так
+
+
+Yevhen Maksymovych [4 hours ago]
+Ага
+
+Artem Murk [4 hours ago]
+@Dmitriy Kozin получилось сделать? У меня что то не выходит. Походу зависимости как то не так прописаны для jstl.
+
+Artem Murk [4 hours ago]
+Томкат ругается
+
+dustnfox [4 hours ago]
+На что ругается?
+
+Artem Murk [4 hours ago]
+Пишет что Бин не найден в скопе.
+
+Artem Murk [4 hours ago]
+как тут код выделить?
+
+
+dustnfox [4 hours ago]
+Покажи, что по поводу бина написал
+
+
+Artem Murk [4 hours ago]
+java.lang.InstantiationException: bean MealWithExceedList not found within scope - это последний Эксепшн
+
+
+Artem Murk [4 hours ago]
+```<jsp:useBean id="MealWithExceedList" type="java.util.List<ru.javawebinar.topjava.model.MealWithExceed>"/>```
+собственно мой Бин (edited)
+
+
+Dmitry Makarov [4 hours ago]
+@Artem Murk ``` с двух сторон
+>как тут код выделить?
+(edited)
+
+
+dustnfox [4 hours ago]
+попробуй `scope="request"` в объявление бина дописать
+
+
+Artem Murk [4 hours ago]
+@dustnfox заработало, спасибо!
+
+
+Sergey Mitrichev [2 hours ago]
+Всем спасибо за эту ветку)):+1:
+
+
+Andrew [2:01 PM]
+Ребят, кто сделал дз, может обменяемся решениями ?
+
+Anton Kiselev [4:15 PM]
+Подскажите, пожалуйста, при delete как мне выйти на url-pat meals?
+1) я в doGet ловлю параметр "удалить", удаляю. преобразую коллекцию, 2)перенаправляю снова в servlet с другим параметром(уже с выводом). 
+3) здесь уже пересылаю запрос в jsp. Вывод есть. а url остается с параметром вывода.
+
+Yevhen Maksymovych [4:29 PM]
+точно перенаправляешь, а не форвардишь?
+если перенаправляешь, должен юрл быть тот, который ты указываешь в sendRedirect
+
+Yevhen Maksymovych [4:38 PM]
+там где ты ловишь в doGet() после удаления делай resp.sendRedirect("meals") - после этого у тебя фактически в браузере юрл станет $APP_CONTEXT\meals, который опять уже попадёт в дуГет, но уже не в ветку, где ты обрабатываешь делит, а в дефолтную ветку
+а там уже делай форвард на твой jsp, uri останется верным
