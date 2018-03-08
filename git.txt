@@ -209,3 +209,23 @@ Grigory Kislin [3:43 PM]
 @Aliaksei Zayats
 я в урок вставил:
 При первом Apply удобнее выбрать имя локального ченджлиста Name: Default. Далее все остальные патчи также будут в него попадать.
+
+
+Jan [2:20 AM]
+https://stackoverflow.com/questions/14075919/using-intellij-to-amend-git-commit-message
+stackoverflow.com
+Using IntelliJ to amend git commit message
+Can one amend a git commit message using IntelliJ, or should one resort to command line? How can this be done please?
+
+1. Подскажите как в ИДЕЕ сделать - git commit --amend ? (edited)
+Или за 5 лет от поста по ссылке ничего не поменялось ?
+
+Jan [2:22 AM]
+2. Кто-то проверял apply Патчи с нашего проекта без IDEA применять? (edited)
+
+Dmitry Makarov [21 hours ago]
+В нетбинсе кодировка ломается и переименование классов не проходит. Через консоль не пробовал. (edited)
+
+
+pro [12 hours ago]
+через консоль апплаится

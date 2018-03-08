@@ -2802,3 +2802,70 @@ Yevhen Maksymovych [4:29 PM]
 Yevhen Maksymovych [4:38 PM]
 там где ты ловишь в doGet() после удаления делай resp.sendRedirect("meals") - после этого у тебя фактически в браузере юрл станет $APP_CONTEXT\meals, который опять уже попадёт в дуГет, но уже не в ветку, где ты обрабатываешь делит, а в дефолтную ветку
 а там уже делай форвард на твой jsp, uri останется верным
+
+
+Anton Kiselev [4:49 PM]
+@Yevhen Maksymovych Ок, thanks. попробую
+
+dyakoven [9:24 PM]
+где правильно реализовать счетчик айдишника еды?
+
+Yevhen Maksymovych [9:29 PM]
+мне думается, нативно за этот счетчик отвечают механизмы бд. соответственно, счетчик тебе надо будет реализовать в том месте, где у тебя будет реализована твоя MockBd
+т.к. сама база у тебя будет скорее всего в каком-нибудь мэпе, вряд ли ты будешь реализовать свою структуру, значит за счетчик будет отвечать класс, который работает с этим мэпом напрямую
+дао, короче :slightly_smiling_face:
+
+uraplayer [11:22 PM]
+commented on Dmitriy Kozin’s file Чисто похвалиться
+скинь ссылку на github посмотреть?
+
+Alex83 [11:34 PM]
+Приветствую, коллеги! Кто знает, как дебажить jsp в плагине томката в мавене? Сам томкат не ставил. Все работает, кроме дебага jsp. На старнице не отображатся данные, хотя в MealServlet приходят, проверял записью листа в лог
+
+Mikhail Makar [1 day ago]
+Ты передаешь список в jsp?
+
+
+dmitry_ov [1 day ago]
+forward или  редирект ?
+При редиректе параметры запроса теряются
+
+
+Alex83 [24 hours ago]
+передаю список, делаю форвард
+
+
+Alex83 [24 hours ago]
+log.debug("start of ListMeal");
+       //List<MealWithExceed> list = MealsUtil.getFilteredWithExceeded(mealDAO.getMeals(), LocalTime.MIN, LocalTime.MAX, 2000);
+       //log.debug(list.toString());
+       request.setAttribute("meals", MealsUtil.getFilteredWithExceeded(mealDAO.getMeals(), LocalTime.MIN, LocalTime.MAX, 2000));
+       RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/meals.jsp");
+       dispatcher.forward(request, response);
+       log.debug("finish of ListMeal");
+
+
+Alex83 [24 hours ago]
+в jsp пишу так
+
+Alex83 [24 hours ago]
+<c:if test="${!empty meals}">
+   <table class="tg">
+       <tr>
+           <th width="80">DateTime</th>
+           <th width="80">DateTime formatted</th>
+           <th width="120">Description</th>
+           <th width="60">Calories</th>
+       </tr>
+       <!--
+       public MealWithExceed(LocalDateTime dateTime, String description, int calories, boolean exceed)!-->
+       <c:forEach items="${meals}" var="meal">
+           <tr>
+               <td>${meal.getDate()}</td>
+               <td><ctg:format value="${meal.getDateTime()}" pattern="dd/MM/yyyy HH:mm:ss"/></td>
+               <td>${meal.getDescription()}</td>
+               <td>${meal.getCalories()}</td>
+           </tr>
+       </c:forEach>
+   </table>
+</c:if>

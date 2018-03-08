@@ -1,0 +1,142 @@
+Grigory Kislin [2:26 AM]
+joined #hw2.
+
+Grigory Kislin [2:28 AM]
+Добро пожаловать на 2й (достаточно сложный) урок, где мы будем делать архитектурные слои нашего приложения:
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson02.md (edited)
+
+Pavel Zaitcev [2:38 AM]
+joined #hw2 along with 18 others.
+
+realcorwin [10:39 AM]
+ссылка на 5. Обзор Spring Framework. Spring Context. не работает
+"Sorry, the file you have requested does not exist."
+
+pro [1:56 PM]
+патч 2 0 add fix принялся?
+
+Aleksey Vra [2:03 PM]
+кто нибудь уже приступил к выполнению?)
+посмотрел все видео, вопрос к патчу 2 5 dependency injection.
+получили контекст, далее получаем bean:
+```UserService userService = appCtx.getBean(UserService.class);
+userService.create(new User(null, "userName", "email", "password", Role.ROLE_ADMIN));```
+в spring-app.xml указываем бин mockUserRepository и UserServiceImpl(с инжектом mockUser)
+Правильно ли я понял, что спринг сам автоматом каким то образом userService присваивает новый объект UserServiceImpl, только потому что в контексте единственный бин унаследованный от этого интерфейса?
+И аннотаций никаких нет, а интерфейс уже сам связался с бином. И получается, что если бы у нас допустим был еще 1 бин унаследованный от UserService, то
+```UserService userService = appCtx.getBean(UserService.class);```
+уже автоматом не свяжется и выдаст ошибку? (edited)
+до 5 патча пока все норм принялось
+пытюсь пока на 5 патче эксперементировать, код поизменял, как бы потом 2 и 6 патч не встал
+
+pro [2:05 PM]
+у меня 108 строка конфликтует MealsUtil, показывает ее одинаковой в обоих случаях, только табуляция на один спейс смещена
+
+Aleksey Vra [2:06 PM]
+там public на private поменялся
+
+Dmitry Neustupov [2:25 PM]
+@Aleksey Vra выдаст ошибку, при нескольких имплементациях можно использовать аннотацию @Qualifier
+@Aleksey Vra для точного определения, какой из бинов инжектить
+
+Aleksey Vra [2:28 PM]
+меня просто вот эта строчка смущает
+```UserService userService = appCtx.getBean(UserService.class);```
+допустим  унас много интерфейсов и бинов, лезть в хмл и смотреть кто инжектиться? легко запутаться (edited)
+
+aleksey [9 hours ago]
+Там есть перегруженный метод с указанием имени,
+Service service = context.getBean(Service.class, "myService");
+или можно выставит primary у нужной имплементации (edited)
+
+
+Aleksey Vra [9 hours ago]
+точно, спасибо
+глянул доки, только аргументы наоборот
+
+
+aleksey [7 hours ago]
+Я строчку вроде с доков копировал, странно :relaxed:
+
+
+Aleksey Vra [2:36 PM]
+действительно эксепшн вылетает
+
+roma [2:59 PM]
+Народ тут пытался создать похожий на  наш проект через архитипы мавена. И убил часа полтора так как не мог получить параметры на .jsp через ${meals} в итоге выяснилось что в web.xml было просто
+```<web-app>...</web-app>```
+а не как у нас
+```<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+  http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+  version="3.1">...</web-app>```
+Кто подскажет что это за Шемы и почему без них не работал  ${meals} ?
+
+pro [3:02 PM]
+@roma в каком теге ты пытался вывести ${meals} ?
+
+roma [3:03 PM]
+td
+ну точнее как у нас
+```   <c:forEach items="${meals}" var="meals">
+        <tr class="${meals.isExceed()}">.....```
+```<td>${meals.getCalories()}</td>```
+в итоге заполнялась только одна строка со значениями в ячейках типо ${meals.getCalories()}
+@pro объяснишь?
+
+pro [3:22 PM]
+пространство имен прописываешь в корневом теге
+там просто версия спецификации
+
+pro [4:09 PM]
+можешь представить себе, что твой web-app - это книга; а спецификация - это год в котором она была написана; пускай язык будет английский; если книга написана на английском 14 века, а ты пытаешься парсить ее в 21, у тебя могут возникнуть проблемы с миграцией понятий: одно и то же слово в 14 и 21 веке может иметь разное значение. Если ты не указываешь версию спецификации, твой парсер не знает, в рамках каких правил он должен интерпретировать то, что вложено в корневой тег, и может сделать это не так как ты ожидаешь от него (edited)
+
+roma [4:39 PM]
+спасибо за доступное объяснение ) стало яснее )
+
+pro [7 hours ago]
+http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/index.html
+
+
+pro [7 hours ago]
+https://www.w3schools.com/xml/schema_schema.asp
+w3schools.com
+XML schema Element
+Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, and XML.
+
+
+Grigory Kislin [5:39 PM]
+> ссылка на 5. Обзор Spring Framework. Spring Context. не работает
+спасибо, поправил
+> 2 0 add fix принялся
+см. https://github.com/JavaOPs/topjava/wiki/git#patch-%D0%BD%D0%B5-%D0%BD%D0%B0%D0%BA%D0%B0%D1%82%D1%8B%D0%B2%D0%B0%D0%B5%D1%82%D1%81%D1%8F-%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%B0%D0%B3%D0%B0%D0%B5%D1%82-merge
+
+Grigory Kislin [5:42 PM]
+> Правильно ли я понял, что спринг сам автоматом каким то образом userService присваивает новый объект UserServiceImpl, только по тотому что в контексте единственный бин унаследованный от этого интерфейса?
+Spring не "каким-то образом", а смотрит что у него в контексте есть (обычные мапы). Пересмотрите видео, если это непонятно. Далее берет оттуда имплементацию UserService. Тк она одна конфликта нет
+
+Aleksey Vra [6 hours ago]
+спасибо, разобрался, когда еще 1 реализацию UserService написал и попробовал несколько вариантов получения бина
+
+
+roma [7:12 PM]
+Вот эта строка меня  немного убивает:
+```return repository.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);```
+в части
+```(id, oldMeal) -> meal)```
+из документации вроде понимаю BiFunction - но как оно работает не понимаю... Полагаю что
+```if ((oldValue = get(key)) != null) {
+            V newValue = remappingFunction.apply(key, oldValue);```
+тут у нас newValue станет meal (так как в нашей функции на выходе у нас -> meal) и потом мы кладем в нашу мапу это новое значение
+```if (newValue != null) {
+                put(key, newValue);
+                return newValue; //еще и возвращает этот new валью зараза```
+
+Aleksey Vra [4 hours ago]
+```(key, val) -> meal```
+так key - это просто ключ мапы куда положим новое значение
+
+
+roma [4 hours ago]
+вроде разобрался - спасибо - функциональное программирование тяжко дается
