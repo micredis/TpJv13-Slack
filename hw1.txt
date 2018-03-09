@@ -2869,3 +2869,355 @@ Alex83 [24 hours ago]
        </c:forEach>
    </table>
 </c:if>
+
+
+Alex83 [11:37 PM]
+uploaded and commented on this image: image.png 
+
+И вот такая шляпа получается.
+
+Tanya [12:28 AM]
+@Alex83
+геттеры есть в MealWithExceed?
+
+dmitry_ov [1 day ago]
+Никто не мешает их добавить
+
+
+Alex83 [1 day ago]
+теперь есть) но не помогло
+
+
+Tanya [1 day ago]
+должно помочь, 
+ctrl + f5?
+
+
+Alex83 [1 day ago]
+неа
+
+
+Alex83 [1 day ago]
+в реквест приходит
+
+
+Alex83 [1 day ago]
+на странице пусто (edited)
+
+
+Alex83 [1:45 AM]
+фух, не добавил в депенденси jstl, поэтому криво работало. каких-то 5 часов, чтобы понять, в чем дело. Осталось мелочь - раскраска )
+
+Alex83 [2:22 AM]
+uploaded and commented on this image: image.png 
+
+Господи, красота-то какая!
+
+Alex83 [2:22 AM]
+Утром T уберу и домашка готова )
+
+Dmitriy [8:14 AM]
+а мне нравится везде прикручивать бутстрап, чтоб красиво было
+
+Dmitriy Kozin [8:17 AM]
+commented on Чисто похвалиться
+https://github.com/dskozin/topjava/tree/HW01
+vch [8:18 AM]
+@Dmitriy Kozin ` new HashMap<>();` Я б лучше застрелился, чем таким хвалиться...
+Dmitriy Kozin [8:21 AM]
+Да застрелись уже.
+Dmitriy Kozin [8:21 AM]
+Можешь по тихому убиться без комментариев.
+
+Dmitry Neustupov [8:31 AM]
+@vch а в чем проблема?
+
+vch [8:44 AM]
+@Dmitry Neustupov ` private final Map<Long, Meal> storage = new HashMap<>();`
+HashMap нельзя использовать при многопоточной работе, нужен `ConcurrentHashMap `. Причём, насколько я помню, автор уже исправил это, но по каким-то причинам забыл залить в github.
+
+Dmitry Neustupov [8:53 AM]
+@vch да, у меня тоже new ConcurrentHashMap<>() стоит, туплю что то с утра )
+
+Victor Shinkarev [8:58 AM]
+Как думаете, уместно ли использовать в данном задании паттерн command? Или это лишнее?
+
+Dmitriy Kozin [9:25 AM]
+commented on Чисто похвалиться
+Залил с Конкурентом. Все равное это скорей всего не правильно.
+
+Timur [9:32 AM]
+@Alex83 цвета наоборот(:thinking_face: вроде бы)
+
+Yevhen Maksymovych [11:19 AM]
+ребят, подскажите по hw1 - мы здесь сделали собственную функцию для форматирования даты,  подключили ее в нашу jsp-страницу
+в тэге <uri> самой функции указали "http://topjava.javawebinar.ru/functions"
+и в meals.jsp при ее подключении - "<%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>"
+
+Yevhen Maksymovych [11:21 AM]
+но ведь функция фактически не сидит на этом url, физически она лежит на одном хосте с jsp-страницей
+
+Aleksey Vra [1 day ago]
+мавен подтягивает библиотеку jstl, которую мы в pom указали.. у меня сюда
+```/home/vra/.m2/repository/javax/servlet/jstl/1.2/jstl-1.2```
+скачивает и видимо затем отсюда берет при сборке
+
+
+Aleksey Vra [1 day ago]
+если навести на либу в meals.jsp путь показывается
+
+
+Yevhen Maksymovych [11:22 AM]
+значит ли это, что отрисовщик jsp и за остальными схемами не обращается на урлы, которые указаны в заголовках xml-страниц, а берёт их где-то локально?
+вот все эти "xmlns="http://java.sun.com/xml/ns/javaee""
+
+Хэм [11:30 AM]
+ага тож заинтересовался этим вопросом
+
+Хэм [11:36 AM]
+а кто как реализовал репозиторий? я так понимаю все через ConcurrentHashMap? никто БД не делал? если через мапу, то при добавлении новой еды она проходит проверку превышения лимита по калориям? а то я тут что то понаделал такое, что не знаю как новую еду добавить на проверку калорий со всей мапой
+
+angelrum [11:40 AM]
+Все правильно, лучше заложить индекс в dao класс, потому что мы его получаем при выгрузке данных из БД. Но в текущей реализации можно обойтись произвольным индексом и заложить его jsp страницу силами jstl. (edited)
+Yevhen Maksymovych
+мне думается, нативно за этот счетчик отвечают механизмы бд. соответственно, счетчик тебе надо будет реализовать в том месте, где у тебя будет реализована твоя MockBd
+К примеру: 
+<c:set var="i" value="0"/>
+<c:forEach items="${meals}" var="meal">
+    <c:out value="${i}"/>//вывод значение индекса
+    <c:set var="i" value="${i + 1}"/> //Присваиваем следующее значение
+</c:forEach> (edited)
+Полезный ресурс по тэгам jstl: https://www.tutorialspoint.com/jsp/jsp_standard_tag_library.htm
+www.tutorialspoint.com
+JSP Standard Tag Library (JSTL) Tutorial
+JSP Standard Tag Library (JSTL) Tutorial - Learn JSP (Java Server Pages) in simple and easy steps starting from basic to advanced concepts with examples including Java JSP Technology including Overview, Environment Setup, Architecture, Lifecycle, Syntax, Directives, Actions, Implicit Objects, Client Request, Server Response, Form Data, HTTP Request Header, Response Header, Status Codes, Writing Filters, Cookies Handling Session Tracking, File Uploading, Handling Date, Page Redirect, Hits Counter, Show more
+
+Artem Murk [1:17 PM]
+Ребят, решил тоже организовать через ConcurentHashMap. При попытке писать в неё вылетает nullPointerException. При обычной HashMap все работает
+
+Nedfrench [2:30 PM]
+Ура! Выполнил HW1.  Спасибо 8 марта за выходной день))
+
+Ivan A [5:28 PM]
+делаю кнопку edit или delete  <td><a class="delete" href=ЧТО СЮДА ПРОПИСАТЬ как сюда вытащить id из бд>Delete</a></td>
+
+Aleksey Vra [1 day ago]
+```href="meals?action=delete&id=${meal.id}"```
+
+
+Ivan A [1 day ago]
+спс
+
+
+Artem Murk [5:51 PM]
+Не пойму как лучше прикрутить форму jsp отвечающую за update/create. У меня сервлет на doPost в mealServlet принимает принимает запросы с meals, и соотвественно перенаправляет на updateCreate.jsp. Неужели ещё один сервлет нужно создавать?
+
+uraplayer [7:25 PM]
+commented on Dmitriy Kozin’s file Чисто похвалиться
+@Dmitriy Kozin спасибо!
+
+Sergey Kubatko [11:03 PM]
+друзья, есть один вопрос: у меня Mac OS, мне не удалось в файле logback.xml прописать строку с именем файла для сохранения в виде относительного пути, 
+вот здесь: <appender name="file" class="ch.qos.logback.core.FileAppender">
+<file>/Volumes/Home/Documents/3. Personal/2. Projects/ИТ/4. Projects/2. Java/1. General/topjava/log/topjava.log</file>
+есть ли возможность задать относительный путь без определения дополнительной переменной окружения?
+
+dmitry_ov [11:32 PM]
+added and commented on this Shell snippet: Untitled 
+Запускаем программу "Terminal"
+Вводим команду:
+export TOPJAVA_ROOT="/Volumes/Home/Documents/3. Personal/2. Projects/ИТ/4. Projects/2. Java/1. General/topjava/log/topjava.log"
+​
+Эта команда создаст переменную окружения TOPJAVA_ROOT. Проверить что создалась можно командой
+echo $TOPJAVA_ROOT
+​
+Глобальных переменных окружения в *nix нет. Поэтому создание переменной надо добавить в файл который выполняется при логине пользователя в систему ~/.bash_profile
+Добавляешь в конец файла ~/.bash_profile строку: 
+export TOPJAVA_ROOT="/Volumes/Home/Documents/3. Personal/2. Projects/ИТ/4. Projects/2. Java/1. General/topjava/log/topjava.log"
+Collapse 
+@Sergey Kubatko
+
+Sergey Kubatko [12:21 AM]
+commented on dmitry_ov’s snippet Untitled
+да, спасибо, также в IDEA нашел возможность установить переменную
+
+Kirilo [1:16 AM]
+может кто сталкивался. При удалении элемента с таблицы и списка, остается старая ссылка на элемент, хотя фактически в jsp подается измененный список. Почему в списке id меняется, строка с таблицы удаляется, а ссылка остается старой? http://localhost:8080/topjava/meals?action=edit&mealId=3                                                         https://screenshots.firefox.com/dGMoTUVf5o0ab3m5/localhost (edited)
+screenshots.firefox.com
+Add or edit meal
+From localhost
+https://screenshotscdn.firefoxusercontent.com/images/ae41c1f8-4a4d-40b4-9dc3-fc103f277713.png?embedded=og
+то есть в конце запроса должно было бы быть 4, а там остается 3
+https://screenshots.firefox.com/YIjlDOtvLRD01MiX/localhost
+screenshots.firefox.com
+Meals
+From localhost
+https://screenshotscdn.firefoxusercontent.com/images/83f11071-2721-4e01-a303-563b6c49b1f3.png?embedded=og
+
+Tanya [2:22 AM]
+@Kirilo у тебя id могут меняться?
+
+Kirilo [2:26 AM]
+Да, они меняются после удаления
+на 1 почему-то
+
+Tanya [2:27 AM]
+неправильный подход
+id не должны меняться и не должны зависеть от др. записей (edited)
+
+Kirilo [2:32 AM]
+спасибо, это натолкнуло меня на мысль где искать.
+
+Tanya [2:33 AM]
+пожалуйста :slightly_smiling_face:
+
+Kirilo [2:50 AM]
+не. id не меняется, зато неправильно формируется запрос, вот там и разбежность. Получается, что запросы привязаны к порядковому номеру элемента...
+Вернее, если так сделать, то будет правильно выводиться. Вручную все правильно выводит. (edited)
+
+Kirilo [3:31 AM]
+Ошибка была в этом методе: @Override
+   public Meal getMealById(int mealId) {...} Вместо id искал по номеру элемента :slightly_smiling_face: (edited)
+
+Ilya [6:19 AM]
+Всем добра! Наконец-то дошли руки доделать опшинал, но есть косячок с кодировкой - при отправке с формы русского текста приходят кракозябры - подскажите, плз, где подкрутить ?
+
+Aleksey Vra [18 hours ago]
+```request.setCharacterEncoding("UTF-8");```
+как то так
+
+
+Ilya [18 hours ago]
+@Aleksey Vra Не помогает, результат такой же ÐÐ°Ð²ÑÑÐ°Ðº , но спасибо!
+
+Ilya [18 hours ago]
+т.е. проблема не в глобальном не правильном отображении еды - когда идет выгрузка захардкоденных милов, то все ок. но когда начинаешь редактировать или добавлять с формы, то беда.
+
+
+Aleksey Vra [18 hours ago]
+у меня что то похожее было, указание
+```request.setCharacterEncoding("UTF-8");```
+в начале doPost помогло
+
+
+Aleksey Vra [18 hours ago]
+как вариант в другом браузере попробовать, посмотреть что придет
+
+
+Ilya [18 hours ago]
+@Aleksey Vra оу, переместил в начало, и все ок. Спасибо тебе большое!
+
+
+Artem Murk [11:03 AM]
+Привет ребят. Подскажите как сделать отправку формы с updateCreate.jsp на сервлет. А именно как отправить данные которые я внёс в форму
+Ок, криво, но разобрался)))
+
+Artem Murk [11:39 AM]
+Ураа. Я сделал hw1 и опшинал. Конечно остался у меня косяк с редиректами в get post, в остальном все норм. Такое чувство что я последний кто остался в этой ветке...
+
+pro [13 hours ago]
+молоток раз сделал; пока прикинешь что тебе посоветовать, ты, хоть и криво, но сам разбираешься, так что ни добавить ни отнять
+
+
+Artem Murk [12 hours ago]
+Да если честно у меня есть проблемы с Сервлетами. Надо читать как лучше слать данные и как перенаправлять запросы. Информации море, а стажировка не стоит на месте. Решил максимально стараться делать нормально учитывая все пункты в задании, но если не буду успевать то буду делать криво и двигаться дальше.
+
+
+
+pro [12 hours ago]
+верняк, пробежался по верхам, сделал задание, а потом снова пролистываешь и если есть время, углубляешься в детали.
+
+
+pro [12 hours ago]
+когда уже пробовал делать что нибудь в той или иной области, тогда и вопросы сформировались у тебя, уже знаешь, на чем тебе акцентировать внимание
+
+
+uraplayer [9:49 PM]
+Смотрел разбор дз optional, Григорий объясняет неплохо, но для меня недостаточно детально (не разжеванно). Явно уже для тех, кто хорошо разбирается во всех технологиях. Когда применяешь патчи - появляется уже готовый код. как он рождался к сожалению не видно.
+Можете пояснить что делает <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
+Григорий говорит про action, что это такое?
+
+VictorStatko [9:54 PM]
+Это ссылка, ведет на сервлет meals, при этом передаются параметры action и id со значениями update и ${meal.id} соответственно. В сервлете сработает метод doGet
+
+uraplayer [10:02 PM]
+откуда взялся этот за параметр action? это вот сюда попадает в метод doGet? String action = request.getParameter("action");
+
+ilya t. [10:05 PM]
+да, получаешь строку из request и обрабатываешь соответственно
+
+uraplayer [10:07 PM]
+А. понял, это кусок URL (ссылка под кнопкой UPDATE), она приходит на сервлет, он ее обрабатывает в зависимости от параметра и выполняет правильный метод. Спасибо
+
+uraplayer [10:08 PM]
+А эта запись с параметрами это относится к html?
+
+aleksey [2 hours ago]
+Это относится к http. Принят такой формат записи URL параметров
+
+
+
+aleksey [2 hours ago]
+Например https://webgyry.info/http-zapros-metodom-get
+
+
+uraplayer [10:18 PM]
+Еще нубский вопрос, можете на примере поянить разницу между doGet и doPost?
+
+aleksey [2 hours ago]
+Это опять же относится к http
+https://ru.m.wikipedia.org/wiki/HTTP
+Wikipedia
+HTTP
+HTTP (англ. HyperText Transfer Protocol — «протокол передачи гипертекста») — протокол прикладного уровня передачи данных (изначально — в виде гипертекстовых документов в формате «HTML», в настоящий момент используется для передачи произвольных данных). Основой HTTP является технология «клиент-сервер», то есть предполагается существование:
+
+Потребителей (клиентов), которые инициируют соединение и посылают запрос;
+Поставщиков (серверов), которые ожидают соединения для получения запроса, производят Show more… (8 kB)
+
+
+aleksey [2 hours ago]
+В кратце, у сервлета есть метод  service, он обрабатывает все запросы приходящие на сервлет. И в зависимости от метода запроса GET, POST, PUT, DELETE... вызывает соответствующий обработчик doPost, doGet и т.д.
+Http это тема которую нужно очень четко понимать, без нее невозможно понять клиент-серверное взаимодействие
+
+
+uraplayer [2 hours ago]
+а в каком месте в *.jsp мы вызываем метод doPost?
+
+
+aleksey [2 hours ago]
+doPost вызывается в обычном сервлете, а из него объекты request и response передаются в jsp
+
+
+uraplayer [2 hours ago]
+да, я с этой темой реально плыву, подскажи что почитать, может есть туториал по http на примерах?
+
+
+aleksey [2 hours ago]
+https://habrahabr.ru/post/215117/
+Хабрахабр
+Простым языком об HTTP
+Вашему вниманию предлагается описание основных аспектов протокола HTTP — сетевого протокола, с начала 90-х и по сей день позволяющего вашему браузеру загружать... (50 kB)
+
+
+aleksey [2 hours ago]
+https://www.youtube.com/watch?v=HFt7Lm7hv1E
+YouTube Технострим Mail.Ru Group
+6. Web-технологии. Протокол HTTP | Технострим
+ 
+
+
+aleksey [2 hours ago]
+И еще очень советую послушать эту лекцию о стеке протоколов tcp/ip
+https://www.youtube.com/watch?v=Z-a7MNStFQs
+YouTube Образовательный IT-портал GeekBrains
+Основы сетей передачи данных. Модель OSI и стек протоколов TCP IP. Основы Ethernet. [GeekBrains]
+ 
+
+
+uraplayer [2 hours ago]
+Спасибо. правильно я понял, что когда мы нажимаем на ссылку meals запускается сервлет meals и вызывает метод doPost? (edited)
+
+
+aleksey [2 hours ago]
+когда нажимается ссылка, браузер формирует http запрос, который идет на сервер, там уже он обрабатывается сервлетом.
+Важно понимать, что jsp не запускается у клиента на браузере. jsp формирует статическую html страницу и отправляет ее клиенту где он ее и видит в окне браузера. И на странице в барузере уже нт никаких jsp тегов, java кода и т.д. только html

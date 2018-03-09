@@ -140,3 +140,187 @@ Aleksey Vra [4 hours ago]
 
 roma [4 hours ago]
 вроде разобрался - спасибо - функциональное программирование тяжко дается
+
+
+roma [9:23 AM]
+Всем доброе утро
+
+roma [9:24 AM]
+```switch (action == null ? "all" : action) ```
+all и соответствующую секцию case добавляем для удобочитаемости кода?
+
+Aleksey Vra [14 hours ago]
+привет.
+ну вот у меня внешний if был с проверкой на null и выводом списка,  а тут проверка в том же свитче, гораздо проще
+
+
+roma [13 hours ago]
+@Aleksey Vra Это я понимаю прото all мы могли бы и не прикреплять - всеравно он проскакивает в дефулт потом - я только про это )
+
+
+Aleksey Vra [13 hours ago]
+у меня action мог быть null, поэтому проверка нужна в любом случае
+
+
+roma [13 hours ago]
+```switch (action)```
+и без проверки бы улетала в секцию default - PS у нас она тоже равна null когда мы с index.html переходим (edited)
+
+
+Aleksey Vra [12 hours ago]
+если action==null вылетит NullPointException
+
+
+roma [6 hours ago]
+Точняк ) нельзя использовать null в свитч кейсе - спасибо
+
+
+Vladimir [10:01 AM]
+Добрый день у кого нибудь были проблемы с патчeм 2_1_HW_1?
+Скинте пожалуйста весь класс MealsUtil.
+
+Vladimir [10:40 AM]
+Спасибо уже не надо
+
+Yevhen Maksymovych [12:45 PM]
+ребят, я чего-то пропустил в видео? зачем мы так делаем?
+```        // treat case: update, but absent in storage
+        return repository.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);```
+
+Yevhen Maksymovych [12:45 PM]
+почему не просто map.put()?
+
+Aleksey Vra [11 hours ago]
+тоже обратил внимание.. 
+может для удобства, ведь put возвращает oldValue
+а compute newValue.. а мы сразу получили и вернули
+
+
+Yevhen Maksymovych [11 hours ago]
+да, но у нас перед этим код
+```if (meal.isNew()) {
+            meal.setId(counter.incrementAndGet());
+            repository.put(meal.getId(), meal);
+            return meal;
+        }```
+
+
+Yevhen Maksymovych [11 hours ago]
+почему не сделать так?
+```        if (meal.isNew()) {
+            meal.setId(counter.incrementAndGet());
+        }
+        repository.put(meal.getId(), meal);
+        return meal;```
+
+
+Alexander Sinayko [11 hours ago]
+Ну лично я думаю, что нам самим надо ответить на данный вопрос. Гуглим метод, что дает, какие +. Ребят, Григорий покажет нам кунг-фу, но махать кулаками за нас никто не будет! Не ленимся и вникаем.
+
+
+
+Dennis [11 hours ago]
+Григорий не зря делает ремарки:
+>Поправил InMemoryMealRepositoryImpl.save(). Если обновляется еда, которой нет в хранилище (c несуществующим id), вставка не >происходит.
+(edited)
+
+
+
+Yevhen Maksymovych [11 hours ago]
+во, спасибо!
+
+
+Yevhen Maksymovych [11 hours ago]
+смотрю в книгу, вижу фигу :slightly_smiling_face:
+
+
+Alexander Sinayko [11 hours ago]
+Внимательность важная черта для разработчика!
+
+
+
+Aleksey Vra [11 hours ago]
+а в каких случаех будет обновляться еда, которой нет в хранилище? редактируем еду, которая отображается, значит она точно есть в хранилище..
+что то не пойму
+
+
+Dennis [11 hours ago]
+Об этом Григорий то-же говорил: кто вам мешает отправить POST запрос с несуществующим Id?
+
+
+Aleksey Vra [10 hours ago]
+спасибо, понял
+
+
+Yevhen Maksymovych [1:59 PM]
+а в джаве нет встроенных предикатов, которые умеют проверять на равенство?
+ну, типа как есть встроенные компараторы для простых типов и для компараблов
+
+Yevhen Maksymovych [3:32 PM]
+ребят, ещё вопрос, в задании две фразы немного противоречат друг другу:
+```4.2: AuthorizedUser известен только на слое web (см. реализацию ProfileRestController). MealService можно тестировать без подмены логики авторизации, принимаем в методах сервиса и репозитория параметр userId: id владельца еды.
+4.3: если еда не принадлежит авторизированному пользователю или отсутствует, в MealServiceImpl бросать NotFoundException.```
+```В Meal, которая приходит в контроллер нет никакой информации о пользователе (еда приходит в контроллер БЕЗ user/userId). Она может быть только авторизованного пользователя, поэтому что-то сравнивать с ним никакого смысла нет. По id еды и авторизованному пользователю нужно проверить ее принадлежность.```
+
+Yevhen Maksymovych [3:35 PM]
+так надо в MealServiceImpl передавать в каждый метод userId или таки надо глядеть в статический AuthorizedUser.id()?
+
+Dmitry Makarov [8 hours ago]
+надо передавать из контроллера (edited)
+
+
+Evgeniy [8 hours ago]
+я так понял: надо глядеть в статический AuthorizedUser.id() в контроллере и передавать в каждый метод сервиса userId
+
+
+Mikhail Makar [7:18 PM]
+кто-нибудь сортировал список юзеров через стримы?
+
+Dennis [5 hours ago]
+Да
+
+
+dustnfox [5 hours ago]
+А зачем через стримы? Не легче просто сортировку на коллекции запустить? Но если так уж хочется именно в стриме, то там есть sorted. Принимает компаратор.  То есть будет что-то вроде `.stream().sorted(Comparator.comparing(User::getName))...`
+
+
+Mikhail Makar [5 hours ago]
+Благодарю!
+
+
+dustnfox [5 hours ago]
+На всякий случай: метод не терминальный. То есть после него еще нужно в коллекцию собирать. или преобразовывать в результат
+
+
+Mikhail Makar [4 hours ago]
+да, конечно, .collect(Collectors.toList());
+Спасибо)
+
+
+Grigory Kislin [7:46 PM]
+@Yevhen Maksymovych
+> так надо в MealServiceImpl передавать в каждый метод userId или таки надо глядеть в статический AuthorizedUser.id()?
+ну да, именно так: глядеть в статический AuthorizedUser.id() И  передавать в каждый метод userId
+
+DimaV [9:03 PM]
+Добрый вечер!
+может кто-нибудь подсказать по поводу thymeleaf? 
+в idea нет стандартной поддержки
+как добавить?
+
+Anton_Bodyakin [9:21 PM]
+Добрый вечер
+Никто не столкнулся с проблемой накатки патча 2_1_HW1?
+После накатки присутствуют ошибки компиляции, в ru.javawebinar.topjava.util.MealsUtil отсутствуют описанные на страничке проекта изменения (edited)
+
+VictorStatko [9:21 PM]
+Добрый вечер, кто подскажет, для чего в User поле enabled?
+
+Yevhen Maksymovych [9:27 PM]
+на случай, если админ захочет деактивировать этого пользователя
+из базы удалять его нельзя, вдруг там есть милы, которые содержает его ид
+нарушится целостность бд (edited)
+потому просто деактивируем
+
+VictorStatko [9:28 PM]
+понял, спасибо

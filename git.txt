@@ -229,3 +229,26 @@ Dmitry Makarov [21 hours ago]
 
 pro [12 hours ago]
 через консоль апплаится
+
+
+Kochedikov Ilia [1:47 PM]
+uploaded and commented on this image: image.png 
+
+Подскажите, пожалуйста, как правильно поступить в случае, если после уроков не был сделан git-commit/push, а сразу создавал ветки с ДЗ? Сейчас только понял, что хронология коммитов нарушена.
+
+Kochedikov Ilia [1:48 PM]
+Другими словами, как возможно из этой ситуации получить следующее:
+
+Kochedikov Ilia [1:48 PM]
+uploaded this image: image.png 
+
+
+Kochedikov Ilia [1:50 PM]
+Нужно ветку HW1 перенести, чтобы она была после lesson1. Как это возможно сделать, может кто знает?
+Спасибо.
+
+Grigory Kislin [7:37 PM]
+uploaded and commented on this image: image.png 
+
+@Kochedikov Ilia попробуй checkout lesson1 (сделать текущей) и на HW1
+merge into current
