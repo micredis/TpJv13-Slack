@@ -3221,3 +3221,124 @@ uraplayer [2 hours ago]
 aleksey [2 hours ago]
 когда нажимается ссылка, браузер формирует http запрос, который идет на сервер, там уже он обрабатывается сервлетом.
 Важно понимать, что jsp не запускается у клиента на браузере. jsp формирует статическую html страницу и отправляет ее клиенту где он ее и видит в окне браузера. И на странице в барузере уже нт никаких jsp тегов, java кода и т.д. только html
+
+
+Kirilo [4:52 AM]
+В нашем случае средствами doGet мы отправляем параметры, в doPost получаем. doGet, в отличии от doPost не скрывает свой запрос и в браузере в адресной строке остается след, что с точки зрения безопасности неочень. Например, через doGet секрктные данные(логин, пароль и т.д.) точно не стоит передавать. (edited)
+
+uraplayer [7:34 PM]
+Проект был сначала под Windows, где я настроил переменную окружения без проблем. Сейчас перешел на macOS Sierra 10.12.6, а как тут это выполняется? - Установите переменную окружения на TOPJAVA_ROOT на корень проекта и перезапустите IDEA. (edited)
+
+mrLanu [21 hours ago]
+mentioned dmitry_ov’s Shell snippet
+Запускаем программу "Terminal"
+Вводим команду:
+export TOPJAVA_ROOT="/Volumes/Home/Documents/3. Personal/2. Projects/ИТ/4. Projects/2. Java/1. General/topjava/log/topjava.log"
+​
+Эта команда создаст переменную окружения TOPJAVA_ROOT. Проверить что создалась можно командой
+2 Comments Collapse
+
+
+v.chernyshoff [21 hours ago]
+Просто заходишь в IDEA в настройки tomcat и во вкладке startup/connection заводишь переменные.
+
+
+uraplayer [20 hours ago]
+@mrLanu Спасибо, теперь пишется в лог.
+
+
+uraplayer [7:57 PM]
+После перезагрузки IDEA и запуске выдает вот какое сообщение
+
+uraplayer [20 hours ago]
+Отвечу себе https://stackoverflow.com/questions/18794573/class-javalaunchhelper-is-implemented-in-both-libinstrument-dylib-one-of-th
+stackoverflow.com
+Class JavaLaunchHelper is implemented in both ... libinstrument.dylib. One of the two will be used. Which one is undefined
+I upgraded to the latest Java 7 u40 on MacOS X and started getting the following message on the console when launching my application using Eclipse. The app works fine but I would like to find out ...
+
+
+
+uraplayer [7:57 PM]
+objc[3739]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/bin/java (0x10a8ca4c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10a9984e0). One of the two will be used. Which one is undefined.
+
+uraplayer [7:59 PM]
+uploaded this image: Снимок экрана 2018-03-10 в 19.58.26.png 
+
+
+Евгений [8:55 PM]
+Всем привет! Тут еще есть кто-нибудь? А то я только подключился:) Подскажите, пож-та, в каком месте нужно хардкодить список еды? В MealsUtils создать метод для этого? Не совсем понятно
+
+aleksey [19 hours ago]
+В том же класса где эта еда хранится, там лучше и хардкодить.
+
+
+Евгений [19 hours ago]
+Не понял. Разве у нас для еды есть какое-то хранилище?
+
+
+aleksey [19 hours ago]
+нужно создать структуру, которая как бы будет играть роль бд и хранить Meal.
+
+
+Grigory Kislin [18 hours ago]
+up to you- где тебе кажется правильным
+
+
+Евгений [18 hours ago]
+спасибо за подсказки)
+
+
+Andrew Manik [10:28 PM]
+Доброй ночи, на всякий случай кидаю сюда, может кому-то в будущем пригодится по настройке TomCat
+Суть проблемы:
+                проект не деплоится вручную ни через менеджер томката, ни через копипаст.
+                При том, что из IntelliJ IDE все работает нормально.
+Что было у меня:
+               какое-то время назад, а именно между занятиями решил поставить AndroidStudio со всеми прибамбасами,
+               а именно NVPACK\jdk1.7.0_71. Будучи самым "умным" я даже не догадался подумать, что он перепишет JAVA_HOME.
+               Итог: при запуске томката он брал jdk1.7xxx и, как следствие, выдавал неожиданные ошибки на тех заданиях,
+                          которые еще несколько дней назад работали. 
+Решение: поправил JAVA_HOME и все заработало.
+
+Artem Murk [11:21 PM]
+@Andrew Manik спасибо, не думал что такие проблемы могут быть. Конда я заглядывал в последний раз у меня данная переменная указывала на 1.9 Java, хоть проблем сейчас нет, но если появятся то буду знать куда заглянуть на случай. П.С. Когда делал проект на 9 намучался с зависимостями.
+
+Andrew Manik [10:15 AM]
+еще одно наблюдение за поведением TomCat: если делать deploy через web интерфейс в «Microsoft Edge» то он формирует ссылку убрав все "/" и, как следствие, это не работает, а через Chrome — все без проблем. Mozila — как Edge.
+У кого-нибудь есть мысль, как это поправить? (edited)
+
+Yevhen Maksymovych [10:21 AM]
+Мне приходят в голову два очевидных варианта
+1. Деплоить через хром
+2. Не деплоить через веб
+
+Alex83 [12:13 PM]
+Что-то веб как-то мучительно больно дается
+
+realcorwin [12:14 PM]
+всё, что знаешь, - просто. что не знаешь - сложно. разберёшься :slightly_smiling_face:
+
+Alex83 [12:14 PM]
+uploaded this image: image.png 
+
+
+Alex83 [12:15 PM]
+столько мучений, чтобы запилить сайт а ля начало 90-х )
+переходим к HW2 )
+
+realcorwin [12:15 PM]
+потому что Java :slightly_smiling_face: она не для таких сайтов создавалась :slightly_smiling_face:
+15 лет назад я сайты на Cold Fusion делал. вот где было легко и приятно :slightly_smiling_face:
+
+Dmitry Neustupov [1:18 PM]
+@Alex83 там, где перебор по калориям, должно же быть красным, не?
+
+Alex83 [1:26 PM]
+Да, перепутал цвета немного)
+@Dmitry Neustupov Спасибо!
+
+Timur [3:24 PM]
+засунуть форматтер в jsp для того,чтобы вывести дату без T правильно?
+
+Mikhail Makar [3:27 PM]
+DateTimeFormatter лучше разместить в сервлете, а затем его передать в jsp и там его использовать

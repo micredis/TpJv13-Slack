@@ -252,3 +252,16 @@ uploaded and commented on this image: image.png
 
 @Kochedikov Ilia попробуй checkout lesson1 (сделать текущей) и на HW1
 merge into current
+
+
+Dmitry Dimidyuk [12:30 PM]
+uploaded and commented on this image: Screen Shot 2018-03-10 at 13.28.29.png 
+
+Не понял, где нужно открыть код проблемного класса, чтобы сравнить со своим?
+
+Grigory Kislin [9:53 PM]
+@Dmitry Dimidyuk
+тут: https://github.com/JavaWebinar/topjava (edited)
+
+Dmitry Dimidyuk [18 hours ago]
+Спасибо
