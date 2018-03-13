@@ -19,3 +19,12 @@ joined #project_change along with 7 others.
 
 zhuchokdimon [4:15 PM]
 Всем привет! По проекту вопрос: то есть нужно сначала подогнать проект так, как сейчас на гитхабе на JavaWebinar, а потом...?
+
+
+GitHub APP [7:17 PM]
+JavaWebinar
+*8 new commits pushed to `master`*
+`b2c461d2` - 2_0_add_fix
+`56aef274` - 2_1_HW1
+`4f971bd5` - 2_2_HW1_optional
+`372759de` - 2_3_app_layers Show more

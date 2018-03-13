@@ -3342,3 +3342,68 @@ Timur [3:24 PM]
 
 Mikhail Makar [3:27 PM]
 DateTimeFormatter лучше разместить в сервлете, а затем его передать в jsp и там его использовать
+
+
+Alex83 [5:18 PM]
+@Timur я делал так
+1) в депенденси добавил
+       <dependency>
+           <groupId>net.sargue</groupId>
+           <artifactId>java-time-jsptags</artifactId>
+           <version>1.1.4</version>
+       </dependency>
+2) в jsp добавил <%@ taglib uri="http://sargue.net/jsptags/time" prefix="javatime" %>
+и <th style="${meal.isExceed() ? 'background-color: green':'background-color: red'}"><javatime:format value="${meal.getDateTime()}" pattern="dd/MM/yyyy HH:mm:ss" /></th>
+
+Евгений [9:08 PM]
+uploaded and commented on this image: ст1.JPG 
+
+Народ, а у кого-нибудь были проблемы с кодировкой на JSP страницах? У меня при первом запуске все норм, описание на русском языке работает. По после того, как ввожу новые данные на странице editMeal.jsp - на главной снова отображается тарабарщина :confused:
+
+Евгений [9:08 PM]
+uploaded this image: ст2.JPG 
+
+
+Евгений [9:09 PM]
+uploaded this image: ст3.JPG 
+
+
+Евгений [9:09 PM]
+не пойму, в какой момент работы сбивается кодировка:/
+
+ilya t. [9:10 PM]
+а ты в методах сервлета явно указывал кодировку?
+request.setCharacterEncoding( "UTF-8" )
+такое должно быть перед реализацией doGet например
+
+Евгений [9:25 PM]
+в doGet было, а вот в doPost забыл)) благодарю
+
+dyakoven [3:07 PM]
+как проверить правильность создания переменной TOPJAVA_ROOT? перезапускал IDEA, проверяю в терминале - указывает правильно на корень проекта. а вот при логировании в консоль пишет но файл с логами не создается. если в logback.xml прописываю полный путь - работает
+
+Dmitry Makarov [24 hours ago]
+`System.getenv("TOPJAVA_ROOT")` в программе
+`echo %TOPJAVA_ROOT%` в Windows
+`echo $TOPJAVA_ROOT` Linux
+
+
+Dmitry Makarov [24 hours ago]
+Компьютер перезагружал?
+
+
+
+dyakoven [24 hours ago]
+вот как раз самое важное сделать забыл) спасибо, перезагрузка помогла
+
+
+Grigory Kislin [21 hours ago]
+вообще в уроке же есть рядом- как из java проверить
+
+
+dyakoven [21 hours ago]
+я поэтому сюда и написал, потому что всё это проверил. ИДЕЮ рестартовал, а вот саму машину - нет
+
+
+Timur [7:24 PM]
+@Alex83 @Mikhail Makar спасибо за ответ

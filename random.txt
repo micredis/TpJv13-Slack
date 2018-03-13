@@ -570,3 +570,107 @@ aleksey [11:54 PM]
 
 mrLanu [11:54 PM]
 :yum:
+
+
+saudabaew [10:24 AM]
+кто может простыми словами объяснить суть параметра scope в useBean
+
+Andrew [10:26 AM]
+область видимости переменных
+ну или чего у тебя там
+
+saudabaew [10:29 AM]
+это я прочел, но не совсем понимаю смысл.
+
+Dmitry Makarov [1 day ago]
+https://stackoverflow.com/a/22766544
+stackoverflow.com
+Page scope- scope in jsp
+There are following scopes in jsp: page scope request scope session scope and application scope. I am confused about page scope. Can anybody tell me what is this page scope? I have not found ...
+ 
+ 
+
+
+Dmitry Makarov [1 day ago]
+Например, когда делаешь forward, бины из request scope не пропадают из видимости. Если сделал redirect - пропадут.
+
+
+saudabaew [1 day ago]
+я наверно жутко туплю, но поясни пжлст, из видимости чего?
+
+
+Dmitry Makarov [1 day ago]
+в данном случае jsp страницы (edited)
+
+
+saudabaew [1 day ago]
+и что мне это дает, что она пропадет или не пропадет из видимости?
+
+
+Dmitry Makarov [1 day ago]
+forward делаешь в сервелете на  jsp и там этот бин будет виден (edited)
+
+saudabaew [1 day ago]
+а, т.е. грубо говоря, в другой jsp заново можно не объявлять этот бин?
+
+
+Dmitry Makarov [1 day ago]
+типа в jsp его можно достать (edited)
+
+
+saudabaew [1 day ago]
+спасибо
+
+
+Andrew [1 day ago]
+Если помещаешь в реквест к примеру что то то этот обьект будет доступен до тех пор пока живут обьекты реквест- респонс в твоем контейнере, наверное как то так...
+
+Andrew [1 day ago]
+Если в сессию то на время сессии
+
+
+
+saudabaew [1 day ago]
+благодарю @Andrew
+
+
+v.chernyshoff [21 hours ago]
+Scope определяет, сколько бин проживёт после создания.
+
+
+mila [8:38 PM]
+только что по bbc видела рекламу что людям уже чипы в руку вживляют, типа в метро расплачиваться, ещё гдето, просто руку подносишь к сканеру:flushed:
+чёта неожиданно
+
+dustnfox [8:41 PM]
+@mila А по-моему как раз таки ожидаемо. То ли еще будет...
+
+aleksey [8:42 PM]
+дело Кевина Уорвика живет=) https://ru.wikipedia.org/wiki/%D0%A3%D0%BE%D1%80%D0%B8%D0%BA,_%D0%9A%D0%B5%D0%B2%D0%B8%D0%BD
+Wikipedia
+Уорик, Кевин
+Кевин Уорик (англ. Kevin Warwick; род. 9 февраля 1954, Ковентри, Великобритания) — британский учёный-кибернетик, исследователь вопросов робототехники и проблематики создания нейрокомпьютерных интерфейсов.
+Степень бакалавра получил в университете Эштона в 1979 году. В 1982 году защитил докторскую диссертацию (PhD) в области электротехники в Имперском колледже Лондона. В 1988—1996 годах — декан факультета кибернетики в Университете Рединга.
+Доктор наук в области технической кибернетики (Институт теории Show more
+https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Kevin_Warwick.jpg/1200px-Kevin_Warwick.jpg
+
+Dmitry Makarov [8:45 PM]
+https://tengrinews.kz/kazakhstan_news/otpechatki-paltsev-kazahstantsev-budut-ispolzovat-vmesto-337776/
+Tengrinews.kz
+Отпечатки пальцев казахстанцев будут использовать вместо удостоверений - Оспанов
+Отпечатки пальцев казахстанцев будут использовать вместо удостоверений - Оспанов - события в Казахстане. Актуальные новости и аналитика происшествий в стране на Tengrinews.
+https://tengrinews.kz/userdata/news/2018/news_337776/photo_240654.jpg
+решили не заморачиваться с чипами
+
+mila [8:47 PM]
+ну вроде как да, пора уже, но одно дело видеть это в какомнить экшне или обзор в ит статье про последние достижения, а другое дело обычная повседневная реклама такая обычная европейская девочка среднего достатка вышла из дома, пошла в метро, приложила руку и такая улыбается в камеру типа "теперь так удобно!"..... только что была реклама яблок со скидками в ближайшем супермаркете за углом а теперь вот эта девочка с чипом....
+у меня следующие мысли сразу про украденные оторванные руки и вырванные глаза)
+
+Dmitry Makarov [8:51 PM]
+тоже об этом подумал
+
+dustnfox [8:52 PM]
+В twitter канал хороший по поводу всяких HiTech-ништяков https://twitter.com/mashable
+twitter.com
+Mashable (@mashable) | Twitter
+The latest Tweets from Mashable (@mashable). Mashable is for superfans. We're not for the casually curious. Obsess with us

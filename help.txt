@@ -161,3 +161,23 @@ Constantine [1 hour ago]
 stackoverflow.com
 Diffrence Between 'class' and 'type' attribute in jsp
 In jsp I have found - <jsp:useBean id="user" class="com.test.UserDetails" /> By which I mean (Please correct me If I am wrong) - if a UserDetails instance is already exists then it will...
+
+
+Pavel [1:57 PM]
+Всем привет, на работе требуется приделать функциональность на REST, пока не очень понимаю с чего начать, кто уже разбирался можете скинуть примеры/уроки нормальные, где хорошо расписано. Спасибо)
+
+Dmitriy Kozin [8 minutes ago]
+Если тебе простенькая функциональность нужна то можно использовать http://sparkjava.com
+sparkjava.com
+Spark Framework: An expressive web framework for Kotlin and Java
+Spark Framework - Create web applications in Java rapidly. Spark is a micro web framework that lets you focus on writing your code, not boilerplate code.
+
+
+Dmitriy Kozin [1:59 PM]
+Павел, а где работаешь?
+
+Pavel [2:15 PM]
+Haulmont, Самара
+
+Dmitriy Kozin [2:24 PM]
+Прикольная компания. Смотрел когда-то платформу Cuba.

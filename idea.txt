@@ -122,3 +122,78 @@ Dmitriy Kozin [4:30 PM]
 
 dmitry_ov [5 hours ago]
 Ctrl + Y
+
+
+Serge [5:42 PM]
+uploaded and commented on this image: image.png 
+
+Коллеги, хорошего дня! Подскажите, плз, идея вдруг перестала распознавать .tld файл. Ассоциация в настройках прописана. Что это может быть?
+
+Grigory Kislin [6:27 PM]
+uploaded this image: @Serge нашел у себя ассоциацию в xml: 
+
+
+Serge [7:14 PM]
+@Grigory Kislin прописана. пришли мне, плз, код из этого файла. Я не коммитил, а патч не накатывается. Кста, вновь созданные файлы идея видит.
+
+Grigory Kislin [7:18 PM]
+@Serge вчекинил в github (edited)
+
+Serge [7:19 PM]
+@Grigory Kislin spasibo!
+
+Yevhen Maksymovych [8:45 PM]
+а как-то можно подавить вывод в консоль всей служебной требухи от томката? вот этих >>>11-Mar-2018 20:44:33.747 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.5.28
+11-Mar-2018 20:44:33.756 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+11-Mar-2018 20:44:33.766 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+11-Mar-2018 20:44:33.770 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 78 ms
+я ограничил в настройках logback'а уровень вывода до ERROR, но от этого все равно не спасает, такое чувство, что этот вывод томката - обычный консольный вывод, а не лог, использующий апи
+
+Grigory Kislin [9:36 PM]
+@Yevhen Maksymovych это надо уже в томкате настраивать. почитай его о логировании
+
+Yevhen Maksymovych [9:36 PM]
+@Grigory Kislin спасибо, почитаю!
+
+saudabaew [5:01 AM]
+uploaded this image: что означает это сообщение? 
+
+Constantine [7:32 AM]
+Думаю здесь ты найдешь объяснение
+https://www.jetbrains.com/help/idea/2016.1/managing-spring-configuration-files.html
+
+saudabaew [7:50 AM]
+если своими словами, то я понимаю это примерно так: IDEA предполагает, что найденный файл spring-app.xml является файл-маппингом спринг-контекста данного проекта. Если это так, то назначьте данный файл по умолчанию, либо создайте дефолтный контекстный файл. Так?
+
+Grigory Kislin [11:54 AM]
+нужно сконфигурить спринг, чтобы idea понимала (facet)
+https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8C%D1%82%D0%B5---%D0%BD%D0%B5%D1%82-%D0%BB%D0%B8-%D0%BB%D0%B8%D1%88%D0%BD%D0%B8%D1%85-%D0%B1%D0%B8%D0%BD%D0%BE%D0%B2-%D0%B8%D0%BB%D0%B8-%D0%BD%D0%B0%D0%BE%D0%B1%D0%BE%D1%80%D0%BE%D1%82-%D0%B8%D1%85-%D0%BD%D0%B5-%D1%85%D0%B2%D0%B0%D1%82%D0%B0%D0%B5%D1%82-%D0%B2-project-structure-modules-spring-%D0%B5%D1%81%D0%BB%D0%B8-%D0%BD%D0%B5-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D1%82-%D1%80%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5--%D1%83%D0%B4%D0%B0%D0%BB%D0%B8%D1%82%D1%8C-%D0%B8-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-%D0%B7%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE
+
+
+poleg [2:15 PM]
+Случайно удалил topjava.iml, теперь проект не открывается ( Что можно сделать?
+
+Aleksei Kirillov [1 hour ago]
+Попробуй сделать импорт проекта maven
+
+
+poleg [1 hour ago]
+Я скопировал папку с проектом в другое место, а тут удалил и добавил проект из мастера на гитхабе.
+
+
+poleg [1 hour ago]
+И сохраненной папки перетащил папки git idea, но теперь все файлы подсвечивает синим и не коммитит (
+
+
+poleg [1 hour ago]
+Commit failed with error
+            0 files committed, 40 files failed to commit: 1 - 3
+            warning: LF will be replaced by CRLF in README.md.
+            The file will have its original line endings in your working directory.
+            warning: LF will be replaced by CRLF in ReleaseNotes.md.
+            The file will have its original line endings in your working directory.
+            warning: LF will be replaced by CRLF in cv.md.
+
+
+poleg [2:57 PM]
+Уфф. Вроде восстановил.
