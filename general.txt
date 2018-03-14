@@ -2815,3 +2815,28 @@ Grigory Kislin [4 hours ago]
 
 aleksey [5:24 AM]
 Тема следующего занятия у нас тестирование, если это те моки о которых подумал я, то они определенно будут в тестировании.
+
+
+alexey [7:56 AM]
+Может кто подскажет хорошую статью по областям видимости (то что мы указываем в jsp scope = request e.t.c.)  или контекстам, не знаю как правильно.
+
+pro [8:35 AM]
+@alexey http://www.baeldung.com/spring-bean-scopes
+Baeldung
+Quick Guide to Spring Bean Scopes | Baeldung
+Learn how to quickly navigate the available bean scopes in the Spring framework.
+
+Sergey [11:31 AM]
+Народ, метод remove(key) у мапы вернет null, если такого ключа нету, я правильно понимаю?
+
+ilya t. [2 hours ago]
+https://docs.oracle.com/javase/7/docs/api/java/util/Map.html#remove(java.lang.Object)
+Returns the value to which this map previously associated the key, or null if the map contained no mapping for the key.
+
+
+dyakoven [1 hour ago]
+Ctrl+Q на реализации метода покажет короткую документацию
+
+
+Mikhail Makar [37 minutes ago]
+Да!

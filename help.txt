@@ -181,3 +181,14 @@ Haulmont, Самара
 
 Dmitriy Kozin [2:24 PM]
 Прикольная компания. Смотрел когда-то платформу Cuba.
+
+
+Grigory Kislin [11:35 PM]
+@Pavel CUBU тоже смотрел. :slightly_smiling_face:
+хорошие ссылки по rest:
+https://habrahabr.ru/company/yandex/blog/265569/
+http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api (edited)
+Хабрахабр
+15 тривиальных фактов о правильной работе с протоколом HTTP
+Внимание! Реклама! Пост оплачен Капитаном Очевидность! Ниже под катом вы найдёте 15 пунктов, описывающих правильную организацию ресурсов, доступных по...
+https://habrastorage.org/files/562/c66/ec2/562c66ec2a8a4ddfbd1290a58dd11776.jpg
