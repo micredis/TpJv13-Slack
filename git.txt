@@ -291,3 +291,11 @@ dustnfox [7:31 AM]
 
 Timur [7:34 AM]
 @Mikhail G dustinfox спасибо,просто думал это другая проблема
+
+
+alexey [10:13 AM]
+uploaded and commented on this image: hunk.png 
+
+Почему так? Проверил master 2.7 на githab и свой, они одинаковые.
+alexey [10:14 AM]
+Help please

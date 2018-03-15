@@ -2538,3 +2538,396 @@ ilya t. [1:25 PM]
 
 pro [1:25 PM]
 <option name = "id" value = 1>
+
+
+ilya t. [1:34 PM]
+<form action="users" method="post">
+   <select>
+       <option disabled>Login ID</option>
+       <option name="id" value=1>User 1</option>
+       <option name="id" value=2>User 2</option>
+   </select>
+       <input type="submit" value="Submit">
+</form>
+в index такое и получается мы передаем в UserServlet и в doPost делаем AuthorizedUser.setId(Integer.parseInt(req.getParameter("id")));
+так?
+таки не работает
+
+pro [1:37 PM]
+попробуй value="1"
+
+ilya t. [1:39 PM]
+так же
+))
+
+dustnfox [1:42 PM]
+напиши name не в option а в select тэг
+
+ilya t. [1:45 PM]
+спасибо, заработало)
+
+ilya t. [2:16 PM]
+поясните все-таки кто уже сделал (edited)
+
+dustnfox [24 hours ago]
+Я извлекал в сервлете. В контроллер отдавал объект.
+
+
+
+pro [22 hours ago]
+@dustnfox проверки объекта meal.isNew() тоже вынес в контроллер?
+
+
+pro [22 hours ago]
+@dustnfox просто там нет никакой логики, кроме как пару тернарных проверок  на isNew , isEmpty да на null
+
+
+pro [22 hours ago]
+@dustnfox думаю может их тоже перекинуть
+
+
+dustnfox [21 hours ago]
+`isNew` в контроллере проверял, хотя в данном случае это избыточно (сервлет уже проверил и на основании этого вызывает update/save). Тоже не совсем уверен, правильно ли это реализовано. Если как Григорий говорит, потом сервлета не будет вообще, то логичнее конечно было бы строковые параметры отдавать в контроллер. Просто я со спрингом не знаком. Знаю, что он эти параметры в виде String в REST заинжектить аннотацией прямо в метод.  Возможно, что этим его возможности не ограничиваются и он может собрать в вывалить в метод целиковый bean :slightly_smiling_face: Время покажет.
+
+
+pro [19 hours ago]
+@dustnfox через аннотацию RequestParam бы заинжектилось все красиво, но нельзя pom.xml менять, будто специально такое условие добавили
+
+
+dustnfox [19 hours ago]
+Ну дальше-то все равно все менять будем. И не раз. :slightly_smiling_face:
+
+
+pro [19 hours ago]
+@dustnfox смотрю тут, идея предлагает написать свою аннотацию а-ля RequestParam)) щас попробую сделать без изменения pom.xml
+
+
+pro [18 hours ago]
+@dustnfox пока сделал через кастомную аннотацию, понял, что она вообще не нужна на самом деле: в метод контроллера можно затащить параметры просто добавив ему входящий параметр HttpServletRequest request , а затем уже непосредственно из request извлекать все необходимое добро)) Тогда из сервлета достаточно будет вызвать нужный метод контроллера, не передавая ему ничего))
+
+
+pro [18 hours ago]
+'''@Controller
+public class MealRestController {
+
+   @Autowired
+   private MealService service;
+
+   public List<MealWithExceed> getAll(HttpServletRequest request) {
+       request.getAttribute("id");
+
+
+pro [18 hours ago]
+@dustnfox сори, насчет передать ничего это я наверное погорячился, таки нужно ведь request передать
+
+
+dustnfox [18 hours ago]
+@pro А зачем в контроллере id для getAll? контроллер забирает его из AuthorizedUser.id() Так что не нужен он ему в параметрах запроса.
+
+
+pro [17 hours ago]
+@dustnfox это я так первый попавшийся параметр для примера дернул)
+
+
+pro [17 hours ago]
+@dustnfox там по ходу meal.id имелось в виду, сейчас залью на гит и скину тебе ссылку посмотреть, все работает, чистенький красивый сервлет)))
+
+
+pro [17 hours ago]
+@dustnfox https://github.com/JavaEEPRO/topjava/blob/HW02/src/main/java/ru/javawebinar/topjava/web/MealServlet.java
+src/main/java/ru/javawebinar/topjava/web/MealServlet.java
+```package ru.javawebinar.topjava.web;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;```
+Show more…
+JavaEEPRO/topjavaAdded by GitHub
+
+
+ilya t. [17 hours ago]
+@pro красиво) но с другой стороны есть ли в этом особый смысл?
+
+
+ilya t. [17 hours ago]
+разве что код чуть чище стал)
+
+pro [17 hours ago]
+@ilya t. да это в рамках пункта 6.1 сделано, где нас просят убрать логику из сервлета и перенести в контроллер
+
+ilya t. [17 hours ago]
+@pro да я знаю, просто подумал зачем такое требование в тз)
+
+pro [17 hours ago]
+@ilya t. примерно за тем же, зачем в бассейне веники
+
+dustnfox [16 hours ago]
+@pro То есть ты просто выпилил сервлет? :slightly_smiling_face: Вместо него реквесты и респонзы принимает RESTcontorller (хоть и от того же сервлета). Но не могу не согласиться - код сервлета теперь чист и понятен. Меня конечно пункт про _всю логику - в контроллер_ тоже напрягал, но я на такие кардинальные меры не решился.
+
+
+pro [5 hours ago]
+@dustnfox пробовал и набор параметров передавать из сервлета в контроллер, и массив строк с параметрами, но оно выглядит как то стремно, да и request с response по сути - объекты, которые в конечном итоге сами по себе и есть строка, поэтому форматировать их в другую строку/массив ради того, чтобы просто передать затем  -  нонсенс
+
+
+ilya t. [2:16 PM]
+pro
+6.1 ..вся логика должна быть в контроллере -  это означает, что все параметры из мапы DOM нужно извлекать непосредственно в контроллере, не задействуя сервлет?
+Posted in #hw2
+Yesterday at 1:11 PM
+
+Ivan A [6:14 PM]
+в index вставил
+```<select name="userId">
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select>```
+    
+dustnfox [20 hours ago]
+Есть разные варианты. Я добавлял `onchange` к `<select>` и менял по этому событию `href` у ссылки на `users` - приклеивал к нему значение  параметра. Кто-то в этой ветке делал через оборачивание селекта в `<form>`
+
+
+Ivan A [20 hours ago]
+спс бро
+
+
+dustnfox [20 hours ago]
+@Ivan A нзчт, бро :slightly_smiling_face:
+
+
+Ivan A [20 hours ago]
+```<form method="get" action="meals">
+    <select name="userId">
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select>
+    <ul>
+        <li><a href="users">Users</a></li>
+        <li><a href="meals">Meals</a></li>
+    </ul>
+</form>```
+
+
+Ivan A [20 hours ago]
+```Integer idUser = Integer.parseInt(request.getParameter("userId"));```
+
+Ivan A [20 hours ago]
+ловлю null
+
+
+dustnfox [20 hours ago]
+Пока все логично ))
+
+
+dustnfox [20 hours ago]
+У формы должен быть Submit. Все данные формы отправляются по этому сабмиту
+
+
+dustnfox [20 hours ago]
+И отправляй в userServlet. Так логичнее. Там выставишь id у AuthorizedUser
+
+
+Ivan A [20 hours ago]
+выручил
+
+
+Ivan A [6:15 PM]
+как выловить в сервлете
+
+pro [7:05 PM]
+@Grigory Kislin шеф, раз pom.xml трогать запрещено, разреши хотя бы екстёрнал либу маленькую подтянуть, чтоб много вручную не писать
+
+Grigory Kislin [16 hours ago]
+если очень хочется- поменяй. спринг mvc не тяни только
+
+
+Евгений [7:27 PM]
+не накатывается патч 2_0_add_fix, требует мержить. Код из мастера вроде как совпадает, делал pull оттуда перед накатом патча
+сравнил в режиме Raw, все равно ругается на класс MealsUtil
+классы, собственно, идентичны
+
+Aliaksei Zayats [7:32 PM]
+может какой пробел лишний поставил? войди в класс, понажимай CTRL + Z несколько раз чтоб на свои места всё стало
+
+Евгений [7:33 PM]
+не, идея же пишет что идентичны. Да и ошибка там в другом, щас
+
+Евгений [7:33 PM]
+uploaded this image: ошибка.JPG 
+
+
+Евгений [7:34 PM]
+ругается, что не может добавить вот этот кусок. Ну, логично, конечно, что не может)
+
+Евгений [7:34 PM]
+я вот думаю, если просто смержить - накатится ли все нормально дальше
+
+Grigory Kislin [16 hours ago]
+если raw совпадают- патч должен накатываться (собственно как у всех). если неясно- поправь руками (edited)
+
+
+Aliaksei Zayats [7:36 PM]
+ребята подскажите смысл 4 задания :
+4: Реализовать слои приложения для функциональности "еда".
+это имеется ввиду папка "meal"?
+
+Евгений [7:39 PM]
+Ну все что относится к еде, соответственно. Даошки там, сервисы и тд
+
+Ma3stro [18 hours ago]
+Именно так
+
+
+Aliaksei Zayats [7:42 PM]
+а почему в MealRestController нам дали  private MealService service;
+а в AdminRestController не дали UserService?
+
+Ma3stro [7:56 PM]
+Потому что он есть в AbstractUserController
+
+roma [8:14 PM]
+Ребята а у меня проект не запаковывается автоматически в war после измЕнений - приходится нажимать на pacage каждый раз - что не так? (edited)
+
+Grigory Kislin [16 hours ago]
+все так. что значит- автоматически пакуется?
+
+
+Anton Kiselev [8:18 PM]
+Подскажите, пожалуйста, так можно вообще было сделать?
+```<form action="users" method="post">
+    <h2><input  type="radio" name="userId" value="1" > #1 user </h2>
+    <h2><input  type="radio" name="userId" value="2" > #2 user</h2>
+        <input type="submit" value="apply">
+    </form>```
+
+Ma3stro [8:33 PM]
+чисто по ТЗ - нет, но в сервлете получишь всё равно тоже самое
+
+Alex83 [9:12 PM]
+как в этом прекрасном и удобном чатике цитировать? С винды сижу
+Share Message? (edited)
+tst
+Alex83
+Share Message?
+Posted in #hw2
+Yesterday at 9:13 PM
+да, оно )
+
+Dmitry Dimidyuk [9:58 PM]
+Подскажите плз, с адреса http://localhost:8080/topjava кнопка submit отправляет форму методом post на userServlet, а уже http://localhost:8080/topjava/index.html отправляет форму методом post уже на mealServlet. Как такое может быть?:) 
+<servlet>
+       <servlet-name>userServlet</servlet-name>
+       <servlet-class>ru.javawebinar.topjava.web.UserServlet</servlet-class>
+       <load-on-startup>0</load-on-startup>
+   </servlet>
+   <servlet-mapping>
+       <servlet-name>userServlet</servlet-name>
+       <url-pattern>/users</url-pattern>
+   </servlet-mapping>
+
+   <servlet>
+       <servlet-name>mealServlet</servlet-name>
+       <servlet-class>ru.javawebinar.topjava.web.MealServlet</servlet-class>
+       <load-on-startup>0</load-on-startup>
+   </servlet>
+   <servlet-mapping>
+       <servlet-name>mealServlet</servlet-name>
+       <url-pattern>/meals</url-pattern>
+   </servlet-mapping>
+
+dustnfox [16 hours ago]
+@Dmitry Dimidyuk не совсем понял, у тебя одна и та же кнопка Submit отправляет данные в разные сервелеты в зависимости от того открыт в браузере адрес `topjava` или `topjava/index.html` ? Так что ли?
+
+
+Dmitry Dimidyuk [16 hours ago]
+да
+
+
+Grigory Kislin [16 hours ago]
+посмотри во вкладке network что отправляет сервер
+
+
+dustnfox [16 hours ago]
+Может перезапустить Tomcat?
+
+
+Dmitry Dimidyuk [9:59 PM]
+сама форма с index.html:
+<form method=“POST”
+     action=“users”>
+   Choose user<p>
+   User ID:
+   <select name=“userID” size=“1">
+       <option value=“1”>1</option>
+       <option value=“2">2</option>
+   </select>
+   <br><br>
+       <input type=“SUBMIT”>
+</form>
+
+Евгений [10:03 PM]
+Кто-нибудь может объяснить вот это: "3.1: реализовать хранение еды для каждого пользователя можно с добавлением поля userId в Meal ИЛИ без него (как нравится)."
+
+Евгений [10:04 PM]
+Что имеется в виду? Не понимаю, как можно реализовать хранение еды без userId. Коллекцию с едой в класс User запихнуть, или речь о чем-то другом?
+
+Андрущенко Игорь [16 hours ago]
+Первое что приходит в голову это таблица сопоставлений, как номализация в БД. Есть две таблицы со связкой многие ко многим. Мжду ними добавить 3-ю таблицу связей.
+В нашем случае это список содержащий объект с двумя параметрами UserID и MealID. 
+Лично мне такой вариант кажется громоздким. 
+Может кто предложит более элегантное решение? (edited)
+
+
+dustnfox [16 hours ago]
+Не совсем без `userId`, а без `userId` внутри meal. В смысле сам объект meal может не содержать этого поля. Сразу скажу: сам я так не делал. (edited)
+
+
+dustnfox [16 hours ago]
+Например, делаем `Map` ключ - userId, значение - коллекция из Meal. Тогда `save(Meal meal, int userId)` может сохранять еду в коллекцию нужного юзера
+
+
+
+Евгений [16 hours ago]
+а, ну вот так еще более-менее понятно, спасибо большое!
+
+
+Tinka [15 hours ago]
+@dustnfox это типа Map<Integer, List<Meal>>?
+
+
+Dmitry Dimidyuk [10:11 PM]
+скорее всего, имеется в виду с помощью другого поля, email например
+
+Евгений [10:13 PM]
+@Grigory Kislin Можете, пожалуйста, пояснить?
+
+Андрущенко Игорь [10:20 PM]
+Коллеги, заранее пардон может уже обсуждалось. 
+Вопрос вот какой. Красивое ли будет решение "пихать" User ID в методы Meal-репозитория? Может более правильно определеять (фильтровать про приналежности) в сервисном слое? (edited)
+
+Tanya [10:22 PM]
+если без  User ID в репо, то получается тебе всегда надо будет тащить все из БД, а потом отфильтровывать нужное... что совсем нехорошо
+
+Андрущенко Игорь [10:23 PM]
+Согласен, лишняя нагрузка. Тогда как вариант передавать в метод фильтр сформированный на уровне бизнес-логики?
+
+dustnfox [10:25 PM]
+Фильтр в данном конкретном случае и есть `userId`. Его и тащим.
+
+Андрущенко Игорь [10:28 PM]
+Коллеги, спасибо за ответы. Понятно что у нас задача потренироваться и научиться. 
+По факту условия фильтрации буду захардкожены в репозитории.
+
+Darkhan [5:18 AM]
+added this XML snippet: Untitled 
+В userMeal.jsp в чем преимущество использования этого: 
+<jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
+
+
+Darkhan [5:19 AM]
+Что бы вызывать методы так? ${meal.description}
+
+Artem Murk [5 hours ago]
+Ты можешь и без этой конструкции вызвать метод Meal.description. Она помогает идее понять к какому типу у тебя относится переменная, а также в какой куче она хранится чтоб её взять(request) (edited)
+
+
+Dmitry Neustupov [7:29 AM]
+@Darkhan да

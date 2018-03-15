@@ -1,0 +1,75 @@
+Grigory Kislin [1:59 AM]
+joined #hw3.
+
+Grigory Kislin [2:01 AM]
+Урок 3: JUnit и работа с RDBMS
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson03.md (edited)
+
+aleksey [2:06 AM]
+joined #hw3 along with 2 others.
+
+aleksey [3:12 AM]
+@Grigory Kislin почему мы решили не хранить userId в классе Meal ? Он нам нигде и никогда не может понадобиться? В таблице Meal в бд очевидно поле userId должно быть.
+
+Grigory Kislin [1 minute ago]
+в уроке есть вопрос
+
+
+SomeRandomName [3:31 AM]
+joined #hw3 along with 6 others.
+
+Ilya [5:37 AM]
+Народ, подскажите, плз, постгресс можно смело брать самый последний 10.3 или есть какая-то стабильная-ламповая версия ?
+
+pro [5 hours ago]
+ламповая)) красава
+
+
+pro [5 hours ago]
+@Ilya последнюю подтягивай, проблем нету
+
+
+Ilya [3 hours ago]
+@pro да, уже юзаю) кстати, юзеринтерфейс нормасик такой.
+
+
+Dmitry Makarov [5:40 AM]
+joined #hw3 along with 8 others.
+
+Dmitry Neustupov [7:37 AM]
+@aleksey А это нормально, что у нас в базе у meals есть userId, а в классе - нет?
+
+Что значит - "нормально"? Приложение работает. Ненормально, когда в приложении есть "лишний" код, который не используется. Для ORM он нам понадобится- мы Meal.user добавим.
+@Ilya пользуюсь 10-й версией, полёт нормальный.
+
+alexey [8:40 AM]
+commented on hunk.png
+со следующими пачами такая же история
+
+Yevhen Maksymovych [10:36 AM]
+ребята, подскажите, когда-то мелькала ссылка на план занятий с датами, ни у кого не осталось?
+
+VictorStatko [10:37 AM]
+На сайте в описании topjava вроде есть
+Где то там
+
+ilya t. [10:38 AM]
+https://github.com/JavaWebinar/topjava/tree/doc
+
+Yevhen Maksymovych [4 hours ago]
+спасибо!
+
+
+Tony [3:04 PM]
+Господа, обычно приходило письмо с хайлевл описанием занятия. В этот раз не было. Так и должно быть?
+
+realcorwin [3:06 PM]
+не должно но было :slightly_smiling_face:
+просто открой ссылку на лекцию на гите
+только что пришло письмо
+
+Grigory Kislin [3:07 PM]
+письмо как раз шлется. там дублирование ссылки на урок
+
+Tony [3:17 PM]
+ага, мерси
