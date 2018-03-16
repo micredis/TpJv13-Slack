@@ -28,3 +28,23 @@ JavaWebinar
 `56aef274` - 2_1_HW1
 `4f971bd5` - 2_2_HW1_optional
 `372759de` - 2_3_app_layers Show more
+
+
+Jan [10:08 PM]
+В описании опечатка - Apply 3_11_test_UserService.patch
+
+       В конструктор User внес registered и длаю копию roles (edited)
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson03.md
+doc/lesson03.md
+```
+# Онлайн проект <a href="https://github.com/JavaWebinar/topjava">Topjava</a>
+
+## [Материалы занятия](https://drive.google.com/drive/u/0/folders/0B9Ye2auQ_NsFT1NxdTFOQ1dvVnM)  (скачать все патчи можно через Download папки patch)
+
+## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Разбор домашнего задания HW02
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 1. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFdDhnNHFMU2dKQzQ">HW2</a>
+> **ВНИМАНИЕ! При удалении класса из исходников, его скомпилированная версия все еще будет находиться в target…
+ Show more
+
+JavaWebinar/topjava
+Added by GitHub

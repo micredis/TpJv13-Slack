@@ -3407,3 +3407,10 @@ dyakoven [21 hours ago]
 
 Timur [7:24 PM]
 @Alex83 @Mikhail Makar спасибо за ответ
+
+
+Евгений Глушков [11:18 AM]
+Подскажите кто знает: почему не получается из сервлета обратиться к jsp странице находящейся в WEB-INF?
+
+Grigory Kislin [6 hours ago]
+наши jsp перенесем в web-inf позднее

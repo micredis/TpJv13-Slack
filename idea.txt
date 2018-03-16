@@ -197,3 +197,48 @@ Commit failed with error
 
 poleg [2:57 PM]
 Уфф. Вроде восстановил.
+
+
+Yevhen Maksymovych [5:14 PM]
+а есть в идее какая-нибудь волшебная комбинация, которая покажет мне все классы из моего проекта, которые используют заданный класс?
+
+Vladimir.M [10 hours ago]
+https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf
+
+
+Yevhen Maksymovych [10 hours ago]
+о, спасибо, распечатаю, пристеплю на стенку :slightly_smiling_face:
+
+
+Vladimir.M [10 hours ago]
+Поставь плагин Key promoter https://plugins.jetbrains.com/plugin/4455-key-promoter (edited)
+
+
+tema.emelyan [5:20 PM]
+@Yevhen Maksymovych Alt+F7? (edited)
+
+
+Yevhen Maksymovych [1 day ago]
+спасибо!
+
+
+tema.emelyan [1 day ago]
+ну оно находит только но не открывает разве что
+
+
+Yevhen Maksymovych [1 day ago]
+мне достаточно, что он показывает "Usage in import"
+
+
+tema.emelyan [1 day ago]
+во, если все usage in import выделить и нажать f4 то откроет. имеется ввиду выделить с шифтом всё, что под юзейдж ин импорт (edited)
+
+
+poleg [1:37 PM]
+А можно ли на Идею на втором компе накатить ту же лицензию? Попеременно на двух компах буду работать.
+
+Valery.Shkerdin [1:39 PM]
+@poleg возможно и нельзя, но по факту работает )
+
+Grigory Kislin [2:15 PM]
+можно, главное одновременно не работать в инете (edited)
