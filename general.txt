@@ -3158,3 +3158,17 @@ eageev [7:09 PM]
 
 eageev [7:35 PM]
 Вообще, чем дальше идем, тем больше на Luxoft'ский код похоже=)
+
+
+Dmitriy Kozin [9:21 AM]
+А у нас в курсе будет тема про профилирование, поиск бутылочных горлышек?
+
+LeoJames [12:09 PM]
+https://www.youtube.com/watch?v=xQDlTXLLjp8&feature=push-lsb&attr_tag=c6VrSChPNEa7lG_a-6
+YouTubeТехнострим Mail.Ru Group
+Moscow Software Testing Club
+
+Прямой эфир через 10 сек. Мобильная и веб разработка
+
+Dmitriy Kozin [1:59 PM]
+И другой вопрос - есть ли в Hibbernate реализация механизма SoftDeletes.?
