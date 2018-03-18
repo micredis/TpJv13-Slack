@@ -677,3 +677,254 @@ Aleksey Vra [3 hours ago]
 
 Aleksey Vra [8:40 PM]
 хотел добавить, но прочитав, понял что и без добавления можно (edited)
+
+
+realcorwin [2:06 AM]
+обгоняет нас постгрес :slightly_smiling_face:. jdbc драйвер 15 марта версией 42.2.2 вышел
+
+poleg [1:26 PM]
+Создать в pgAdmin новую базу topjava и новую роль user, пароль password - или в UNIX командной строке:
+- psql -c 'create database topjava' -U postgres
+- psql -c 'create user "user";
+
+А вот это как сделать через pgAdmin? - psql -c 'grant all privileges on database topjava to "user"' -U postgres
+
+tema.emelyan [1:32 PM]
+в пгадмине правой кнопкой мыши щёлкнуть на Roles по-моему
+
+poleg [1:35 PM]
+Там нет выбора базы, на которую права даем
+
+poleg [1:44 PM]
+Что-то ерунда какая-то с этим pgAdmin. Создал базу, создал юзера, а воможности дать права этому юзеру на определенную базу нет. Как так?
+
+Grigory Kislin [4 hours ago]
+я полагаю это делается в databaseа не в юзерах
+
+
+Nedfrench [2:29 PM]
+Я один "spring-jdbc" не знаю? 
+Никто не поделиться ссылкой на статью об инструментах используемых в JdbcUserRepositoryImpl?
+
+Aleksey Vra [2:43 PM]
+тоже не знал, но в процессе написания JdbcMeal* как то все проясняется.. к HW3 ссылка есть https://docs.spring.io/spring/docs/current/spring-framework-reference/data-access.html#jdbc
+
+poleg [2:43 PM]
+Снес десятку, поставил 9.5, все сразу получилось.
+
+poleg [3:53 PM]
+Не проходит соединение с базой на heroky
+В настройках вроде все правильно прописал
+host ec2-54-217-202-110.eu-west-1.compute.amazonaws.com
+port 5432
+DB dehm6lvm8bink0
+user wegxlfzjjgxaxy
+pwd SSQyKKE_e93kiUCR-ehzMcKCxZ
+
+В advanced
+ssl true
+sslfactory org.postgresql.ssl.NonValidatingFactory
+
+Test Connection - failed 08001
+Что я делаю не так?
+
+poleg [4:13 PM]
+И еще - а зачем настройки прописываются в двух местах - во вкладке Databases DataSources и в db/postgres.properties ?
+
+Arthur [4:49 PM]
+db/postgres.properties юзаются апликейшеном, который крутится в томкате. А вкладки - средой IDE. Они друг про друга ничего не знают (edited)
+
+poleg [4:51 PM]
+Я к тому что настройки и там и там одни и те же, почему бы IDE автоматом не сгенерить db/postgres.properties? (edited)
+
+Arthur [4:52 PM]
+продложи эту фитчу компании JetBrains :slightly_smiling_face: (edited)
+
+poleg [4:55 PM]
+По поводу коннекта, пардон, к хероку, что у меня не так? Или сервер ушел в даун?:electric_plug:
+
+Nedfrench [6:16 PM]
+Пункт 1 HW03 нужно только разобраться почему не работает, исправлять не нужно?
+
+roma [6:59 PM]
+В книге Spring in action еть такая фраза:
+```В прошлом приходилось тщательно взвешивать выбор того или иного шаблона JDBC. Но в последних версиях Spring сделать выбор намного проще. В версии Spring 2.5 поддержка именованных парамет- ров из NamedParameterJdbcTemplate была добавлена в SimpleJdbcTemplate. А в версии Spring 3.0 была ликвидирована поддержка старых вер- сий Java (ниже версии Java 5), поэтому выбор шаблона JdbcTemplate не дает никаких преимуществ перед SimpleJdbcTemplate```
+Почему мы используем 2 разных шаблона - ели могли бы пользоваться одним SimpleJdbcTemplate?
+
+aleksey [7:09 PM]
+Потому что книжка старая и SimpleJdbcTemplate deprecated ныне
+
+dmitry_ov [7:43 PM]
+Накатил  все патчи. После последнего ошибки  в файле: 
+src/test/java/ru/javawebinar/topjava/web/InMemoryAdminRestControllerSpringTest.java  
+
+@Autowired
+private InMemoryUserRepositoryImpl repository;
+Could not Autowire. No beans InMemoryUserRepositoryImpl type found
+
+Кто нибудь сталкивался с этим ?
+“Maven clean” делал (edited)
+
+Aleksey Vra [5 hours ago]
+все сталкивались
+>1 Понять, почему перестали работать SpringMain, InMemoryAdminRestControllerTest, InMemoryAdminRestControllerSpringTest
+
+
+
+dmitry_ov [5 hours ago]
+Аа…блин)
+
+
+dmitry_ov [5 hours ago]
+это в ДЗ
+
+
+dmitry_ov [5 hours ago]
+Спасибо. Вопрос закрыт:-)
+
+
+Aleksey Vra [5 hours ago]
+выше thread есть где это обсуждалось)
+
+
+Alex83 [8:35 PM]
+всем привет!
+
+Alex83 [8:36 PM]
+поясните после создания папки mock, каким образом создается junit
+
+Grigory Kislin [3 hours ago]
+в optional уроке есть: 
+Ctrl+Shift+T (выбрать JUnit4)
+про это?
+
+
+Alex83 [8:36 PM]
+?
+там какая-то магия происходит и он сам собой появляется
+ощущение как будто папку database драгндропом перенесли
+
+Ma3stro [8:39 PM]
+Почему Qualifier отказывается работать?
+ ```@Autowired
+@Qualifier("inMemoryUserRepositoryImlp") //cannot find bean
+private InMemoryUserRepositoryImpl repository;
+
+@Repository
+@Qualifier("inMemoryUserRepositoryImpl")
+public class InMemoryUserRepositoryImpl implements UserRepository {```
+
+
+VictorStatko [4 hours ago]
+В ковычках не Impl, а Imlp
+
+
+Ma3stro [4 hours ago]
+Исправил, до сих пор тоже самое
+
+
+Ma3stro [4 hours ago]
+Если просто сделать = new InMemory... и запустить, то почему-то идет работа с БД вообще, интересно)
+
+
+Grigory Kislin [3 hours ago]
+полагаю что InMemoryUserRepositoryImpl  не попадает в контекст спринг
+
+
+Ma3stro [8:44 PM]
+replied to a thread:
+
+
+
+
+
+
+
+Если просто сделать = new InMemory... и запустить, то почему-то идет работа с БД вообще, интересно)
+
+ivanpobeguts [8:53 PM]
+Коллеги, подскажите, пожалуйста. Я на винде создал пользователя user с паролем password. Я так понимаю, что у меня такая же проблема, как была выше, но там был линукс. При попытки подключиться из идеи:
+The specified database user/password combination is rejected: [28P01] ВАЖНО: пользователь "user" не прошёл проверку подлинности (по паролю)
+
+Я так понимаю, слово user нельзя использовать. Писать в кавычках "user"? Тогда он постгрес его так и создаёт - "user".
+
+ivanpobeguts [9:09 PM]
+Хотя пробую создавать пользователей с другими именами - та же ошибка. Пароль уже перепроверял - всё правильно.
+
+roma [9:29 PM]
+У меня винда - вначале такое тоже было так как я пасворд не задал )
+
+ivanpobeguts [9:30 PM]
+Хм, оказалось, надо было перезагрузить IDEA)
+
+roma [9:33 PM]
+Мне для теста getAll и getBeetween нужно както в populateDB - данные даты вбить - не понима в каком формате их туда засунуть что бы их съела база
+Пытаюсь как тут написано
+```http://postgresql.ru.net/manual/datatype-datetime.html```
+вводить
+```1999-01-08 04:05:06```
+и ничего не получается
+
+roma [9:39 PM]
+Вроде нашел )))
+```(TIMESTAMP '2011-05-16 15:36:38')```
+
+Nedfrench [3 hours ago]
+как раз этим вопросом озадачился)) Спасибо
+
+
+roma [3 hours ago]
+не за что )
+
+
+Grigory Kislin [9:46 PM]
+@poleg
+> Не проходит соединение с базой на heroky
+Коллеги, обновил патч 3_09_add_postgresql
+https://drive.google.com/open?id=1ON7WUOWsiav1e0l5tOA1OR7bf_QQIndP
+креденшелы к рабочей базе:
+```#database.url=jdbc:postgresql://ec2-54-247-74-197.eu-west-1.compute.amazonaws.com:5432/de4fjsqhdvl7ld?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+#database.username=anbxkjtzukqacj
+#database.password=da1f25b2a38784fb0d46858e5b8fc168e08c9e1e9c72faea5bbac9c0e1f9c24f```
++ запушил патчи урока (edited)
+
+roma [9:50 PM]
+@Grigory Kislin В мастере надо теперь до него откатиться и заново накатить его и то что после? (edited)
+
+Grigory Kislin [3 hours ago]
+не обязательно.
+
+
+Nedfrench [9:51 PM]
+Ура! Выполнил основную часть HW03.
+
+dmitry_ov [10:33 PM]
+added and commented on this Shell snippet: Untitled 
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+​
+Collapse 
+@Grigory Kislin
+
+Создаем src/main/resources/spring/spring-db.xml
+Добавляем в него эти строки.
+
+А что это за строки, откуда они берутся ?
+Если это было объяснено  в лекции, дайте конктеную ссылку : имя видео::ремя
+Grigory Kislin [10:43 PM]
+стандартные namespace spring
+можно из документации взять, проще скопировать
+
+roma [10:53 PM]
+Не могу не поделиться: - Время позднее (сейчас)- сижу пилю тесты (муторное дело - ОЧЕНЬ).... В голове почти не прекращаясь играет мысль - нафиг я все это пишу сейчас, если в пункте 4 Д.З. я запустил приложение и проверил каждую его функциональность... Дохожу до проверки теста
+```updateNotFound()...```
+с мыслями сейчас допилю побырому
+```deleteNotFound и getNotFound```
+и с тестами покончено... - и не прохожу этот тест (exeption не бросился) - полез в JdbcMealRepositoryImpl и оказалось что только в этом методе (get и delete правильно) у меня по запаре оставленно прото
+```WHERE id=:id```
+, а не
+```WHERE (id=:id AND user_id=:user_id)```
+.... Поле чего тесты getNotFound и deleteNotFound - допиливал с мыслью - "не плохая вещь эти тесты ) - хоть и муторная" :wink:

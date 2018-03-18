@@ -3414,3 +3414,20 @@ Timur [7:24 PM]
 
 Grigory Kislin [6 hours ago]
 наши jsp перенесем в web-inf позднее
+
+
+Alex [1 day ago]
+А как ты обращаешься? Если форвард, то просто изменить путь
+```request.getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);```
+а редирект вроде не будет работать с веб-инф, потому что новый запрос генерирует, а веб-инф внутренняя директория проекта.
+
+
+Alex [11:38 AM]
+а что предпочтительнее в JSP использовать - Expression language, который ${} или JSP Expressions - типа скриплетов, выражении?
+
+Dmitry Makarov [13 hours ago]
+Предпочтительнее EL
+https://stackoverflow.com/a/3180202
+stackoverflow.com
+How to avoid Java code in JSP files?
+I'm new to Java EE and I know that something like the following three lines <%= x+1 %> <%= request.getParameter("name") %> <%! counter++; %> is an old school way of coding and i...

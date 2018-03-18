@@ -192,3 +192,18 @@ http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-ap
 15 тривиальных фактов о правильной работе с протоколом HTTP
 Внимание! Реклама! Пост оплачен Капитаном Очевидность! Ниже под катом вы найдёте 15 пунктов, описывающих правильную организацию ресурсов, доступных по...
 https://habrastorage.org/files/562/c66/ec2/562c66ec2a8a4ddfbd1290a58dd11776.jpg
+
+
+Oleksii Leshchenko [4:44 PM]
+added and commented on this Java snippet: Untitled 
+    // treat case: update, but absent in storage
+    return repository.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);
+Не совсем понятно что именно мы тут делаем....
+Aleksey Vra [4:50 PM]
+осуществляется вставка, но только при условии что в репозитории имеется запись с ключем id
+
+Oleksii Leshchenko [4:52 PM]
+а если нету такого id? что поизойдет тогда и что вернется из функции?
+
+Aleksey Vra [4:56 PM]
+https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/ConcurrentHashMap.html

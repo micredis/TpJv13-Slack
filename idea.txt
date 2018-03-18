@@ -259,3 +259,79 @@ uploaded this image: Безымянный.jpg
 Katherine [9:37 PM]
 commented on qf05’s file 222____________________.jpg
 А со светлой темой полосы тоже есть?
+
+
+qf05 [9:44 AM]
+спасибо, тоже думал попробовать, но искуственно их появление вызвать не получается, и как специально после моего вопроса они пока не появлялись. Подожду следующего дз, там наверняка снова вылезут.
+
+knkv [5:28 PM]
+IDEA ругается, хотя все работает:
+
+knkv [5:28 PM]
+uploaded this image: image.png 
+
+
+knkv [5:29 PM]
+Из-за чего может быть?
+
+Grigory Kislin [8:35 PM]
+@knkv сконфигури spring facet: https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D1%8C%D1%82%D0%B5---%D0%BD%D0%B5%D1%82-%D0%BB%D0%B8-%D0%BB%D0%B8%D1%88%D0%BD%D0%B8%D1%85-%D0%B1%D0%B8%D0%BD%D0%BE%D0%B2-%D0%B8%D0%BB%D0%B8-%D0%BD%D0%B0%D0%BE%D0%B1%D0%BE%D1%80%D0%BE%D1%82-%D0%B8%D1%85-%D0%BD%D0%B5-%D1%85%D0%B2%D0%B0%D1%82%D0%B0%D0%B5%D1%82-%D0%B2-project-structure-modules-spring-%D0%B5%D1%81%D0%BB%D0%B8-%D0%BD%D0%B5-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D1%82-%D1%80%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5--%D1%83%D0%B4%D0%B0%D0%BB%D0%B8%D1%82%D1%8C-%D0%B8-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-%D0%B7%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE
+нужно добавить `spring-db.xml`
+
+knkv [10:24 PM]
+@Grigory Kislin Facet был настроен. Но там же добавил Parent context - и перестал выделять как не настроен.
+
+knkv [10:24 PM]
+uploaded this image: image.png 
+
+
+Andrey Fedkin [10:36 PM]
+Всем привет. Подскажите, как продлить лицензию Идеи - письма с единоразовым купоном не было, поэтому не понятно, как это выполнить
+
+Grigory Kislin [2 hours ago]
+кнопка в профиле и далее по инструкции в письме
+это все есть в первом письме
+
+
+Andrey Fedkin [2 hours ago]
+какая кнопка?
+
+
+knkv [10:42 PM]
+Код купона есть в профиле: http://javaops.ru/auth/profile
+Java Online Projects
+Онлайн обучение Java/Spring/JPA. Практика, проекты, стажировки
+Онлайн обучение Java Web, Spring/JPA, Enterprise. От новичков до эксперта. Совместная разработка проектов. БЕСПЛАТНОЕ вступительное занятие. Стажировки и помощь в трудоустройстве. Получи опыт работы его в реальном Spring/JPA Enterprise проекте
+http://javaops.ru/static/img/javaEE.png
+
+Andrey Fedkin [11:11 PM]
+uploaded and commented on this image: image.png 
+
+о какой кнопке идет речь?
+
+knkv [11:13 PM]
+На скиншоте есть код :slightly_smiling_face:
+
+Andrey Fedkin [11:13 PM]
+это код с бэйсджава - он истекает через неделю
+
+knkv [11:14 PM]
+А, в каждом проекте новый код?
+
+Andrey Fedkin [11:15 PM]
+не знаю, но когда я его пытаюсь применить на сайте джетбрэинс, получаю следующую картину
+
+Andrey Fedkin [11:15 PM]
+uploaded this image: image.png 
+
+
+Grigory Kislin [11:28 PM]
+JetBrains выдает купон на полгода только один раз. можно взять EAP 2018 и обновлять раз в месяц, можно получать на степика на 3 мес. за решения задач, можно купить со скидкой (есть у кого уже полгода активирована IDEA)
+
+
+Andrey Fedkin [11:50 PM]
+Будучи участником топджава я могу получить другой купон? В описании проекта написано следующее -  Разработка ведется на the number one IDE IntelliJ IDEA. В начале проекта выдаются персональные лицензии на 6 месяцев. 
+Или я смогу использовать купон повторно после истечения полугода? (edited)
+
+Grigory Kislin [4 minutes ago]
+согласно политике JetBrains выдает купон на полгода только один раз. потому я везде пишу- единоразовый. использовать повторно- нельзя (edited)

@@ -3172,3 +3172,11 @@ Moscow Software Testing Club
 
 Dmitriy Kozin [1:59 PM]
 И другой вопрос - есть ли в Hibbernate реализация механизма SoftDeletes.?
+
+Grigory Kislin [4 hours ago]
+не в курсе что это такое. можешь ссылку дать?
+
+
+Tanya [9:42 PM]
+@here
+не удаляйте каналы с уроками
