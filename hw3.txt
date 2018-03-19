@@ -928,3 +928,208 @@ roma [10:53 PM]
 , а не
 ```WHERE (id=:id AND user_id=:user_id)```
 .... Поле чего тесты getNotFound и deleteNotFound - допиливал с мыслью - "не плохая вещь эти тесты ) - хоть и муторная" :wink:
+
+
+AntonY [6:16 AM]
+Кто дошел до тестов, подскажите как быть. В финальные переменные лучше заносить объекты Meal или делать записи как в таблице с userid? Если делать без userid то тогда сравнение объектов как производить? Короче, запутался в мыслях :slightly_smiling_face:
+
+Tanya [8:28 AM]
+обязательно делайте тест на update чужой еды!
+некорректно реализованный save в JdbcMealRepositoryImpl - одна из частных ошибок (edited)
+
+poleg [10:26 AM]
+Не могу догнать, где этот бин нужно прописывать?
+No qualifying bean of type 'javax.sql.DataSource' available: expected at least 1 bean which qualifies as autowire candidate.
+
+Vladimir Gorbatenko [10:27 AM]
+В SpringMain, ...."spring/spring-app.xml", "spring/spring-db.xml"
+poleg
+Не могу догнать, где этот бин нужно прописывать?
+No qualifying bean of type 'javax.sql.DataSource' available: expected at least 1 bean which qualifies as autowire candidate.
+Posted in #hw3
+Today at 10:26 AM
+
+poleg [10:29 AM]
+Блин, точно.
+
+poleg [11:05 AM]
+Теперь в MealServiceImpl ругается: expected single matching bean but found 2: jdbcMealRepositoryImpl,inMemoryMealRepositoryImpl
+Ну ок, пишу
+   @Autowired
+   public MealServiceImpl(@Qualifier("JdbcMealRepositoryImpl") MealRepository repository) {
+       this.repository = repository;
+   }
+но @Qualifier("JdbcMealRepositoryImpl") подсвечивает красным - бин не найден...
+
+Хотя это есть  <context:component-scan base-package="ru.javawebinar.**.repository.jdbc"/>
+
+Pavel Zaitcev [9 hours ago]
+"jdbcMealRepositoryImpl".
+
+
+poleg [9 hours ago]
+Блин )))
+
+
+mila [12:49 PM]
+после 7го патча в уроке есть вопрос почему падает страница с едой, вижу что спринг не может найти имплементацию MealRepository, это потому что её перенесли в папку test?  а почему расположение у неё осталось package ru.javawebinar.topjava.repository.mock ? судя по пэкэджу должен найти.
+то ли я никогда не обращала на это внимание то ли никогда не задавалась вопросом - у нас тут какието две параллельные структуры файлов? типа одна обычная джавашная, вторая местная идеевская ? и спринг смотрит на ту которая в idea?
+
+dustnfox [7 hours ago]
+@mila "это норма"(с) :slightly_smiling_face:  Вообще, если я правильно помню, то СРАЗУ после седьмого патча, страница еды упадет с NullPointerException ибо реализация присутствует, но в ней одни "заглушки". Если ты уже руками попыталась подсунуть  в MealService использование mock вместо jdbc, тогда другое дело.  В этом случае неплохо бы описать, что ты уже сделала
+
+
+Pavel Zaitcev [7 hours ago]
+Все, что находится в папке "test", не включается в сборку проекта.
+
+
+mila [7 hours ago]
+@dustnfox не делала ничего, после 7го патча у меня страница упала с сообщением что не найден бин для MealRepository
+
+
+mila [7 hours ago]
+да, я поняла что это изза папки тест, но вопрос о структуре файлов остаётся открытым
+
+mila [7 hours ago]
+почему package у InMemoryMealRepositoryImpl не поменялся?
+
+
+dustnfox [7 hours ago]
+@mila А почему ты считаешь он должен был поменяться? Я имею в виду, как он должен по-твоему выглядеть, после переноса mock в test? package считается от classpath. Для тестов это `src\test\java`, для приложения - `src\main\java` Относительный путь как был `ru.javawebinar.topjava.repository.mock` так и остался.
+
+
+dustnfox [7 hours ago]
+Как правильно заметил @Pavel Zaitcev директория с скомпилированными тестами при нормальном запуске приложения в classpath не попадает. Наша mock реализация - фейковая и приложению, которое будет деплоиться не нужна. То есть пытаться запустить с ней приложение задеплоенное в tomcat не нужно. А вот _почнинить SpringMain, InMemory*Test. InMemory*Test_ как раз таки нужно.
+
+
+dustnfox [6 hours ago]
+@mila прошу прощения. Я - растяпа. Не увидел, что ты только семь патчей накатила. Я думал, что все.  Тем не менее, все, что было написано - верно. Те классы, что компилируются из папки тест, не видны при работе обычного приложения.
+
+
+mila [6 hours ago]
+ок, спс, теперь про относительный путь более менее ясно
+
+roma [6 hours ago]
+@dustnfox ладно с путем понятно - а страница то почему падает? Мы же поднимаем спринг конекст... - он поднимает бин репозитория
+```ru.javawebinar.topjava.repository.mock```
+который находится в
+```src\test\java```
+.... Почему тогда падаем? (edited)
+
+
+dustnfox [6 hours ago]
+Потому что `ru.javawebinar.topjava.repository.mock` лежит в `topjava\src\test\java` и компилируется в `topjava\target\test-classes`. в то время как `topjava\src\main\java` компилируется в `topjava\target\classes`. IDEA запуская тест дописывает (помимо всего прочего, целиком ключ два экрана занимает :slightly_smiling_face: ) в ключ -classpath оба пути и `target\classes` и `target\test-classes`. Когда в IDEA запускаем не тест, а обычное приложение, она дописывает в -classpath только `target\classes`. Соответственно CLASSLOADER не может найти скомплированный InMemoryMealRepositoryImpl.class
+
+
+
+dustnfox [6 hours ago]
+Вот как-то так, если я правильно все понимаю. Если нет - пусть старшие товарищи поправляют.
+
+
+roma [6 hours ago]
+ну не плохо )
+
+
+Grigory Kislin [1 hour ago]
+ну да, все верно, все что в test в проект не попадает. можно сделать war (package) и поглядеть, что в него попало
+
+
+Ma3stro [2:44 PM]
+Какие материалы можно почитать для того, чтобы составить запросы и скрипты для БД? Совсем плохо с этим пока
+
+Aleksey Vra [6 hours ago]
+делал по аналогии со скриптом initDB, если что то непонятно, гуглил, отличия от MySql незначительные.. если вообще нулевые знания, то любая первая же ссылка в гугле выдаст кучу примеров.. а для запоминания эти примеры лучше повторять в pgAdmin
+
+
+
+roma [6 hours ago]
+https://postgrespro.ru/docs/postgrespro/10/index мне вот это помогло, но только нужные нам главы
+postgrespro.ru
+Postgres Pro Standard : Документация: 10: Документация к Postgres Pro Standard 10.3.1 (9 kB)
+(edited)
+
+
+roma [6 hours ago]
+Обманул тебя ) - вот этот ресурс: http://postgresql.ru.net/manual/ (edited)
+
+
+
+roma [6 hours ago]
+хотя все одно помоему)
+
+
+alexey [Today at 3:18 PM]
+in #hw3
+Народ помогите с с запросом на фильтрацию. Написал такой (SELECT * FROM meals WHERE datetime BETWEEN " + startDate +" AND "+ endDate), но он все время с ошибкой вылетает про неправильный синтаксис.В чем проблема то?
+
+
+9 replies
+Aleksei Kirillov [5 hours ago]
+Замени between на больше /меньше
+
+
+dustnfox [5 hours ago]
+>9: НЕ делайте склейку SQL запросов вручную из параметров, только через jdbcTemplate параметры! См. Внедрение_SQL-кода
+
+
+
+alexey [5 hours ago]
+Через jdbcTemplate.query что ли надо?
+
+
+dustnfox [5 hours ago]
+В данный момент вообще непонятно в какой метод ты это пихаешь, но в любом случае это ОЧЕНЬ bad practice и так не делается. Нельзя просто так взять и склеить строку запроса из литералов и переменных. Сие чревато очень большими проблемами.
+
+
+Aleksey Vra [5 hours ago]
+в дз еще к этому пунтку ссылка дается, довольно интересно
+
+
+alexey [5 hours ago]
+метод getBetween класса JdbcUserRepositoryImpl.
+
+dustnfox [5 hours ago]
+>метод getBetween класса JdbcUserRepositoryImpl.
+Тогда совсем непонятно. У нас интерфейс MealRepository никаких строк с SQL запросами не принимает. Только userId и параметры фильтра.
+
+
+dustnfox [5 hours ago]
+Посмотри как у Григория, например, запрос пользователя по email сделан.
+`jdbcTemplate.query("SELECT * FROM users WHERE email=?", ROW_MAPPER, email)`
+Ничего он в строку не вклеивает через плюсы. Делай по аналогии. В первом параметре ставятся плейсхолдеры `?`. Потом идет `BeanPropertyRowMapper` а дальше vararg, то есть метод принимает неограниченное число аргументов. Все они подставляются на место плейсхолдеров.
+
+
+
+alexey [2 hours ago]
+спасиб
+
+
+Ma3stro [Today at 4:39 PM]
+in #hw3
+Создаю скрипт для таблицы meals после двух первых таблиц с юзерами и ролями. Мы создали в populate двух юзеров, теперь у id еды значение берется не с 100000, а с 100002, как это исправить? (edited)
+
+
+2 replies
+dustnfox [4 hours ago]
+Это не баг, это фича :slightly_smiling_face: Григорий специально использует сквозную индексацию. Так и должно быть.  Исправлять не надо. Ну а уж если _прям очень сильно надо_ - создай еще один `sequence` и используй его для `meals`
+
+
+
+Ma3stro [4 hours ago]
+Окей)
+
+
+Ivan A [5:40 PM]
+народ как добавить https://cloud.githubusercontent.com/assets/13649199/24730713/eb21456a-1a6d-11e7-997c-fb4ad728ba45.png
+https://cloud.githubusercontent.com/assets/13649199/24730713/eb21456a-1a6d-11e7-997c-fb4ad728ba45.png
+у меня при нажатии на плюсик нету спринга
+
+Ivan A [5:56 PM]
+в плагинах не был добавлен спринг
+
+Tanya [7:44 PM]
+обратите внимание, что в assertMatch нельзя использовать assertThat *isEqualTo*, в нашем случае не подходит, т.к. через equals сравнивает, а у нас в equals только по id сравнение
+
+Grigory Kislin [8:19 PM]
+Добавил в замечания: 
+11: В `assertMatch` для модели нельзя использовать `assertThat().isEqualTo`: сравнение будет происходить через equals, который сравнивает объекты только по id. Мы не можем переопределять equals для объектов модели, тк будем использовать JPA (на следующем уроке будет ссылка) (edited)

@@ -207,3 +207,13 @@ Oleksii Leshchenko [4:52 PM]
 
 Aleksey Vra [4:56 PM]
 https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/ConcurrentHashMap.html
+
+
+VictorStatko [1:01 PM]
+Всем привет, кто подскажет, каким образом можно динамически создавать страницу? То есть, например, сервлет обрабатывает данные, и делает редирект на только что созданную новую страницу
+
+Dmitriy Kozin [3:26 PM]
+@VictorStatko Было бы проще если бы ты объяснил предметную область..
+
+Ivan A [5:40 PM]
+https://cloud.githubusercontent.com/assets/13649199/24730713/eb21456a-1a6d-11e7-997c-fb4ad728ba45.png

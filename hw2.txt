@@ -2974,3 +2974,33 @@ Grigory Kislin [4 hours ago]
 
 Евгений [3 hours ago]
 Окей, спасибо!
+
+
+saudabaew [5:00 AM]
+Накатываю патчи HW03 и заметил, что в моей реализации MealServiceImpl над конструктором отсутствует аннотация  @Autowired. Тем не менее, все функции работают. Отсюда не совсем понятен смысл данной аннотации. Можете просветить?
+
+
+aleksey [Today at 5:04 AM]
+in #hw2
+Без твоего кода сложно гадать что у тебя за ситуация
+
+
+3 replies
+saudabaew [15 hours ago]
+https://github.com/saudabaew/topjava/blob/HW2/src/main/java/ru/javawebinar/topjava/service/MealServiceImpl.java
+src/main/java/ru/javawebinar/topjava/service/MealServiceImpl.java
+```package ru.javawebinar.topjava.service;
+
+import org.springframework.stereotype.Service;
+import ru.javawebinar.topjava.model.Meal;```
+Show more…
+saudabaew/topjavaAdded by GitHub
+
+
+aleksey [15 hours ago]
+@saudabaew Короче, если класс обозначен как spring-bean, тоесть имеет соответствующую аннотацию и при этом имеет единственный конструктор, то спринг сам соображает что туда инжектить, но если конструктор не единственный, то это не прокатит. Для инжектирования через сеттеры или в поле напрямую, autowired тоже обязателен. (edited)
+
+
+
+saudabaew [15 hours ago]
+воо, спасибо большое! магии стало чуть меньше)
