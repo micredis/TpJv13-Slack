@@ -1133,3 +1133,113 @@ Tanya [7:44 PM]
 Grigory Kislin [8:19 PM]
 Добавил в замечания: 
 11: В `assertMatch` для модели нельзя использовать `assertThat().isEqualTo`: сравнение будет происходить через equals, который сравнивает объекты только по id. Мы не можем переопределять equals для объектов модели, тк будем использовать JPA (на следующем уроке будет ссылка) (edited)
+
+
+knkv [Yesterday at 10:29 PM]
+in #hw3
+org.springframework.dao.DuplicateKeyException обрабатывать надо или пока так оставляем?
+
+
+2 replies
+Aleksey Vra [15 hours ago]
+exception вроде как обрабатывать не надо, так же как и NotFoundException..
+тест сделал, если при добвлении одинаковой даты получаем DuplicateKeyException то все гуд
+
+
+knkv [14 hours ago]
+Ок, спасибо
+
+
+knkv [10:34 PM]
+Это по пункту 7 Optional
+
+aleksey [10:36 PM]
+в тестах или в самом приложении?
+
+knkv [10:43 PM]
+И в тестах, и в приложении.
+
+aleksey [10:46 PM]
+В тестах сделай, а в приложении пока нет смысла, если не имеешь понятия что с ним делать когда поймал, думаю потом нам скажут что делать. Может будем на уровне сервиса ловить и на фронт выводить данные по ошибке (edited)
+
+dmitry_ov [10:49 PM]
+> 5.1 Сделать тестовые данные MealTestData (точно такие же, как вставляем в populateDB.sql).
+
+Здесь надо сделать .sql файл который отработает перед запуском тестов и наполнит БД нужными данными ?
+Или  через SimpleJdbcInsert надо создавать тестовые данные ? (edited)
+
+aleksey [10:51 PM]
+Создать final static переменные вида Meal meal = new Meal(....); в конструктор которых будут вноситься те же значения что и в базу через sql. Смотри UserTestData класс (edited)
+
+dmitry_ov [10:54 PM]
+@aleksey  Не  в БД надо создать ? 
+Пишем же тест для JdbcMealRepositoryImpl, который из БД будет вычитывать meals (edited)
+
+
+Tanya [Yesterday at 10:56 PM]
+in #hw3
+см как сделано в юзере и сделай по аналогии, должны быть в БД (populateDB.sql) *и* в MealTestData, и эти данные должны быть одинаковые
+
+
+8 replies
+dmitry_ov [14 hours ago]
+При тестировании  JdbcMealRepositoryImpl  откуда будут братся данные,  из БД ? (edited)
+
+
+dmitry_ov [14 hours ago]
+JdbcMealRepositoryImplTest  автоварит JdbcMealRepositoryImpl и вызывает у него методы. 
+JdbcMealRepositoryImpl при этом ходит в БД ?
+
+
+aleksey [14 hours ago]
+на то он и jdbcMealRepositoryImpl чтобы из бд данные брать
+
+
+dmitry_ov [14 hours ago]
+А для чего дублировать данные в БД и в MealsTestData. Как это помогает при тестировании JdbcMealRepositoryImpl ? (edited)
+
+
+dmitry_ov [14 hours ago]
+Я что то не могу догнать(
+
+
+Tanya [14 hours ago]
+при тестировании полученные из БД и тестовые данные должны будут совпадать
+см. как в юзере, начни делать и станет понятно
+
+
+dmitry_ov [14 hours ago]
+Аааа……   т.е. я убеждаюсь что данные в БД и в MealsTestData идентичные, а потом тестом проверяю что JdbcMealRepositoryImpl так же идентичные вернет
+
+
+dmitry_ov [14 hours ago]
+Понял
+Спасибо большое :slightly_smiling_face:
+
+
+Vladimir Gorbatenko [Today at 12:04 AM]
+in #hw3
+Григорий в видео частенько употребляет слово "зачекинить", что это значит?
+
+
+2 replies
+dyakoven [12 hours ago]
+добавить локальные изменения в удаленный репозиторий
+
+
+Grigory Kislin [10 hours ago]
+скорее от слова check-in - закоммитить
+
+
+mila [Today at 12:31 PM]
+in #hw3
+почему у нас 2 файла со спринг контекстом? почему нельзя всё в один положить?
+
+
+2 replies
+Dmitry Makarov [37 minutes ago]
+Для удобства. Скоро они разрастутся
+
+
+mila [15 minutes ago]
+ок
