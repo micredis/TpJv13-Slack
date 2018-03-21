@@ -60,3 +60,18 @@ JavaWebinar
  Show more
 
 JavaWebinar/topjava
+
+
+GitHub APP [10:26 PM]
+JavaWebinar
+*1 new commit pushed to `master`*
+`2e726fd2` - Add github tools integration
+
+JavaWebinar/topjava
+
+GitHub APP [10:39 PM]
+JavaWebinar
+*1 new commit force-pushed to `master`*
+`5f9aae59` - Add github tools integration
+
+JavaWebinar/topjava

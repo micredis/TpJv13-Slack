@@ -3309,3 +3309,190 @@ Yevhen Maksymovych [3 hours ago]
 
 Yevhen Maksymovych [3 hours ago]
 и т.д.
+
+
+eageev [23 hours ago]
+Владею регексами. Отлаживать легко прям в браузере, потом вставляю в код на Java, PHP или другом языке..
+
+
+Yevhen Maksymovych [9:47 PM]
+господа, у меня такой вопрос странный, а как BeanPropertyRowMapper сопоставляет поля из jdbc-запроса полям моего бина?
+откуда он такой умный взялся?
+мы же нигде напрямую не указываем ему, кто есть ху
+
+dmitry_ov [9:52 PM]
+Через Reflection видимо
+
+Yevhen Maksymovych [9:55 PM]
+не, я про сопоставление имён. я думал оно просто переводит camel case в snake case, и по такому принципу сопоставляет, но вот только что обратил внимание, что в скуле сделал ошибку в названии столбца, а сопоставление работало корректно все равно
+
+
+Yevhen Maksymovych [Yesterday at 9:56 PM]
+in #general
+провалился в BeanPropertyRowMapper.mapRow(), где происходит вся магия, но там столько текста, что не перечитать
+
+
+8 replies
+dustnfox [1 day ago]
+Сами они утверждают, что именно так и делают. Он пытается сначала прикладывать имена полей класса напрямую к именам столбцов, а если не нашел такого столбца, то уже весь camel меняет на underscore. Я, кстати, в имени ошибся и нифига у меня не работало, минут 20 убил ((
+
+
+dustnfox [1 day ago]
+До собссно вот, прямо из класса. Никакой магии не заявлено, просят пользовать алиасы при выборке. 
+
+```Column values are mapped based on matching the column name as obtained from result set metadata to public setters for the corresponding properties. The names are matched either directly or by transforming a name separating the parts with underscores to the same name using "camel" case.
+Mapping is provided for fields in the target class for many common types, e.g.: String, boolean, Boolean, byte, Byte, short, Short, int, Integer, long, Long, float, Float, double, Double, BigDecimal, java.util.Date, etc.
+To facilitate mapping between columns and fields that don't have matching names, try using column aliases in the SQL statement like "select fname as first_name from customer".```
+(edited)
+
+
+aleksey [1 day ago]
+Это где доки можно почитать? можно ссылочку?
+
+Yevhen Maksymovych [1 day ago]
+это прям в исходниках BeanPropertyRowMapper'а
+
+Yevhen Maksymovych [1 day ago]
+я что-то совсем туплю, минут двадцать смотрел на сам метод, а прокрутить в шапку класса не догадался :slightly_smiling_face:
+
+
+dustnfox [1 day ago]
+Именно так :slightly_smiling_face: Это из javadoc к классу BeanPropertyRowMapper. IDEA попросил, она втянула
+
+
+aleksey [1 day ago]
+Спасибо
+
+
+dyakoven [22 hours ago]
+юзайте Ctrl+Q на имени метода, доки в удобном виде показываются
+
+
+Oleksii Leshchenko [11:20 PM]
+added and commented on this Java snippet: Untitled 
+return CollectionUtils.isEmpty(meals) ? Collections.emptyList() :
+        meals.values().stream()
+            .filter(filter)
+            .sorted(Comparator.comparing(Meal::getDateTime).reversed())
+            .collect(Collectors.toList());
+Зачем мы в этом куске кода вначале проверяем meals на эмпти? Вторая часть со стримом разве и так не вернет пустую коллекцию?
+
+Tanya [11:21 PM]
+meals.values() без проверки может выкинуть NPE
+
+
+eageev [Yesterday at 11:50 PM]
+in #general
+Нда.. NPE - самое стрррашное, что может произойти в работе Java-разработчика:)
+
+
+pro [4 hours ago]
+@eageev страшнее NPE - только OOME) (edited)
+
+
+eageev [1 hour ago]
+What is OOME?
+
+
+micredis [< 1 minute ago]
+Out of Memory Error
+
+
+eageev [Yesterday at 11:55 PM]
+in #general
+Григорий, если мы пишем РЕСТ, почему у нас в методах не @ResponseBody и @Controller, а не @RestController? Или мы еще до этого не дошли? И почему ExceptionUtils а не @ExceptionHandler?
+
+
+1 reply
+pro [4 hours ago]
+@eageev чтобы читать бегло, надо сперва блеять по-слогам; то же самое и здесь - чтобы постигнуть RestController, приходится пройти сначала ResponseBody и Controller
+
+
+Artem Murk [Today at 10:59 AM]
+in #general
+Ребят, задаюсь вопросом какие задания и какие сроки для их выполнения даются Джунам. Понимаю что каждая контора по разному выставляет требования, но интересно в среднем. Если взять за основу наши задания HW+Optional, сколько времени дадут в реальной компании на данную работу? (Ежедневные таски, не тестовые задания рассматриваю) (edited)
+
+
+18 replies
+aleksey [11 hours ago]
+HW + Optional это же не полноценные приложения, каждый раз это кусок приложения. Думаю стоит ожидать как минимум полноценный простенький круд.
+
+
+Artem Murk [11 hours ago]
+Простенький Круд, ок. Мне интересны врямязатраты для понимания.
+
+
+Artem Murk [11 hours ago]
+@aleksey Возможно ты меня неправильно понял, хотел узнать за ежедневные таски для Джунов(не тестовые задания на вакансию), какие обычно дают, сколько времени дают.
+
+
+Dzmitry Shalukhau [9 hours ago]
+Джунам даются те таски, от которых сениоры отказываются :slightly_smiling_face:
+
+
+Grigory Kislin [7 hours ago]
+я так думаю на HW: день-два
+
+
+eageev [6 hours ago]
+Скажем так - дадут ТЗ и скажут, да его делать 2 часа (для Сеньора возможно и так), а делать будешь 2 дня - неделю. Реально надо рассчитывать поработать с недельку. Особенно, учитывая то, что задачи часто даются нетривиальные, придется изрядно в инете порыться и/или самому что то придумать по той теме, что дадут...
+
+
+eageev [6 hours ago]
+Вообще есть задания по Java на любой вкус, самое сложное из них - от Московской биржы (ММВБ). Кому интересно попробовать свои силы, могу отправить любое по почте.
+
+
+aleksey [6 hours ago]
+@eageev давай. korolal.spb@gmail.com
+
+
+Artem Murk [5 hours ago]
+@eageev also me) muravlevars@Gmail.com
+
+
+ivanpobeguts [5 hours ago]
+@eageev , если можно, мне тоже: Ivan.Pobeguc@gmail.com
+
+
+Grigory Kislin [5 hours ago]
+вот здесь собираем тестовые задания на работу: https://drive.google.com/drive/u/0/folders/0B1TmSF1-jkXyZU9EeldnOWNlalk
+
+
+mrLanu [5 hours ago]
+@Grigory Kislin ты сказал что эта стажировка "вытекла" из твоего тестового задания на работу, какие были сроки ?
+
+
+Grigory Kislin [5 hours ago]
+да вроде 2 недели было. но делал 3
+тут же все понимают, что ты не все время над задачей трудишься
+
+
+
+eageev [5 hours ago]
+По той ссылке нет кнопки Upload, кнопка New ни на новый файл, ни на новую папку не работают.
+
+
+mrLanu [4 hours ago]
+@eageev, можно пожалуйста и мне задания ? mrlanu@gmail.com
+
+
+Grigory Kislin [4 hours ago]
+сделал google logout. в папки захожу, задания скачиваются, подпапки тоже., скачать все даже есть (edited)
+
+
+Grigory Kislin [4 hours ago]
+@eageev мне пришли тоже, я доложу на drive (edited)
+
+
+eageev [2 hours ago]
+ок
+
+
+Grigory Kislin [3:43 PM]
+добавил в wiki idea инструкцию: Непонятно что за класс/метод:
+https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%9D%D0%B5%D0%BF%D0%BE%D0%BD%D1%8F%D1%82%D0%BD%D0%BE-%D1%87%D1%82%D0%BE-%D0%B7%D0%B0-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BC%D0%B5%D1%82%D0%BE%D0%B4 (edited)
+
+realcorwin [4:45 PM]
+Григорий, можно переписать так:
+
+Если непонятно, что перед вами за класс или метод:  ...можно посмотреть...*далее по тексту*

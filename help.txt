@@ -217,3 +217,44 @@ Dmitriy Kozin [3:26 PM]
 
 Ivan A [5:40 PM]
 https://cloud.githubusercontent.com/assets/13649199/24730713/eb21456a-1a6d-11e7-997c-fb4ad728ba45.png
+
+
+Andrii [Today at 6:42 PM]
+in #help
+Всем привет. А некто случайно телеграмм бота на java не писал? Может есть ссылки на интересный контент или готовый кусок кода?
+
+
+7 replies
+pro [4 hours ago]
+@Andrii есть ссылка на такого рода урок на ютюбе (+ссылка на гит, естественно)
+
+
+pro [4 hours ago]
+https://www.youtube.com/watch?v=cQ0Em2BxCz0
+YouTube Сергей Ирюпин
+Простой чат-бот на Java
+ 
+
+
+pro [4 hours ago]
+https://www.youtube.com/redirect?redir_token=bXyOJMGhxn44fZXJnjnvwWthTQZ8MTUyMTczODkyMEAxNTIxNjUyNTIw&event=video_description&v=cQ0Em2BxCz0&q=https%3A%2F%2Fgithub.com%2Fbiblelamp%2FJavaExercises%2Fblob%2Fmaster%2FJava%25202%2FSimpleChatBot.java
+youtube.com
+YouTube
+Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.
+
+
+pro [4 hours ago]
+только он сделан на JFrame, думаю, впрочем, труда особого не составит переделать под web-gui
+
+
+Jan [3 hours ago]
+Там обычный Рест сервис можно в Постмане читать и писать чат вообще без кода )
+
+
+Andrii [8 minutes ago]
+Ребята, Спасибо! 
+@Jan Можешь плиз чуть подробнее про Постмен написать? А у него локальное хранилище есть? У меня в задаче, нужно написать этого бота, что бы он с клиентами на сайте общался.
+
+
+Andrii [7 minutes ago]
+Про постмена узнал вот вот, еще не успел с ним ознакомится.
