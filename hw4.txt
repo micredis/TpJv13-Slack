@@ -1,0 +1,60 @@
+Grigory Kislin [12:54 AM]
+joined #hw4.
+
+Grigory Kislin [12:57 AM]
+Добро пожаловать:
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson04.md
+урок и ДЗ небольшие (хотя тема JPA обширная)
+поэтому для равномерной нагрузки сделал изменения в расписании для уроков 5 и 6 (у нас был перерыв между 6 и 7). 
+см. https://github.com/JavaWebinar/topjava (edited)
+
+Daniil Kulak [1:03 AM]
+joined #hw4 along with 18 others.
+
+
+alexey [Today at 12:56 PM]
+in #hw4
+народ напомните пожалуйста директория $HOME в travis.yml что за директория и где ее прописывать? где то уже было, найти не могу.
+
+
+1 reply
+Grigory Kislin [5 hours ago]
+это деректория на сервере travis, тебе ничего не надо прописывать. с чем вопрос связан?
+
+
+realcorwin [Today at 1:20 PM]
+in #hw4
+популирование - это размножение в смысле? :slightly_smiling_face: то бишь заполнение базы данных?
+
+
+2 replies
+ilya t. [4 hours ago]
+да, populate - заполнение
+
+
+
+pro [2 hours ago]
+@realcorwin populate="населить" (edited)
+
+
+Artem Murk [Today at 3:48 PM]
+in #hw4
+Кто уже добрался до QAPlug? Плагин установился, но при попытке анализа кода вылетает ошибка, как можно полечить? Ошибка в QAPlug - Hammurapi
+```Found interface com.intellij.openapi.roots.LanguageLevelModuleExtension, but class was expected```
+
+
+4 replies
+ilya t. [2 hours ago]
+попробуй другую версию плагина, видимо конфликтует с идеей.
+
+
+Artem Murk [2 hours ago]
+Ага, Гугл тоже говорит что конфликт с идеей
+
+
+Artem Murk [1 hour ago]
+Я должен установить плагины PMD, FIndBugs and CheckStyle перед установкой Хамурапи?
+
+
+Artem Murk [1 hour ago]
+Отвечаю на свой же вопрос, надо было)
