@@ -58,3 +58,77 @@ Artem Murk [1 hour ago]
 
 Artem Murk [1 hour ago]
 Отвечаю на свой же вопрос, надо было)
+
+
+Vyacheslav [7:45 PM]
+Что-то я не заметил на каком моменте javaee.jar в мой проект залетел. просто обнаружил его в Local Changes. Ну и в корне, в папке lib.
+
+Ivan A [7:49 PM]
+uploaded and commented on this image: Безымянный.png 
+
+repository все равно горит красным
+
+Yevhen Maksymovych [4:49 PM]
+а после накатки патчей тесты и должны падать, или это что-то у меня криво встало?
+
+
+Yevhen Maksymovych [Today at 4:50 PM]
+in #hw4
+ ```Error creating bean with name 'entityManagerFactory' defined in class path resource [spring/spring-db.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException```
+
+
+11 replies
+Aleksey Vra [1 hour ago]
+>Тесты и приложение ломаются. MealServiceTest починится после выполнения HW04 (JpaMealRepositoryImpl)
+
+
+Yevhen Maksymovych [1 hour ago]
+но это юзер, который уже вроде как полноценно имплементирован
+
+
+Yevhen Maksymovych [1 hour ago]
+у меня контекст не заводится
+
+
+Mikhail Makar [44 minutes ago]
+@Yevhen Maksymovych тесты юзера должны работать, по крайней мере у меня после накатки патчей работают.
+Откатить пробовал?
+
+
+Yevhen Maksymovych [44 minutes ago]
+разобрался
+
+
+Yevhen Maksymovych [44 minutes ago]
+из-за Java9
+
+
+Yevhen Maksymovych [43 minutes ago]
+JAXBException перенесли в другую библиотеку
+
+
+Mikhail Makar [43 minutes ago]
+Да, с девяткой могут быть проблемы
+
+
+aleksey [42 minutes ago]
+Я вчера весь вечер бодался с этой ошибкой. Склонировал проект из гита в новую папку и все магически заработало. (edited)
+
+
+Yevhen Maksymovych [39 minutes ago]
+я так починил :slightly_smiling_face:
+
+
+Yevhen Maksymovych [39 minutes ago]
+добавил зависимость
+```<dependency>
+    <groupId>javax.xml.bind</groupId>
+    <artifactId>jaxb-api</artifactId>
+    <version>2.3.0</version>
+</dependency>```
+
+
+Ma3stro [5:16 PM]
+uploaded and commented on this image: image.png 
+
+IDEA почему-то ругаться стала

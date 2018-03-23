@@ -340,3 +340,26 @@ Grigory Kislin [2 hours ago]
 
 aleksey [2:47 PM]
 У мобильных приложений тоже есть серверная часть :smiley:
+
+
+aleksey [7:22 PM]
+Актуальная ныне версия старого анекдота;
+"Заходит джавист в столовую и говорит: дайте, пожалуйста, вар борщ нью Борщ!"
+
+ну и про Спрингиста тоже=)
+
+Заходит Спрингист в столовую:
+— Суп!
+— Борщ, Гороховый, Солянку?
+— NoUniqueBeanDefinitionException…
+
+mrLanu [7:23 PM]
+:grin:
+
+tema.emelyan [7:27 PM]
+джавист - хипстер
+
+Andrew Manik [10:50 AM]
+https://www.youtube.com/watch?v=fWR5SFhBUWc
+YouTubeHighLoad Channel
+Принцип экономии мыслетоплива / Максим Дорофеев (mnogosdelal.ru)

@@ -3646,3 +3646,170 @@ Oleksii Leshchenko [3:46 PM]
 
 Tanya [5:28 PM]
 а значения, которые туда добавляешь тоже один раз кладутся и общие для всех meal?
+
+
+Oleksii Leshchenko [Yesterday at 5:50 PM]
+in #general
+Ах да, значения каждый ж раз разные...
+
+
+1 reply
+eageev [24 hours ago]
+Вот-вот. Общий мап в классе делают, чтобы хранить скажем список всех юзверей, или всей еды или всех товаров (кэш на Java).
+
+
+Oleksii Leshchenko [5:53 PM]
+added and commented on this Java snippet: Untitled 
+public static void assertMatch(Iterable<Meal> actual, Meal... expected)
+Есть такой метчер.
+Как его вызвать, если в качестве 2го параметра у меня на самом деле 2 значения:
+Meal created и List<Meal> ? 
+Т.е. я проверяю  метод create() и мне надо проверить есть ли там новая запись и также передать эталонные данные из MealTestData, которые в виде List уже...
+
+
+eageev [Yesterday at 9:32 PM]
+in #general
+Все Girl Who Codes, давайте знакомиться, покажу зарубежное сообщество в кот-е вам нужно срочно добавиться:)
+
+
+1 reply
+Tanya [15 hours ago]
+в зарубежном сообществе уже достаточно и boys и girls и тех, кто не определились (edited)
+
+
+aleksey [9:35 PM]
+ловкий парень
+
+
+mrLanu [Yesterday at 9:37 PM]
+in #general
+@eageev все, подразумевает множественное число, а girl это один девочко...:grin:
+
+
+4 replies
+eageev [20 hours ago]
+я сам оч сильно удивился, когда узнал, что их много:) мало того, они уже и сообщества организовали)
+
+
+mrLanu [20 hours ago]
+Не женское это занятие....как и хоккей:) имхо
+
+
+aleksey [20 hours ago]
+Есть даже такая милота :smiley:
+https://tutorial.djangogirls.org/ru/
+https://djangogirls.org/ (edited)
+
+
+eageev [20 hours ago]
+это да) но на одном обучении была девушка, кот-я оказалась круче всех мужиков с n-лет стажем:) (обучение было по Андроиду) И по итогам выполнения ДЗ ед-я выиграла приз стоим-тью в 25т.р.
+
+
+eageev [Yesterday at 9:37 PM]
+in #general
+Кому нужно, есть 2 книги по Спрингу, по кот-м начинал учиться я сам, а также большая (1.5 - 2Гб) библиотека книг по Java практически на любую тему. Из удобных вещей для себя написал сканер портов на Java, download manager (все руки не доходят разбить на 10 потоков загрузку файла), простенькую графику "звездное небо", небольшую Game-разработку..
+
+
+8 replies
+LeoJames [20 hours ago]
+Огласите весь список, пжалуйста)
+
+
+[20 hours ago]
+даа небольшую библиотеку я тоже собрал, вот перечитать все их теперь неплохо было бы... :slightly_smiling_face:
+
+
+Artem Murk [20 hours ago]
+Предлагаю организовать кружок для чтения :smiley_cat:
+
+
+[20 hours ago]
+по спрингу - наверно это spring in action и spring для профессионалов? я частично прочел spring in action, имхо вторая более сложная и подробная
+
+
+Artem Murk [20 hours ago]
+Читаю Spring in action, пока все нравится
+
+
+eageev [20 hours ago]
+Да, в Спринг 4 для профессионалов, я сам вникал долго, в НГ 2016. Шла с трудом и болезненно.. Вначале. Потом с середины уже с рабочими примерами - норм.
+
+
+eageev [20 hours ago]
+Список большой, все и не помню:) могу сказать ток каких авторов больше полюбил, кроме них "Изучаем Java EE 7", "Web-Сервисы в Java", "Advanced Wildfly JavaEE Development".. По стримам есть набор отдельный..
+
+
+Artem Murk [20 hours ago]
+Заберу что то из списка, интересно все)
+
+
+Artem Murk [9:42 PM]
+@eageev какие книги) почем продаёшь?)
+
+
+eageev [Yesterday at 9:59 PM]
+in #general
+бесплатно отдаю. сюда все пришли, чтобы становиться профи и помогать друг другу. бесплатно.
+
+
+3 replies
+[20 hours ago]
+@eageev заливай куда нибудь, раз такое дело))
+
+
+eageev [19 hours ago]
+Думаю, Григорию отправлю что нибудь, если что-то нужно. А он уже выложит в общую папку для всех учеников.
+
+
+
+realcorwin [18 hours ago]
+Список книг, если есть, залей куда-нибудь, пожалуйста :slightly_smiling_face:.
+
+
+Grigory Kislin [10:16 PM]
+commented on Oleksii Leshchenko’s snippet Untitled
+1. вопросы по уроку задавай к канал урока, не general
+2. посмотри в UserTestData
+
+Yevhen Maksymovych [10:15 AM]
+ребят, а effective java 3d edition Блоха ни у кого нет в .mobi?
+кстати, если кому-то надо, есть полтора десятка честно купленных книжек по джаве от о'райли в электронном виде, они там дают скачать в pdf/epub/mobi
+
+
+realcorwin [Today at 10:55 AM]
+in #general
+надо :slightly_smiling_face:
+
+
+5 replies
+Yevhen Maksymovych [6 hours ago]
+https://drive.google.com/open?id=1casf4WwTD8r8jRIz9rJphlQptOFpm4nG
+
+
+Yevhen Maksymovych [6 hours ago]
+выложил
+
+
+
+dustnfox [6 hours ago]
+@Yevhen Maksymovych Ого! Спасибо, бро!
+
+
+realcorwin [5 hours ago]
+Спасибо!
+
+
+Fedor [2 hours ago]
+Спасибо дорогой!
+
+
+Oleksii Leshchenko [12:59 PM]
+Зачем делать инициализацию и популирование DB через Спринг контекст, если для тестов у нас и так есть:
+`@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))`
+?
+Можно просто добавить еще один скрипт для инит...
+
+Oleksii Leshchenko [4:40 PM]
+uploaded and commented on this image: versioneye.png 
+
+Правильно ли я понимаю, что у меня установлены версии более новые, чем VersionEye думает о новейших версиях?
