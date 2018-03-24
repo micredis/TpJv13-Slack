@@ -27,8 +27,14 @@ JavaWebinar
 `b2c461d2` - 2_0_add_fix
 `56aef274` - 2_1_HW1
 `4f971bd5` - 2_2_HW1_optional
-`372759de` - 2_3_app_layers Show more
+`372759de` - 2_3_app_layers
+`c7a85205` - 2_4_add_spring_context
+`f554e3bb` - 2_5_dependency_injection
+`d4cc67e1` - 2_6_annotation_processing
+`95d2ef06` - 2_7_constructor_injection
+Show less
 
+JavaWebinar/topjava
 
 Jan [10:08 PM]
 В описании опечатка - Apply 3_11_test_UserService.patch
@@ -43,12 +49,84 @@ doc/lesson03.md
 
 ## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Разбор домашнего задания HW02
 ### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 1. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFdDhnNHFMU2dKQzQ">HW2</a>
-> **ВНИМАНИЕ! При удалении класса из исходников, его скомпилированная версия все еще будет находиться в target…
- Show more
+> **ВНИМАНИЕ! При удалении класса из исходников, его скомпилированная версия все еще будет находиться в target (и classpath). В этом случае (или в любом другом, когда проект начинает глючить) сделайте `mvn clean`.**
+
+#### Apply 3_01_HW2_repository.patch
+> - В репозиториях по другому инстанциировал компараторы. [Оптимизация анонимных классов](http://stackoverflow.com/questions/19718353) не требуется! Почитайте комменты от Holger: *Java 8 relieves us from the need to think about such things at all*.
+> - Зарефакторил `<T extends Comparable<? super T>> DateTimeUtil.isBetween(T value, T start, T end)`. Дженерики означают, что мы принимаем экземпляры класса, реализующего компаратор, который умеет сравнивать T или суперклассы от T
+> - Для фильтрации в `InMemoryMealRepositoryImpl` передаю `Predicate` анологично решению в `MealsUtil`
+> - В `InMemoryMealRepositoryImpl.save()` вместо 2-х разнесенных по времени операций
+>   - `get(meal.getId(), userId)`
+>   - `meals.put(meal.getId(), meal)`,
+между которыми может вклинится операция удаления этой еды из другого потока, сделал обновление атомарным, используя `ConcurrentHashMap.computeIfPresent()` (см. псевдокод в `Map.computeIfPresent`. `ConcurrentHashMap` в отличие от `HashMap` делает операции атомарно).
+
+#### Apply 3_02_HW2_meal_layers.patch
+> - Перенес обработку null-дат  в `MealRestController.getBetween()`
+> - По аналогии с `AbstractUserController` добавил проверку id пользователя, пришедшего в `MealRestController (assureIdConsistent, checkNew)`
+
+#### Apply 3_03_HW2_optional_MealServlet.patch
+> - Убрал логирование (уже есть в контроллере)
+> - `assureIdConsistent` позволяет в контроллере обновлять еду с `id=null`
+
+#### Apply 3_04_HW2_optional_filter.patch
+> - Вместо `MealServlet.resetParam` (перемещение параметров фильтрации в атрибуты запроса для отображения в `meals.jsp`), достаю их в jsp напрямую из запроса через [`${param.xxx}`](https://stackoverflow.com/a/1890462/548473)
+> - В демо фильтр не хранится в сессии (скидывается по F5). Что такое сессия будем разбирать, когда будем делать реальную авторизацию
+> - Цвет строк сделал через аттрибут `data-mealExceed` и css `tr[data-mealExceed=...]`
+>   - [Использование data-* атрибутов](https://developer.mozilla.org/ru/docs/Web/Guide/HTML/Using_data_attributes)
+
+#### Apply 3_05_HW2_optional_select_user.patch
+
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 2. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFMGRVM0QyblJtNGc">Вопросы по API и слоям приложения</a>
+- <a href="http://stackoverflow.com/questions/21554977/should-services-always-return-dtos-or-can-they-also-return-domain-models">Should services always return DTOs, or can they also return domain models?</a>
+- <a href="http://stackoverflow.com/questions/31644131/spring-dto-dao-resource-entity-mapping-goes-in-which-application-layer-cont/35798539#35798539">Mapping Entity->DTO goes in which application layer: Controller or Service?</a>
+
+### ![question](https://cloud.githubusercontent.com/assets/13649199/13672858/9cd58692-e6e7-11e5-905d-c295d2a456f1.png) Вопросы по HW2
+
+> Что делает `repository.computeIfAbsent / computeIfPresent` ?
+
+Всегда пробуйте ответить на вопрос сами. Дастоточно просто зайти по Ctrl+мышка в реализацию и посмотреть javadoc и **их дефолтную реализацию**
+
+> Почему выбрана реализация `Map<userId, Map<mealId,Meal>>` а не `Meal.userId + Map<mealId,Meal>` ?
+
+В данном случае двойная мапа - самый эффективный способ хранения, который не требует итерирования (перебора всех значений).
+
+## Занятие 3:
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 3. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFOU8wWlpPVE05STA">Коротко о жизненном цикле Spring контекста.</a>
+#### Apply 3_06_bean_life_cycle.patch
+-  <a href="http://habrahabr.ru/post/222579/">Spring изнутри. Этапы инициализации контекста.</a>
+-  Ресурсы:
+  -  <a href="https://www.youtube.com/watch?v=BmBr5diz8WA">Евгений Борисов. Spring, часть 1</a>
+  -  <a href="https://www.youtube.com/watch?v=cou_qomYLNU">Евгений Борисов. Spring, часть 2</a>
+
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png)  4. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFODlkU1B0QnNnSGs">Тестирование через JUnit.</a>
+> - в `maven-surefire-plugin` (JUnit) <a href="http://stackoverflow.com/questions/17656475/maven-source-encoding-in-utf-8-not-working/17671104#17671104">поменял кодировку на UTF-8</a>
+> - добавил метод `InMemoryUserRepositoryImpl.init()` для инициализации.
+>   - `save()` не больше работает для  отсутствующих `id`
+>   - автогенерацию id начал со 100
+
+### ВНИМАНИЕ!! Перед накаткой патча создайте каталог test (из корня проекта путь `\src\test`), иначе часть файлов попадет в `src\main`.
+#### Apply 3_07_add_junit.patch
+### После патча [обновите зависимости Maven](https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%9E%D0%B1%D0%BD%D0%BE%D0%B2%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8-%D0%B2-maven-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5), чтобы IDEA определила сорсы тестов
+#### ![question](https://cloud.githubusercontent.com/assets/13649199/13672858/9cd58692-e6e7-11e5-905d-c295d2a456f1.png) Вопрос: почему проект упадет при попытке открыть страничку еды (в логе смотреть самый верх самого нижнего исключения)?
+-  <a href="http://junit.org/junit4/">JUnit 4</a>
+-  <a href="http://habrahabr.ru/post/120101/">Тестирование в Java. JUnit</a>
+
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 5. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFai1veG9qaFZlZ2s">Spring Test</a>
+> - поменял `@RunWith`: `SpringRunner` is an alias for the `SpringJUnit4ClassRunner`
+#### Apply 3_08_add_spring_test.patch
+-  <a href="https://docs.spring.io/spring/docs/4.3.x/spring-framework-reference/htmlsingle/#testing">Spring Testing</a>
+
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 6. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFVlNYczhnSU9JdXc">Базы данных. Обзор NoSQL и Java persistence solution без ORM.</a>
+-  <a href="https://ru.wikipedia.org/wiki/PostgreSQL">PostgreSQL</a>.
+-  [PostgreSQL JDBC Driver](https://github.com/pgjdbc/pgjdbc)
+-  <a href="http://java-course.ru/begin/postgresql/">Установка PostgreSQL</a>. **ВНИМАНИЕ! с postgres 9.6 возможны проблемы.** 
+-  Чтобы избежать проблем с правами и именами каталогов, [**рекомендуют установить postgres в простой каталог, например `C:\Postgresql`**. И при проблемах создать каталог data на другом диске](https://stackoverflow.com/questions/43432713/postgresql-installation-on-windows-8-1-database-cluster-initialisation-failed). Если Unix, [проверить права доступа к папке (0700)](http://www.sql.ru/forum/765555/permissions-should-be-u-rwx-0700).
+   
+> Создать в pgAdmin новую базу `topjava` и новую роль `user`, пароль `p…
+Show less
 
 JavaWebinar/topjava
 Added by GitHub
-
 
 GitHub APP [9:47 PM]
 JavaWebinar
@@ -57,10 +135,18 @@ JavaWebinar
 `d11c5c0b` - 3_02_HW2_meal_layers
 `37db8725` - 3_03_HW2_optional_MealServlet
 `79e6d533` - 3_04_HW2_optional_filter
- Show more
+`0e57a2d8` - 3_05_HW2_optional_select_user
+`8a9b4a2b` - 3_06_bean_life_cycle
+`6a230294` - 3_07_add_junit
+`6b27cfb5` - 3_08_add_spring_test
+`d019f20b` - 3_09_add_postgresql
+`c84909e7` - 3_10_db_implementation
+`5492ca43` - 3_11_test_UserService
+`689419b9` - 3_12_test_logging
+`3f2d96e7` - 3_13_fix_servlet
+Show less
 
 JavaWebinar/topjava
-
 
 GitHub APP [10:26 PM]
 JavaWebinar
@@ -73,5 +159,20 @@ GitHub APP [10:39 PM]
 JavaWebinar
 *1 new commit force-pushed to `master`*
 `5f9aae59` - Add github tools integration
+
+JavaWebinar/topjava
+
+GitHub APP [4:55 PM]
+JavaWebinar
+*8 new commits pushed to `master`*
+`5e085bbc` - 4_1_HW3
+`daf1ba75` - 4_2_HW3_optional
+`1c3cb1e3` - 4_3_improve_code
+`5255b669` - 4_4_init_and_populate_db
+`e3400633` - 4_5_create_mock_test_ctx
+`fc6f446e` - 4_6_add_jpa
+`3c42b734` - 4_7_add_named_query_and_transaction
+`4eac0343` - 4_8_add_hsqldb
+Show less
 
 JavaWebinar/topjava

@@ -132,3 +132,558 @@ Ma3stro [5:16 PM]
 uploaded and commented on this image: image.png 
 
 IDEA почему-то ругаться стала
+
+
+Viktor [7:32 PM]
+@Ma3stro важный навык разработчика - имение найти ответ. Гугл тебе в помощь
+
+
+qf05 [Yesterday at 7:37 PM]
+in #hw4
+Кто столкнулся с LazyInitializationException: could not initialize proxy - no Session подскажите, в какую сторону думать? 
+И надо ли менять что то в тестах? В видео вроде говорилось что тесты у нас уже готовые, но у нас же приходит actual из нашей базы, а expected из MealTestData, но ведь в expected поля user = null. Или я что то не понимаю?
+
+
+26 replies
+qf05 [1 day ago]
+Это конечно очень забавно, когда ставишь брекпоинт в репозитории и получаешь ошибку сравнения пользователя у еды, а если убираешь брекпоинт, то ошибку инициализации... Но у нас же не курс квантовой физики, когда от наличия наблюдателя может меняться состояние объекта!... Подскажите, чего я не понял???? Что почитать? куда смотреть?
+
+
+ilya t. [1 day ago]
+у нас user объявлен FetchType.LAZY, попробуй поменять на EAGER
+
+
+ilya t. [1 day ago]
+тоже столкнулся с таким эксепшеном, поменял fetchtype, этот эксепшн ушел, зато пришли другие :slightly_smiling_face:
+
+
+Viktor [1 day ago]
+https://www.google.ru/search?q=LazyInitializationException&cad=h
+
+ilya t. [1 day ago]
+короче юзеры сравниться не могут между собой поскольку ленивая загрузка как я понял
+
+
+qf05 [1 day ago]
+поменять на EAGER - это первое что я сделал))) 
+Но у нас тогда при необходимости кому то удалить какую нибудь еду будет подниматься вся база пользователей. Надо делать Lazy. По идее сравнивать пользователей не должно быть никаких проблем, т.к. при ленивой загрузке они должны загружаться когда они нам понадобятся, а не посылать нас ... разбирать стектрейс с эксепшенами.
+
+
+ilya t. [1 day ago]
+ага, и еще у меня при одинаковых списках (одни и те же данные) пишется что данные разные по результату теста, это при EAGER (edited)
+
+
+qf05 [1 day ago]
+@Viktor Спасибо! Помогло! Вот только осталось решить надо в тестовую еду пихать тестовых юзеров или думать дальше?
+
+
+Viktor [1 day ago]
+@qf05 тестовые данные для каких тестов?
+
+qf05 [1 day ago]
+"Произошла незаконная операция с отражающим доступом" походу полиция java за мной уже выехала))))
+
+
+qf05 [1 day ago]
+@Viktor тестовые данные в MealTeastData, которые у нас захардкожены. Они вроде для всех тестов. Просто в них все поля user = null. По этому и думаю как нам сравнивать эти объекты, с теми которые у нас в базе?
+
+Viktor [1 day ago]
+@qf05 какие варианты есть? (edited)
+
+
+qf05 [1 day ago]
+@Viktor в смысле все поля user у еды.
+
+
+qf05 [1 day ago]
+@Viktor можно всей еде, захардкодить userов, что мне кажется наиболее правильным, или сравнивать еду без учета пользователя, или пихать в тестовую еду пользователя во время выполнения теста, пока больше идей нет.
+
+
+Yevhen Maksymovych [1 day ago]
+сравнивать без учета пользователей некорректно,мы ведь помимо прочего должны проверять, что нельзя выполнить операции с чужой едой
+
+
+Yevhen Maksymovych [1 day ago]
+@qf05 так как поборол ЛэйзиИнициализейшн? Сделал его егерем или фетч джойн?
+
+
+qf05 [1 day ago]
+если бы в видео не прозвучала фраза, что тесты у нас уже готовы, я бы не задумываясь захардкодил бы еде юзеров.
+
+qf05 [1 day ago]
+ЛэйзиИнициализейшн - Transactional на класс тестов.
+
+
+Viktor [1 day ago]
+@qf05 я бы сравнивал без учета пользователей. Т.е. сначала сравнил бы еду, а потом проверил бы кому она принадлежит.
+
+qf05 [1 day ago]
+Ну я захардкодил юзеров в статик блоке, не прошел только update. Чаю попью и буду разбираться дальше.
+
+
+Yevhen Maksymovych [1 day ago]
+а у меня наоборот, апдейт проходит, но на сейв ругается
+
+
+qf05 [1 day ago]
+проверь не захардкодил ли ты чего в getCreated(). или может в самом репозитории реализация что то  не делает.
+
+
+Yevhen Maksymovych [1 day ago]
+семён семёныч
+
+
+Yevhen Maksymovych [1 day ago]
+точно
+
+qf05 [1 day ago]
+А кто знает Rule все самим писать или изголяться так сказать с готовыми? Я что то туда глянул, мне не понравилось...
+
+
+Grigory Kislin [24 hours ago]
+почитать подсказки в уроке:
+1. Если делаете debug (на тему квантовой физики)
+2. Когда будете чинить MealServiceTest, помните, что тесты пишутся для приложения, а не наоборот.
+(означает что не надо вводить в приложение доп. функциональность для своих тестов. нужно тесты делать основываясь на приложении) (edited)
+
+
+Dmitry Neustupov [Yesterday at 7:47 PM]
+in #hw4
+Товарищи, подскажите, Travis работает с HSQLDB? Не могу примеров найти.
+
+
+4 replies
+Grigory Kislin [23 hours ago]
+опиши, что делал и в чем проблема
+
+
+Dmitry Neustupov [13 hours ago]
+@Grigory Kislin на сайте трэвиса есть примеры подключения и создания разных баз данных, MySql, Mongo, Postgress и т.д. А по поводу HSQL инфы ноль. Оставил .yml файл без настроек для БД - сборка прошла успешно. Т.е., если БД - in memory, то для тревиса ничего прописывать не надо?
+
+
+Grigory Kislin [5 hours ago]
+inmemory- в памяти. не только для тревиса- никому не надо
+
+
+Dmitry Neustupov [3 hours ago]
+@Grigory Kislin понял, спасибо!
+
+
+Grigory Kislin [10:06 PM]
+commented on Ma3stro’s file image.png
+IDEA написала в чем проблема..
+попробуй maven reimport.
+если зависимость не хочет подтягиваться -  удали ее в локальном репозитории и снова попробуй reimport
+
+Arthur [10:54 PM]
+Друзья, может я что-то пропустил, но вопрос такой: как assertMatch() сделать порядконезависимым?
+
+Viktor [11:14 PM]
+@Arthur assertMatch и так порядконезависимый :smiley: порядкозависимым другой метод
+
+Yevhen Maksymovych [11:25 PM]
+ребят, уже сломал голову, но как побороть метод save? если туда попадает на вход новый meal, ему в user подставляется em.getReference(User.class, userId), и он персистится в БД. Но если я теперь что-то попытаюсь сделать с этим meal'ом - я выхватываю эксепшн. Я так понимаю, из-за того, что по сути мой мил не был создан через EntityManager, а был собран вручную, а юзера ему подсунули не настоящего, а прокси-объект, создаваемый EM'ом, и теперь при попытке обратиться к юзеру, запрос переадресуется к проксе, а в проксе нет информации о Meal'е
+ффух, как-то нелепо сформулировал, но лучше не смог
+```Meal created = getCreated();
+        service.create(created, USER_ID); << вот тут всё путём
+        assertMatch(service.getAll(USER_ID), created, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1); <<а вот тут created пытается обратиться к проксе```
+
+Tanya [11:29 PM]
+а ты не сравнивай по юзеру
+
+
+aleksey [Yesterday at 11:31 PM]
+in #hw4
+Ок, нам в этом конкретном случае не нужно по юзеру сравнивать, а как быть в других случаях с другими энтити и полями? Или это и есть одна из основных болей в хибернейт?
+
+
+1 reply
+Grigory Kislin [5 hours ago]
+мы будем даствать и юзера у еды и еду у юзера, точбы потренироваться
+
+
+Yevhen Maksymovych [Yesterday at 11:34 PM]
+in #hw4
+но ведь мы не можем просто взять и выбросить юзера из сравнения...
+
+
+1 reply
+Grigory Kislin [5 hours ago]
+почему неможешь:)?
+
+
+Yevhen Maksymovych [11:34 PM]
+uploaded this image: image.png 
+
+Arthur [11:37 PM]
+ты про MEAL6, MEAL5 и тому подобные сейчас говоришь?
+
+aleksey [11:52 PM]
+Вот раз тут уже есть дошедшие до тестов, можете пояснить, как работает lazy load. Вот я делаю getAll для Meal просто left join в query, у меня вместо юзера там заглушка. Как теперь мне его подгрузить например в том же методе getAll?
+Через getUser() возвращает заглушку (edited)
+
+Arthur [11:59 PM]
+не знаю правильно я сделал или нет, но я над юзером написал 
+@ManyToOne(fetch = FetchType.EAGER)
+
+После чего он стал сразу без заглушки вытаскиваться (edited)
+
+aleksey [12:02 AM]
+ну так это понятно, так оно и работает. Я хочу понять, как через lazy load
+
+Yevhen Maksymovych [12:21 AM]
+угу, я тоже на этом несколько сломался. то ли мы отказываемся от проверки юзера в тестах и оставляем все на откуп проверкам в namedQuery, то ли дейсытно меняем все на егеря
+
+aleksey [12:24 AM]
+Видимо это потому что объект detached и вся эта магия произойдет, только если открыть новую сессию, перевести объект в persist и там уже эти lazy загрузки будут работать.
+Чтоб не менять все на егеря можем явно указать в getAll "left join fetch m.user" . Но это все только в том случае, если у меня в голове не полная каша и я не несу ересь (edited)
+
+Yevhen Maksymovych [12:27 AM]
+я не настоящий сварщик, но мне кажется, что left join fetch делает то же самое, что смена типа инициализации на егеря
+
+Viktor [12:32 AM]
+@Yevhen Maksymovych юзера можно просто ручками сравнить, т.е. не класть его в тестовые данные еды. В тестах мы знаем свои тестовые данные и какая еда какому пользователю принадлежит, этим можно воспользоваться.
+@aleksey смотря с какой целью хочешь вытащить пользователя. Если что-то в нем посмотреть, то доверь это хибернейту и lazyLoad. Если отдать куда-то наружу, тут появляются проблемы и надо выкручиваться, по разному делают :smiley:
+
+aleksey [12:35 AM]
+@Yevhen Maksymovych но делает это конкретно в одном методе а не глобально, а по умолчанию. Вдруг ты в getBetweenl не хочешь такого результата. 
+Я, если правильно понял, надо ручками сессии создавать для lazy load, мы используем EntityManager, он является оберткой над Session, и мы просто не имеем возможности что-то явно делать с объектом когда он в состоянии persist внутри EntityManager.
+А когда он вне его, он уже detached (edited)
+
+Yevhen Maksymovych [12:38 AM]
+@Viktor, ок, мы выбросим проверку юзера из ассертов, и будем просто в тестах подставлять нужные милы. Но как быть с этим?
+```@Test(expected = NotFoundException.class)
+    public void updateNotFound() throws Exception {
+        service.update(MEAL1, ADMIN_ID);
+    }```
+здесь проверка должна быть на стороне сервиса. Если в MEAL1 нет информации о юзере, как мы его проверим на не соответствие админу?
+
+Viktor [12:39 AM]
+@Yevhen Maksymovych ты точно знаешь какая еда и какому юзеру принадлежит (в тестовых данных) + ты можешь получить юзера при lazy load у meal, ну а дальше сам придумай :smiley:
+
+Yevhen Maksymovych [12:40 AM]
+что-то уже голова не варит. пойду спать, завтра на свежую голову начну решать.
+что-то мне кажется, Григорий нас обманул, что это задание самое короткое :slightly_smiling_face:
+
+Arthur [12:41 AM]
+оно по объему нового кода наверно короткое... (edited)
+
+Viktor [12:43 AM]
+не, просто я может быть вас не туда веду...
+
+aleksey [12:47 AM]
+@Viktor вот ты говоришь, доверься хибернейту и lazy load. Можешь привести пример кода lazy load ?
+
+Yevhen Maksymovych [12:47 AM]
+гхм
+я вот только что заметил
+что я тут демагогствую последние два часа, а тесты не провожу
+а они-то проходят
+когда это они проходить стали-то, непонятно
+
+Arthur [12:48 AM]
+может они по ошибке проходят :slightly_smiling_face:
+
+Viktor [12:48 AM]
+@aleksey не совсем понял. Lazy load поле а весь код - поле в аннотации (edited)
+
+Arthur [12:50 AM]
+у меня save и update сейчас не проходят, потому что вместо юзера стоит заглушка. Несмотря на то, что включена EAGER
+
+aleksey [12:51 AM]
+@Viktor Предположим я получил из базы Meal, но не с EAGET  а с LAZY, как мне подгрузить юзера?
+
+Viktor [12:52 AM]
+meal.getUser()
+
+Arthur [12:52 AM]
+где ты это напишешь?
+
+aleksey [12:52 AM]
+@Viktor ты пробовал? Что-то ты упускаешь из описания. (edited)
+
+Yevhen Maksymovych [12:53 AM]
+но это сработает, если meal получен из энтитиманагера, а не сформирован локально
+
+Viktor [12:53 AM]
+там где мне понадобится пользователь, да пробовал :smiley:
+@aleksey ты наверно про LazyLoadException, но она выбрасывается не из-за обращения к lazy полю, точнее из-за этого, но там ещё одно важное обстоятельство.
+@Yevhen Maksymovych насчет локально собранного, честно не знаю. Ну при обращении к заглушке полученной getReference будет либо ошибка либо прокси. Если прокси то проблем нет, если ошибка, то решать её
+https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html#getReference-java.lang.Class-java.lang.Object-
+доки говорят, что все будет норм :slightly_smiling_face: (edited)
+
+Yevhen Maksymovych [12:59 AM]
+короче, ладно, парни, я спать, чтобы не мучались, добавляйте к тестам @Transactional, так лэйзи будет работать
+
+aleksey [1:19 AM]
+Спасибо, это одна из причин по которой у меня все криво было.
+
+Aleksey Vra [7:30 AM]
+>ВНИМАНИЕ: патч меняет postgres.properties
+>IDEA может ${jdbc.initLocation} подчеркивать красным - тупит...
+оставить как есть? или както лечится? (edited)
+
+Yevhen Maksymovych [9:07 AM]
+тут должна быть картинка с подмигивающим микки-маусом и надписью "да и черт с ним"
+
+
+Vitaly M. [Today at 9:13 AM]
+in #hw4
+Как правильно query написать?
+```SELECT m FROM Meal m WHERE m.user=?1 AND m.dateTime BETWEEN ?2 AND ?3 ORDER BY m.dateTime DESC"```
+у меня в этом запросе
+```AND m.dateTime BETWEEN``` 
+ругается, что m.dateTime - Tipe mistmach
+
+
+4 replies
+Yevhen Maksymovych [12 hours ago]
+он будет ругаться, но выполнит корректно. насколько я понимаю, hsql уже научился работать с LocalDateTime, а валидатор идеи пока об этом не знает
+
+Vitaly M. [12 hours ago]
+ну я так и мыслил, но решил спросить )
+а еще вопрос, я правильно понял синтаксис ?1 ?2 ?3, это он будет брать переменные по порядку ?
+
+
+qf05 [11 hours ago]
+тоже с этим столкнулся и решил что >= и <= вместо BETWEEN более красиво, т.к. идея на это не ругается.
+
+
+Dmitry Neustupov [10 hours ago]
+@Vitaly M. да, по порядку
+
+
+Arthur [Today at 11:53 AM]
+in #hw4
+кто-нибудь optional смотрел уже?
+Я про Rule... (edited)
+
+
+5 replies
+Yevhen Maksymovych [10 hours ago]
+Да, там все просто на самом деле
+
+
+Pavel Zaitcev [9 hours ago]
+Да, все есть по ссылке что дана в задании. А итоговую сводку (п. 3.3) сделал через @AfterClass.
+
+
+Arthur [9 hours ago]
+я про время выполнения не сразу нашел...
+
+
+Yevhen Maksymovych [9 hours ago]
+я просто создал анонимный класс на основе TestWatcher'а, в нём можно зафиксировать время перед тестом и после
+
+
+Arthur [8 hours ago]
+ты самопальным путем время высчитываешь?
+Я нашел способ: TimeUnit
+
+
+Oleksii Leshchenko [Today at 12:16 PM]
+in #hw4
+Ради интереса, почему мы перешли на HSLDB с PostgreSQL? Просто для тренировки охватить по-больше продуктов/технологий?
+
+
+
+1 reply
+Grigory Kislin [5 hours ago]
+мы не перешли:) в xml остался postgres. ввели- да, потренироваться (edited)
+
+
+Dmitry Neustupov [12:18 PM]
+@Oleksii Leshchenko hsqldb быстрее работает, удобно использовать на тестах, имхо.
+
+
+Oleksii Leshchenko [Today at 1:00 PM]
+in #hw4
+Тоже чисто ради интереса...
+В https://en.wikibooks.org/wiki/Java_Persistence/ManyToOne используется 2 референса одновременно: @ManyToOne и @OneToMany.... Мы же используем только @ManyToOne.... Почему?
+
+
+1 reply
+Oleksii Leshchenko [9 hours ago]
+Хммм. Нашел ответ в 1м же абзаце в той статье:
+>A ManyToOne relationship in Java is where the source object has an attribute that references another object, the target object. I.e. the rather typical Java case that one object holds a reference to another object. A ManyToOne relationship can be specified unidirectional. However, it is typical that the target object has the inverse relationship specified back to the source object. This would be a OneToMany relationship specification in the target object. All relationships in Java and JPA are unidirectional, in that if a source object references a target object there is no guarantee that the target object also has a relationship to the source object. This is different than a relational database, in which relationships are defined through foreign keys and querying such that the inverse query always exists.
+(edited)
+
+
+Anton Kiselev [1:00 PM]
+Подскажите, у кого-нибудь было подобное?
+```java.lang.AssertionError: 
+Expecting value <null> in field <"user"> but was <User{id=100001, email=admin@gmail.com, name=Admin, enabled=true, roles=[ROLE_ADMIN], caloriesPerDay=2000}> in <Meal{id=100008, dateTime=2015-06-01T14:00, description='Админ ланч', calories=510}>.
+Comparison was performed on all fields```
+
+запускаю тест get. в assertMatch вижу что приходят оба Meal потом магия и null.
+
+
+Oleksii Leshchenko [Today at 1:25 PM]
+in #hw4
+У нас добавилось новое поле в *Meal* - `User user`. Ранее его не было. И я так подозревая, в сервис приходит Meal без юзера. У нас есть только user_id при этом. Т.е. для сохранения через JPA мне надо создать пустого юзера и передать ему только свой id... Так?
+
+
+1 reply
+ilya t. [8 hours ago]
+в подсказках первый пункт
+
+
+Oleksii Leshchenko [3:06 PM]
+У меня тест для get() падает на `assertMatch`.
+Если юзер в мил прописан так:
+`@ManyToOne(fetch = FetchType.LAZY)`
+`@JoinColumn(name = "user_id")`
+`@NotNull`
+`private User user;`
+то при сравнении ошибка:
+LazyInitializationException: could not initialize proxy - no Session
+А если вместо LAZY поставить EAGER, то вылетает с :
+Expecting value <null> in field <"user"> but was <User{id=100001, ....}>.
+
+Viktor [3:21 PM]
+@Oleksii Leshchenko а какое поведение тебе нужно?
+
+Oleksii Leshchenko [3:22 PM]
+assertMatch должен сравнить 2 объекта и не вылетить по эксепшену. Пока только могу поставить поле user в игнор при сравнении объектов
+
+Arthur [3:24 PM]
+если идти по этому пути, можно таким же макаром и другие поля заигнорить
+
+
+druxa [Today at 3:25 PM]
+in #hw4
+Не могу запустить тесты MealServiceTest и UserServiceTest из-за SLF4JBridgeHandler IDEA пишет Error:(5, 24) java: package org.slf4j.bridge does not exist
+
+
+2 replies
+Arthur [6 hours ago]
+в мавене этот пакет есть?
+
+
+Arthur [6 hours ago]
+jul-to-slf4j
+
+
+druxa [3:27 PM]
+патч не правильно накатил или библиотека не загрузилась?
+
+druxa [3:33 PM]
+да есть, посмотрел в загруженных библиотеках в jar там один класс SLF4JBridgeHandler
+Arthur
+jul-to-slf4j
+From a thread in #hw4
+Today at 3:28 PM
+
+
+Arthur [Today at 3:37 PM]
+in #hw4
+идея этот импорт подсвечивает как ошибка?
+import org.slf4j.bridge.SLF4JBridgeHandler;
+
+
+1 reply
+druxa [6 hours ago]
+Нет
+
+
+Viktor [Today at 3:52 PM]
+in #hw4
+@druxa удали библиотку из локального репозитория и сделай reimport, может во время загрузки что-то сломалось
+
+
+4 replies
+druxa [6 hours ago]
+из локального это .m2? удалил и сделал   reimport не помогло
+
+
+Grigory Kislin [5 hours ago]
+похоже у тебя чтото с проектом-идеей
+1. пропробуй запустить не из idea: mvn test
+2. я вчекинил патчи- попробуй сделать git clone и сделать в новом проекте
+
+
+druxa [4 hours ago]
+первый пункт не понял как сделать, а второй сделал clone и проблема решилась, только запутался, в MealServiceTest 3 теста прошли из 9, это потому что JpaMealRepositoryImpl заглушка?
+
+
+Grigory Kislin [4 hours ago]
+> первый пункт не понял как сделать
+из cmd либо terminal в каталоге проекта набери: mvn test
+> только запутался
+я все таки призываю вас начинать думать, а не просто патчи накатывать...
+есть дебаг, есть логирование (edited)
+
+
+Viktor [3:54 PM]
+@Oleksii Leshchenko ну тогда просто во время сравнения лови Throwable и возвращай true, объекты будут сравниваться, а если вдруг вылетит Exception любой, ты его поймаешь и все будет хорошо :slightly_smiling_face:
+
+Grigory Kislin [4:47 PM]
+Дополнил п.5:
+
+*5: Когда будете чинить MealServiceTest, помните, что тесты пишутся для приложения, а не наоборот. Это означает, что если нашему приложению `Meal.user` не требуется, не следует его доставать исключительно для тестов. В следующем уроке мы будет разными способами доставать зависимости `Meal.user` и `User.meals`*
+
+Aleksey Vra [5:37 PM]
+>database.url=jdbc:hsqldb:file:media/vra/temp
+путь должен начинаться без слеша.. мож кому пригодится
+
+
+Aleksey Vra [Today at 6:01 PM]
+in #hw4
+почему не проходит тест на удаление? записи же одинаковые
+>>>java.lang.AssertionError: 
+Expecting:
+<"[Meal{id=100007, dateTime=2015-05-31T20:00, description='Ужин', calories=510},
+   Meal{id=100006, dateTime=2015-05-31T13:00, description='Обед', calories=1000},
+   Meal{id=100005, dateTime=2015-05-31T10:00, description='Завтрак', calories=500},
+   Meal{id=100004, dateTime=2015-05-30T20:00, description='Ужин', calories=500},
+   Meal{id=100003, dateTime=2015-05-30T13:00, description='Обед', calories=1000}] (ArrayList@3a342944)">
+to be equal to:
+<"[Meal{id=100007, dateTime=2015-05-31T20:00, description='Ужин', calories=510},
+   Meal{id=100006, dateTime=2015-05-31T13:00, description='Обед', calories=1000},
+   Meal{id=100005, dateTime=2015-05-31T10:00, description='Завтрак', calories=500},
+   Meal{id=100004, dateTime=2015-05-30T20:00, description='Ужин', calories=500},
+   Meal{id=100003, dateTime=2015-05-30T13:00, description='Обед', calories=1000}] (ArrayList@3a342944)">
+but was not.
+
+
+3 replies
+ilya t. [4 hours ago]
+выше в ветках обсуждалось - по юзеру еще сравнение идет
+
+
+ilya t. [4 hours ago]
+т.е. насколько я понял нам на данном этапе надо исключить сравнение по юзеру
+
+
+Aleksey Vra [3 hours ago]
+спс, разобрался
+
+
+Vitaly M. [Today at 6:02 PM]
+in #hw4
+тяжело мне тесты даются...
+Вот тест
+```service.delete(MEAL1_ID, USER_ID);```
+Вот вывод теста
+```Hibernate: 
+    /* Meal.delete */ delete 
+    from
+        meals 
+    where
+        id=? 
+        and user_id=?```
+Чего там около id=? и user_id=? пусто?
+
+
+3 replies
+Grigory Kislin [4 hours ago]
+если хочется значения нужно или уровень дебага ставит trace или использовать jdbc4j вроде. в видео Круглова про нее есть
+
+
+Vitaly M. [3 hours ago]
+trace не помог ))) сделал простынку раз в 10 длиннее, но id=? и user_id=? пустыми так и остались...
+Ладно это не важно, просто запомню, что так задумано )
+
+
+Viktor [3 hours ago]
+@Vitaly M. хибернейт всегда так пишет. Но есть какой-то хак, который это исправляет, погугли

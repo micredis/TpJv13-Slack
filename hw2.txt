@@ -3027,3 +3027,43 @@ Oleksii Leshchenko [11:25 PM]
 
 Tanya [11:27 PM]
 посмотри что computeIfPresent возвращает
+
+
+anyukhin_artem [7:07 PM]
+Доброго времени суток. Объясните пожалуйста, зачем в assureIdConsistent идёт запись id в entity в случае, если она новая. Разве не база создаёт id? По ссылке https://stackoverflow.com/questions/27900041/rest-put-ids-in-body-or-not/32728226#32728226 как я понял надо проверять правильность id пришедшей по rest. но зачем задавать id, если она - сущность новая не совсем ясно.
+stackoverflow.com
+REST - put IDs in body or not?
+Let's say I want to have a RESTful resource for people, where the client is able to assign ID. A person looks like this: {"id": <UUID>, "name": "Jimmy"} Now, how should the client save (or ...
+
+anyukhin_artem [7:19 PM]
+added and commented on this Java snippet: Untitled 
+public static void assureIdConsistent(AbstractBaseEntity entity, int id) {
+    if (!entity.isNew() && entity.getId() != id) {
+      throw new IllegalArgumentException(entity + " must be with id=" + id);
+    }
+  }
+почему к примеру не так?
+Aleksey Vra [7:45 PM]
+```assureIdConsistent(meal, id);```
+используется в контроллере только при обновлдении еды (update)
+
+anyukhin_artem [8:28 PM]
+1) это используется не только для еды
+2) это не ответ на мой вопрос
+
+Viktor [8:56 PM]
+@anyukhin_artem насколько я помню в topjava за id отвечает sequance в БД. поэтому тут за создание id отвечает база.
+Зачем заносит id в редактируемую сущность:
+- dto с фронта может прилетать без id т.к. id зашит в url, поэтому брать его можно оттуда
+- создание id через sequance это лишний запрос. Банальным создание id в коде мы сокращаем количество запросов в 2 раза (по этой entity) (edited)
+
+Aleksey Vra [8:56 PM]
+можно заменить на entity*
+>идёт запись id в entity в случае, если она новая
+entity как бы не новая, а "старая" вновь созданная с null id, а если null то в нее нужно поместить id
+>Разве не база создаёт id?
+в базе генерится только для новой entity, а мы обновляем (edited)
+DevTools (f12 в фаерфоксе) попробовтаь подменить id и через дебаг отследить
+
+anyukhin_artem [9:38 PM]
+Оп. Спасибо))) Это теперь понял почему метод ведёт себя так. Но теперь не пойму почему возникает ситуация, о которой вы говорите. Что приводит к тому, что с фронта приходит "старая" сущность без id. Пошёл разбираться. Ещё раз спасибо!)
