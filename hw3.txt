@@ -1910,3 +1910,40 @@ Grigory Kislin [19 hours ago]
 
 angelrum [19 hours ago]
 Понятно, спасибо.
+
+
+Ivan A [Today at 4:39 AM]
+in #hw3
+В Spring Facet есть только spring-app b spring-db. В тестах красным подсвечивает repository
+Grigory Kislin
+@Ivan A картинка для тестов (у меня и без флажка все хорошо)
+Spring Facet сделал?
+Thread in #hw3Mar 22nd at 10:13 PM
+
+
+2 replies
+Grigory Kislin [10 hours ago]
+а зачем тебе вообще в тестах репозиторий?
+
+
+Ivan A [6 hours ago]
+ниже картинка
+
+
+Ivan A [4:17 PM]
+uploaded this image: Безымянный.png 
+
+Ma3stro [4:19 PM]
+Вероятно, этот бин не попадает в контекст
+Oleksii Leshchenko [4:19 PM]
+Слева лучше иметь или интерфейс, или абстрактный класс. А не Impl, как на картинке
+
+Ivan A [4:20 PM]
+так это ведь мастер ветка все по патчам
+
+Ma3stro [4:21 PM]
+Тебе и нужно это починить
+
+Ivan A [4:26 PM]
+спасибо,я не вьехал сразу. Читаю задание а вижу ну вы поняли
+впорос снят

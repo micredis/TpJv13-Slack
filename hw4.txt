@@ -876,3 +876,723 @@ Nedfrench [7:10 PM]
 
 Ma3stro [7:10 PM]
 `<context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>` (edited)
+
+
+Nedfrench [1 day ago]
+Спасибо, в видео "ORM. Hibernate. JPA."упустил этот момент.
+
+
+Yevhen Maksymovych [7:38 PM]
+ребят, а почему в пропертях, которые мы указываем в .xml конфиге практически все проперти (доступные) дублируются как property и property-ref. Т.е. есть "dataSource" и "dataSource-ref", "packagesToScan" и "packagesToScan-ref". Но мы используем именно dataSource-ref, но packagesToScan (не-реф)?
+
+
+Yevhen Maksymovych [Yesterday at 7:39 PM]
+in #hw4
+ну, т.е. понятно, что в другом случае контекст просто не заведётся, я уже проверил, но что это за -ref? я посмотрел в исходниках бина, там ничего подобного нет
+
+
+4 replies
+Yevhen Maksymovych [1 day ago]
+не, всё ок
+
+
+Yevhen Maksymovych [1 day ago]
+с -ref ты указываешь в качестве параметра бины
+
+
+Yevhen Maksymovych [1 day ago]
+а без ref стринги
+
+
+Grigory Kislin [10 hours ago]
+ref- это ссылка на объявленный уже бин
+если он нужен нескольким другим бинам- только через него
+
+
+qf05 [Yesterday at 8:17 PM]
+in #hw4
+Блин, я всё таки не понимаю, почему мы должны иметь в еде юзера, а не просто int с его id. Это же намного проще.
+
+
+5 replies
+Viktor [1 day ago]
+а как в таком случае получить юзера?
+
+
+qf05 [1 day ago]
+а нафиг нам юзер в еде вообще нужен? у нас везде где еда юзера касается ей только его айди нужен.
+
+
+qf05 [1 day ago]
+например: 
+если у еды id юзера - то это как у тебя в шкафу висит 20 костюмов, они твои потому что на них бирочка с твоим именем.
+если у еды есть юзер - то это как у тебя есть 20 костюмов, и они твои потому что каждый надет на твоего клона.
+
+
+Viktor [23 hours ago]
+Тут скорее для удобства, для более простых модификаций в будущем. Ведь если тебе в еде понадобиться ещё и имя пользователя, то либо ещё одну колоку заводи, либо переписывай все обращения с id на user.id
+
+
+Grigory Kislin [10 hours ago]
+в п.5: В следующем уроке мы потренируемся разными способами доставать зависимости Meal.user и User.meals
+
+
+Ma3stro [Yesterday at 8:18 PM]
+in #hw4
+Подскажите, пожалуйста, почему следующий код отказывается работать:
+JpaMeal:
+    ```@Override
+    @Transactional
+    public boolean delete(int id, int userId) {
+        return em.createNamedQuery(Meal.DELETE, Meal.class)
+                .setParameter("id", id)
+                .setParameter("user_id", userId)
+                .executeUpdate() != 0;
+    }```
+В Meal:
+ ```@NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:user_id"),``` 
+
+
+У меня на всех тестах просто NPE вылетает
+
+
+26 replies
+ilya t. [1 day ago]
+А для delete разве пишется Meal.class?
+
+
+ilya t. [1 day ago]
+Попробуй удали (edited)
+
+
+qf05 [1 day ago]
+em.createNamedQuery(Meal.DELETE)...
+
+
+Ma3stro [1 day ago]
+@ilya t., @qf05
+Да, действительно, исправил. Но у меня по прежнему NPE... У меня нигде при run'e не фигурируют данные из базы, как это было в примерах выше от других (edited)
+
+ilya t. [1 day ago]
+@Ma3stro проверь популируется ли бд
+
+
+ilya t. [1 day ago]
+Потому что куери и метод такой же у меня и все работает
+
+
+Ma3stro [1 day ago]
+@ilya t. сама бд непосредственно популируется, вижу все тестовые данные справа во вкладочке. Возможно, я неправильно сделал Meal entity hibernate?
+```@NamedQueries({
+        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:user_id"),
+        @NamedQuery(name = Meal.ALL, query = "SELECT m FROM Meal m LEFT JOIN FETCH m.user.id ORDER BY m.dateTime DESC"), //на исправление
+        @NamedQuery(name = Meal.ALL_BETWEEN, query = "SELECT m FROM Meal m WHERE m.user=?1 AND m.dateTime BETWEEN ?2 AND ?3 ORDER BY m.dateTime DESC")
+})
+@Entity
+@Table(name = "meals")
+public class Meal extends AbstractBaseEntity {
+
+    public static final String DELETE = "Meal.delete";
+    public static final String ALL = "Meal.getAll";
+    public static final String ALL_BETWEEN = "Meal.getBetween";
+
+    @Column(name = "date_time")
+    @NotNull
+    private LocalDateTime dateTime;
+
+    @Column(name = "description")
+    @NotBlank
+    private String description;
+
+    @Column(name = "calories")
+    @NotNull
+    private int calories;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+***Геттеры и сеттеры***```
+
+
+ilya t. [1 day ago]
+Джойн фетч убери
+
+ilya t. [1 day ago]
+И сделай просто через where с сортировкой
+
+ilya t. [1 day ago]
+А, она у тебя есть
+
+
+qf05 [1 day ago]
+илья, можешь объяснить в двух словах что такое этот джойн фетч лефт, я уже кучу статей перечитал, но там всё так заумно, никак не могу понять суть.
+
+
+Ma3stro [1 day ago]
+Я исправлю эти запросы с getAll. Я хочу понять, почему у меня тот же delete не работает
+
+ilya t. [1 day ago]
+@Ma3stro с энтити вроде порядок, значит не здесь
+
+
+ilya t. [1 day ago]
+@qf05 https://stackoverflow.com/questions/6838574/difference-between-left-join-and-left-join-fetch-in-hibernate
+Fetch в hibernate говорит загрузить полностью вместо ленивой загрузки.
+LEFT JOIN - это запрос который возвращает все записи из левой таблицы а из правой только если условие удовлетворяется
+stackoverflow.com
+Difference between LEFT JOIN and LEFT JOIN FETCH in Hibernate?
+I am trying to understand the difference between LEFT JOIN and LEFT JOIN FETCH in Hibernate. Can anyone explain this? Thanks
+ 
+
+
+qf05 [1 day ago]
+маэстро, не много не в тему, но у тебя calories это int, они и так не могут быть null, там должно быть другое ограничение.
+
+ilya t. [1 day ago]
+https://www.w3schools.com/sql/sql_join_left.asp
+w3schools.com
+SQL LEFT JOIN Keyword
+Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, and XML.
+
+
+ilya t. [1 day ago]
+Соответственно тем записям которым условие не удовлетворяется в колонке второй таблицы ставится null (edited)
+
+qf05 [1 day ago]
+спасибо, ещё бы понять что значит левая, и правая таблица...
+
+ilya t. [1 day ago]
+@qf05 иди на тот сайт что выше и посмотри наглядно, нажми там try it to yourself и запусти запрос (edited)
+
+
+ilya t. [1 day ago]
+@qf05 сразу поймёшь
+
+ilya t. [1 day ago]
+@qf05 если не понял то скажи
+
+
+Ma3stro [1 day ago]
+Исправил NPE добавив уникальность в Meal для user_id и date_time
+
+
+qf05 [1 day ago]
+@ilya t. то есть создаётся как бы отдельная таблица из значений в которую попадает выбранная колонка из 1-й таблицы и выбранная колонка из 2-й таблицы, но во второй колонке если значения нет или оно не удовлетворяет условию то ставится null
+
+
+ilya t. [1 day ago]
+@qf05 да все именно так. Собственно синтаксис запроса говорит сам за себя :)
+
+
+ilya t. [1 day ago]
+@qf05 join - объединение
+
+
+qf05 [1 day ago]
+@ilya t. спасибо, вроде понял)
+
+
+knkv [Yesterday at 8:19 PM]
+in #hw4
+Из-за чего может вылетать такая ошибка?
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘entityManagerFactory’ defined in class path resource [spring/spring-db.xml]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory
+
+
+21 replies
+Yevhen Maksymovych [1 day ago]
+не девятая ли джава часом?
+
+
+knkv [1 day ago]
+Нет.  “1.8.0_151”
+
+
+Yevhen Maksymovych [1 day ago]
+а весь стектрейс покажи
+
+
+knkv [1 day ago]
+https://gist.github.com/vknk/3e607be2c37e53ef2cb6f13632bba06f
+
+
+Yevhen Maksymovych [1 day ago]
+синтаксическая ошибка в @NamedQuery
+
+
+knkv [1 day ago]
+Понял, будем разбираться. Спасибо.
+
+
+Yevhen Maksymovych [1 day ago]
+а зачем ты вручную через namedQuery его вообще вставляешь? оставил бы на откуп EntityManager'у, у тебя ведь нет какой-то хитрой механики по обработке полей перед вставкой, а "как есть" записываешь
+
+
+knkv [1 day ago]
+Если Как есть, то без user id же будет записываться.
+
+Yevhen Maksymovych [1 day ago]
+странно, у меня с юзером всё ок записывается
+
+knkv [1 day ago]
+em.persist(meal) - нормально отрабатывает?
+
+
+Yevhen Maksymovych [1 day ago]
+ага
+
+
+knkv [1 day ago]
+Ок. Может у меня ошибка в другом месте.
+
+qf05 [1 day ago]
+а ты перед персист кладёшь рефернс на юзера в еду?
+
+
+Yevhen Maksymovych [1 day ago]
+ага
+
+knkv [1 day ago]
+Да, пришлось подсказки подсмотреть))
+
+Yevhen Maksymovych [1 day ago]
+:+1:
+
+knkv [1 day ago]
+А как meal c id возвращать?)
+
+
+Yevhen Maksymovych [1 day ago]
+да он после persist() будет заполнен
+
+
+Yevhen Maksymovych [1 day ago]
+просто возвращаешь этот же meal
+
+
+knkv [1 day ago]
+Действительно. Как это? :thinking_face:
+
+
+Yevhen Maksymovych [1 day ago]
+магия jpa :slightly_smiling_face:
+
+
+Andrew Manik [10:57 PM]
+Думаю пригодится кому-нибудь, особенно когда будете делать свой проект:
+
+когда мы добавляем в spring_db.xml namespase "tx" Intellij IDEA делает такой финт
+xmlns:tx="http://www.springframework.org/schema/cache" 
+и еще такой
+xsi:schemaLocation=...http://www.springframework.org/schema/cache
+http://www.springframework.org/schema/cache/spring-cache.xsd...
+
+что приводит вот к этому: 
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'cacheManager' available
+
+Я наткнулся на эту штуку, т.к. делаю параллельный проект, т.е. просто по видео Григория набиваю код и правлю, чтобы работало
+(в противном случае моя "запоминалка" работает значительно хуже), это я к тому, что при накатке патчей получается нормальный неймспейс и проблемы не возникает.
+
+Лечится это просто (перебивается руками):
+xmlns:tx="http://www.springframework.org/schema/tx"
+xsi:schemaLocation=... http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd (edited)
+
+Kirilo [2:01 AM]
+фу-ух... Вот это упражнение на внимательность... postgres.properties как-то криво накатился... Неужели так и нужно его подправлять?
+
+Хэм [3:44 AM]
+Использовать hibernate sessionFactory или JPA entityManager?
+на сколько важно использование одного или другого?
+
+Хэм [3:52 AM]
+если делать на JPA, то можно будет в любой момент поменять вендора(т.е. Hibernate на какой-нибудь другой). А если такого не планируется, то можно на Native API.
+Так зачем тогда вообще нужен JPA, и что он из себя представляет? По аналогии с slf4j и log4j могу предположить, что JPA(как slf4j в логах) - это такая "обертка", под которой должен работать какой-то конкретный вендор. Так ли это?
+Использовать Hibernate API однозначно. Это поможет понять лучше сам ORM и получить доступ к функциональности большей чем JPA.
+А история здесь такая. J2EE это набор спецификаций. Чтобы получить J2EE сертификацию серверу необходимо пройти огромный набор определенных тестов. Таким образом официально J2EE совместемый сервер это уже залог некоторого достаточно высокого качества.
+
+В старых версиях J2EE было некоторое подобие ORM, где приходилось делать выбор между "быстро делаем, медленно работает" и "долго делаем, быстро работает". Hibernate же предлагал разработчикам полноценный ORM, который включал лучшее из этих двух вариантов. Поэтому Hibernate на несколько лет стал стандартом де-факто в J2EE. В конце концов такой хороший ORM нельзя было не стандартизировать. Так и появилась спецификация JPA, которая основана на Hibernate, даёт простор другим вендорам и является частью J2EE.
+
+
+Ilya [Today at 8:58 AM]
+in #hw4
+@Grigory Kislin Пытаюсь осознать все происходящее, остались вопросы:
+1. На данный момент в проекте в POM есть зависимость:
+<artifactId>spring-orm</artifactId>
+Мы это с учетом на следующий урок сделали ? У нас же, вроде как, на данный момент хибернейт везде используется.
+
+2. Стало интересно по поводу Spring Boot - получается так, что если мы используем spring-boot-starter-data-jpa из коробки, то в нем встроены как <artifactId>hibernate-core</artifactId> так и <artifactId>spring-data-jpa</artifactId>. Если я, допустим, использую аннотации JPA для маппинга entity, то там юзается hibernate автоматом, а когда делаю класс репозитория для работы с БД и использую JpaRepository или CrudRepository, т.е. использую spring-data-jpa для работы с БД. Вопрос - это ведь нормальная практика, мешать одно с другим ?  Понимаю, что делают они разные вещи, но стало интересно. (edited)
+
+
+3 replies
+Grigory Kislin [10 hours ago]
+1. это же проще чем вопрос писать- попробуй вернуть как было и скомпилить
+2. хибернате под jpa везде используется. data-jpa у нас впереди, но если когда например нужен для запроса другой entity, мы будем челать  чз EntityManager (edited)
+
+
+Ilya [9 hours ago]
+@Grigory Kislin да, спасибо. судя по всему entityManagerFactory живет в спринговском api, а без него никуда. 
+Еще вопрос -  мы entityManager не закрываем явно в коде, как в нашем случае жизненный цикл entity происходит, разве не буду копиться объекты в persistence-context постоянно ? 
+гуглил, не совсем понял, как приминимо к нашему случаю.
+
+
+Grigory Kislin [9 hours ago]
+по поводу что такое EntityManager у меня вроде в видео будет. это под капотом каждый раз обертка над hibertate factory создается
+
+
+Yevhen Maksymovych [10:29 AM]
++пару дней назад тоже на это наткнулся :slightly_smiling_face:
+
+
+poleg [Today at 10:47 AM]
+in #hw4
+А почему в JpaUserRepositoryImpl в гетах в createNamedQuery мы передаем User.class, а в delete - нет?
+em.createNamedQuery(User.ALL_SORTED, User.class).getResultList();
+em.createNamedQuery(User.BY_EMAIL, User.class)
+
+em.createNamedQuery(User.DELETE)
+
+
+4 replies
+dustnfox [11 hours ago]
+`get` заканчивается `getResultList` который должен вернуть entity, чтобы собрать сущность ему нужно знать ее класс. У `delete` такой необходимости нет. Он заканчивается  `executeUpdate` и возвращает лишь число entity которые попали под запрос.
+
+
+
+AntonY [11 hours ago]
+@dustnfox а как такое же выделение красным делать?
+
+
+dustnfox [11 hours ago]
+` вот такими символами выделяй. Это кнопка с буковой ё на клавиатуре :slightly_smiling_face: (edited)
+
+
+AntonY [11 hours ago]
+`спасибо`
+
+
+Ivan Koshelia [12:13 PM]
+тестирую  @Override
+   @Transactional
+   public boolean delete(int id, int userId) {
+       return em.createQuery("DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:user_id")
+               .setParameter("id", id)
+               .setParameter("user_id", userId)
+               .executeUpdate() != 0;
+   } и получаю org.hibernate.LazyInitializationException: could not initialize proxy - no Session
+    at org.hibernate.proxy.AbstractLazyInitializer.initialize(AbstractLazyInitializer.java:155)
+    at org.hibernate.proxy.AbstractLazyInitializer.getImplementation(AbstractLazyInitializer.java:268)
+    at org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer.invoke(JavassistLazyInitializer.java:73)
+    at ru.javawebinar.topjava.model.User_$$_jvst260_0.equals(User_$$_jvst260_0.java)
+    at org.assertj.core.util.Objects.areEqual(Objects.java:41)
+    at org.assertj.core.internal.Objects.propertyOrFieldValuesAreEqual(Objects.java:675)
+    at org.assertj.core.internal.Objects.isEqualToIgnoringGivenFields(Objects.java:651)
+    at org.assertj.core.internal.Objects.areEqualToIgnoringGivenFields(Objects.java:790)   В чем может быть проблема?
+
+Oleksii Leshchenko [10 hours ago]
+в assertMath идет сравнение по всем полям, включая User. Этот Юзер не может подтянуться из базы в Мил. Для тестов надо исключить сранение по полю Юзер
+
+
+
+Oleksii Leshchenko [10 hours ago]
+@Ivan Koshelia ответ выше)
+
+
+saudabaew [Today at 12:45 PM]
+in #hw4
+А такой ошибки ни у кого не было? 
+16:45:36.534 ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper.logExceptions:131 - ОШИБКА: столбец meal0_.datetime не существует
+ Подсказка: Возможно, предполагалась ссылка на столбец "meal0_.date_time".
+
+
+18 replies
+Yevhen Maksymovych [10 hours ago]
+ну, судя по всему, у тебя столбец в таблице называется "date_time"
+
+
+saudabaew [10 hours ago]
+да не, так и называется datetime
+
+
+Oleksii Leshchenko [9 hours ago]
+А как называется поле в Энтити, и как в БД?
+
+
+Yevhen Maksymovych [9 hours ago]
+тогда странно. попробуй таблицы пересоздать
+
+
+Yevhen Maksymovych [9 hours ago]
+не стоит случаем чего-то типа "hbm2ddl=create" в параметрах хибернейта? а то он может каким-то образом до твоего инита их сам создаёт, и именует по своим правилам?
+
+
+saudabaew [9 hours ago]
+@Oleksii Leshchenko в ентити: 
+@Column(name = "datetime", nullable = false, unique = true)
+   @NotBlank
+   private LocalDateTime dateTime;
+
+
+saudabaew [9 hours ago]
+Может быть где-то здесь косяк: 
+@NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:userId") 
+?
+
+
+saudabaew [9 hours ago]
+@Override
+   public boolean delete(int id, int userId) {
+       return em.createNamedQuery(Meal.DELETE)
+               .setParameter("id", id)
+               .setParameter("userId", userId)
+               .executeUpdate() != 0;
+   }
+
+
+Yevhen Maksymovych [9 hours ago]
+ну, если ты не менял скрипт initDb.sql Григория, то у него там иначе (edited)
+
+
+Yevhen Maksymovych [9 hours ago]
+```CREATE TABLE meals (
+  id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  user_id     INTEGER   NOT NULL,
+  date_time   TIMESTAMP NOT NULL,```
+
+
+Yevhen Maksymovych [9 hours ago]
+т.е. date_time
+
+Oleksii Leshchenko [9 hours ago]
+и в самой базе тоже колонка datetime? или там date_time таки?
+
+
+saudabaew [9 hours ago]
+запутался. в таблице meals колонка называется date_time. скрипты не менял...
+
+
+Yevhen Maksymovych [9 hours ago]
+ну вот и указывай в своей энтити, как в таблице. как он иначе тогда их соотнесёт
+
+
+Yevhen Maksymovych [9 hours ago]
+своё имя столбца ты можешь указывать либо если на откуп хибернейта оставляешь создание таблиц, либо если заранее озаботился, чтобы в таблице это имя соответствовало тому, как ты обзываешь столбец
+
+
+saudabaew [9 hours ago]
+чет у меня даже юзер тесты сломались. видимо где то выше косяк.
+
+
+saudabaew [9 hours ago]
+пишу правильные названия - идея ругается, но тест проходит...Пишу без нижнего подчеркивания, идея не ругается, но тест падает.
+
+
+Pavel Klindziuk [1 hour ago]
+не обращай внимания,пусть ругается ) пиши как в скиртаху Григория!
+
+
+Vladimir Gorbatenko [2:50 PM]
+вероятно было..
+@test
+   public void get() throws Exception {
+       Meal actual = service.get(ADMIN_MEAL_ID, ADMIN_ID);
+       ADMIN_MEAL1.setUser(ADMIN);
+       assertMatch(actual, ADMIN_MEAL1);
+   }
+Не проходил тест пока в ADMIN_MEAL1 не добавил юзера. В комментах выше не понял, таки надо юзера добавлять как это сделал я или нет???
+
+test [2:50 PM]
+joined #hw4 by invitation from Vladimir Gorbatenko.
+
+
+alexey [Today at 4:17 PM]
+in #hw4
+Почему  public Meal save(Meal meal, int userId) {
+
+       if (meal.isNew()) {
+           User ref = em.getReference(User.class, userId);
+           meal.setUser(ref);
+           em.persist(meal);
+           return meal;
+       }    для Postgress работает, а когда переключаешься на Hsql  то вылетает с ошибкой?! (edited)
+
+
+18 replies
+Oleksii Leshchenko [6 hours ago]
+А какое именно сообщение обь ошибке?
+
+alexey [6 hours ago]
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: NEXTVAL
+
+
+alexey [6 hours ago]
+mentioned this image: 11.jpg
+2 Comments
+
+
+Oleksii Leshchenko [6 hours ago]
+Для Hsql надо было в настройках прописывать другой файлик инициализации БД... Скорее всего база не полностью создалась
+
+
+alexey [6 hours ago]
+остальные тесты проходит, все кроме сейва
+
+
+Yevhen Maksymovych [6 hours ago]
+судя по логу, нет сиквенса global_seq, потому и не даёт сохранить. проверь, что он создаётся
+
+Oleksii Leshchenko [6 hours ago]
+база в памяти или на диске? если на диске - подкючись и проверь, есть ли этот сиквенс
+
+
+alexey [6 hours ago]
+сиквенс же у нас привязан к id
+
+alexey [6 hours ago]
+захожу в таблицу, айдишники есть
+
+
+alexey [6 hours ago]
+или я чего то не понимаю!?
+
+
+Yevhen Maksymovych [6 hours ago]
+сиквенс не привязан к айдишникам, айдишники привязаны к сиквенсу
+
+Yevhen Maksymovych [6 hours ago]
+изначально данные добавляются с указанными ид, если ты пытаешься добавить в таблицу запись без ид, она берётся из сиквенса по правилам, которые прописаны в этом сиквенсе
+
+
+Yevhen Maksymovych [6 hours ago]
+судя по тому, что у тебя не работает сохранения, бд по какой-то причине не может сгенерировать новый ид из этого сиквенса
+
+
+Yevhen Maksymovych [6 hours ago]
+собственно, об этом она тебе и пишет в ошибках, что либо нет сиквенса, либо прав на него
+
+
+alexey [6 hours ago]
+Просто не пойму тогда где ошибка. Если другая БД правильно отрабатывает с методом save, значит дело точно не репозитории?!
+
+
+Yevhen Maksymovych [6 hours ago]
+дела в инициализации таблицы
+
+
+Yevhen Maksymovych [6 hours ago]
+покажи гит
+
+
+alexey [6 hours ago]
+https://github.com/alexey8686/topjava.git
+
+
+alexey [4:26 PM]
+uploaded this image: 11.jpg 
+
+
+Vladimir Gorbatenko [4:37 PM]
+Все переделывали 2 метода MealTestData.assertMatch чтоб не учитывалось поле "user"?
+
+Ma3stro [4:39 PM]
+Угу.
+
+qf05 [4:44 PM]
+А я правильно понимаю, что если метод помечен аннотацией Transactional, и в этом методе есть несколько операций записи в базу, то это гарантирует что либо выполнятся все операции либо ни одной.
+
+
+Vladimir Gorbatenko [Today at 4:51 PM]
+in #hw4
+Валятся тесты "updateNotFound()" и "update()". Виноват ведь "public Meal save(Meal meal, int userId)" потому что user==null. Подскажите как решить.
+
+
+2 replies
+qf05 [5 hours ago]
+я сделал с двумя запросами в базу, но на сколько это правильно пока не знаю. это всё что я смог придумать.
+
+
+Grigory Kislin [5 hours ago]
+Подсказки по HW4 п.1
+
+
+Slav [4:53 PM]
+Почему у меня вообще нет опции HSQLDB (Embeded) при выборе Data Source? Предлагаются только HSQLDB (Remote) и HSQLDB (In-memory).
+
+Viktor [4:56 PM]
+Ребята если у вас что-то падает с ошибкой, читайте ошибку и пытайтесь с ней разобраться, spring и hibernate пишут выкидывают говорливые  exception читайте и решайте. Если сами решить не смогли и гугл не помог или сломался, выкладывайте вместе с вопросом стек ошибки, тут очень мало экстрасенсов.
+
+Vladimir Gorbatenko [5:09 PM]
+added this Plain Text snippet: Из MealTestData 
+public static Meal getUpdated() {
+    Meal meal = new Meal(MEAL1_ID, MEAL1.getDateTime(), "Обновленный завтрак", 200);
+    meal.setUser(USER);
+    return meal;
+  }
+
+Vladimir Gorbatenko [5:10 PM]
+Изменил таким образом MealTestData, и тесты прошли, но вот сомневаюсь в правильности такого решения.
+
+Grigory Kislin [5:11 PM]
+commented on alexey’s file 11.jpg
+чтото с правами. гуглил?
+
+
+Aleksey Vra [Today at 5:13 PM]
+in #hw4
+ ```em.find(Meal.class, id);```
+намекните как сделать, чтоб при поиске учитывался еще и user_id.. у меня получается сначала достаю еду а потом сравниваю userID
+
+
+5 replies
+Grigory Kislin [5 hours ago]
+можно либо так либо чз NamedQuery и WHERE
+
+
+
+Ma3stro [3 hours ago]
+Я сделал getAll и сделал поиск циклом хд
+
+
+Ma3stro [3 hours ago]
+Но что-то я сомневаюсь в правильности)
+
+
+Pavel Klindziuk [1 hour ago]
+сначала достнать юзера а потом передавай его параметром в  NamedQuery
+
+
+Aleksey Vra [1 hour ago]
+это двойная работа.. 
+Григорий выше ответил, в принципе, так и сделал 2 мя выриантами, просто думал может еще проще можно, оказалось и так нормально
+
+
+Vladimir Gorbatenko [5:14 PM]
+commented on Из MealTestData
+И собственно такой save
+@Override
+   @Transactional
+   public Meal save(Meal meal, int userId) {
+       if (meal.isNew()) {
+           User user = em.getReference(User.class, userId);
+           meal.setUser(user);
+           em.persist(meal);
+           return meal;
+       } else {
+           Meal result = em.find(Meal.class, meal.getId());
+           if(result.getUser().getId() != userId) {
+               throw new NotFoundException("Not found!");
+           }
+           return em.merge(meal);
+       }
+   }
+
+alexey [6:54 PM]
+commented on 11.jpg
+гуглил, но копал в сторону сиквенса. пока не разобрался
+
+Ma3stro [7:18 PM]
+@Vladimir Gorbatenko, работа с исключениями у нас пока строго в сервисе. Не нужно их здесь кидать
+Попробуй для update сделать запрос на подобии того, что было в Jdbc реализации (edited)
+
+Pavel Klindziuk [9:04 PM]
+commented on Vladimir Gorbatenko’s snippet Из MealTestData
+на слое репозитория ты должен отдавать в  слой серисов "null", а не выбрасывать эксепшн. NotFoundException должен бросать слой сервисов.

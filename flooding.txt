@@ -363,3 +363,32 @@ Andrew Manik [10:50 AM]
 https://www.youtube.com/watch?v=fWR5SFhBUWc
 YouTubeHighLoad Channel
 Принцип экономии мыслетоплива / Максим Дорофеев (mnogosdelal.ru)
+
+
+Yevhen Maksymovych [Yesterday at 9:08 PM]
+in #flooding
+парни, а кто-то хорошо умеет в hbsql? как вот такую штуку обернуть в него:
+```SELECT * FROM offices o WHERE ? ~ o.ip_regexp OR ? = o.ip_ext```
+?
+
+
+2 replies
+Grigory Kislin [9 hours ago]
+я не встречал. решение- гуглить. если не найдешь- Criteria API либо native query
+
+
+Yevhen Maksymovych [9 hours ago]
+да, я с NativeQuery вставил, но там свой прикол вылез, почему-то объявленный через аннотацию не хочет принимать параметры, а скопированный прямо в виде запроса - проходит ок
+
+
+Yevhen Maksymovych [9:08 PM]
+вот так
+```select o from Office o where :ip like o.ipRegexp OR :ip=o.ipExt```
+не канает, говорит, "like" можно применять только к текстовому выражению, а не к столбцу\
+
+saudabaew [6:19 AM]
+круто, что на курсе мы проходим технологии по мере их развития. складывается более-менее ясная картина как все это работает и откуда ноги растут) к примеру, сначала мы вручную работали с данными, потом с помощью jdbc, сейчас подключаем ORM (edited)
+
+Tanya [6:29 AM]
+https://www.improgrammer.net/wp-content/uploads/2017/09/21764763_1465151506867056_9031583960664823835_n.jpg
+https://www.improgrammer.net/wp-content/uploads/2017/09/21764763_1465151506867056_9031583960664823835_n.jpg

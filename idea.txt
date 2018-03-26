@@ -361,3 +361,19 @@ uploaded and commented on this image: Idea_DB.png
 
 Oleksii Leshchenko [12:34 PM]
 О, разрезоливил. Нажал Alt+Enter и предложило сделать Assign DataSource.
+
+
+Aleksey Vra [Today at 5:27 PM]
+in #idea
+В каком то видео говорилось про плагин для отображения readme.md с рабочими ссылками в idea, подскажите как называется?
+Прикрепил Codacy Badge, а он не отображается, да и шрифт кривой какой то.
+
+
+2 replies
+Grigory Kislin [5 hours ago]
+я юзаю Markdown Navigator
+
+
+
+Aleksey Vra [5 hours ago]
+cпc, попробую

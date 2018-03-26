@@ -683,3 +683,28 @@ Dmitriy Kozin [8:54 AM]
 
 realcorwin [9:49 AM]
 мне больше нравятся секс, наркотик и рок'н'ролл :slightly_smiling_face:
+
+
+Andrey [9:48 PM]
+ЛЮЮЮЮДИИИИИ!!!!!!!!!!
+Помогите плиззз!
+Я в орфографии не очень, как правильно для Линуха записать:
+<property name="basenames" value="file:///# systemEnvironment['TOPJAVA_ROOT']}/config/app"/> на Винде
+<property name="basenames" value="file:///home/andrey/IdeaProjects/topjava/config/app"/> на Линухе ???
+Это код из нашего проекта, тапками не кидаццо!
+
+goodhoopoe [9:51 PM]
+в никсах в целом нет понятия file://, просто пишешь /Users/nickname/path/to/file
+у тебя будет аля /home/andrey/etc/
+
+Andrey [9:54 PM]
+т.е я просто file:// убираю из строчки?
+value="/home/andrey/IdeaProjects/topjava/config/app"/>
+
+
+goodhoopoe [9:55 PM]
+да
+
+Andrey [9:58 PM]
+Спасибо! :slightly_smiling_face:
+хоть и высветило красным путь, буду дальше пробовать.
