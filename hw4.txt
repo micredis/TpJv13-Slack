@@ -1596,3 +1596,455 @@ Ma3stro [7:18 PM]
 Pavel Klindziuk [9:04 PM]
 commented on Vladimir Gorbatenko’s snippet Из MealTestData
 на слое репозитория ты должен отдавать в  слой серисов "null", а не выбрасывать эксепшн. NotFoundException должен бросать слой сервисов.
+
+
+roma [11:17 PM]
+Ребята как только добавляю @Entity над класом мил у меня отваливаютя UserService Tests
+```Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [spring/spring-db.xml]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory```
+Почему отваливатся юзер тесты - я их класы вообще не трогал... почему не может оздать Hibernate SessionFactory? (edited)
+
+
+roma [Mar 26th at 11:24 PM]
+in #hw4
+Помогите плиз разобраться
+
+
+3 replies
+Fedor [2 days ago]
+Попробуй все остальные аннотации добавить в мил, по заданию, потом все заработает
+
+
+roma [2 days ago]
+@Fedor Все добавил вроде и поcле добавления @Entity вылетаю - мне кажется дело в этом:
+    ```@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;```
+но не уверен (edited)
+
+
+roma [2 days ago]
+Охренеть ) нашел ошибку )))) - было:
+    ```@Column(name = "description", nullable = false)
+    @NotBlank
+    private int calories;```
+
+
+saudabaew [7:43 AM]
+uploaded this image: в локал ченж обнаружил скачанный javaee.jar. Просто удалить? 
+
+This message was deleted.
+
+Reomor [1 day ago]
+причем тут я вообще?)
+
+
+Kirilo [23 hours ago]
+:slightly_smiling_face:
+
+
+Kirilo [9:38 AM]
+@saudabaew я откатывался и обновлял проект уже с боковой панельки (edited)
+
+poleg [9:39 AM]
+У меня после просмотра видео по jpa осталась кучка вопросов и непоняток. ДЗ по аналогии сделать было несложно, но вот это ощущение долбаной черной магии раздражало. Поэтому если у кого остались непонятки, рекомендую почитать вот это (ссылки есть в уроке, но если вдруг кто мимо них):
+https://easyjava.ru/data/jpa/hello-jpa-i-hibernate/
+https://easyjava.ru/data/jpa/jpa-entity-mapping/
+https://easyjava.ru/data/jpa/jpa-entitymanager-upravlyaem-sushhnostyami/
+и вообще этот раздел:
+https://easyjava.ru/category/data/jpa/
+
+Куча вопросов снялось. (edited)
+EasyJava
+Hello, JPA (и Hibernate)
+JDBC предоставляет вполне достаточный интерфейс для работы с базами данных в Java. Однако этот интерфейс весьма многословен и довольно неудобен и даже Spring JDBC не делает его сильно лучше. По сути дела проблема в том, что реляционные базы данных работают с таблицами... #h2 #helloworld #hibernate
+Mar 4th, 2016
+https://easyjava.ru/wp-content/uploads/2016/03/orm.png
+EasyJava
+JPA entity mapping
+Главное в любом ORM решении, это описать, как ваши классы (entity) отображаются (maps) на реляционные таблицы. В JPA это делается с помощью аннотаций. Как я уже писал, перед тем, как начать использовать класс в качестве JPA сущности, надо убедиться, что он соответствует... #h2 #hibernate #jpa
+Mar 18th, 2016
+https://easyjava.ru/wp-content/uploads/2016/03/operations_details.png
+EasyJava
+JPA EntityManager: управляем сущностями
+Как определять сущности и связи между ними я уже писал. Пора рассказать, как сущностями управлять. Хотя в сущности :) большую часть управления сущностями я описал в вводном примере. Фабрика Управление сущностями начинается с создания EntityManagerFactory, которая отвечает за... #h2 #hibernate #jpa
+Apr 19th, 2016
+https://easyjava.ru/wp-content/uploads/2016/04/tmp2f4191_thumb-600x398.jpg
+EasyJava
+Данные – Java Persistence API
+JPA – это технология, обеспечивающая объектно-реляционное отображение простых JAVA объектов и предоставляющая API для сохранения, получения и управления такими объектами. JPA – это спецификация (документ, утвержденный как стандарт, описывающий все аспекты технологии), часть EJB3 спецификации...
+
+Aleksey Vra [9:42 AM]
+а обязательно выставлять  @JoinColumn(name = ..) над полем User user?
+
+Kirilo [9:46 AM]
+http://qaru.site/questions/20587/jpa-joincolumn-vs-mappedby
+qaru.site
+java - JPA JoinColumn vs mappedBy - Qaru
+В чем разница между: @Entity public class Company { @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.LAZY) @JoinColumn(name = "companyIdRef", referencedColumnName = "companyId") private List<Branch> branches; ... } и
+
+Ilya [10:03 AM]
+@Aleksey Vra кстати, хороший вопрос. В ссылке выше ответа не нашел. (edited)
+
+
+Sergey [Yesterday at 10:15 AM]
+in #hw4
+Народ, доброго времени суток всем. Есть вопрос оп optional. Для вывода имени теста и затраченного времени заэкстендил StopWatch JUnit'овский. Переопределил методы, все красиво, в консоль пишет. А в лог не пишет. Смотрю по дебагу а логгер, который я пытаюсь получить в своем StopWatch классе  вот таким образом:     private final Logger log = LoggerFactory.getLogger(getClass()); - null. Не могу понять, почему он null...
+
+
+3 replies
+Aleksey Vra [1 day ago]
+сделай Logger статическим и пропиши вручную .class..
+
+
+Aleksey Vra [1 day ago]
+хотя у меня и без статик работает..
+
+
+Sergey [1 day ago]
+Победил. На самом деле просто не прописал в logback-test.xml аппендер с указанием, что в него надо  писать из ru.javawebinar.topjava
+
+
+Хэм [10:36 AM]
+возник вопрос почему бы не сделать один `@NamedQuery` на `List<Meal> getAll(int userid)` а дальше как в первом уроке уже сортировать например стримами? (edited)
+
+Ilya [10:45 AM]
+@Хэм на сколько я понимаю - фильтровать нужно на уровне БД, ибо не по понятиям грузить в хип кучу мусора.
+
+Vladimir Gorbatenko [10:50 AM]
+а разве не сегодня должно было появиться hw5?
+
+Хэм [10:57 AM]
+у меня уже чайник закипел никак не могу победить namedQuery  для BETWEEN идые ругается подскажите кто как реализовал а то в интернетах только про sql BETWEEN  а я так понимаю надо hql
+
+Хэм [12:12 PM]
+<jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
+       <jdbc:script location="classpath:db/`${jdbc.initLocation}`"/> ===> вот эта штукенция горит красным idea ругается
+       <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
+   </jdbc:initialize-database>
+
+Хэм [12:12 PM]
+`${jdbc.initLocation}`cannot resolve file (edited)
+
+Хэм [12:15 PM]
+нет его нигде
+
+Arthur [12:27 PM]
+postgres.properties у тебя в проекте есть?
+
+Хэм [12:40 PM]
+да увидел все прописано как  надо но почему то все равно горит красным :thinking_face:
+
+Arthur [12:45 PM]
+проект запускается и работает?
+
+Хэм [12:50 PM]
+postgres.properties все серое все unused
+
+Arthur [12:51 PM]
+ты в spring-db.xml ничего не менял?
+
+Fedor [12:51 PM]
+Попробуй закрыть spring-db и снова открыть, все опять станет серым
+Только не кликай по нему
+
+Хэм [12:52 PM]
+да не что мне там менять))
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:p="http://www.springframework.org/schema/p"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+      xmlns:tx="http://www.springframework.org/schema/tx"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+   <!-- Change DB by comment/uncomment property-placeholder -->
+
+   <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
+   <!--<context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>-->
+
+   <context:component-scan base-package="ru.javawebinar.**.repository.jpa"/>
+
+   <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
+       <jdbc:script location="classpath:db/${jdbc.initLocation}"/>
+       <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
+   </jdbc:initialize-database>
+
+   <!--no pooling-->
+   <bean id="dataSource"
+         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+       <property name="driverClassName" value="${database.driverClassName}"/>
+       <property name="url" value="${database.url}"/>
+       <property name="username" value="${database.username}"/>
+       <property name="password" value="${database.password}"/>
+   </bean>
+
+   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+         p:dataSource-ref="dataSource"
+         p:packagesToScan="ru.javawebinar.**.model">
+       <!--p:persistenceUnitName="persistenceUnit">-->
+
+       <property name="jpaPropertyMap">
+           <map>
+               <entry key="#{T(org.hibernate.cfg.AvailableSettings).FORMAT_SQL}" value="${hibernate.format_sql}"/>
+               <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SQL_COMMENTS}" value="${hibernate.use_sql_comments}"/>
+               <!--<entry key="#{T(org.hibernate.cfg.AvailableSettings).HBM2DDL_AUTO}" value="${hibernate.hbm2ddl.auto}"/>-->
+           </map>
+       </property>
+
+       <property name="jpaVendorAdapter">
+           <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+                 p:showSql="${jpa.showSql}">
+           </bean>
+       </property>
+   </bean>
+
+   <tx:annotation-driven/>
+
+   <!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
+   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+         p:entityManagerFactory-ref="entityManagerFactory"/>
+
+<!--
+   <context:component-scan base-package="ru.javawebinar.**.repository.jdbc"/>
+   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+       <constructor-arg ref="dataSource"/>
+   </bean>
+
+   <bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+       <constructor-arg ref="dataSource"/>
+   </bean>
+-->
+</beans>
+userservicetest работает
+просто идея тупит что ли?
+
+Arthur [12:56 PM]
+похоже на то
+
+Andrew Manik [1:12 PM]
+я просто руками путь вбил, та-же проблема, тоже не врубаюсь
+
+realcorwin [2:05 PM]
+написал же Григорий: "IDEA может ${jdbc.initLocation} подчеркивать красным - тупит..."
+немцы в таких случаях говорят: "У тех, кто умеет читать, явное преимущество". :slightly_smiling_face:
+
+Andrew Manik [2:17 PM]
+ну что поделать:) видать малость разучился:)
+
+Хэм [2:19 PM]
+да читать вещь полезная штука))
+
+roma [3:07 PM]
+Народ есть кто живой?
+
+
+roma [Yesterday at 3:08 PM]
+in #hw4
+Нужна помощь
+
+
+18 replies
+Fedor [1 day ago]
+Чем помочь?
+
+
+roma [1 day ago]
+    ```@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;```
+и
+  ```@NamedQuery(name = Meal.GET, query = "SELECT m FROM Meal m LEFT JOIN FETCH m.user WHERE m.id=:id AND m.user.id=:userId"), ````
+и
+    ```@Override
+    public Meal get(int id, int userId) {
+        Meal result = (Meal) em.createNamedQuery(Meal.GET)
+                .setParameter("id", id)
+                .setParameter("userId", userId)
+                .getSingleResult();
+    return result.getUser().getId()!=userId?null:result;
+    }при так```
+такойой реализации летит такая фигня
+ ```java.lang.AssertionError: 
+Expecting value <null> in field <"user"> but was <User{id=100001, email=admin@gmail.com, name=Admin, enabled=true, roles=[ROLE_ADMIN], caloriesPerDay=2000}> in <Meal{id=100008, dateTime=2015-06-01T14:00, description='Админ ланч', calories=510}>.
+Comparison was performed on all fields```
+(edited)
+
+
+roma [1 day ago]
+@Fedor выше вопрос
+
+
+Viktor [1 day ago]
+куда летит?
+
+roma [1 day ago]
+@Viktor ой ) исправил вопрос - то что летит в стек трейс (edited)
+
+
+Viktor [1 day ago]
+@roma что именно не понятно?
+
+roma [1 day ago]
+Не понятно почему юзер не достается и как его достать
+
+
+Viktor [1 day ago]
+юзер достается
+
+roma [1 day ago]
+запустался я совсем - это у меня что ли в тестовых данных юзера нет
+
+
+Fedor [1 day ago]
+Я не думаю что по юзеру надо сравнивать
+
+roma [1 day ago]
+Тоесть, мы в мил добавили поле юзер, а в тестовых данных его не добавили - блин я думал у меня из базы не достается юзер, а в тестовых данных он есть (edited)
+
+Fedor [1 day ago]
+Ты в UserTestData поправил два метода assertMatch, чтобы исключить юзера из сравнений?
+
+roma [1 day ago]
+нет конечно - сейчас когда догнал - начал судорожно править
+
+
+roma [1 day ago]
+спасибо
+
+roma [1 day ago]
+можно еще вопрос маленький
+
+Fedor [1 day ago]
+Вернее в MealTestData, сорри
+
+Fedor [1 day ago]
+давай
+
+roma [1 day ago]
+Снялся вопрос ) - не повторить эксепшен ))) Спасбио большое - большая часть тестов заработала - сейчас с остатками разберусь
+
+
+Artem Murk [3:34 PM]
+Всем привет, нужна помощь с update, никак не могу понять почему он не апдейтит Meal, пытаюсь сделать с помощью NamedQuery.
+    ```@Transactional
+    public Meal save(Meal meal, int userId) {
+
+        if (meal.isNew()){
+            User user = em.getReference(User.class, userId);
+            meal.setUser(user);
+            em.persist(meal);
+            return meal;
+        } else {
+            if (em.createNamedQuery(Meal.UPDATE)
+                    .setParameter("meal",meal )
+                    .setParameter("mealId" ,meal.getId() )
+                    .setParameter("userId" ,userId ).executeUpdate() !=0) {
+                return meal;
+            }
+        }
+        return null;
+    }```
+в jpaRepo.
+        ```@NamedQuery(name = Meal.UPDATE, query = "UPDATE Meal m SET m=:meal WHERE m.id=:mealId AND m.user.id=:userId"),```
+мой query в Meal. Хелп!
+
+
+Artem Murk [Yesterday at 3:37 PM]
+in #hw4
+метод get возвращает старое значение, новое значение в базу не заноситься, хотя ошибки не вылетает, в if-е условие не равно нулю, тест на NotFoundException проходит нормально
+
+
+11 replies
+Aleksey Vra [1 day ago]
+у меня что то похожее было..
+записывал meal не полностью а по полям
+SET m.discription=:discription
+
+
+Artem Murk [1 day ago]
+пытался так сделать, ругается на AND. WTF?
+
+
+Artem Murk [1 day ago]
+@Aleksey Vra
+
+
+Aleksey Vra [1 day ago]
+а запятая если? точно помню что поля записывал по-отдельности, открыть проект сейчас не могу посмотреть
+
+
+Artem Murk [1 day ago]
+точно, голова уже не варит как их связать....
+
+Aleksey Vra [1 day ago]
+HQL по сути как SQL только проще)
+
+Artem Murk [1 day ago]
+Если знаешь нормально SQL, то наверное ты прав, хотя ничего не подвижного не вижу, время улетает в трубу на изучение нового материала, а на носу 5 урок и выпускной проект...
+
+
+Artem Murk [1 day ago]
+ура, прощло
+
+
+Artem Murk [1 day ago]
+@Aleksey Vra спасибо)
+
+Pavel Klindziuk [1 day ago]
+можно и без неймед квери апдейтнуть :
+if (null != meal.getUser() && meal.getUser().getId() == userId) {
+           return em.merge(meal); (edited)
+
+
+Aleksey Vra [1 day ago]
+@Pavel Klindziuk а разве проверку не так надо делать? 
+if (null != meal && ...)
+ведь find может вернуть null и meal.getUser() выдаст NPE
+
+
+roma [4:43 PM]
+    ```@Transactional
+    public Meal save(Meal meal, int userId)
+    {
+        if (meal.isNew()) {
+            em.persist(meal);
+            return meal;
+        } else {
+            return (meal.getUser().getId()!=userId)?null: em.merge(meal);
+        }
+    }```
+и получаю:
+```org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction```
+
+Oleksii Leshchenko [1 day ago]
+meal.getId()!=userId
+ты сравниваешь разные айдишники, от разных энтити... Они никогда не будут равны, тем более у нас один сиквенс на всех...
+
+
+roma [1 day ago]
+@Oleksii Leshchenko согласен косяк адский но если сделать так вылетает с тем же эксепшеном
+    ```@Transactional
+    public Meal save(Meal meal, int userId)
+    {
+        if (meal.isNew()) {
+            em.persist(meal);
+            return meal;
+        } else {
+            return (meal.getUser().getId()!=userId)?null: em.merge(meal);
+        }
+    }```
+(edited)
+
+
+Oleksii Leshchenko [1 day ago]
+а можно все сообщение со стеком целиком?
+
+
+Pavel Klindziuk [1 day ago]
+Ты пытаешься замапить Meal у которого поле user : null
+Один из способов пофиксить :
+User user = em.getReference(User.class, userId);
+           meal.setUser(user);

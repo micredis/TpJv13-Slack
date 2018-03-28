@@ -3431,3 +3431,63 @@ https://stackoverflow.com/a/3180202
 stackoverflow.com
 How to avoid Java code in JSP files?
 I'm new to Java EE and I know that something like the following three lines <%= x+1 %> <%= request.getParameter("name") %> <%! counter++; %> is an old school way of coding and i...
+
+
+eageev [1:37 PM]
+Делаю рефакторинг HW0 согласно видео 1го урока. Нашел NPE. Для того, чтобы его не было нужен containsKey:
+mealsExceeded.add(new UserMealWithExceed(dateTime, meal.getDescription(), meal.getCalories(),
+   caloriesSumPerDay.containsKey(curDate) && caloriesSumPerDay.get(curDate) > caloriesPerDay)
+);
+
+vch [1:43 PM]
+@eageev Т.е. у тебя реально вылетает NPE при каких-то входных данных?
+
+eageev [1:45 PM]
+если даты не будет во вспомогательной мапе, приложение упадет. поправьте в патче.
+Элементарно. Комментируем одну строку кода - добавление в мап и получаем NPE:
+
+
+eageev [Mar 27th at 1:47 PM]
+in #hw1
+final Map<LocalDate, Integer> caloriesSumByDate = new HashMap<>();
+       //meals.forEach(meal -> caloriesSumByDate.merge(meal.getDate(), meal.getCalories(), Integer::sum));
+
+       final List<MealWithExceed> mealsWithExceeded = new ArrayList<>();
+       meals.forEach(meal -> {
+           if (TimeUtil.isBetween(meal.getTime(), startTime, endTime)) {
+               mealsWithExceeded.add(createWithExceed(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay));
+           }
+       });
+
+
+1 reply
+Grigory Kislin [1 day ago]
+не нужно. как же она может не быть в мапе??
+
+
+eageev [Mar 27th at 5:43 PM]
+in #hw1
+По HW1 2 вопроса:
+1. Почему не работает чрз <javatime:parseLocalDateTime value="${date}" pattern="yyyy-MM-dd" var="parsedDate" /> ?
+2. Почему удаление работает в CopyOnWriteArrayList, но не работает просто с ArrayList? Односложный ответ, что в 1м случае либа concurrent не подойдет - это я знаю.
+
+
+5 replies
+goodhoopoe [1 day ago]
+по 2. CopyOnWriteArrayList создаёт новую копию списка каждый раз, когда выполняется модифицирующая операция, и гарантируется, что её итераторы возвращают состояние списка на момент, когда итератор был сконструирован и не выкинут ConcurrentModificationException. Нет необходимости клонировать список до перебора или блокировать его во время перебора, потому что копия списка, которую видит итератор, не будет изменяться. Другими словами, CopyOnWriteArrayList содержит изменяемую ссылку на неизменяемый массив, поэтому до тех пор, пока эта ссылка остаётся фиксированной, вы получаете все преимущества потокобезопасности от неизменности без необходимости блокировок.
+
+
+goodhoopoe [1 day ago]
+все очевидно же
+
+
+eageev [1 day ago]
+Ок. 1000 и 1 раз проходил ArrayList итератором и делал remove любого элемента. И проблем не было. Только сегодня в сервлете. Надеюсь, вы в курсе, что только итератор позволяет так делать.
+
+
+Alex [10 hours ago]
+Один инстанс Эрррэйлиста в разных потоках без синхронизации?  Да даже в двух потоках экзепшн вылетает. Суть листа в безопасном использовании многими потоками одновременно, чего не обеспечивает эррэйлист (edited)
+
+
+eageev [6 hours ago]
+Ну на сервлет я тоже не заходил с 2х юзеров одновременно. Потоки тоже не создаю. Так что странно.

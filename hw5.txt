@@ -1,0 +1,42 @@
+Grigory Kislin [2:51 PM]
+joined #hw5.
+
+Grigory Kislin [2:53 PM]
+пятое занятие: заканчиваем с DB.
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson05.md
+на следующем занятии 10.04 начинается web (edited)
+
+tema.emelyan [2:55 PM]
+joined #hw5 along with 18 others.
+
+Arthur [10:43 PM]
+Всем привет! 
+Кто-нибудь уже смотрел новые темы и накатывал патчи?
+Меня интересует: выбор spring профиля, а точнее говоря - как IDEA реагирует на выбор того или иного профиля? Есть ли какая-нибудь подсветка активного и неактивного профиля. 
+Лично у меня IDEA никак в плане подсветки кода не реагирует на смену профиля.
+(флажок в настройках выставлен) (edited)
+
+Dmitry Neustupov [11:01 PM]
+@Arthur
+Аналогично, никакой реакции.
+
+Arthur [11:01 PM]
+ok
+
+Andrew Manik [4:50 PM]
+Для корректного отображения неактивного профиля в IDEA проверьте флаг Inactive profile highlighting и сделайте проекту clean
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson05.md
+doc/lesson05.md
+```
+# Онлайн проект <a href="https://github.com/JavaWebinar/topjava">Topjava</a>
+
+## <a href="https://drive.google.com/drive/folders/0B9Ye2auQ_NsFfmctT3oyNW1qaVhDb2p0bGpyTFVlaUJ2VVpOdVgtWF9KTUFBMWFaR2xVYVE">Материалы занятия</a>
+### ![error](https://cloud.githubusercontent.com/assets/13649199/13672935/ef09ec1e-e6e7-11e5-9f79-d1641c05cbe6.png) Правки в проекте
+
+#### Apply 5_0_fix.patch
+> Удалил из зависимостей commons-logging: [Spring Framework 5.0 comes with its own Commons Logging bridge](https://github.com/spring-projects/spring-framework/wiki/What's-New-in-Spring-Framework-5.x#general-core-revision)
+
+## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593… Show more
+
+JavaWebinar/topjava
+Added by GitHub

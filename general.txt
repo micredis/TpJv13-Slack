@@ -3904,3 +3904,371 @@ Viktor [23 hours ago]
 
 Yevhen Maksymovych [12:39 PM]
 коллеги, кто-то сталкивался с тем, что запросы, объявленные через @NamedNativeQuery не хотят принимать параметры, а при копировании текста того же запроса в .createNativeQuery(query).setParameter() - все проходит как по маслу? (edited)
+
+
+Ilya [3:23 AM]
+hw5 еще не кидали ? По расписанию вроде должны были...
+
+Ilya [6:43 AM]
+@Grigory Kislin можно, пожалуйста, вопрос - мы сделали transfer object MealWithExceed и НЕ наследовали его от AbstractNamedEntity или Meal, а создали с нуля - т.е. это грамотная практика, чтобы не быть зависимым от предков и прочего? Спасибо!
+
+Ma3stro [8:09 AM]
+@Ilya, MealWithExceed не относится к пакету model и не фигурирует в БД (!), поэтому, полагаю, так и должно быть:)
+
+Ilya [9:01 AM]
+@Ma3stro это само собой - мы пилили ( как я понял ) transfer object MealWithExceed , дабы уменьшить колличество колов между слоями. Просто стало интересно, если бы я TO в данном случае пилил, и наследовал его от того же Meal, то меня бы за это покарали ? В общем, люблю задавать глупые вопросы для полного понимания, дабы не давать глупые ответы в будущем)
+
+Aleksey Vra [9:09 AM]
+у эккеля помню прочитал и запомнил, - наследовать только в том случае, если класс наследник является классом родителя..
+MealWithExceed является утилитным классом, функция которого - сквозная фильтрация.. наследовать неверно
+
+Ilya [9:15 AM]
+@Aleksey Vra Спасибо!
+
+Yevhen Maksymovych [10:00 AM]
+коллеги, а нам следующий урок вроде обещали 27-го или я что-то путаю?
+
+Aleksey Vra [10:09 AM]
+верно, я тоже жду, распланировал дела, чтоб пораньше приступить.. хотелось бы получить информацию по след уроку
+
+eageev [11:04 AM]
+Доброе утро) Отправил Григорию норм кол-во тестовых заданий на любой вкус, он выложил в папке "от Дмитрия Донского" (псевдоним). Также отправил ему неск-ко книг по Java.
+
+Jan [11:10 AM]
+А где эти задания можно посмотреть ?
+
+
+Ma3stro [Yesterday at 11:16 AM]
+in #general
+@eageev, да, можно посмотреть?
+
+
+1 reply
+eageev [1 day ago]
+Вот непосредственно на мою папку ссылка: https://drive.google.com/drive/folders/1dYE4dex148tNTgi2icmhy1pe_d-Zn388
+
+
+tema.emelyan [11:19 AM]
+https://drive.google.com/drive/folders/0B1TmSF1-jkXyZU9EeldnOWNlalk
+
+realcorwin [2:14 PM]
+@eageev а книжки где?
+видео по 5 неделе и патчи у выложены
+https://drive.google.com/drive/folders/0B9Ye2auQ_NsFfmctT3oyNW1qaVhDb2p0bGpyTFVlaUJ2VVpOdVgtWF9KTUFBMWFaR2xVYVE
+
+Mikhail Makar [2:17 PM]
+а канал уже создан?
+
+realcorwin [2:18 PM]
+не-а. и на гите ещё нет
+
+
+Grigory Kislin [2:55 PM]
+@here
+*Занятие 5: #hw5*
+канал создан, на github выложил
+напомню, 6е занятие будет 10.04
+
+
+eageev [Mar 27th at 10:43 PM]
+in #general
+Друзья, у кого есть какие идеи насчет трудоустройства, предлагайте, не стесняйтесь:) Я пишу на Java не из любви к искусству. В 2015м я начал ее изучать чтобы получить возможность зарабатывать хорошие деньги. И, может быть, уехать на работу за границу.. Кстати, некоторые Java-сообщества зовут постоянно в Лондон на пиццу)
+
+
+6 replies
+mrLanu [1 day ago]
+Понятие хороших денег у всех разное. С 2015 года это уже каким "монстром" надо быть:)
+
+
+dustnfox [1 day ago]
+Мне кажется, прежде всего должен быть passion. И от этого уже плясать. Иначе все очень быстро надоест. А деньги приду вслед за этим.
+
+
+
+mrLanu [1 day ago]
+Я полностью согласен:)
+
+
+Tanya [20 hours ago]
+Зарубежные компании берут, если опыт и рекомендации есть, ну или хотя бы визу не надо делать.
+А так маловероятно, чтобы джуну визу рабочую делали.
+На пиццу тоже могу пригласить :slightly_smiling_face:
+Будете у нас ~на Колыме~ в Ванкувере - милости просим! (с) угощу пиццей, даже с пивом :wink: (edited)
+
+
+mrLanu [20 hours ago]
+Я бы к примеру, за границу работать не хотел, там прогеры бедные люди 80к в год, - 30% налоги:)
+
+
+aleksey [10 hours ago]
+А тебя и не возьмут :grinning:
+
+
+Grigory Kislin [Mar 27th at 10:57 PM]
+in #general
+@eageev те ты не бескорыстно в java пошел:)? не за идею..
+в группе javaops есть канал #vacations/ туда если чтото подворачивается пишем
+
+
+2 replies
+tema.emelyan [20 hours ago]
+#vacancies
+
+
+eageev [6 hours ago]
+Капитализм не позволяет быть бескорыстным:) При социализме поддерживать идеи ради идеи можно было..
+
+
+Grigory Kislin [10:59 PM]
+@here
+я до 05.04 буду в инете с оказией (не в городе)
+поэтому пожалуйста обращайтесь к @Tanya и @Katherine по всем вопросам
+я по возможности буду тоже отвечать
+
+
+Yevhen Maksymovych [Yesterday at 7:41 AM]
+in #general
+ребят, уже голову сломал, но не выходит каменный цветок: через $.ajax() передаю данные в пост, приходят в кривой кодировке. уже везде, где только можно указал utf-8 - в странице, в контентТайпе в аякс-запросе, в реквесте сервлета, и даже в строке, где json вычитываю из реквеста, один хрен, приходят кракозябры на сервер, а обратно всё приходит в нормальном UTF-8.
+
+
+29 replies
+Ilya [16 hours ago]
+в сервлете в самом начале указал ?
+
+
+Yevhen Maksymovych [16 hours ago]
+конечно
+
+
+Yevhen Maksymovych [16 hours ago]
+везде указал...
+        ```req.setCharacterEncoding("UTF-8");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(req.getInputStream(), Charset.forName("UTF-8")));
+        String jsonStr = "";
+        if (reader != null) {
+            jsonStr = reader.readLine();
+        }
+        log.debug("jsonStr {}", jsonStr);```
+
+
+Yevhen Maksymovych [16 hours ago]
+в самом скрипте:
+```$('#test_input').on('input', function (e) {
+    $.ajax({
+        type: 'POST',
+        url: 'search',
+        dataType: 'json',
+        contentType: 'application/json;charset=UTF-8',```
+
+
+Yevhen Maksymovych [16 hours ago]
+и в jsp - аж дважды
+```<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>```
+
+
+Yevhen Maksymovych [16 hours ago]
+уже даже не представляю, где ещё можно указать, приходит в посте все равно получаю
+```07:35:35.393 DEBUG ua.dp.rundot.armps.web.WebServlet.doPost:46 - jsonStr Р°Р±РІРіРґ```
+
+
+dustnfox [16 hours ago]
+А ты где это смотришь? Я имею в виду, что за tool? Судя по кракозябрам приходит utf8 а его пытаются отображать как cp1251. Может проблема не в том, что летает между слоями, а в том кто пытается отображать?
+
+Yevhen Maksymovych [16 hours ago]
+на стороне сервера просто логером стандартным
+
+
+dustnfox [16 hours ago]
+Строка указанная выше из IDEA скопирована ?
+
+
+Yevhen Maksymovych [16 hours ago]
+агп
+
+
+Yevhen Maksymovych [16 hours ago]
+ага
+
+Yevhen Maksymovych [16 hours ago]
+кодировка проекта тоже везде выставлена утф-8, если что
+
+
+dustnfox [16 hours ago]
+Странно. Судя по паттерн в том, что ты прислал codepage явно двухбайтный, просто отображают его неправильно. Попробуй ради интереса в эту консоль вывести заведомо юникодный символ.  На stackoverflow советуют что-то типа: System.out.println("\u0394"); prints Greek Character Delta, Δ
+Если отобразится корректно, тогда проблемы все же в коде, если нет - в IDE (edited)
+
+
+Yevhen Maksymovych [13 hours ago]
+блин, уже вообще мозги кипят
+
+
+Yevhen Maksymovych [13 hours ago]
+обратно всё приходит великолепно, а на сервере - не могу получить данные
+
+
+Yevhen Maksymovych [13 hours ago]
+не могу понять, где именно всё ломается
+
+goodhoopoe [12 hours ago]
+было такое в тестовом задании, никак не мог победить, кроме одного способа
+
+goodhoopoe [12 hours ago]
+в web-xml в самом верху прописал такой блок
+
+goodhoopoe [12 hours ago]
+<filter>
+        <filter-name>encoding-filter</filter-name>
+        <filter-class>
+            org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+
+goodhoopoe [12 hours ago]
+тоже на стыке cp1251 и utf проблема была, только это помогло починить (edited)
+
+
+Yevhen Maksymovych [12 hours ago]
+короче, полная мистика - у меня в разных классах разный вывод
+
+Yevhen Maksymovych [12 hours ago]
+делаю тестовый класс:
+
+Yevhen Maksymovych [12 hours ago]
+```LogFactory.getLog(PopulateGenerator.class).debug("\u0394");```
+- выводит дельту
+
+Yevhen Maksymovych [12 hours ago]
+то же самое в сервлете - выводит кракозябру
+
+
+goodhoopoe [12 hours ago]
+а мой способ в итоге тоже не помог?
+
+Yevhen Maksymovych [12 hours ago]
+неа, у меня жсп обычный, через спринг не гоняется
+
+Yevhen Maksymovych [12 hours ago]
+о, идея, буду выдавать в спринг вью
+
+Yevhen Maksymovych [10 hours ago]
+короче, долбился-долбился, менял кодировку в файлах идеи, в итоге пересоздал проект, скопировал исходники из старого, и всё чудом заработало
+
+Grigory Kislin [7 minutes ago]
+мы с кодировкой будем бороться
+а это делал:
+https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%92%D1%8B%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%BA%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D1%83-utf-8-%D0%B2-%D0%BA%D0%BE%D0%BD%D1%81%D0%BE%D0%BB%D0%B8 ? (edited)
+
+
+Yevhen Maksymovych [7:41 AM]
+где ещё можно эту чёртову кодировку прописать?
+
+Valery.Shkerdin [8:44 AM]
+@Yevhen Maksymovych в pom еще можно явно указать
+
+
+Oleksii Leshchenko [Yesterday at 11:05 AM]
+in #general
+Все таки пока все еще не понятно про hashCode/equals.
+https://stackoverflow.com/questions/5031614/the-jpa-hashcode-equals-dilemma
+Эта статья не сильно проливает свет. В вопросе среди предложенных вариантов нет идеального на все случаи. По крайней мере в первых 2х ответах тоже нет решения на все случаи... И в первом ответе рекомендуется для исправления проблемы вообще генерировать Id самому, а не полагаться на Hibernate. 
+Как быть? (edited)
+
+
+1 reply
+Grigory Kislin [7 minutes ago]
+принять, что однозначных ответов нет
+
+
+Oleksii Leshchenko [11:27 AM]
+added and commented on this Java snippet: Untitled 
+meal.setUser(em.getReference(User.class, userId));
+    if (meal.isNew()) {
+      em.persist(meal);
+      return meal;
+    } else {
+      return em.merge(meal);
+    }
+Collapse 
+Ради интереса, в этом куске кода можно вместо *persist* также использовать *merge*? И возвращать то, что вернет merge, а не исходный meal....
+Oleksii Leshchenko [11:39 AM]
+Попробывал вместо всего того блока кода поставить только это:
+`return em.merge(meal);`
+Все тесты прошли, кроме create - энтитти было без Id. Точнее в БД запись попала как надо с Id, но service.getAll(USER_ID) вернул запись с Id=null, а остальные поля заполнены...
+
+Oleksii Leshchenko [12:49 PM]
+Я смотрю, теперь у меня из IDE профиль меняется в 2х местах после применения патча Apply 5_5_profiles_connection_pool.patch.
+Один checkbox в профилях Мавена, как и положено. И еще один подгружается при открытие Спринг контекста  - появляется ссылочка Change profile...
+
+Arthur [1:00 PM]
+все верно
+
+Oleksii Leshchenko [1:04 PM]
+У нас для тестов профайл выбирается @ActivePrifile... 
+А при сборке проекта через Мавен из командной строки как задать какой профайл?
+ну кроме как этого в pom:
+<activation>
+               <activeByDefault>true</activeByDefault>
+</activation>
+
+Arthur [1:05 PM]
+mvn -P hsqldb test (edited)
+это включение профиля hsqldb
+
+tema.emelyan [2:48 PM]
+вот мануал хороший по профилям в мавене, там можно включать профили по переменным окружения, чз параметры в терминале, в зависимости от ос и ещё какие-то варианты. почитайте если интересно http://maven.apache.org/guides/introduction/introduction-to-profiles.html
+
+
+Yevhen Maksymovych [Yesterday at 5:50 PM]
+in #general
+ребят, никто не сталкивался с таким? выпадает из classpath'а webapp. вот всё работает, потом в очередной раз редеплю - все, 404 на всех сервлетах. внутрь сервлета попадаю, но .getRequestDispatcher("....jsp") не фурычит, просто не видит ничего в webapp
+
+
+3 replies
+eageev [4 hours ago]
+Какие команды юзаешь для сборки? Мож быть некорректные? Что собирается в итоге? Как деплоишь? Уверен, данная проблема не оч сложная и легко решается если все проверить.
+
+
+eageev [4 hours ago]
+Даже если генерить готовый варник и закидывать сразу на сервер, как это делаю я, всегда можно его открыть и посмотреть, что внутри.
+
+
+Grigory Kislin [1 minute ago]
+посмотри- может лишние процессы java запущены. их поубивать надо. проверяется еще по url при незапущенном приложении
+
+
+Yevhen Maksymovych [5:52 PM]
+вот реально никакой закономерности - несколько раз подряд clean-deploy - начинает работать
+
+
+eageev [Yesterday at 8:06 PM]
+in #general
+Как в Идее диаграмму зависимостей Maven увидеть? Какой-то плагин ставить надо? Или просто в Ultimate стоит?
+
+
+1 reply
+Alex83 [3 hours ago]
+ctrl+alt+shift+u
+
+
+Alex83 [9:35 PM]
+или так
+
+Alex83 [9:35 PM]
+uploaded this image: image.png 
+
+
+Grigory Kislin [12:05 AM]
+плагин при этом вроде нужен какойто стандартный. UML вроде
