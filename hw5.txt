@@ -40,3 +40,275 @@ doc/lesson05.md
 
 JavaWebinar/topjava
 Added by GitHub
+
+
+saudabaew [9:35 AM]
+кто понял о чем патч 5_2_fix_hibernate_issue?
+
+Vladimir Gorbatenko [11:25 AM]
+Накатил все патчи с изучением того что происходит, всквозную прочел статьи в описании патчей... Это же капец, у нас получается калькулятор с использованием нанотехнологий. Надо еще видео посмотреть. Афигеть какой огромный объем информации, это же как все запоминать??? Читаешь статьи и прозреваешь сколько всего люди знают...
+
+tema.emelyan [11:31 AM]
+недавно прочитал прикольную фразу: когда читаешь статьи в интернете, важно помнить, что не все они написаны одним человеком :smiley:
+
+Oleksii Leshchenko [11:31 AM]
+Все сразу читать не обязательно
+
+tema.emelyan [11:31 AM]
+по-моему очень точно в тему импостер синдрома
+
+Vladimir Gorbatenko [11:48 AM]
+Вот это (Самый быстрый пул соединений на java (читаем комменты)) особенно понравилось, прочел начало статьи и пошел читать комменты, где развели дикий срачь про хикари это таки быстро и не может этого быть ))
+https://habrahabr.ru/post/269023/ (edited)
+
+
+poleg [Today at 12:55 PM]
+in #hw5
+Для переключения на HSQLDB необходимо:
+поменять в окне Maven Projects профиль (Profiles) на hsqldb и сделать Reimport All Maven Projects (1я кнопка)
+поменять Profiles.ACTIVE_DB = HSQLDB
+почистить проект mvn clean (фаза clean не выполняется автоматически, чтобы каждый раз не перекомпилировать весь проект)
+
+Все сделал, тесты валятся с ошибкой
+java.lang.IllegalStateException: Failed to load ApplicationContext at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125)
+
+При переключении на постгрес все ок. Что я делаю не так?
+
+
+1 reply
+Oleksii Leshchenko [2 hours ago]
+А можно полное сообщение об ошибке, весь стэк?
+
+
+poleg [1:00 PM]
+added this Plain Text snippet: Untitled 
+12:59:25.462 ERROR o.springframework.test.context.TestContextManager.prepareTestInstance:246 - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@543e710e] to prepare test instance [ru.javawebinar.topjava.service.MealServiceTest@4b200971]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+  at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125)
+  at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:107)
+  at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+  at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+  at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:242)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+  at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+  at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+  at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+  at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+  at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+  at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+  at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+  at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+  at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+  at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+  at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+  at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+  at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+  at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+  at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.jdbc.datasource.init.DataSourceInitializer#0': Invocation of init method failed; nested exception is org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #5 of class path resource [db/initDB.sql]: CREATE SEQUENCE global_seq START 100000; nested exception is java.sql.SQLSyntaxErrorException: unexpected token: 100000 required: WITH
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1710)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:583)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:502)
+  at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:312)
+  at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+  at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310)
+  at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+  at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:760)
+  at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:868)
+  at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+  at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:128)
+  at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+  at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:107)
+  at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+  at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+  at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+  ... 25 common frames omitted
+Caused by: org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #5 of class path resource [db/initDB.sql]: CREATE SEQUENCE global_seq START 100000; nested exception is java.sql.SQLSyntaxErrorException: unexpected token: 100000 required: WITH
+  at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:492)
+  at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:240)
+  at org.springframework.jdbc.datasource.init.CompositeDatabasePopulator.populate(CompositeDatabasePopulator.java:87)
+  at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:48)
+  at org.springframework.jdbc.datasource.init.DataSourceInitializer.execute(DataSourceInitializer.java:111)
+  at org.springframework.jdbc.datasource.init.DataSourceInitializer.afterPropertiesSet(DataSourceInitializer.java:96)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1769)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1706)
+  ... 40 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: unexpected token: 100000 required: WITH
+  at org.hsqldb.jdbc.JDBCUtil.sqlException(Unknown Source)
+  at org.hsqldb.jdbc.JDBCUtil.sqlException(Unknown Source)
+  at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+  at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+  at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:471)
+  ... 47 common frames omitted
+Caused by: org.hsqldb.HsqlException: unexpected token: 100000 required: WITH
+  at org.hsqldb.error.Error.parseError(Unknown Source)
+  at org.hsqldb.ParserBase.unexpectedTokenRequire(Unknown Source)
+  at org.hsqldb.ParserBase.readThis(Unknown Source)
+  at org.hsqldb.ParserTable.readSequenceOptions(Unknown Source)
+  at org.hsqldb.ParserDDL.compileCreateSequence(Unknown Source)
+  at org.hsqldb.ParserDDL.compileCreate(Unknown Source)
+  at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+  at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+  at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+  at org.hsqldb.Session.execute(Unknown Source)
+  ... 50 common frames omitted
+java.lang.IllegalStateException: Failed to load ApplicationContext
+  at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125)
+  at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:107)
+  at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+  at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+  at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:242)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+  at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+  at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+  at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+  at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+  at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+  at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+  at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+  at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+  at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+  at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+  at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+  at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+  at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+  at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+  at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.jdbc.datasource.init.DataSourceInitializer#0': Invocation of init method failed; nested exception is org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #5 of class path resource [db/initDB.sql]: CREATE SEQUENCE global_seq START 100000; nested exception is java.sql.SQLSyntaxErrorException: unexpected token: 100000 required: WITH
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1710)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:583)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:502)
+  at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:312)
+  at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+  at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310)
+  at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+  at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:760)
+  at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:868)
+  at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+  at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:128)
+  at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+  at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:107)
+  at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+  at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+  at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+  ... 25 more
+Caused by: org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #5 of class path resource [db/initDB.sql]: CREATE SEQUENCE global_seq START 100000; nested exception is java.sql.SQLSyntaxErrorException: unexpected token: 100000 required: WITH
+  at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:492)
+  at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:240)
+  at org.springframework.jdbc.datasource.init.CompositeDatabasePopulator.populate(CompositeDatabasePopulator.java:87)
+  at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:48)
+  at org.springframework.jdbc.datasource.init.DataSourceInitializer.execute(DataSourceInitializer.java:111)
+  at org.springframework.jdbc.datasource.init.DataSourceInitializer.afterPropertiesSet(DataSourceInitializer.java:96)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1769)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1706)
+  ... 40 more
+Caused by: java.sql.SQLSyntaxErrorException: unexpected token: 100000 required: WITH
+  at org.hsqldb.jdbc.JDBCUtil.sqlException(Unknown Source)
+  at org.hsqldb.jdbc.JDBCUtil.sqlException(Unknown Source)
+  at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+  at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+  at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:471)
+  ... 47 more
+Caused by: org.hsqldb.HsqlException: unexpected token: 100000 required: WITH
+  at org.hsqldb.error.Error.parseError(Unknown Source)
+  at org.hsqldb.ParserBase.unexpectedTokenRequire(Unknown Source)
+  at org.hsqldb.ParserBase.readThis(Unknown Source)
+  at org.hsqldb.ParserTable.readSequenceOptions(Unknown Source)
+  at org.hsqldb.ParserDDL.compileCreateSequence(Unknown Source)
+  at org.hsqldb.ParserDDL.compileCreate(Unknown Source)
+  at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+  at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+  at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+  at org.hsqldb.Session.execute(Unknown Source)
+  ... 50 more
+Collapse 
+ This snippet was truncated for display; see it in full
+poleg [1:02 PM]
+Хм ругается на java.sql.SQLSyntaxErrorException: unexpected token: 100000 required: WITH
+
+
+Oleksii Leshchenko [1:06 PM]
+Оно пытается применить db/initDB.sql. Там для HSQLDB был другой скрипт
+
+
+poleg [Today at 1:07 PM]
+in #hw5
+Так я ж ничего не менял. Я тоже вижу теперь что он initDB.sql берет вместо initDB_hsql.sql
+
+
+2 replies
+Oleksii Leshchenko [2 hours ago]
+Попробуй clean и Reimport maven projects поменять местами. Т.е. вначале сделать clean
+
+
+poleg [2 hours ago]
+Уже. В разных комбинациях. Все равно ошибка. (edited)
+
+
+poleg [1:08 PM]
+Но:
+   <beans profile="hsqldb">
+       <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
+А в hsqldb.properties:
+jdbc.initLocation=initDB_hsql.sql
+
+qf05 [1:27 PM]
+А кто с такой ошибкой сталкивался?
+Caused by: java.lang.ClassNotFoundException: com.sun.xml.internal.bind.v2.ContextFactory
+
+qf05 [1:53 PM]
+Вроде с этой ошибкой разобрался, это из-за 9 джавы ему нужны ещё com.sun.xml.bind зависимости...
+но теперь вылазит такое : Caused by: java.lang.ClassNotFoundException: javax.activation.DataSource
+причем ругается на entityManagerFactory:
+
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [spring/spring-db.xml]: Cannot create inner bean 'org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter#25b2cfcb' of type [org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter] while setting bean property 'jpaVendorAdapter'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter#25b2cfcb' defined in class path resource [spring/spring-db.xml]: Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.config.internalCacheAdvisor': Cannot resolve reference to bean 'org.springframework.cache.annotation.AnnotationCacheOperationSource#0' while setting bean property 'cacheOperationSource'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.AnnotationCacheOperationSource#0': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.config.internalJCacheAdvisor': Cannot resolve reference to bean 'org.springframework.cache.jcache.interceptor.DefaultJCacheOperationSource#0' while setting bean property 'cacheOperationSource'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.jcache.interceptor.DefaultJCacheOperationSource#0': Cannot resolve reference to bean 'ehCacheManager' while setting bean property 'cacheManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ehCacheManager' defined in class path resource [spring/spring-tools.xml]: Cannot create inner bean 'org.springframework.cache.jcache.JCacheManagerFactoryBean#58be6e8' of type [org.springframework.cache.jcache.JCacheManagerFactoryBean] while setting bean property 'cacheManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.jcache.JCacheManagerFactoryBean#58be6e8' defined in class path resource [spring/spring-tools.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/activation/DataSource
+
+Вот что с эти делать?
+
+
+qf05 [Today at 2:05 PM]
+in #hw5
+добавил ещё зависимость javax.activation, теперь тесты запускаются, но получаю пачку WARN сообщений, это нормально?
+
+
+7 replies
+Oleksii Leshchenko [1 hour ago]
+а что за сообщения?
+
+
+qf05 [1 hour ago]
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.sun.xml.bind.v2.runtime.reflect.opt.Injector (file:/C:/Users/Пользователь/.m2/repository/com/sun/xml/bind/jaxb-impl/2.3.0/jaxb-impl-2.3.0.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int)
+WARNING: Please consider reporting this to the maintainers of com.sun.xml.bind.v2.runtime.reflect.opt.Injector
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+
+
+Oleksii Leshchenko [1 hour ago]
+не знаю. наверное не очень хорошо. скорее всего это относится к Java 9...
+
+
+qf05 [1 hour ago]
+у меня есть подозрение сто причина в пути к папке .m2 , но как её переместить в другое место незнаю(
+
+
+Oleksii Leshchenko [1 hour ago]
+В настройках Idea ищи по Maven
+
+
+Oleksii Leshchenko [1 hour ago]
+там будет или сама папка или конфиг файл, в котором прописана папка... не помню )
+
+
+qf05 [1 hour ago]
+ок, спасибо
