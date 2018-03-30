@@ -312,3 +312,278 @@ Oleksii Leshchenko [1 hour ago]
 
 qf05 [1 hour ago]
 ок, спасибо
+
+
+qf05 [21 hours ago]
+перемещение папки .m2 не помогло(
+
+
+Vladimir Gorbatenko [Yesterday at 4:29 PM]
+in #hw5
+У всех в DataJpaMealRepositoryImpl так:
+public Meal save(Meal Meal, int userId)
+имя переменной написано с большой буквы?
+
+
+1 reply
+Oleksii Leshchenko [23 hours ago]
+Да. Это ошибка....
+
+
+Oleksii Leshchenko [Yesterday at 7:27 PM]
+in #hw5
+Это нормально, что DataJpaMealRepositoryImpl содержит 2 репозитория: CrudMealRepository и CrudUserRepository ?
+CrudUserRepository - чтобы найти юзера перед созданием/сохранением еды....
+
+
+1 reply
+qf05 [19 hours ago]
+Как раз тоже сижу над этим и думаю, наверное норм. Возможно ещё и DataUser.. надо будет второй интерфейс добавлять... что то не могу найти где у нас в проекте добавлен List с едой из 8 пункта подсказок, или его самим делать?
+Но надо ещё подумать, не нравится мне такое решение...
+
+
+qf05 [Yesterday at 8:05 PM]
+in #hw5
+Не пойму, что у нас должно не работать в JdbcMealRepositoryImpl для HSQLDB , у меня все тесты и так проходят. (edited)
+
+
+1 reply
+aleksey [14 hours ago]
+Проверь точно, что у тебя все профили правильно настроены и включены.
+
+
+qf05 [Yesterday at 8:20 PM]
+in #hw5
+на стаковерфлоу пишут:"HSQLDB 2.4.0 etc understand Java 8 Time API without any conversations", по этому вообще не понимаю 5-е задание.
+
+
+2 replies
+aleksey [12 hours ago]
+У меня сначала была та же ситуация, все тесты проходились, и те же вопросы. Но мы используем 2.3.4 версию и она не поддерживает Time API, потом я перепроверил все настройки профилей. И ты еще проверь что в классе Profiles REPOSITORY_IMPLEMENTATION = JDBC
+
+
+Tanya [7 hours ago]
+*Цель задания - потренироваться с паттерном шаблонный метод и профилями Spring*
+
+
+poleg [10:59 AM]
+Так и не смог победить проблему с профилями...
+Когда выбираю профиль hsqldb, запрос почему-то идет в initDB.sql вместо initDB_hsql.sql,  и тест валится.
+
+  <beans profile="hsqldb">
+       <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
+
+       <!--no pooling-->
+       <bean id="dataSource"
+             class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+             p:driverClassName="org.hsqldb.jdbcDriver"
+             p:url="${database.url}"
+             p:username="${database.username}"
+             p:password="${database.password}"/>
+   </beans>
+
+hsqldb.properties:
+#database.url=jdbc:hsqldb:file:D:/temp/topjava
+database.url=jdbc:hsqldb:mem:topjava
+
+database.username=sa
+database.password=
+
+database.init=true
+
+jdbc.initLocation=initDB_hsql.sql
+jpa.showSql=true
+hibernate.format_sql=true
+hibernate.use_sql_comments=true
+
+Ошибка:
+org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #5 of class path resource [db/initDB.sql]: CREATE SEQUENCE global_seq START 100000; nested exception is java.sql.SQLSyntaxErrorException: unexpected token: 100000 required: WITH
+
+Если содержимое initDB_hsql.sql скопировать в initDB.sql, то тест конечно проходит. (edited)
+
+Ilya [4 hours ago]
+Глянь куда ты вставил -     <jdbc:script location=“classpath:db/${jdbc.initLocation}“/>
+лучше оставить это вне профиля. насколько я понял, мы эти строки только ради hsqldb вставляли, т.к. каждый раз новая база создается в памяти.
+ну и по стандарту - проверь, что все профили выбраны верно, запили clean и рефреш в мавене.
+
+
+poleg [4 hours ago]
+хм. у меня вот так:
+<jdbc:script location="classpath:db/initDB.sql"/>
+Код накатываю патчами.
+
+
+Ilya [4 hours ago]
+копипастни себе в конфигу спринга для БД - 
+
+   <jdbc:initialize-database data-source=“dataSource” enabled=“${database.init}“>
+   <jdbc:script location=“classpath:db/${jdbc.initLocation}“/>
+   <jdbc:script encoding=“utf-8” location=“classpath:db/populateDB.sql”/>
+   </jdbc:initialize-database>
+
+
+poleg [4 hours ago]
+Профили выбраны, рефрешил и клининил в разных комбинациях.
+
+
+poleg [4 hours ago]
+${jdbc.initLocation} - cannot resolve
+
+
+Ilya [4 hours ago]
+у тебя, судя по всему, статический прописан путь до скрипта для иницилизации БД. (edited)
+
+
+Ilya [4 hours ago]
+Это норм, не важно. Проверь
+
+
+poleg [4 hours ago]
+Да, так работает. Но странно - откуда взялся статический путь если код в мастере только патчами накатываю...
+
+
+Ilya [4 hours ago]
+ну хз, эта часть кода появилась еще на прошлом занятии, последним патчем. Может не накатил чего. У меня все ок было.
+
+
+poleg [4 hours ago]
+Ясно, спсб, теперь все ок
+
+
+Oleksii Leshchenko [Today at 11:28 AM]
+in #hw5
+> Разделить реализации Repository по профилям Spring: jdbc, jpa, datajpa
+Почему только профили Спринг? А профили Мавен не надо также сделать?
+
+
+1 reply
+Ilya [4 hours ago]
+Я так понимаю, что тогда в POM надо отдельно указывать spring-data-jpa и все что он покрывает ( jdbc, orm). А это лишние буквы в POM и, наверное, не гуд практика)
+
+
+Oleksii Leshchenko [1:06 PM]
+shared this post 
+How to activate Spring profiles
+Last edited 2 hours ago
+Правильно ли я понимаю, что профили Мавен и Спринг между собой никак не связаны?
+
+И как активировать профили в Спринге? Я нашел несколько, но они больше годятся для DEV, а как лучше в случае деплоймента на Prod или если надо сбилдить на travis-ci?
+
+Вот способы, что нашел:
+
+1) spring.profiles.active свойство. Задается как опция, например из командной строки при запуске:
+
+-Dspring.profiles.active=production
+
+2) Через контекст во время инициализации:
+
+ConfigurableEnvironment env = ctx.getEnvironment();   
+env.setActiveProfiles("test1", "test2");
+3) Аннотацией перед классом или методами:
+
+@ActiveProfiles
+@Profile
+Collapse 
+Oleksii Leshchenko [1:06 PM]
+О профилях Спринга
+
+tema.emelyan [1:11 PM]
+при запуске мавена это разве не профиль мавена так задаётся? (edited)
+
+Oleksii Leshchenko [1:11 PM]
+да, мавена, точно. подправил в документе
+
+tema.emelyan [1:14 PM]
+@Profile не задаёт профиль, а указывает, что аннотированный компонент должен попасть в контекст если один из профилей активен (edited)
+@ActiveProfiles задаёт активные профили, но только в тестах
+Ещё можно активировать профили через web.xml и через переменную окружения и через JNDI 
+вот здесь про это написано https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-property-source-abstraction (edited)
+
+Oleksii Leshchenko [1:25 PM]
+> 3.1 сделать один базовый класс для MealServiceTest и UserServiceTest.
+Имеется в виду по одному базовому классу для Мил и Юзер, т.е. по сути 2 класса. Или таки один общий для Мил и Юзер?
+
+
+alexey [Today at 1:33 PM]
+in #hw5
+Народ подскажите как в save назначить user-а  новой еде?
+
+
+5 replies
+Oleksii Leshchenko [2 hours ago]
+meal.setUser(crudUserRepository.findById(userId).get());
+
+
+Oleksii Leshchenko [2 hours ago]
+пришлось добавить crudUserRepository...
+
+
+alexey [2 hours ago]
+так можно было!?)) блин
+
+
+Oleksii Leshchenko [2 hours ago]
+возможно это не лучший вариант. потом посмотрим что скажут после проверки и когда будут ответы... )
+
+
+alexey [2 hours ago]
+спасибо
+
+
+alexey [Today at 1:57 PM]
+in #hw5
+Кто нибудь может пояснить пункт 3: Сделать тесты всех реализаций (jdbc, jpa, datajpa) через наследование (без дублирования) , не пойму что хотят:thinking_face:
+
+
+1 reply
+Oleksii Leshchenko [1 hour ago]
+Я так понял, что класс MealServiceTest должен стать базовым и не зависеть от имплементации jdbc/jpa/datajpa. Т.е. он не использует профилиспринга. А взамен создаются через наследование пустые классы, которые будут включать соответ. профиль....
+
+
+Oleksii Leshchenko [2:03 PM]
+Тут кстати описали, как запускать тесты несколько раз с различными профилями, использую параметризированные тесты. Но, имхо, слишком заумно, сложноватенько такое сделать...
+http://forum.spring.io/forum/spring-projects/container/120249-runwith-parameterized-class-with-different-set-of-spring-profiles-per-parameter (edited)
+
+
+qf05 [Today at 2:39 PM]
+in #hw5
+блин, как сломать JdbcMealRepositoryImpl для HSQLDB, что не делаю, а оно всё равно работает:sweat_smile:
+
+
+2 replies
+Oleksii Leshchenko [32 minutes ago]
+Сделай clean и Reimport Maven projects перед запуском тестов
+
+
+qf05 [10 minutes ago]
+делал, не помогло.
+нашел причину: оказывается мне почему то в классе Profiles метод getActiveDbProfile() всегда возвращает Postgres.
+
+
+Artem Murk [Today at 2:42 PM]
+in #hw5
+Не пойму почему у меня не падает контекст в spring-db.xml прописаны 2 способа сканирования для datajpa.
+    ```<context:component-scan base-package="ru.javawebinar.**.repository.datajpa"/>
+    <jpa:repositories base-package="ru.javawebinar.**.repository.datajpa"/>```
+
+
+3 replies
+Oleksii Leshchenko [26 minutes ago]
+я так понимаю это 2 разные инструкции.
+*<context:component-scan* сканирует и обрабатывает для *Spring* аннотации типа @Component, @Service, @Repository...
+*<jpa:repositories* - обрабатывает репозитории для *Spring Data Jpa*
+
+
+Artem Murk [22 minutes ago]
+Идея видит инициализацию нескольких бинов (edited)
+
+
+Artem Murk [3 minutes ago]
+@Oleksii Leshchenko уловил суть твоего ответа
+
+
+Artem Murk [2:43 PM]
+Или бины инициализируются один раз понимая что это одно и тоже? что то я  запутался
+
+Artem Murk [2:53 PM]
+uploaded this image: 2 бина 

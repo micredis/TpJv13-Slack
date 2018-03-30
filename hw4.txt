@@ -2048,3 +2048,60 @@ Pavel Klindziuk [1 day ago]
 Один из способов пофиксить :
 User user = em.getReference(User.class, userId);
            meal.setUser(user);
+
+           
+           
+Джони [12:00 PM]
+uploaded and commented on this image: error.jpg 
+
+ребята, кто работает в postgres на linux, помогите разобраться. 
+1. у меня версия psql 9.5.12. роль "user" он мне не дал создать, в итоге я создал "username"
+2. базу topjava локально создал
+3. поставил pgadmin4, но он её не видит. вообще ничего не видит.
+4. в idia postgres подключил
+5. после накатки патчей с 4_1 по 4_4 приложение запускается, но при нажатии кнопки "select" выходит следующее сообщение об ошибке:  Servlet.init() for servlet [mealServlet] threw exception
+
+В каком месте я мог накосячить?
+
+Джони [12:00 PM]
+uploaded this image: idia.jpg 
+
+
+Джони [12:00 PM]
+uploaded this image: pgadmin.jpg 
+
+
+Oleksii Leshchenko [12:04 PM]
+commented on Джони’s file error.jpg
+Я чего user не дало создать?
+я делал по инструкции:
+https://www.digitalocean.com/community/tutorials/postgresql-ubuntu-16-04-ru
+
+
+Viktor [Today at 12:05 PM]
+in #hw4
+1. в postgers.properties у тебя стоит порт 5432(дефолт) в браузере 5050, почему так?
+2. В postgers.properties укажи диалект для БД
+
+
+2 replies
+tema.emelyan [3 hours ago]
+пгадмин 4 работает на порт 5050, это браузер пгадмина у него открыт
+
+
+Viktor [2 hours ago]
+не знал об этом :slightly_smiling_face: спасибо
+
+
+Viktor [12:06 PM]
+3. Заходи в логи томката и смотри весь стек.
+
+tema.emelyan [12:26 PM]
+commented on Джони’s file error.jpg
+побольше бы знать об ошибке :smiley:
+tema.emelyan [12:28 PM]
+Георгий вроде бы давал уточнение, что нужно кавычки вокруг user ставить, чтобы можно было создать такого пользователя
+
+Alexander Shnaider [1:46 PM]
+друзья, я тут недавно восстанавливал проект на другом ноуте, и вот сейчас понял что у меня логирование не работает.  Нужно ведь было только создать файл `topjava/log/topjava.log` и создать переменную среды `TOPJAVA_ROOT` с путём к папке `topjava`, так? Никак не пойму, почему не логируется ничего? Запускаю тест, например InMemoryAdminRestControllerTest, лог файл остаётся пустым, что я упускаю?
+блин, написал вопрос и понял что у нас два разных конфига для логирования в тесте и в продакшине, всё заработало
