@@ -2105,3 +2105,53 @@ tema.emelyan [12:28 PM]
 Alexander Shnaider [1:46 PM]
 друзья, я тут недавно восстанавливал проект на другом ноуте, и вот сейчас понял что у меня логирование не работает.  Нужно ведь было только создать файл `topjava/log/topjava.log` и создать переменную среды `TOPJAVA_ROOT` с путём к папке `topjava`, так? Никак не пойму, почему не логируется ничего? Запускаю тест, например InMemoryAdminRestControllerTest, лог файл остаётся пустым, что я упускаю?
 блин, написал вопрос и понял что у нас два разных конфига для логирования в тесте и в продакшине, всё заработало
+
+
+Grigory Kislin [11:00 AM]
+commented on Джони’s file error.jpg
+поправка- Григорий
+tema.emelyan [1:51 PM]
+пардон, всё время путаю
+
+
+dmitry_ov [6:54 PM]
+added and commented on this Java snippet: Untitled 
+@Override
+public boolean delete(int id, int userId) {
+​
+Query query = em.createQuery("DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:userId");
+    return query
+        .setParameter("id", id)
+        .setParameter("userId", userId)
+        .executeUpdate() != 0;
+}
+​
+​
+javax.persistence.TransactionRequiredException: Executing an update/delete query
+	at org.hibernate.query.internal.AbstractProducedQuery.executeUpdate(AbstractProducedQuery.java:1496)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$DeferredQueryInvocationHandler.invoke(SharedEntityManagerCreator.java:379)
+	at com.sun.proxy.$Proxy63.executeUpdate(Unknown Source)
+	at ru.javawebinar.topjava.repository.jpa.JpaMealRepositoryImpl.delete(JpaMealRepositoryImpl.java:56)
+Collapse 
+Коллеги кто ниубдь сталкивался с такого рода ошибками при удалении из таблицы meals ?
+
+realcorwin [7:24 PM]
+не хватает @Transactional?
+
+realcorwin [7:25 PM]
+> @Override
+   @Transactional
+   public boolean delete(int id, int userId) {
+       return em.createNamedQuery(Meal.DELETE)
+               .setParameter("id", id)
+               .setParameter("userId", userId)
+               .executeUpdate() != 0;
+   }
+
+
+dmitry_ov [2 hours ago]
+Спасибо. Да, вы правы.

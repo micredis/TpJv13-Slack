@@ -4342,3 +4342,10 @@ Oleksii Leshchenko [7:17 PM]
 Tanya [7:43 PM]
 а как ты предлагаешь это проверить?
 вопросы по дз лучше обсуждать в соотв каналах
+
+
+Yevhen Maksymovych [12:17 PM]
+ребят, а никому случаем не приходилось сталкиваться c com4j?
+
+eageev [3:15 PM]
+А зачем мы создаем свой NotFoundException, когда есть javax.persistence.EntityNotFoundException? он тоже от RuntimeException.

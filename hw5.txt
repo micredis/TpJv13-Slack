@@ -587,3 +587,161 @@ Artem Murk [2:43 PM]
 
 Artem Murk [2:53 PM]
 uploaded this image: 2 бина 
+
+
+Artem Murk [4:37 PM]
+Можно ли как то сделать фильтр для метода findAll SpringData? Или придется обратно писать Query? Пробовал через findAll(Example example, Sort sort) но не могу понять как правильно обращаться. При попытке переопределить данный метод выкидывает странную ошибку
+```.JpaRepository have the same erasure, yet neither overrides the other```
+, подчеркивает красным весь метод, запутался в Дженериках. Помогите кто силен)
+
+Oleksii Leshchenko [4:43 PM]
+Можно. Вот хорошее руководство из линков к уроку :slightly_smiling_face:
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+
+Artem Murk [4:57 PM]
+@Oleksii Leshchenko да, там только создание Query, для Meal не вижу преимуществ в Spring Data:unamused:.
+
+Oleksii Leshchenko [5:00 PM]
+@Artem Murk неа, смотри там Table 4. Supported keywords inside method names.
+Т.е. можно создать метод как в интерфейсе, без реализации вовсе. Т.е. просто правильно задать имя. Spring Data Jpa само распарсит имя и создаст имплементацию метода
+Например, я в репозитории в классе написал:
+   List<Meal> findByDateTimeBetweenAndUser_Id(LocalDateTime startDate, LocalDateTime endDate, Integer userId, Sort sort);
+И не создавал реализацию метода - само все сделало и заработало
+
+Artem Murk [5:02 PM]
+Чудеса... Наверное слишком поверхностно просмотрел доки
+
+Oleksii Leshchenko [5:02 PM]
+Обрати внимание на ; в конце, нет реализации {}. А это класс, а не интерфейс
+
+Artem Murk [5:04 PM]
+Ок, почитаю внимательно доки, спасибо!!
+
+
+aleksey [Today at 4:00 AM]
+in #hw5
+Кто подскажет, как в optional 7 сделал отдельные тесты так, чтобы они выполнялись только для jpadata а соответствующим assertThat ?
+
+
+9 replies
+Ilya [19 hours ago]
+реализовать новый тест только в том классе, который ты делал для jpadata в 3-м пункте задания. По части assert - я отдельно сравнивал каждый тип сущности через соответствующий ассерт.
+
+
+aleksey [19 hours ago]
+Что значит каждый тип сущности через соответствующий assert?
+
+
+Ilya [19 hours ago]
+В проекте есть  MealTestData и UserTestData. Внутри них есть реализации assertThat - для еды и юзеров, соотвественно. 
+Когда достаешь юзера и еду, то отдельно проверяешь его еду, отдельно юзера. В общем, внутри метода теста будет что-то такое:
+ MealTestData.assertMatch(user.getMeals(),USER_WITH_MEALS.getMeals());
+assertMatch(user,USER_WITH_MEALS); (edited)
+
+
+aleksey [19 hours ago]
+Это довольно спорная практика, как пишут.
+https://softwareengineering.stackexchange.com/questions/7823/is-it-ok-to-have-multiple-asserts-in-a-single-unit-test
+http://www.owenpellegrin.com/blog/testing/how-do-you-solve-multiple-asserts/
+softwareengineering.stackexchange.com
+Is it OK to have multiple asserts in a single unit test?
+In the comment to this great post, Roy Osherove mentioned the OAPT project that is designed to run each assert in a single test. The following is written on the project's home page: Proper unit
+ 
+(edited)
+
+
+Ilya [19 hours ago]
+это тема для холиваров. кому-как удобней. даже комментарии из приведенных топиков это подверждают. в нашем случае я париться не стал. 
+а так, пожалуйста - никто не запрещает написать свой ассерт, чтобы проверял все и сразу. там делов на 2 минуты. я просто решил юзать, что есть.
+
+
+aleksey [19 hours ago]
+Ну вот я почитал холиваров, так у меня этот вопрос и возник.
+
+
+Ilya [19 hours ago]
+ну, опять же - если вчитаться, то они там говорят в первую очередь о том, что не должно быть такого, что ты в одном тесте делаешь кучу действий и проверяешь результаты каждого действия. в нашем случае действие одно. и ты проверяешь его по частям. так что я думаю. что это норм. увидим, какой будет подход у Григория.
+
+
+Ilya [19 hours ago]
+вот, самый ок коммент: Tests should fail for one reason only, but that doesn’t always mean that there should be only one Assert statement. IMHO it is more important to hold to the “Arrange, Act, Assert” pattern.
+
+The key is that you have only one action, and then you inspect the results of that action using asserts. But it is “Arrange, Act, Assert, End of test”. If you are tempted to continue testing by performing another action and more asserts afterwards, make that a separate test instead.
+
+
+aleksey [18 hours ago]
+OK, принято :smiley:
+
+
+Oleksii Leshchenko [11:36 AM]
+А 7е задание делать через UserService или MealService?
+
+eageev [12:05 PM]
+Что-то я не понял. Зачем имплементировать репозитории? В этом и смысл Spring Data - в том, что не нужно писать имплементацию. Ни в одном проекте пока не видел, чтобы это делали.
+
+Pavel Klindziuk [12:07 PM]
+Чтобы у нас было понимание что скрывается в реализации спринг дата, и как это работает. Потренироваться в общем)
+
+realcorwin [12:18 PM]
+не, лучше б не путали :slightly_smiling_face:
+
+eageev [12:22 PM]
+Потренироваться может и хорошо. Но надо сразу учиться писать так, как пишут в реальных проектах.
+
+Pavel Klindziuk [12:25 PM]
+foundation is key to creativity, слыхал о таком ? ))
+
+eageev [12:29 PM]
+Кто то (кажется Флёнов) сказал: "Неправильное знание хуже не знания")
+
+Pavel Klindziuk [12:30 PM]
+а что же там неправильного в том что мы пишем имплементацию ?
+
+eageev [12:31 PM]
+абстрагирование от реальных проектов.
+
+Pavel Klindziuk [12:31 PM]
+это скорее  подготовка к ним
+
+Oleksii Leshchenko [1:57 PM]
+`mvn -P hsqldb test`
+Мне теперь приходится запускать так тесты из под Мавена, если хочу hsqldb...
+
+Pavel Klindziuk [1:58 PM]
+а что с резолверами ?
+
+Oleksii Leshchenko [2:02 PM]
+не использую - не получилось одновременно использовать резолвер для БД и тесты для каждой реализации jdbc/jpa/datajpa. Иначе в @ActiveProfiles мне надо одновременно юзать profiles и resolver, а у меня так не работает
+
+Oleksii Leshchenko [2:15 PM]
+На эту домашку у меня ушло 2 полных дня, если кому интересно... 
+Это еще без многочисленных правок после проверки... :slightly_smiling_face:
+
+Jan [3:29 PM]
+Спасибо. Будем расчитывать это время как эталонное ) (edited)
+Oleksii Leshchenko
+На эту домашку у меня ушло 2 полных дня, если кому интересно... 
+Это еще без многочисленных правок после проверки... :slightly_smiling_face:
+Posted in #hw5
+Today at 2:15 PM
+
+realcorwin [5:12 PM]
+мы используем выражение SELECT m FROM Meal m WHERE m.user.id=:userId (edited)
+а если бы SELECT m FROM Meal m WHERE m.user_id=:userId - что изменилось бы?
+
+Viktor [5:14 PM]
+а в чем разница?
+
+realcorwin [5:14 PM]
+m.user_id и m.user.id
+
+Viktor [5:14 PM]
+а вижу, такое стоит уточнять :smiley:
+у meal нет поля user_id поэтому второй запрос упадет
+
+realcorwin [5:16 PM]
+действительно. User есть. в таблице user_id есть. а вот в Meal user_id нет
+благодарю
+
+Grigory Kislin [7:31 PM]
+этож гораздо проще проверить чем вопрос задавать
