@@ -4349,3 +4349,68 @@ Yevhen Maksymovych [12:17 PM]
 
 eageev [3:15 PM]
 А зачем мы создаем свой NotFoundException, когда есть javax.persistence.EntityNotFoundException? он тоже от RuntimeException.
+
+
+Ilya [7:19 AM]
+Поясните, пожалуйста, за блокировки в hibernate - почему при попытке установить   @Lock(LockModeType.PESSIMISTIC_WRITE) на метод, который делает Update в таблице - я получаю 
+IllegalStateException: Illegal attempt to set lock mode on a non-SELECT query ? 
+Опыта с БД по минимум, но из прочитанной теории я сделал вывод, что блокировать запись в рамках транзакции можно для чтения/записи/апдейта, а здесь получается, что это не так ? Спасибо!
+
+Viktor [12:03 PM]
+какоу код выкидывает ошибку? выложи весь стектрейс (edited)
+
+Darkhan [1:06 PM]
+added and commented on this Java snippet: ClassCastException 
+Session session = sessionFactory.getCurrentSession();
+Transaction transaction = session.beginTransaction();
+​
+Query query = session.createQuery("SELECT id, name, url FROM Campaign");
+List<Campaign> list = query.list();
+Почему года используешь запись в list как объект Campaign выдает ошибку:
+
+
+Darkhan [Today at 1:06 PM]
+in #general
+Вот эту ошибку: java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to com.omdialer.model.Campaign
+
+
+4 replies
+Viktor [11 hours ago]
+ClassCastException говорит, что Object нельзя привести к Campaign
+
+
+Darkhan [10 hours ago]
+Аха, это понятно. А хибернейт не может вернуть коллекцию с нашими объектами? (edited)
+
+
+Viktor [9 hours ago]
+смотрел перегруженные методы?
+
+
+Oleksii Leshchenko [5 hours ago]
+попробуй getResultList()  вместо list()
+
+
+Джони [Today at 1:14 PM]
+in #general
+Коллеги, вопрос по postgreSQL. Утерян пароль от пользователя postgres. В интернете советуют редактировать конфигурационные файлы, но я не могу их редактировать, потому что без postgres пароль запрашивает. И получается замкнутый круг. Может кто-нибудь сталкивался с такой проблемой и знает что делать?
+
+
+4 replies
+Shtramak [11 hours ago]
+http://www.postgresqltutorial.com/postgresql-reset-password/
+postgresqltutorial.com
+How To Reset Forgotten Password Of postgres User
+In this tutorial, we will show you step by step how to reset forgotten password of postgres user in PostgreSQL.
+
+
+Shtramak [11 hours ago]
+если не получается открыть файл, то скопируй его куда-нибудь - отредактируй и потом замени тот что в нужной папке
+
+
+Shtramak [11 hours ago]
+замена должна отрабатывать
+
+
+Джони [10 hours ago]
+спасибо, сейчас попробую

@@ -745,3 +745,332 @@ realcorwin [5:16 PM]
 
 Grigory Kislin [7:31 PM]
 этож гораздо проще проверить чем вопрос задавать
+
+realcorwin [1 day ago]
+Да. Но на ходу всплыл вопрос :slightly_smiling_face:. Надо было не забыть :slightly_smiling_face:.
+
+
+Ma3stro [Yesterday at 4:51 PM]
+in #hw5
+Нам ведь нельзя в CrudMealRepository менять аргументы методов?
+
+
+1 reply
+Ma3stro [1 day ago]
+Менял названия методов и с этим структуру. Большинство  методов через @Query
+
+
+Alexander Shnaider [Yesterday at 5:05 PM]
+in #hw5
+Друзья, помогите утопающему)  Накатил все патчи из урока, пытаюсь запустить тест `UserServiceTest` Вылетает ошибка 'Failed to load ApplicationContext'  причина `org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set`
+Вот не пойму причём здесь hibernate, он же к JPA реализации относится, а сейчас должно было всё сконфигурироваться для DataJPA. В Maven выставил postges профайл, делал clean and reimport all maven projects. Что я делаю не так? (За исключением того что делаю всё в последний момент) (edited)
+
+
+3 replies
+Fedor [1 day ago]
+<context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
+
+
+Fedor [1 day ago]
+Раскомментил данную строку в spring-db.xml?
+
+
+Alexander Shnaider [17 hours ago]
+да, точно, ещё оказалось что у меня пароль базы другой, я как-то раньше и не замечал. Спасибо
+
+
+realcorwin [Yesterday at 9:18 PM]
+in #hw5
+Странно. Пишет "No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available". При этом вроде всё есть. spring-db.xml куда надо смотрит. Нужный класс репозиторий имплементирует. Аннотация стоит... Опять замыленным взглядом какую-то мелочь не вижу :slightly_smiling_face:.
+
+
+2 replies
+Fedor [24 hours ago]
+У меня такая же ошибка, всю голову поломал
+
+
+Fedor [24 hours ago]
+WARN  o.s.context.support.AbstractApplicationContext.refresh:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'mealServiceImpl' defined in file [D:\Internship\topjava\target\classes\ru\javawebinar\topjava\service\MealServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+
+
+realcorwin [Yesterday at 9:33 PM]
+in #hw5
+Кто пробовал просто нагло конструировать методы в CrudMealRepository безо всяких Query? Работает? Вроде Meal findByIdAndUserId(Integer id, Integer userId);
+
+
+1 reply
+Ma3stro [9 hours ago]
+Да, это работает. Только возвращаемое значение Optional<Meal>
+
+
+Vitaly Ch [10:27 PM]
+Кто-нибудь сталкивался с такой проблемой?org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter#73455391' defined in class path resource [spring/spring-db.xml]: Initialization of bean failed; nested exception is org.springframework.beans.TypeMismatchException: Failed to convert property value of type 'java.lang.String' to required type 'boolean' for property 'showSql'; nested exception is java.lang.IllegalArgumentException: Invalid boolean value [${jpa.showSql}]
+
+Viktor [11:10 PM]
+@Vitaly Ch java.lang.IllegalArgumentException: Invalid boolean value [${jpa.showSql}] - поправь значение
+
+Vitaly Ch [11:20 PM]
+В properties все нормально jpa.showSql=true
+Viktor
+@Vitaly Ch java.lang.IllegalArgumentException: Invalid boolean value [${jpa.showSql}] - поправь значение
+Posted in #hw5
+Yesterday at 11:10 PM
+
+Viktor [12:20 AM]
+а ошибка говори, что Invalid boolean value [${jpa.showSql}]
+Failed to convert property value of type 'java.lang.String' to required type 'boolean' for property 'showSql'
+покажи свой конфиг
+
+Vitaly Ch [12:43 AM]
+все как у всех
+<property name="jpaVendorAdapter">
+<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+p:showSql="${jpa.showSql}">
+</bean>
+</property>
+создал новый проект
+
+
+Vitaly Ch [Today at 12:45 AM]
+in #hw5
+все та же проблема
+
+
+1 reply
+Pavel Zaitcev [22 hours ago]
+В spring-db.xml разделение на профили сделал? А теперь в качестве эксперимента верни все как было (без разделения) и проверь, заработает ли.
+
+
+Alexander Shnaider [Today at 11:01 AM]
+in #hw5
+Что-то не пойму как CrudMealRepository написать, у нас же везде требуется проверка по двум параметрам userId and id поэтому родительские крудовские методы не подходят. Я так понял все писали свои методы используя @Query аннотации с двумя входными параметрами userId и id? Не понимаю как написать метод save или его нужно разбить на два метода update и insert?
+
+
+8 replies
+Ilya [13 hours ago]
+save можно реализовать на основе готовых getOne и save
+
+
+Oleksii Leshchenko [13 hours ago]
+Можно написать без @Query. Оно потом парсит имя и само делает имплементацию:
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+
+
+Oleksii Leshchenko [13 hours ago]
+Например,    
+`List<Meal> findByDateTimeBetweenAndUser_Id(LocalDateTime startDate, LocalDateTime endDate, Integer userId, Sort sort);`
+
+Alexander Shnaider [13 hours ago]
+это я понял, уже видел твой пример. Значит можно все методы таким образом написать...
+
+
+Alexander Shnaider [13 hours ago]
+я просто думал, что он парсит только ключевое слово find, во всех примерах только оно
+
+
+Oleksii Leshchenko [13 hours ago]
+ДУмаю не все. Методы с FETCH JOIN писал через @Query
+
+
+realcorwin [12 hours ago]
+можно вообще Repository имплементить безо всяких методов
+
+
+realcorwin [12 hours ago]
+чтобы убрать Sort можешь писать так: findByDateTimeBetweenAndUserIdOrderByStartDateDesc
+
+
+realcorwin [1:51 PM]
+сделал в тестах @ActiveProfiles({Profiles.REPOSITORY_IMPLEMENTATION, Profiles.POSTGRES_DB}). Kак сделать оба профиля активным через resolver?
+
+realcorwin [2:02 PM]
+понял.
+>>>@Override
+   public String[] resolve(Class<?> aClass) {
+return new String[]{Profiles.REPOSITORY_IMPLEMENTATION, Profiles.getActiveDbProfile()};
+(edited)
+что-то не получается у меня блоком кода сделать :disappointed: все кавычки уже перепробовал...
+
+Ma3stro [2:31 PM]
+replied to a thread:
+Да, это работает. Только возвращаемое значение Optional<Meal>
+
+Kirilo [2:42 PM]
+@Alexander Shnaider не во всех методах @Query аннотации нужно использовать, там есть готовые уже, например, для save и update можно сделать похоже, как c jpa делали, а далее вызвать save у crudRepository вместо  persist и merge
+
+Ma3stro [2:46 PM]
+    ```<jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
+        <jdbc:script location="classpath:db/${jdbc.initLocation}"/>
+        <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
+    </jdbc:initialize-database>```
+Эта часть ведь не только для jdbc используется?
+
+alexey [2:59 PM]
+Да,она общая
+Ma3stro
+    ```<jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
+        <jdbc:script location="classpath:db/${jdbc.initLocation}"/>
+        <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
+    </jdbc:initialize-database>```
+Эта часть ведь не только для jdbc используется?
+Posted in #hw5
+Today at 2:46 PM
+
+Ma3stro [3:22 PM]
+В getActiveDbProfile у нас возвращается нужный профиль БД по названию класса драйвера.
+Что можно сделать для getActiveRepositoryProfile?
+
+Arthur [3:31 PM]
+для репозитария подход другой. Для него у нас же нет понятия "драйвер"
+
+realcorwin [7:42 PM]
+Где и что надо поменять, чтобы профили datajpa/jpa/... правильно подхватились тестами?
+
+Oleksii Leshchenko [7:48 PM]
+в зависимсти от того, что указано в @ActiveProfiles
+
+realcorwin [7:53 PM]
+ну я выше написал, как я @ActiveProfiles сделал. но не работает: не находит апп контекст
+
+realcorwin [8:02 PM]
+что любопытно. оставляю spring_db.xml как есть. меняю только CrudMealRepository и DataJpaMealRepositoryImpl - и вылетают все тесты UserServiceTest. хотя по юзеру ведь ничего вообще не изменилось
+может, на какую-то кнопку надо нажать, чтоб заапдейтилось всё в нужном месте? :slightly_smiling_face: так вроде нет...
+
+Viktor [8:05 PM]
+@realcorwin опиши свою реальную проблему, с чем падают тесты.
+
+realcorwin [8:13 PM]
+@Viktor постоянно вылетала такая хрень:
+>>>Error creating bean with name 'mealServiceImpl' defined in file [D:\Internship\topjava\target\classes\ru\javawebinar\topjava\service\MealServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+
+Сейчас я что-то таки изменил и стало вылетать другое.
+>>>Caused by: org.springframework.data.mapping.PropertyReferenceException: No property save found for type Meal!
+ну и всегда сверху
+>java.lang.IllegalStateException: Failed to load ApplicationContext
+
+Viktor [8:17 PM]
+смотреть надо на верх самого нижнего исключения.
+@realcorwin гугл спрашивал?
+
+realcorwin [8:22 PM]
+@Viktor да, его и смотрю. закомментил сейчас метод save в CrudMealRepository - все тесты юзера стали зелёными. Но хоть убей меня кто, если я понял, почему изменился стектрейс. Причём изменился он только тогда, когда я запустил его в очередной раз, чтобы для тебя скопировать :slightly_smiling_face: "Эффект демонстрации" (edited)
+
+Viktor [8:23 PM]
+покажи CrudMealRepository
+
+realcorwin [8:23 PM]
+@Viktor
+>>>package ru.javawebinar.topjava.repository.datajpa;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
+import ru.javawebinar.topjava.model.Meal;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Transactional(readOnly = true)
+public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
+
+   //@Transactional
+   //Meal save(Meal meal, int userId);
+
+   @Transactional
+   @Modifying
+   @Query ("DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:userId")
+   boolean deleteByIdAndUserId(@Param("id") Integer id, @Param("userId") Integer userId);
+
+   Meal findByIdAndUserId(Integer id, Integer userId);
+
+   List<Meal> findByUserId(Integer userId, Sort sort);
+
+   List<Meal> findByDateTimeBetweenAndUserId(LocalDateTime startDate, LocalDateTime endDate, Integer userId, Sort sort);
+}
+(edited)
+
+Viktor [8:25 PM]
+а как по твоему должен работать метод save? Ну что делать с entity он знает, а что делать с примитивом, который там появился?
+
+realcorwin [8:26 PM]
+что в save хрень, это понятно. но до save не доходило раньше :slightly_smiling_face:
+
+Ma3stro [8:26 PM]
+Наверное, если ты меняешь аргументы, то тебе нужно прописать Query или дополнить название метода. Можно сделать не меняя. (edited)
+На подобии Jpa реализации
+
+realcorwin [8:27 PM]
+@Ma3stro скинь без Query
+просто
+@Override
+Meal save(Meal item);
+не?
+
+Ma3stro [8:31 PM]
+Именно так
+Попробовал разными способами указать профили в MealServlet: `ConfigurableEnvironment env.setActiveProfiles()`, `AnnotationConfigApplicationContext context.getEnvironment().setActiveProfiles`, в web.xml через `spring.active.profiles`, но по прежнему вылетает `org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}`
+
+realcorwin [8:33 PM]
+вот-вот. подобная хрень у меня всё время вылетала
+
+Ma3stro [8:34 PM]
+В чём я ошибаюсь?
+
+Anton Kiselev [8:36 PM]
+самый простой вариант в arg tomcata вбить 
+-Dspring.profiles.active="datajpa,postgres"
+
+Viktor [8:36 PM]
+@realcorwin думаю спринг проверяет запросы репозиториев
+
+realcorwin [8:47 PM]
+@Ma3stro помогло с томкатом?
+
+Ma3stro [8:47 PM]
+Да)
+
+Alexander Shnaider [8:58 PM]
+Ребят, а вот эта настройка `<tx:annotation-driven/>` к чему относиться?
+
+realcorwin [8:59 PM]
+ко всему
+
+Alexander Shnaider [9:06 PM]
+странно, я пихнул эту стоку только в профиль `jpa` и `datajpa` нормально работает без этой настройки
+
+
+Viktor [Today at 9:16 PM]
+in #hw5
+@Alexander Shnaider вот почитай про <tx:annotation-driven/> http://bit.ly/2H5dSEf
+google.gik-team.com
+| Давай я поищу в Google вместо тебя
+Давай я поищу в Google вместо тебя. Этот сайт создан для людей, которые считают, что лучше побеспокоить вас своими вопросами, нежели самим поискать ответ в Google. Давай я поищу в Гугл вместо тебя; Давай я поищу в Гугл за тебя; Давай я поищу в Google за тебя
+
+
+5 replies
+Alexander Shnaider [2 hours ago]
+ну такой запрос я догадался сделать) Но что-то мне не очень понравились результаты сверху выдачи, не очень было понятно. У меня в принципе проблема с этими настройками XML...
+
+
+Viktor [2 hours ago]
+конкретизируй, что не понятно.
+
+
+Alexander Shnaider [2 hours ago]
+в принципе нашёл ответ на этот вопрос https://coderanch.com/t/520903/frameworks/Understanding-tx-annotation-driven-working
+эта настройка нужна для восприятия аннотации `@Transactional`
+coderanch.com
+Understanding  working (Spring forum at Coderanch)
+From what I understand, this annotation enabled spring to interpret @Transactional annotation. But what does it actually do underneath.
+ 
+
+
+Alexander Shnaider [2 hours ago]
+но в принципе у меня каша в голове по настройке spring xml. Я сделал так чтобы все профили работали методом научного тыка
+
+
+Viktor [2 hours ago]
+это нормально :smiley:
