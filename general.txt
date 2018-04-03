@@ -4414,3 +4414,32 @@ Shtramak [11 hours ago]
 
 Джони [10 hours ago]
 спасибо, сейчас попробую
+
+
+Джони [Today at 8:30 AM]
+in #general
+я в линуксе и он не даёт мне сделать замену...
+Andrii Kovalchuk
+замена должна отрабатывать
+From a thread in #generalYesterday at 1:20 PM
+
+
+5 replies
+Shtramak [14 hours ago]
+через суперпользователя должно дать
+
+
+Shtramak [14 hours ago]
+sudo mv fileName /pathToMove
+
+
+Shtramak [14 hours ago]
+запускать из терминала находясь в папке где отредактированный файл (edited)
+
+
+Shtramak [14 hours ago]
+ну, пароль истессно еще придется ввести
+
+
+Shtramak [14 hours ago]
+ну, и не забудь, конечно бекап старого файла сделать на всякий случай )
