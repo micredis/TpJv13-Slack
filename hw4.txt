@@ -2172,3 +2172,25 @@ https://habrastorage.org/getpro/habr/post_images/3b5/974/f53/3b5974f533b24e6f1ed
 Евгений [10:25 PM]
 Спасибо что добавили)) теперь можно и похвастаться, что статья моя ^_^ (edited)
 Открыто достижение - "Уроборос": пройдите стажировку, в учебных материалах которой будет статья, которую вы написали
+
+
+Serhii [12:34 AM]
+Помогите пожалуйста !!! С чем может быть связана ошибка org.hibernate.DuplicateMappingException: Duplicate query mapping Meal.getAllSorted ? (edited)
+
+
+Viktor [Today at 12:35 AM]
+in #hw4
+@Serhii эм.. с дубликатами?
+
+
+3 replies
+Serhii [11 hours ago]
+Да
+
+
+Serhii [11 hours ago]
+Где смотреть?
+
+
+Viktor [10 hours ago]
+Meal.getAllSorted куда-то туда наверно

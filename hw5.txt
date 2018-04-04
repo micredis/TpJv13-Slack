@@ -1227,3 +1227,239 @@ dustnfox [9:25 PM]
 
 Yevhen Maksymovych [10:10 PM]
 да, дейсытно, не надо резольвер трогать, всё само собой разрешилось :slightly_smiling_face:
+
+
+Oleg K [11:30 PM]
+Подскажите, после патча 5_8 UserServiceTest должен работать? или надо что-то сделать?
+
+Yevhen Maksymovych [11:33 PM]
+должен работать
+
+Oleg K [11:48 PM]
+added this Plain Text snippet: Untitled 
+23:41:14.802 ERROR o.springframework.test.context.TestContextManager.prepareTestInstance:246 - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7c137fd5] to prepare test instance [ru.javawebinar.topjava.service.UserServiceTest@42561fba]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+  at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125)
+  at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:107)
+  at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+  at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+  at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:242)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+  at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+  at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+  at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+  at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+  at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+  at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+  at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+  at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+  at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+  at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+  at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+  at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+  at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+  at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+  at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [spring/spring-db.xml]: Cannot create inner bean 'org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter#77a98a6a' of type [org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter] while setting bean property 'jpaVendorAdapter'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter#77a98a6a' defined in class path resource [spring/spring-db.xml]: Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.config.internalCacheAdvisor': Cannot resolve reference to bean 'org.springframework.cache.annotation.AnnotationCacheOperationSource#0' while setting bean property 'cacheOperationSource'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.AnnotationCacheOperationSource#0': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.config.internalJCacheAdvisor': Cannot resolve reference to bean 'org.springframework.cache.jcache.interceptor.DefaultJCacheOperationSource#0' while setting bean property 'cacheOperationSource'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.jcache.interceptor.DefaultJCacheOperationSource#0': Cannot resolve reference to bean 'ehCacheManager' while setting bean property 'cacheManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ehCacheManager' defined in class path resource [spring/spring-tools.xml]: Cannot create inner bean 'org.springframework.cache.jcache.JCacheManagerFactoryBean#58326051' of type [org.springframework.cache.jcache.JCacheManagerFactoryBean] while setting bean property 'cacheManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.jcache.JCacheManagerFactoryBean#58326051' defined in class path resource [spring/spring-tools.xml]: Invocation of init method failed; nested exception is javax.cache.CacheException: org.ehcache.xml.exceptions.XmlConfigurationException: Error parsing XML configuration at file:/home/sebastian/my_java_projects/topjava/target/classes/cache/ehcache.xml
+  at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:327)
+  at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:124)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1613)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1357)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:502)
+  at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:312)
+  at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+  at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310)
+  at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+  at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1085)
+  at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:858)
+  at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+  at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:128)
+  at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+  at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:107)
+  at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:243)
+  at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+  at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+  ... 24 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter#77a98a6a' defined in class path resource [spring/spring-db.xml]: Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.config.internalCacheAdvisor': Cannot resolve reference to bean 'org.springframework.cache.annotation.AnnotationCacheOperationSource#0' while setting bean property 'cacheOperationSource'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.AnnotationCacheOperationSource#0': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.config.internalJCacheAdvisor': Cannot resolve reference to bean 'org.springframework.cache.jcache.interceptor.DefaultJCacheOperationSource#0' while setting bean property 'cacheOperationSource'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.jcache.interceptor.DefaultJCacheOperationSource#0': Cannot resolve reference to bean 'ehCacheManager' while setting bean property 'cacheManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ehCacheManager' defined in class path resource [spring/spring-tools.xml]: Cannot create inner bean 'org.springframework.cache.jcache.JCacheManagerFactoryBean#58326051' of type [org.springframework.cache.jcache.JCacheManagerFactoryBean] while setting bean property 'cacheManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.jcache.JCacheManagerFactoryBean#58326051' defined in class path resource [spring/spring-tools.xml]: Invocation of init method failed; nested exception is javax.cache.CacheException: org.ehcache.xml.exceptions.XmlConfigurationException: Error parsing XML configuration at file:/home/sebastian/my_java_projects/topjava/target/classes/cache/ehcache.xml
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:591)
+  at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:502)
+  at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:312)
+  ... 42 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.config.internalCacheAdvisor': Cannot resolve reference to bean 'org.springframework.cache.annotation.AnnotationCacheOperationSource#0' while setting bean property 'cacheOperationSource'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.AnnotationCacheOperationSource#0': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.config.internalJCacheAdvisor': Cannot resolve reference to bean 'org.springframework.cache.jcache.interceptor.DefaultJCacheOperationSource#0' while setting bean property 'cacheOperationSource'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.jcache.interceptor.DefaultJCacheOperationSource#0': Cannot resolve reference to bean 'ehCacheManager' while setting bean property 'cacheManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ehCacheManager' defined in class path resource [spring/spring-tools.xml]: Cannot create inner bean 'org.springframework.cache.jcache.JCacheManagerFactoryBean#58326051' of type [org.springframework.cache.jcache.JCacheManagerFactoryBean] while setting bean property 'cacheManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.jcache.JCacheManagerFactoryBean#58326051' defined in class path resource [spring/spring-tools.xml]: Invocation of init method failed; nested exception is javax.cache.CacheException: org.ehcache.xml.exceptio...
+Collapse 
+ This snippet was truncated for display; see it in full
+Oleg K [11:48 PM]
+Не хочет.
+
+
+Viktor [Today at 12:34 AM]
+in #hw5
+@Oleg K "Caused by: java.lang.ClassNotFoundException: com.sun.xml.internal.bind.v2.ContextFactory" - скорее всего проблема в 9 java (edited)
+
+
+1 reply
+Oleg K [3 hours ago]
+Да, так и есть, спасибо. Помогло добавление com.sun.xml.bind и javax.activation. Тесты проходят с предупреждениями. Наверное пора менять 9 на 8:grin:
+
+
+Yevhen Maksymovych [Today at 7:55 AM]
+in #hw5
+а как проверить, что все обращения выполняются в рамках одной транзакции?
+
+
+3 replies
+Oleksii Leshchenko [2 hours ago]
+Вроде в логах надо смотреть
+
+
+Yevhen Maksymovych [2 hours ago]
+ну, т.е. если сконструлился один hibernate-запрос, значит всё путём?
+
+
+Oleksii Leshchenko [2 hours ago]
+Скорее всего да. Я сам не смотрел, но задавал такой вопрос. Мне сказали смотреть в логах. 
+И у меня в методе save() было 2 обращения к БД - для get и insert. Каждый в своей тарнзакции, что не правильно...
+
+
+Oleg K [Today at 8:34 AM]
+in #hw5
+Кто-нибудь уже сдался и сменил 9 java?)
+
+
+6 replies
+Yevhen Maksymovych [2 hours ago]
+я сменил на восьмёрку, надоели предупреждения о том, что всё, чем я пользуюсь, деприкэйтед, и скоро будет отключено
+
+
+Vladimir Gorbatenko [2 hours ago]
+неужели такие кардинальные изменения в 9 ???
+
+
+Yevhen Maksymovych [2 hours ago]
+ну хотя бы вот:
+```Java 9 has deprecated java.xml.bind module and has removed it from the default classpath. That's why we get the class not found exception. The javax.xml.bind package is now a sub package of Module java.xml.bind.```
+
+
+Yevhen Maksymovych [2 hours ago]
+это, конечно, лечится добавлением зависимости
+
+
+Yevhen Maksymovych [2 hours ago]
+но постоянно вылезают другие глюки
+
+
+Yevhen Maksymovych [2 hours ago]
+тот же junit
+```Java 9 is much more restrictive concerning reflective access to non-public fields/methods. For example setAccessible called by org.assertj.core.util.introspectionFieldUtils#readField on a private field fails with:
+
+java.lang.reflect.InaccessibleObjectException: Unable to make field private transient long java.util.Date.fastTime accessible: module java.base does not "opens java.util" to unnamed module @66b72664
+This means that assertj methods which use reflection on non-public fields/methods will fail/behave differently. For example the isEqualTo*Fields methods.```
+
+
+alexey [Today at 9:37 AM]
+in #hw5
+Достаю в тестах еду с пользователем, у пользователя все поля кроме калорий и даты - null. Не пойму как получить остальное. Подскажите куда копать:face_with_rolling_eyes:
+
+
+5 replies
+Yevhen Maksymovych [2 hours ago]
+а ты как достаёшь собственно юзера? если ручным назначением полей, то где-то ошибся в присваивании, если через join fetch, то такого быть не должно, все не-объектные поля должны примапиться (edited)
+
+
+alexey [2 hours ago]
+Вообще через cruduser getOne(id). Через join fetch это вручную запрос написать?
+
+
+Yevhen Maksymovych [2 hours ago]
+ага
+
+
+alexey [1 hour ago]
+Я так понимаю getOne(id) возращает мне proxy!?
+
+
+Yevhen Maksymovych [21 minutes ago]
+ага, findOne возвращает живую энтити, а getOne - референс
+
+
+Yevhen Maksymovych [10:16 AM]
+и ещё вопрос, почему для jpa-реализации нам достаточно указать
+```<context:component-scan base-package="ru.javawebinar.**.repository.jpa"/>```
+а для spring data нужно ещё
+```<jpa:repositories base-package="ru.javawebinar.**.repository.datajpa"/>```
+
+
+alexey [Today at 10:23 AM]
+in #hw5
+Было же в видео вроде. <jpa:repositories base-package="ru.javawebinar.**.repository.datajpa"/> ищет наследников от  Repository<T, ID>
+Yevhen Maksymovych
+и ещё вопрос, почему для jpa-реализации нам достаточно указать
+```<context:component-scan base-package="ru.javawebinar.**.repository.jpa"/>```
+а для spring data нужно ещё
+```<jpa:repositories base-package="ru.javawebinar.**.repository.datajpa"/>```
+Thread in #hw5Today at 10:16 AM
+ 
+
+
+1 reply
+Yevhen Maksymovych [1 hour ago]
+спасибо!
+
+
+Vitaly M. [10:47 AM]
+Всем привет.
+Я что-то сразу в тупик стал.
+Настраиваю профиль jdbc...
+У меня ошибка
+```No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}```
+Я не пойму, почему она выскакивает. Даже вопрос сформулировать не могу...
+
+
+Vitaly M. [Today at 10:48 AM]
+in #hw5
+Ведь бин jdbcMealRepositoryImpl есть
+
+
+5 replies
+alexey [1 hour ago]
+spring -db внимательнее смотри. видимо не убрал под профиль какой то скан
+
+
+Grigory Kislin [1 hour ago]
+смотри какой у тебя профиль в тестах и попадает ли в конфигурации в этом профиле jdbcMealRepositoryImpl
+
+
+Vitaly M. [34 minutes ago]
+В конфигурации:
+```<beans profile="jdbc">
+        <context:component-scan base-package="ru.javawebinar.**.repository.jdbc"/>
+
+        <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
+            <jdbc:script location="classpath:db/${jdbc.initLocation}"/>
+            <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
+        </jdbc:initialize-database>
+
+        <bean id="jdbcTemplate"
+              class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+        </bean>
+
+        <bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+        </bean>
+    </beans>```
+Да все убрал, и идея показывает слева иконку со стереотипами, где есть jdbcMealRepositoryImpl
+
+
+Vitaly M. [29 minutes ago]
+в логах теста видна такая строка:
+```Skipped XML bean definition file due to specified profiles [jdbc] not matching: class path resource [spring/spring-db.xml]```
+
+
+alexey [25 minutes ago]
+инициализацию зачем в профиль ?
