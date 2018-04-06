@@ -4447,3 +4447,74 @@ Shtramak [14 hours ago]
 
 alexey [8:28 AM]
 Кто нибудь может подсказать, почему при дебаге тестов то нормально весь контекст с базами подгружается, то ждать приходиться минут по 5-10?
+
+
+phoenix [3:44 PM]
+@alexey возможно с пулом связано
+
+
+realcorwin [Yesterday at 1:30 PM]
+in #general
+след. урок, сегодня, да? или что-то сдвинули?
+
+
+5 replies
+Oleksii Leshchenko [1 day ago]
+сдвинули. Следующий - аж 10 апреля
+
+
+Oleksii Leshchenko [1 day ago]
+@realcorwin
+
+
+Oleksii Leshchenko [1 day ago]
+https://github.com/JavaWebinar/topjava (edited)
+
+
+Oleksii Leshchenko [1 day ago]
+там есть расписание
+
+
+realcorwin [1 day ago]
+понял. спасибо.
+
+
+eageev [12:19 AM]
+У кого-нить есть опыт настройки CORS в Wildfly?
+
+
+Ilya [Today at 10:49 AM]
+in #general
+интересно - есть рабочее решение на фикс бага - не рабоает lazy на отношениях @OneToOne ? Тут такой варик предлагают https://coderwall.com/p/p7-nqq/lazy-load-one-to-one-in-jpa-hibernate
+Он рабочий, но чистейший костыль.
+Coderwall
+Lazy load one-to-one in JPA/Hibernate (Example)
+A protip by quartzde about hibernate, jpa, and java.
+ 
+
+
+4 replies
+saudabaew [2 hours ago]
+могу ошибаться, но использование отношения @OneToOne вроде как вообще не приветсвтуется
+
+
+Ilya [1 hour ago]
+@saudabaew а как тогда быть ?
+
+
+saudabaew [28 minutes ago]
+Модифицировать структуру бд
+
+
+Ilya [24 minutes ago]
+@saudabaew всм, если у меня по логике вещей 1 к 1 ?
+
+
+realcorwin [1:06 PM]
+Григорий, может выложишь следующий урок? Можно даже мне в личку :slightly_smiling_face:. Выпускной не хочу начинать, пока весь курс не пройду. На этой неделе время есть, а следующая - вся в разъездах.
+
+Yevhen Maksymovych [1:07 PM]
+тогда уж всем в личку :slightly_smiling_face:
+
+Ilya [1:38 PM]
+да, я бы тоже не отказался от следующего занятия.

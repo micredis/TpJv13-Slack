@@ -1463,3 +1463,388 @@ Vitaly M. [29 minutes ago]
 
 alexey [25 minutes ago]
 инициализацию зачем в профиль ?
+
+
+Vitaly M. [2 days ago]
+я решил, что если профиль выключен , то и инициализация не нужна
+
+
+Viktor [2 days ago]
+при каких условиях получаешь ошибку? Как и где указывашь с какими профилями стартовать?
+
+Ps.. нет бина MealRepository, если в конфиге он есть, значит конфиг не грузится.
+
+
+Vitaly M. [2 days ago]
+не могу сюда вставить скрин... поэтому напишу в основном диалоге
+
+
+Grigory Kislin [1 day ago]
+@Vitaly M. гуглил по фразе `Skipped XML bean definition file due to specified profiles not matching: class path resource` ?
+как профиль ставишь при запуске? (edited)
+
+
+Vitaly M. [1:20 PM]
+uploaded this image: Снимок экрана от 2018-04-04 13-19-31.png 
+
+alexey [1:30 PM]
+в ActiveProfiles у тебя добавлен профиль jdbc?
+
+Vitaly M. [1:35 PM]
+Хм, может спатчами чего напортачил
+у меня нет такого
+
+
+Vitaly M. [Apr 4th at 1:35 PM]
+in #hw5
+Есть только Profiles
+
+
+5 replies
+alexey [2 days ago]
+над классом тестов должна стоять аннотация @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
+
+
+Vitaly M. [1 day ago]
+```@RunWith(SpringRunner.class)
+@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
+@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
+public class MealServiceTest {```
+
+
+Vitaly M. [1 day ago]
+все есть
+
+
+Viktor [1 day ago]
+я точно не помню, но имя класса ActiveDbProfileResolver явно намекает, что оно решает только профили БД (edited)
+
+
+Grigory Kislin [1 day ago]
+ну, це ж просто поглядеть на класс ActiveDbProfileResolver
+
+
+Viktor [2:12 PM]
+commented on Vitaly M.’s file Снимок экрана от 2018-04-04 13-19-31.png
+то, что бин в конфиге описан уже поняли, вопрос все тот же какие профили запускаются?
+Grigory Kislin [2:46 PM]
+профили запускаются
+1. в тестах- какие ты сконфигуришь (либо напрямую через @ActiveProfile, либо через резолвер)
+2. в приложении аналогично- какие укажешь при создании контекста спринга
+
+AntonY [8:49 PM]
+Ребята, помогите, пожалуйста, застрял в самом начале. Сделал datajpa для еды, разбил spring на профили.
+Ошибка идет и на всех тестах (user и meal) и через tomcat. Куда копать? И есть какой-нибудь алгоритм дебага spring?
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'mealServiceImpl' defined in file [C:\project\topjava\topjava\target\topjava\WEB-INF\classes\ru\javawebinar\topjava\service\MealServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+    
+public class MealServiceImpl implements MealService {
+   private final MealRepository repository;
+   @Autowired
+   public MealServiceImpl(MealRepository repository) {
+       this.repository = repository;}
+
+Vitaly M. [8:50 PM]
+ООО ))) добро пожаловать! )
+у меня та же проблема
+
+AntonY [8:50 PM]
+привет. как победил?
+
+Vitaly M. [8:51 PM]
+ни как ))) вот только сел снова побеждать
+
+Vitaly M. [8:51 PM]
+uploaded and commented on this image: Снимок экрана от 2018-04-04 20-47-07.png 
+
+Григорий, я наверное сильно туплю, но профиль запуска, я выбираю так...
+
+AntonY [8:53 PM]
+@Vitaly M. это просто декорации на работу никак не влияет
+
+Oleksii Leshchenko [8:53 PM]
+Проблема в настройках профилей и какие из них включены в тестах. Смотрите @ActiveProfiles в тестах. В Idea выбор профиля при открытие конфигуоации Спринга ни на что не влияет, просто для удобства Ide...
+Соббщение об ошибке говорит, что не может найти ниодного репозитория для MEal. а их у нас несколько - jdbc/jpa/datajpa. Но профилем ниодин не включен в тестах. Если включить одновременно несколько - будет другая ошибка...
+
+Vitaly M. [8:56 PM]
+в тестах используется
+```@ActiveProfiles(resolver = ActiveDbProfileResolver.class)```
+
+ActiveDbProfileResolver берет активный профиль из Profiles
+
+а в Profiles прописан только тип базы
+```public static String getActiveDbProfile() {
+        try {
+            Class.forName("org.postgresql.Driver");
+            return POSTGRES_DB;
+        } catch (ClassNotFoundException ex) {
+            try {
+                Class.forName("org.hsqldb.jdbcDriver");
+                return Profiles.HSQL_DB;
+            } catch (ClassNotFoundException e) {
+                throw new IllegalStateException("Could not find DB driver");
+            }
+        }
+    }```
+
+AntonY [8:56 PM]
+@Oleksii Leshchenko  спасибо. а как это делается?
+@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
+
+Vitaly M. [8:56 PM]
+т.е. мне нужно добавить сюда тип профиля?
+
+AntonY [8:57 PM]
+на тестах стоит, но если пишу второй раз @ActiveProfiles то ругается. хотя бы с одним вариантом запустить, а потом делить буду (edited)
+
+Vitaly M. [8:58 PM]
+Я это понимаю )))
+Oleksii Leshchenko
+Проблема в настройках профилей и какие из них включены в тестах. Смотрите @ActiveProfiles в тестах. В Idea выбор профиля при открытие конфигуоации Спринга ни на что не влияет, просто для удобства Ide...
+Posted in #hw5
+Apr 4th
+
+Oleksii Leshchenko [8:59 PM]
+для начала укажите типа такого:
+@ActiveProfiles(profiles = {"datajpa", "postgres"})
+значения только правильные для конкретного теста выбирете.
+а потом можно в классе тестов:
+@ActiveProfiles(profiles = Profiles..IMPLEMENTATION.......)    <- тут не помню точно имя
+а в базовом классе
+@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
+ибо одновременно resolver и profiles не получится. и 2 раза @ActiveProfiles для одного класса тоже не работает
+
+AntonY [9:01 PM]
+@Oleksii Leshchenko спаситель! спасибо
+@Oleksii Leshchenko А как быть с tomcat? Пробовал самые разные варианты, в том числе -Dspring.profile.active=datajpa
+Куда и как правильно вставлять инициализацию профилей?
+
+Vitaly M. [9:07 PM]
+```@ActiveProfiles(profiles = {"datajpa", "postgres"})```
+за это спасибо )))
+получается, если использовать getActiveDbProfile(), то его нужно править, чтоб он возвращал {"datajpa", "postgres"} ?
+
+Oleksii Leshchenko [9:09 PM]
+нет,
+в базовом классе для тестов:
+@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
+а в самих тестах:
+@ActiveProfiles(profiles={Profiles.JPA})
+тогда они будут одновременно работать оба
+@AntonY С Томкатом в сервлете, где создается XML контекст надо использовать другой класс контекста. Надо смотреть, не помню имя.
+Там в отличии от текущего создается контекст пустой, конструктор без параметров.
+потом у него вызываем setProfiles() - задаем профили.
+потом load() - передаем наши конфиги Спринта
+и в конце refresh() контекста
+может получится и с этим классом контекста, кстати
+надо просто не грузить конфиги в конструкторе
+а задать профили, а потом лоад и рефреш
+
+AntonY [9:14 PM]
+спасибо. буду копать
+
+Vitaly M. [9:21 PM]
+ну тогда уж в тестах будет правильнее
+```@ActiveProfiles(profiles={Profiles.JDBC,Profiles.POSTGRES_DB})```
+
+Oleksii Leshchenko [9:23 PM]
+не очень, ибо БД захардкожена... а у нас есть резолвер для базы....
+Если захотим переключиться на другую БД, то во всех тестах надо править... 
+Так можно сделать для начала, чтобы протестировать сам тест и если все ок, уже дальше править
+
+Vitaly M. [9:24 PM]
+А вот без этого Profiles.POSTGRES_DB у меня тесты не идут )
+
+Oleksii Leshchenko [9:25 PM]
+так БД резолвер надо добавить в базовый класс...
+
+Yevhen Maksymovych [9:25 PM]
+там же написано, что тесты надо наследовать от одного общего класса. положи резолвер в базовый, а реализацию - в потомков
+
+Vitaly M. [9:49 PM]
+@Oleksii Leshchenko, @Yevhen Maksymovych - совместно достучались до моего мозга ))) с тестами разобрался, теперь пойду с томкатом бороться
+
+AntonY [9:59 PM]
+Кто знает почему так происходит?
+Если написать:
+       springContext = new ClassPathXmlApplicationContext();
+То создастся объект ClassPathXmlApplicationContext, но idea не будет определять методы этого класса
+и при вызове метода springContext.setConfigLocations будет ругаться, что такого нет
+А если написать
+       `ClassPathXmlApplicationContext` springContext = new ClassPathXmlApplicationContext();
+То все соберется без ошибок.
+Это глюк идеи или без объявления типа переменные лучше не создавать?
+Если второе, то тогда в topjava надо внести изменения.
+
+Vitaly M. [10:00 PM]
+Потому как у нас
+```private ConfigurableApplicationContext springContext;```
+
+tema.emelyan [10:01 PM]
+что такое создание переменных без типа в джаве? :smiley: (edited)
+
+Yevhen Maksymovych [10:02 PM]
+может имеется в виду
+```var springContext = new ClassPathXmlApplicationContext();```
+а чё, теперь так можно )
+
+AntonY [10:04 PM]
+лоханулся js рулит
+
+Yevhen Maksymovych [10:04 PM]
+да не, серьёзно, теперь так можно, оракл разрешил в жаве 10 не указывать тип переменной
+
+tema.emelyan [10:05 PM]
+ну это дело известное, но товарищ вар тоже не написал
+
+AntonY [10:06 PM]
+возможно это уже 11 джава?
+ai и все такое
+
+tema.emelyan [10:06 PM]
+11 в сентябре что ли
+
+Vitaly M. [10:41 PM]
+ЙОУ ТомКат заработал! )))
+
+
+dustnfox [Yesterday at 9:20 AM]
+in #hw5
+А кто мне может объяснить, что значит "не копятся"? Что Григорий имел в виду? _ОСТОРОЖНО! В РЕПЛАЯХ КУСОК ИЗ ПОДСКАЗОК_
+
+
+4 replies
+dustnfox [1 day ago]
+Я вот про это
+>Проверьте, что все тесты запускаются из Maven (имена классов тестов удовлетворяют соглашению) и итоги тестов класса выводятся корректно (не копятся)
+
+
+Alexander Shnaider [1 day ago]
+ну это значит когда ты выполняешь несколько реализаций тестов подряд, у тебя итоги идут по каждой реализации отдельно для DataJpa отдельно для Jpa и так далее
+
+
+Alexander Shnaider [1 day ago]
+я например косякнул и у меня просто всё слеплялось) Проверь у себя в консоле
+
+
+dustnfox [1 day ago]
+Понял. Спасибо!
+
+
+Alexander Shnaider [Yesterday at 9:41 AM]
+in #hw5
+Коллеги, поясните пожалуйста 5-й пункт задания. Как я понимаю шаблонный метод, нам нужно создать некий интерфейс для отображения даты. В классе JdbcMealRepositoryImpl создать переменную с этим созданым интерфейсом и в зависимости от базы данных класть туда LocalDateTime либо Timetamp.valueOf(LocalDateTime). Так вот вопрос, а что это за общий интерфейс может быть если LocalDateTime и Timetamp наследуются от разных классов и реализуют разные интерфейсы. Не пойму как сделать...
+
+
+12 replies
+Yevhen Maksymovych [1 day ago]
+не усложняй :slightly_smiling_face:
+
+
+Yevhen Maksymovych [1 day ago]
+сделай сам JdbcMealRepositoryImpl абстрактным, во всех местах, где происходит присваивание LocalDateTime оберни этот LocalDateTime в абстрактный метод-обёртку, и имплементируй этот метод двумя способами, для postgres и hbsql
+
+
+dustnfox [1 day ago]
+То, что ты описал, это паттерн Стратегия. В ШМ для классов имеющих много общего кода создается родительский и весь общий код кладется в него.
+
+dustnfox [1 day ago]
+Ну вот. Шустрый @Yevhen Maksymovych уже все описал :slightly_smiling_face:
+
+
+Yevhen Maksymovych [1 day ago]
+:+1:
+
+
+Alexander Shnaider [1 day ago]
+ок, сейчас подумаю. Честно говоря пока не улавливаю разницы между стратегией и шаблоном, нужно ещё раз почитать про них)
+
+
+jawinterod [24 hours ago]
+А я так и не понял как сюда дженерики присобачить, чтобы возвращать не просто Object:thinking_face: Может кто даст подсказку.
+
+
+dustnfox [24 hours ago]
+Добавляешь в родительский класс дженерик. Абстрактный метод возвращает этот дженерик. У потомков указываешь, чем замещается дженерик.
+
+
+
+Yevhen Maksymovych [24 hours ago]
+Опередил :-)
+
+jawinterod [23 hours ago]
+@dustnfox Спасибо большое! Всё получилось.
+
+
+alexey [23 hours ago]
+а какой метод возращает object?
+
+
+jawinterod [23 hours ago]
+При реализации пункта 5 такой метод может появиться.
+
+
+poleg [2:29 PM]
+Сделал тесты по 3 пункту, все работает. Но когда запускаю в IDEA Maven Lifecycle - test, почему-то он эти тесты не видит (кнопку skipTest отжата).
+Вот я специально сделал ошибку в тесте, когда запускаю из класса с тестом, он ругается. А запускаю Maven Lifecycle - test - ошибок нет. Как так? (edited)
+
+poleg [2:40 PM]
+Сам спросил - сам ответил ) Забыл что имя класса на Test должно заканчиваться. Т.е не UserServiceTestDataJpa, а UserServiceDataJpaTest
+
+Хэм [6:47 PM]
+туплю нереально:( почему то кроме меня(только я не догнал?) никто не задался вопросом а что должно быть в теле профиля datajpa? я имею ввиду в: `<beans profile="datajpa">`
+ `<bean id =?`
+`class=?`
+ `p:driverClassName=?`// и так далее тоже самое что и для postgres или вообще ничего:thinking_face: (edited)
+
+Yevhen Maksymovych [7:05 PM]
+Профили для постгреса и хдб - профили для выбора типа бд. Жпа, ждбс и датажпа - профили для выбора имплементации репозитроиев. В них по определению должны быть разные вещи
+Т.е. в них тоже будут бины, но уже не для подключения базы данных. Все необходимые тебе бины уже есть в spring-db.xml
+Надо только правильно их разбросать
+Ничего нового добавлять или копировать существующие не надо. Вырезал - вставил
+Подсказка: когда мы имплементировали новые варианты репов - мы закомментировали старые бины для предыдущих реализаций. Тебе их надо раскоммментировать, и растащить по нужным профилям
+
+Хэм [7:34 PM]
+wow паззл собрался спасибо:+1:
+
+Edgar Zed [8:35 AM]
+ооо даа, нашел как программно заставить томкат подхватывать нужные профили во время загрузки сервлета %)
+`System.setProperty("spring.profiles.active", "postgres, datajpa");`
+
+Nedfrench [9:30 AM]
+Коллеги, добрый день.
+При запуске теста получаю 
+"Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}". Хотя выбран профиль JPA. Не подскажете куда смотреть?
+
+Yevhen Maksymovych [9:35 AM]
+покажь-как гит
+
+Nedfrench [9:38 AM]
+Разобрался. Т.к. базовый класс для тестов еще не создавал, в UserServiceTest сделал "@ActiveProfiles(resolver = ActiveDbProfileResolver.class, profiles={Profiles.JPA})" -- НЕ работает. Изменил(временно) на "@ActiveProfiles(profiles={Profiles.JPA,Profiles.POSTGRES_DB})" заработало.
+В гит особо показывать нечего еще.
+Спасибо.
+Не понимаю зачем нам "REPOSITORY_IMPLEMENTATION" в классе Profiles? (edited)
+Туплю, сам же выше написал зачем. Извиняюсь.
+
+tema.emelyan [9:44 AM]
+rubber duck programming
+
+
+Zhivchik [Today at 11:11 AM]
+in #hw5
+Добрый день. Вопрос по пятому пункту. Я правильно понимаю - если в профилях выставить HSQLDB и JDBC и запустить тесты , те из них , которые работают с датой и временем не должны проходить (так как HSQLDB не умеет работать с Java8 Time API)?
+
+
+3 replies
+Yevhen Maksymovych [3 hours ago]
+да, должны упасть тесты MealService использующие дату (edited)
+
+
+Zhivchik [3 hours ago]
+Спасибо. Забыл поменять REPOSITORY_IMPLEMENTATION на JDBC в профилях
+
+
+dustnfox [1 minute ago]
+С нашей версией `2.3.4` - да. Должна упасть. А вот текущая уже не должна, судя по этой записи https://sourceforge.net/p/hsqldb/feature-requests/331/
+
+Григорий, дает возможность нам "приложить" _шаблонный метод_ к тому, что мы делаем.
