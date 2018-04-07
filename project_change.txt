@@ -176,3 +176,20 @@ JavaWebinar
 Show less
 
 JavaWebinar/topjava
+
+
+GitHub APP [7:49 PM]
+JavaWebinar
+*9 new commits pushed to `master`*
+`f58c79d5` - 5_0_fix
+`e36eeac0` - 5_1_HW4
+`309d39f9` - 5_2_fix_hibernate_issue
+`8708ca23` - 5_3_HW4_optional
+`4f0f497b` - 5_4_log_colored
+`6d92b442` - 5_5_profiles_connection_pool
+`42b23297` - 5_6_profile_resolver
+`54157ca1` - 5_7_spring_data_jpa
+`99050889` - 5_8_spring_cache
+Show less
+
+JavaWebinar/topjava

@@ -1848,3 +1848,95 @@ dustnfox [1 minute ago]
 С нашей версией `2.3.4` - да. Должна упасть. А вот текущая уже не должна, судя по этой записи https://sourceforge.net/p/hsqldb/feature-requests/331/
 
 Григорий, дает возможность нам "приложить" _шаблонный метод_ к тому, что мы делаем.
+
+
+Vladimir Gorbatenko [4:08 PM]
+Что-то я с профайлами недопонимаю.
+1) Мавен профайлы, определяют общее для проекта поведение работы с чем-то. В данном случае нужны для того чтобы в проект подтянуть нужную зависимость соответствующей БД.
+  У нас 2 таких профиля (профайла):
+    - hsqldb
+    - postgresql
+ С этим вроде как все ясно.
+2) Спринг профайлы, нужны для конфигурирования бинов. В данном случае утилиты/драйверы для работы с БД.
+  В домашке изначально 2 настроенных:  
+    - hsqldb
+    - postgresql
+  в которых указывается какой нужно взять файл-property, и вытянуть из него соответствующие настройки для работы с БД.
+ 
+  В этом месте мне становится  непонятно что нужно делать, как настроить бины: jpa, jdbc, datajpa???
+Help pls
+
+
+Viktor [Yesterday at 4:22 PM]
+in #hw5
+@Vladimir Gorbatenko что именно ты не понимаешь? как создавать бины? как настраивать? Настаивать какой бин? с чем конкретно проблема?
+
+
+7 replies
+Vladimir Gorbatenko [1 day ago]
+jdbc и jpa настраиваемые ранее, настраивались на сканирование определенного пакета, и настраивались  конкретную базу (postgresql). А как быть сейчас, на какие базы настраиваться?
+
+
+Vladimir Gorbatenko [1 day ago]
+С вот этим что делать тоже не ясно
+<context:component-scan base-package="ru.javawebinar.**.repository.datajpa"/>
+   <jpa:repositories base-package="ru.javawebinar.**.repository.datajpa"/>.
+
+
+Vladimir Gorbatenko [1 day ago]
+Убрать datajpa, пусть сканирует весь пакет repository?
+
+
+Vladimir Gorbatenko [1 day ago]
+Подсмотрел в гит. Непонятно, зачем тогда в spring-db.xml осталось столько мусора, если мы все это хозяйство должны положить в профайлы???
+
+
+Viktor [1 day ago]
+@Vladimir Gorbatenko spring можно запускать с несколькими профилями
+
+
+Vladimir Gorbatenko [1 day ago]
+да, это ясно
+
+
+Viktor [1 day ago]
+т.е. за то с какой базой будет общаться код описывает профиль БД, за то как с ней общаться описывают профили jdbc, jpa, datajpa
+
+
+Vladimir Gorbatenko [Yesterday at 5:41 PM]
+in #hw5
+Григорий писал: в профиле репозиторий есть и профиль в тестах включен?
+Скажите, а как включить профиль в тестах?
+
+
+6 replies
+Viktor [1 day ago]
+@ActiveProfiles
+
+
+Vladimir Gorbatenko [1 day ago]
+@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
+
+
+Vladimir Gorbatenko [1 day ago]
+Изменить на конкретно datajpa?
+
+
+Vladimir Gorbatenko [1 day ago]
+@ActiveProfiles(Profiles.DATAJPA) ага?
+
+
+Viktor [1 day ago]
+попробуй
+
+
+Vladimir Gorbatenko [1 day ago]
+да :slightly_smiling_face:
+
+
+Vladimir Gorbatenko [5:43 PM]
+Active Spring Profile установлен в datajpa, 
+В классе Profiles, public static final String REPOSITORY_IMPLEMENTATION = DATAJPA;
+
+Nedfrench [10:13 PM]
+Всем привет. Подскажите пож-та, итого сколько должно быть тестов - 7? Базовый и по 3(jdbc, jpa, datajpa) для MEAL и USER?
