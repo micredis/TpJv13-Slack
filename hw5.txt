@@ -1940,3 +1940,102 @@ Active Spring Profile установлен в datajpa,
 
 Nedfrench [10:13 PM]
 Всем привет. Подскажите пож-та, итого сколько должно быть тестов - 7? Базовый и по 3(jdbc, jpa, datajpa) для MEAL и USER?
+
+
+qf05 [10 hours ago]
+Если ты спрашиваешь сколько должно быть всего файлов/классов в папке service в тестах, то у меня их 9. А если сколько тестовых методов то 60.
+
+
+Nedfrench [5 hours ago]
+Спасибо
+
+
+Nedfrench [5 hours ago]
+Я правильно понимаю, что тесты для MEAL наследуются от MealServiceTest, в котором вся функциональность?
+
+
+qf05 [2 hours ago]
+да
+
+
+mila [Today at 4:04 PM]
+in #hw5
+только добралась до дз( не пойму как в мил перед сохранением засетить ссылку на юзера? T getOne(ID id) только на мил ссылку дастаёт, если написать для этого метод со своим запросом он уже не будет возвращать только ссылку
+
+
+2 replies
+Nedfrench [5 hours ago]
+Коллеги 29.03 об этом писали, я также сделал.
+
+
+mila [4 hours ago]
+@Nedfrench о, спасибо! я искала в канале по "getOne", ничего толком не нашла
+интересный вариант, не подумала об этом...
+
+
+Nedfrench [Today at 7:48 PM]
+in #hw5
+Коллеги, тест с профилем JPA валится " No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available: expected single matching bean but found 2: jpaMealRepositoryImpl,dataJpaMealRepositoryImpl".
+Подозреваю, что в spring-db с профилями что-то не так, больше часа уже разбираюсь. 
+Куда  смотреть?
+
+
+14 replies
+Yevhen Maksymovych [3 hours ago]
+по тексту ошибки и смотри - судя по тому, что у тебя спринг находит два бина там, где ожидает один, у тебя в профиле jpa стоит <context:component-scan ...jpa/> и <context:component-scan ...datajpa/>
+
+
+Yevhen Maksymovych [3 hours ago]
+или, что более вероятно, в профиле "jpa" сидит <context:component-scan ...jpa/>, а <context:component-scan ...datajpa/> сидит в профиле "datajpa,jpa", и применяется к jpa в том числе
+
+
+Nedfrench [3 hours ago]
+Проверил, все context:component-scan в своих профилях. Когда запускаю тест DataJPA, то тест проходит.
+
+
+Yevhen Maksymovych [3 hours ago]
+давай гит
+
+
+Nedfrench [2 hours ago]
+https://github.com/Aflek87/topjava/tree/HW05
+
+
+Yevhen Maksymovych [2 hours ago]
+у тебя MealServiceJpaTest тестится с профиле jpa
+
+
+Yevhen Maksymovych [2 hours ago]
+но он наследуется от MealServiceTest.java, который в свою очередь наследуется от BaseServiceTest.java, в который включен профиль datajpa
+
+
+Nedfrench [2 hours ago]
+Разобрался!
+
+
+Nedfrench [2 hours ago]
+Спасибо.
+
+
+Yevhen Maksymovych [2 hours ago]
+:+1:
+
+
+Nedfrench [2 hours ago]
+В базовом классе  забыл убрать профиль DATAJPA/
+
+
+Yevhen Maksymovych [2 hours ago]
+ты в базовом оставь вообще резольвер, это будет корректнее
+
+
+Yevhen Maksymovych [2 hours ago]
+так у тебя тесты будут автоматом подхватывать реализацию БД из текущего профиля мавена
+
+
+Nedfrench [2 hours ago]
+Понял.
+
+
+mila [11:35 PM]
+а у кого была проблема с java.lang.IllegalArgumentException: Invalid boolean value [${jpa.showSql}] всё-таки решили её как-то?
