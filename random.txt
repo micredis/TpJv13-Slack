@@ -718,3 +718,21 @@ Andrey [3:33 PM]
 
 Andrey [3:38 PM]
 Мне просто очень понравилась идея (Григорию спасибо) выноса файлов локаализации вне проекта, и реализовывать стандартным способом (messageSource.setBasename("classpath:locale/messages"))  уже не интересно. (edited)
+
+
+Valery.Shkerdin [10:08 AM]
+Народ, не у кого не было такого, что в базе, прикрученой к идее, не загружаются данный таблицы, по клику, от одной базы загружаются таблицы, от другой нет
+
+Arthur [1:11 PM]
+какую роль здесь Идея играет?Данные в таблицу через GUI Идеи загружаются? (edited)
+
+Valery.Shkerdin [1:25 PM]
+uploaded this file 
+@Arthur я вот о чём
+502 kB Binary
+
+
+Valery.Shkerdin [1:25 PM]
+uploaded this file 
+record_000003.avi
+530 kB Binary

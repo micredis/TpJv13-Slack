@@ -2039,3 +2039,45 @@ Nedfrench [2 hours ago]
 
 mila [11:35 PM]
 а у кого была проблема с java.lang.IllegalArgumentException: Invalid boolean value [${jpa.showSql}] всё-таки решили её как-то?
+
+
+Yevhen Maksymovych [20 hours ago]
+а что у тебя в ${jpa.showSql}?
+
+
+Arthur [20 hours ago]
+скорее всего не может разрисолвить
+
+
+mila [11 hours ago]
+jpa.showSql=true (edited)
+
+
+mila [11 hours ago]
+там Григорий уже писал в чём дело скорее всего, но что конкретно попробовать не сказал 
+https://topjava13.slack.com/archives/C9XPFU79D/p1522707115000377?thread_ts=1522619148.000051&cid=C9XPFU79D
+Grigory Kislin
+@Vitaly Ch спринг не видит твоего конфига. скорее всего из за того, что `context:property-placeholder` не попал в контекст спринга из за профиля
+From a thread in #hw5Apr 3rd at 1:11 AM
+
+
+mila [11 hours ago]
+профили вроде везде правильно выбраны у меня
+
+
+roma [5:14 PM]
+Народ есть кто живой?
+
+Dmitry Neustupov [5:16 PM]
+есть )
+
+roma [5:17 PM]
+супер
+проблемы у меня с методом create
+обычная реализация ругается мол поле USER должно быль не нуль по условиям валидации (с чем я полностью согласен)... а я не могу понять откуда его взять что бы туда засетить в SPRING_DJ (edited)
+
+roma [5:37 PM]
+ну хоть пните куда-нибудь где посмотреть
+
+roma [5:58 PM]
+Снято
