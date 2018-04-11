@@ -2079,5 +2079,182 @@ roma [5:17 PM]
 roma [5:37 PM]
 ну хоть пните куда-нибудь где посмотреть
 
+Grigory Kislin [1 day ago]
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson05.md#-%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B7%D0%BA%D0%B8-%D0%BF%D0%BE-hw05
+п. 6
+
 roma [5:58 PM]
 Снято
+
+
+Vladimir Gorbatenko [8:14 PM]
+Добрые люди, объясните, как это работает?
+//  Get DB profile depending of DB driver in classpath
+   public static String getActiveDbProfile() {
+       try {
+           Class.forName("org.postgresql.Driver");
+           return POSTGRES_DB;
+       } catch (ClassNotFoundException ex) {
+           try {
+               Class.forName("org.hsqldb.jdbcDriver");
+               return Profiles.HSQL_DB;
+           } catch (ClassNotFoundException e) {
+               throw new IllegalStateException("Could not find DB driver");
+           }
+       }
+   } (edited)
+... и почему это (ниже) таки не работает в тестах?
+@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
+
+Oleksii Leshchenko [8:51 PM]
+Работа getActiveDbProfile основана на том факте, что драйверы для БД - это соответсвующие классы, которые хранятся в путях, указанных в classpath. Идея состоит в том, чтобы попытаться просто загрузить соответствующий класс при помощи Class.forName. Если получилось, то соответсвующий драйвер есть в класспаф и значит именно эта БД активирована в данный момент. Если нет такого класса в доступности - вылетает эксепшен. Мы его перехватываем и пытаемся загрузить класс для другой БД.... Чтобы это все работало правильно, при переключении профиля мавена на другую БД надо сделать clean (удалить предыдущий класс) и Reimport maven projects (загрузить новый.)
+
+
+Oleksii Leshchenko [Apr 9th at 8:52 PM]
+in #hw5
+В тестах могло не работать, так как там помимо задания БД надо еще задать соответсвующую имплементацию jdbv/jpa/datajpa
+
+
+
+8 replies
+Nedfrench [1 day ago]
+Добрый день.
+"classpath" - всё вникнуть не могу, что это?
+
+
+Oleksii Leshchenko [1 day ago]
+Для безопасности, джава не шарится где попало по всему компьютеру. Доступ к библиотекам, сторонним jar файлам ищится только по определенным путям. Эти пути и конкретные jar прописываются в переменной, названной classpath. Просто стринговое значение, в котором через то чку запятой указаны пути и конкретные jar, которыми разрешено пользоваться. Похоже на системную переменную PATH
+
+
+Nedfrench [1 day ago]
+Т.е. maven записывает туда название класса(драйвер БД)?
+
+
+Oleksii Leshchenko [1 day ago]
+Скорее всего не совсем так. В результате Reimport maven progects соответсвующий класс загружается из репозитория и попадает туда, куда указывает classpath. И соответсвенно данный класс становится нам виден
+
+
+Oleksii Leshchenko [1 day ago]
+Т.е. не название попадает куда-то а сам класс в соответсвующию папку. както так, если не ошибаюсь, конечно)
+
+
+Oleksii Leshchenko [1 day ago]
+название тоже скорее всего попадает в класспаф
+
+
+Nedfrench [1 day ago]
+Понял, спасибо.
+
+
+Grigory Kislin [1 day ago]
+@Nedfrench classpath относится к основам...
+не смотрел программу basejava?
+http://javaops.ru/reg/basejava#program (edited)
+
+
+Vladimir Gorbatenko [Apr 9th at 9:01 PM]
+in #hw5
+В мавен сделал clean, профилях выбрал postgres, нажал на reimport.
+В Profiles - public static final String REPOSITORY_IMPLEMENTATION = DATAJPA;
+Не работает...
+Error creating bean with name 'mealServiceImpl' defined in file [C:\JAVA_PROJECTS\JAVA\topjava\target\classes\ru\javawebinar\topjava\service\MealServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {} (edited)
+
+
+6 replies
+Nedfrench [1 day ago]
+Так и не понял зачем нам REPOSITORY_IMPLEMENTATION?
+
+Vladimir Gorbatenko [1 day ago]
+Константа, в которой храниться один из видов обращения к БД (DATAJPA,JPA.JDBC) - для удобства
+
+
+Nedfrench [1 day ago]
+@ActiveProfiles(profiles= Profiles.DATAJPA) - почему так нельзя?
+
+
+Vladimir Gorbatenko [1 day ago]
+как я понял, затем что нужно указать пару (подключение - бд)
+
+
+Tanya [1 day ago]
+в MealServlet и SpringMain
+указывать профили надо через `getActiveDbProfile(), REPOSITORY_IMPLEMENTATION` (edited)
+
+
+Nedfrench [1 day ago]
+Спасибо
+
+
+Vladimir Gorbatenko [9:02 PM]
+А вот такой вариант работает...
+@ActiveProfiles({Profiles.DATAJPA,  Profiles.POSTGRES_DB})
+
+Tanya [9:04 PM]
+видимо, в spring-db не указано где брать реализацию репо для профилей jdbc или jpa (edited)
+
+Vladimir Gorbatenko [9:07 PM]
+подробней пожалуйста (edited)
+Tanya
+видимо, в spring-db не указано где брать реализацию репо для профилей jdbc или jpa
+Posted in #hw5
+Apr 9th
+
+Tanya [9:09 PM]
+для каждого профиля репо DATAJPA, JPA, JDBC
+должен быть задан context:component-scan (edited)
+
+Vladimir Gorbatenko [9:10 PM]
+это есть
+
+Tanya [9:12 PM]
+скинь spring_db (в лс), думаю что ошибка там где-то
+
+
+Oleksii Leshchenko [Apr 9th at 9:12 PM]
+in #hw5
+Проблема в том, что в базовом классе надо указать профиль БД через резолвер, а в производных указать нужный профиль имплементации jdbc/jpa/datajpa. тогда будкт работаь
+
+
+11 replies
+Nedfrench [1 day ago]
+А в MealServiceTest что указывать если от него наследуются тесты реализующие jdbc/jpa/datajpa?
+
+
+Oleksii Leshchenko [1 day ago]
+@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
+
+Nedfrench [1 day ago]
+Согласно "3.1 сделать один базовый класс для MealServiceTest и UserServiceTest." сделал базовый класс с "@ActiveProfiles(resolver = ActiveDbProfileResolver.class)". 
+От него наследуются MealServiceTest и UserServiceTest. А уже от этих по три теста (jdbc/jpa/datajpa), в которых указан профиль.
+
+
+Nedfrench [1 day ago]
+Итого 9 классов, перебор?
+
+
+Nedfrench [1 day ago]
+9 тестов
+
+
+Oleksii Leshchenko [1 day ago]
+DatajapaUserServiceTest -> UserServiceTest -> ServiceTest
+
+
+Oleksii Leshchenko [1 day ago]
+одна цепочка...
+
+
+Oleksii Leshchenko [1 day ago]
+таких несколкьо
+
+
+Nedfrench [1 day ago]
+Видимо из-за того, что всю логику оставил в UserServiceTest, а в DatajapaUserServiceTest только профиль указал.
+
+
+Nedfrench [1 day ago]
+Вроде разобрался, спасибо.
+
+
+Nedfrench [1 day ago]
+"1: Для того, чтобы не запускались родительские классы тестов нужно сделать их abstract"

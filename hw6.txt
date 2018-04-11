@@ -1,0 +1,164 @@
+Grigory Kislin [1:54 AM]
+joined #hw6.
+
+Grigory Kislin [1:58 AM]
+Готово 6-е занятие:
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson06.md
+Начинаем изучать Spring-MVC и слой Web. 
+Занятие и домашнее задание относительно большие, следующее занятие будет в четверг, 19.04 (edited)
+
+Daniil Kulak [2:09 AM]
+joined #hw6 along with 18 others.
+
+
+Хэм [10:15 PM]
+у кого не работают тесты? у меня не определяет говорит No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available: expected single matching bean but found 2: dataJpaMealRepositoryImpl,jpaMealRepositoryImpl
+ноэтой ошибки не должно же быть ведь у нас профили теперь все четко я не знаю почему он находит jdbc  он не активен у меня:tired_face:
+
+Jan [10:54 PM]
+А как ты запускаешь ? Консоль, ide ?
+
+Хэм [1:54 AM]
+через мавен
+
+Tanya [1:55 AM]
+пролема не в том, что нет jdbc, а в том находит два dataJpaMealRepositoryImpl, jpaMealRepositoryImpl когда нужен один
+
+
+Yevhen Maksymovych [Today at 9:09 AM]
+in #hw6
+у меня одного это занятие вызывает какой-то ступор? до этого всё было просто и последовательно, а теперь мы напихали новых контекстов, хмл, чего-то наподключали, наотключали я дошёл до шестого ролика, и начал понимать, что джава, по всей видимости, не моё
+
+
+6 replies
+dustnfox [4 hours ago]
+Ну вот чего ты меня раньше времени пугаешь? Я еще даже до шестого не дошел :disappointed:
+
+
+Dmitry Neustupov [3 hours ago]
+Не переживай - дальше будет её интереснее )
+
+
+Arthur [3 hours ago]
+А в чем ступор то?
+
+
+Jan [3 hours ago]
+https://github.com/google/guice а еще вместо спринга можно вот это использовать )
+google/guice
+Guice (pronounced 'juice') is a lightweight dependency injection framework for Java 6 and above, brought to you by Google.
+Website
+----------------
+https://github.com/google/guice
+
+Watchers
+----------------
+523
+
+Stars
+----------------
+6526
+
+Forks
+----------------
+1022
+
+google/guiceMay 29th, 2014 at 2:18 AM Added by GitHub
+
+
+Ilya [3 hours ago]
+Вызывает ступор, что не очень плавно перешли - на 6-7-8 видосы. Я вот сейчас пересматривать буду - не сращиваю, у нас томкат теперь впилен в проект ? Томкат сам управляет пулом коннектов ? На каждый запрос в браузере будет даваться свой коннект ?
+
+
+Arthur [2 hours ago]
+если я правильно понимаю, в базовой поставке томката этой функциональности нет. Поэтому мы ее прикручиваем сбоку...
+
+
+Yevhen Maksymovych [9:10 AM]
+uploaded this image: image.png 
+
+
+qf05 [Today at 11:05 AM]
+in #hw6
+Сейчас вроде разобрался с первыми двумя пунктами дз, на третьем ступор.
+1) В каком пакете надо размещать JspMealController? web или meal?
+2)От куда надо получать userId ? Из AuthorizedUser.id()?
+3)Когда надо использовать @PostMapping, а когда @RequestMapping?
+4)Что это вообще такое: RootController#setUser? что за решётка, что она означает ? Или это просто имеется в виду метод сетЮзер или это где то в джсп искать?
+Возможно вопросы тупые, но в голове реально каша.
+
+А ещё очень пугает фраза: "Если нет понимания этих основ, двигаться дальше нельзя" начал судорожно перебирать всё что знаю про спринг, но вроде первые два задания сделал быстро и всего по паре строчек кода, хоть и методом научного тыка. Все тесты работают, наверно что то я всё-таки уже знаю и можно двигаться дальше.
+
+
+4 replies
+Oleksii Leshchenko [1 hour ago]
+3) Не принципиально что именно использовать. Они взаимозаменяемые
+
+
+Oleksii Leshchenko [1 hour ago]
+4) RootController#setUser - где это? Скорее всего это Spring Expression Language (SpEL)
+
+
+qf05 [40 minutes ago]
+это в дз пункт 1.3.1
+
+
+Oleksii Leshchenko [37 minutes ago]
+ДУмаю # ничего не значит... Могли и через точку написать RootController.setUser
+
+
+qf05 [Today at 11:14 AM]
+in #hw6
+И почему то у меня в мавене в плагинах не хочет томкат появляться...
+
+
+2 replies
+Oleksii Leshchenko [2 hours ago]
+Он там заменен на cargo plugin...
+
+
+qf05 [2 hours ago]
+спасибо
+
+
+Ilya [Today at 11:41 AM]
+in #hw6
+поясните, плз, 
+1.что еще за messages? Когда они используются ? 
+2. У нас в проекте есть tomcat-servlet-api ? Зачем ? Где используется  ?
+3. В чем смысл следующего бина ?
+  <beans profile=“tomcat”>
+       <jee:jndi-lookup id=“dataSource” jndi-name=“java:comp/env/jdbc/topjava”/>
+       <context:property-placeholder location=“classpath:db/tomcat.properties” system-properties-mode=“OVERRIDE”/>
+   </beans>
+
+
+5 replies
+Arthur [1 hour ago]
+Мэсаджи используются на фронте, для интернализации сообщений. Это встроенный в Spring механизм. Можно его не использовать, тогда тебе ручками придется заниматься интернализацией. (edited)
+
+
+Arthur [1 hour ago]
+По поводу третьего твоего вопроса - если правильно понимаю, в веб серверах JNDI механизм есть в исходной поставке. У нас томкат(это не полноценный веб сервер). У него нет этого механизма. Поэтому мы его прикручиваем ручками.
+Если я не прав в свих высказываниях, пусть меня поправят (edited)
+
+
+Arthur [1 hour ago]
+По поводу второго вопроса - помойму Григорий в каком-то видео отвечает на твой вопрос
+
+
+Ilya [1 hour ago]
+@Arthur да, но перебирать все видео сейчас лень) спасибо за ответы!
+
+
+Oleksii Leshchenko [1 hour ago]
+Если не ошибаюсь, то tomcat-servlet-api используем для организации пула коннектов к БД
+
+
+qf05 [12:03 PM]
+return "redirect:meals";
+С этим вроде понятно, а как сделать форвард?
+
+
+qf05 [1:55 PM]
+что то с кодировкой не могу справиться, фильтр CharacterEncodingFilter не помогает.

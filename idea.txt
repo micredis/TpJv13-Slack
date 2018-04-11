@@ -425,3 +425,36 @@ Grigory Kislin [13 hours ago]
 
 Grigory Kislin [10:56 AM]
 *Коллеги, в личном профиле есть конка получения купона Ultimate IDEA на 6 месяцев. Дается только 1н раз- политика JetBrains. Это не код, который вводите в регистрацию. По кнопке приходит письмо с подробной инструкцией как купон активировать.*
+
+
+Andrii [8:52 PM]
+Подскажите, плиз. 
+Нажимаю в Мавен проекте test, выдает ошибку: [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.21.0:test (default-test) on project topjava: There are test failures.
+Я удалил какой то плагин, который теперь не могу понять какой. 
+В pom все есть. 
+Подскажите, что делать?
+
+
+Grigory Kislin [Yesterday at 9:14 PM]
+in #idea
+попробуй перевести: There are test failures
+
+
+4 replies
+Andrii [16 hours ago]
+У меня все тесты отлично проходят проверку.
+
+
+Andrii [16 hours ago]
+Clean тоже ошибка.
+Failed to execute goal org.apache.maven.plugins:maven-clean-plugin:2.5:clean (default-clean) on project topjava: Failed to clean project: Failed to delete C:\projects\topjava\target -> [Help 1]
+
+
+Andrii [16 hours ago]
+В pom вырезал и потом вставил назад org.apache.maven.plugins, тесты заработали. Но теперь clean с ошибкой 
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-clean-plugin:2.5:clean (default-clean) on project topjava: Failed to clean project: Failed to delete C:\projects\topjava\target -> [Help 1]
+
+
+Andrii [16 hours ago]
+Спасибо! Все заработало :smiley:
+С тестами помогло: вырезал/вставил org.apache.maven.plugins, с clean просто перезагрузка.
