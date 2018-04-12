@@ -162,3 +162,96 @@ return "redirect:meals";
 
 qf05 [1:55 PM]
 что то с кодировкой не могу справиться, фильтр CharacterEncodingFilter не помогает.
+
+Vitaly M. [6:06 PM]
+У меня, после всех патчей вылетает ошибка
+```javax.servlet.jsp.JspTagException: No message found under code 'app.title' for locale 'ru_RU'.```
+
+
+Vitaly M. [Yesterday at 6:09 PM]
+in #hw6
+я так понимаю, для locale 'ru_RU' у нас app_ru.properties... и spring его не ассоциирует с ru_RU
+
+
+6 replies
+Grigory Kislin [23 hours ago]
+скорее всего spring не видит config\messages\app_ru.properties
+попробуй захардкодить без переменной окуржения TOPJAVA_ROOT и проверить
+
+
+Vitaly M. [23 hours ago]
+все верно...
+не могу вспомнить на каком занятии мы TOPJAVA_ROOT устанавливали, чтоб найти куда проверить как оно у меня в идее прописано
+
+
+Fedor [6 hours ago]
+Получилось решить?
+
+
+Vitaly M. [4 hours ago]
+нет ) просто поставил абсолютный путь и забил пока... тут бы найти время все видео просмотреть и въехать )
+
+
+Vitaly M. [2 hours ago]
+я работаю в линуксе, поэтому я добавил переменную окружения в /etc/environment
+Для windows это подробно описано в последнем видео текущего урока.
+
+
+Fedor [2 hours ago]
+Да, я наковырял, спасибо
+
+
+qf05 [6:37 PM]
+подскажите, а фильтр CharacterEncodingFilter надо же в web.xml вставить и всё, дальше оно само должно работать? никак не могу разобраться почему у меня вместо букв знаки вопроса. (edited)
+
+
+Евгений [Yesterday at 10:08 PM]
+in #hw6
+Всем привет! Я немного отстал, и пересел за другой комп вдобавок. Как с помощью GIT клонировать ветку master, которая была перед началом занятия 5?
+
+
+1 reply
+Oleksii Leshchenko [19 hours ago]
+А твой репозиторий на ГитХабе в каком щас состоянии?
+
+
+Oleg K [Yesterday at 11:15 PM]
+in #hw6
+Коллеги, после патча 6_02 при запуске tomcat и переходе на страничку еды вылетает
+```org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}```
+Тесты проходят. Я криво накатываю патчи, или проблема в ином?
+
+
+2 replies
+Kirilo [17 hours ago]
+починка в других патчах. Это же задание optional, здесь мы еще не прикручивали профили в tomcat
+
+
+Oleg K [5 hours ago]
+В самом деле. Спасибо!
+
+
+Kirilo [1:36 AM]
+Накотил три патча. Хотел спросить "почему не работают тесты с профилем postgres?" А после отката в начало, увидел, что в месте, где меняем профиль БД файл не изменялся патчами :slightly_smiling_face: (edited)
+
+Ilya [4:01 AM]
+Как это работает ? 
+public void testValidation() throws Exception {
+       validateRootCause(() -> service.create(new Meal(null, of(2015, Month.JUNE, 1, 18, 0), ”  “, 300), USER_ID), ConstraintViolationException.class);
+   
+public <T extends Throwable> void validateRootCause(Runnable runnable, Class<T> exceptionClass) {
+       try {
+           runnable.run();
+           Assert.fail(“Expected ” + exceptionClass.getName());
+       } catch (Exception e) {
+           Assert.assertThat(getRootCause(e), instanceOf(exceptionClass));
+       }
+   }
+
+т.е. одним потоком запустили процесс создания мила, а потом в главном потоке сами бросаем эксепшион, который проверяем ?
+
+Tanya [7:53 AM]
+создаем еду, если исключение вылетело - тест ок, если нет - то тест fail
+
+vch [7:58 AM]
+@Ilya Тут нет нового потока. Runnable (т.е. создание Meal) в данном случае выполняется в том же главном потоке. (edited)
