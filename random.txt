@@ -736,3 +736,18 @@ Valery.Shkerdin [1:25 PM]
 uploaded this file 
 record_000003.avi
 530 kB Binary
+
+
+
+Valery.Shkerdin [5:51 PM]
+Ни кто не в курсе, в чём сокральный смысл обязательности применения тут AtomicBoolean
+AtomicBoolean testified = new AtomicBoolean(false);
+thisUserRatings.forEach(x -> {if (now.getTime() - x.getDate().getTime() > 86400000) testified.set(true); }); (edited)
+
+Dzmitry Shalukhau [7:53 PM]
+Не видя полный код - сложно сказать.
+AtomicBoolean нужно использовать в многопоточном приложении.
+
+Grigory Kislin [8:54 PM]
+я полагаю тут он просто как ссылочный тип используется
+внутри лябда ты не можешь нефинальные переменные юзать

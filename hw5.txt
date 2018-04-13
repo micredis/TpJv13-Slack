@@ -2316,3 +2316,7 @@ Nedfrench [19 hours ago]
 
 Oleksii Leshchenko [19 hours ago]
 В Datajpa можно не имплементить интерфейс. Просто задекларировать без реализации... Interface driven development
+
+
+Grigory Kislin [15 hours ago]
+@Nedfrench посмотри внимательнее видео про data-jpa
