@@ -193,3 +193,25 @@ JavaWebinar
 Show less
 
 JavaWebinar/topjava
+
+
+GitHub APP [10:00 PM]
+JavaWebinar
+*15 new commits pushed to `master`*
+`c4fdc36a` - 6_01_HW5_data_jpa
+`36adf689` - 6_02_HW5_profile_test
+`ae0c3d88` - 6_03_extract_rules
+`76660c98` - 6_04_HW5_optional_fix_jdbc_profiles
+`78364f0d` - 6_05_update_hsqldb
+`30f9cb59` - 6_06_HW5_optional_fetch_join
+`29de6b46` - 6_07_HW5_graph_batch_size
+`a8cee439` - 6_08_add_test_validation
+`b8cfef17` - 6_09_hibernate_cache
+`c010b168` - 6_10_cascade_ddl
+`6982f562` - 6_11_spring_web
+`78a5d460` - 6_12_jsp_jstl_i18n
+`e0ab507c` - 6_13_tomcat_pool_jndi_cargo
+`e4d1127f` - 6_14_spring_webmvc
+`61a1127a` - 6_15_spring_i18n
+Show less
+JavaWebinar/topjava

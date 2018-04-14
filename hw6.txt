@@ -432,3 +432,330 @@ Oleksii Leshchenko [1 hour ago]
 qf05 [1:09 PM]
 Подскажите, где я что пропустил. Томкат из плагина не запускается, пишет:
 Failed to execute goal org.codehaus.cargo:cargo-maven2-plugin:1.6.7:run (default-cli) on project topjava: Execution default-cli of goal org.codehaus.cargo:cargo-maven2-plugin:1.6.7:run failed: Failed to create deployable with implementation class org.codehaus.cargo.container.tomcat.TomcatWAR for the parameters (container [id = [tomcat8x]], deployable type [war]). InvocationTargetException: Failed to parse Tomcat WAR file in [C:\Project\qf05\topjava\target\topjava.war]: Failed to find file [C:\Project\qf05\topjava\target\topjava.war]: C:\Project\qf05\topjava\target\topjava.war (Не удается найти указанный файл) -> [Help 1]
+
+
+qf05 [1 day ago]
+Решил тем, что в мавене сделал package. 
+Теперь лог заканчивается этим:
+[INFO] [talledLocalContainer] Tomcat 8.x started on port [8080]
+[INFO] Press Ctrl-C to stop the container...
+И больше ничего не происходит. http://localhost:8080 пишет что страница не найдена.
+
+
+Pavel Zaitcev [1 day ago]
+В IDEA, внизу, во вкладке "Terminal" попробуй выполнить   mvn clean package -DskipTests=true org.codehaus.cargo:cargo-maven2-plugin:1.6.7:run
+
+
+Pavel Zaitcev [1 day ago]
+Запустилось?
+
+
+qf05 [1 day ago]
+нет, пишет тоже самое( (edited)
+
+
+Grigory Kislin [1 day ago]
+карго деплоит war в контекст приложения topjava
+http://localhost:8080/topjava
+
+
+qf05 [1 day ago]
+Точно!) Спасибо) Всё работает)
+
+
+Zhivchik [4:35 PM]
+После накатки  6_14_spring_webmvc ссылка "моя еда" - ведет на страницу со статусом 404. Так и должно быть или это у меня косяк в проекте?
+
+Ma3stro [4:37 PM]
+Да, и это нужно будет править:)
+
+Zhivchik [4:39 PM]
+Ок. Спасибо:)
+
+Ma3stro [4:45 PM]
+Так и не понял, в какую сторону глядеть для починки mock тестов?
+
+
+Ma3stro [Yesterday at 4:47 PM]
+in #hw6
+Странно, написал сюда и решение пришло
+
+
+1 reply
+Nedfrench [1 hour ago]
+Намекнешь в какую сторону смотреть?
+
+
+Ma3stro [4:47 PM]
+хд
+
+Ma3stro [6:26 PM]
+Как можно исправить то, что при выполнении метода post у меня формируется запрос /topjava/meals/meals?
+    ```@PostMapping("/meals")
+    public String post(HttpServletRequest request) {
+        Meal meal = new Meal(
+                LocalDateTime.parse(request.getParameter("dateTime")),
+                request.getParameter("description"),
+                Integer.parseInt(request.getParameter("calories")));
+
+        ValidationUtil.checkNew(meal);
+
+        if (request.getParameter("id").isEmpty()) {
+            mealService.create(meal, AuthorizedUser.id());
+        } else {
+            mealService.update(meal, AuthorizedUser.id());
+        }
+
+        return "meals";
+    }
+
+    @GetMapping("/meals/create")
+    public String create(Model model) {
+        Meal meal = new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000);
+        model.addAttribute("meal", meal);
+        return "mealForm";
+    }```
+
+
+ilya t. [1 day ago]
+посмотри у диспетчер сервлета url pattern какой
+
+
+ilya t. [1 day ago]
+если ничего не менял
+
+
+Ma3stro [1 day ago]
+Прости, куда конкретно посмотреть?
+
+
+ilya t. [1 day ago]
+ну в web.xml
+
+ilya t. [1 day ago]
+там твой сервлет определен и у него такое
+
+ilya t. [1 day ago]
+<servlet-mapping>
+       <servlet-name>mvc-dispatcher</servlet-name>
+       <url-pattern>/</url-pattern>
+   </servlet-mapping>
+
+
+Ma3stro [1 day ago]
+url pattern /
+
+
+ilya t. [1 day ago]
+аа
+
+
+ilya t. [1 day ago]
+тогда в другом месте смотреть надо)
+
+ilya t. [1 day ago]
+попробуй вот что
+
+ilya t. [1 day ago]
+перепиши на @RequestMapping с method POST также
+
+
+ilya t. [1 day ago]
+может подействует
+
+
+ilya t. [1 day ago]
+сходу так не скажешь почему
+
+
+Ma3stro [1 day ago]
+Возможно, здесь с самой логикой немного проблемы. Делаю метод create, в нем отправляюсь на mealForm, где `<form method="post" action="meals">` отправляет данные на "meals". В контроллере я ловлю это `@PostMapping("/meals")`, выполняю метод create у сервиса и отправлюсь meals.jsp
+
+
+Ma3stro [1 day ago]
+Верно мыслю?
+
+
+ilya t. [1 day ago]
+да вроде бы
+
+
+ilya t. [1 day ago]
+сейчас еще подумаю
+
+Ma3stro [1 day ago]
+При дебаге выполнение даже не доходит до этого метода. После отправки данных формируется запрос и просто вылетает 404
+
+
+Ma3stro [1 day ago]
+Можно попробовать сделать через @ModelAttribute
+
+
+ilya t. [1 day ago]
+пост вроде норм написан
+
+ilya t. [1 day ago]
+Попробуй все таки изменить url запроса
+
+
+ilya t. [1 day ago]
+С телефона сложно сказать
+
+
+EdK [1 day ago]
+попробуй в mealForm у формы указать action="/meals"
+
+
+Grigory Kislin [1 day ago]
+Подсказки по HW06 п.3
+
+
+aleksey [2:26 AM]
+Кому-нибудь удалось нормально прописать basenames для messageSource под Linux ?
+
+tema.emelyan [3:04 AM]
+@aleksey а там разве как-то по-другому? (edited)
+
+aleksey [3:07 AM]
+@tema.emelyan это праздный интерес или у тебя linux ?
+
+tema.emelyan [3:07 AM]
+ubuntu у меня
+
+Vyacheslav [10:26 AM]
+Народ. У меня у одного ИДЕЯ намертво виснет при накатке 15-го патча?
+
+Dmitry Neustupov [10:53 AM]
+@Vyacheslav у меня всё норм
+
+
+Vyacheslav [Today at 11:15 AM]
+in #hw6
+IDEA 2018.1 билд от 27 марта.  Вмоем случае помогла накатка патча в 2 этапа. Сначала выполнить перемещение пропертей в config\messages. Потом все остальное включая удаление старого app_ru.properties и src\main\resourсes.
+
+
+
+1 reply
+Arseniit [3 hours ago]
+Да, так же подвисала идея. Сделал поэтапно. IDEA 2016.3,3
+
+
+Vyacheslav [11:21 AM]
+А есть ли что-то типа дебага накладывания патчей?
+
+Vyacheslav [11:30 AM]
+uploaded and commented on this image: redDataSourse.jpg 
+
+Я видимо упустил. Как от этого подчеркивания правильно избавиться?
+
+
+Vladimir Gorbatenko [Today at 11:47 AM]
+in #hw6
+Всем привет! есть у кого-то видео с объяснением про все что связано EntityGraph или может вообще про графы?
+
+
+2 replies
+ilya t. [5 hours ago]
+вчера только читал про них, только ссылку не найду, Видео тоже нету, ну смысл в общем как я понял что нам не надо непосредственно в запросе join fetch писать, вместо этого можем просто обозначить нужные нам поля в атрибутах и они вытянутся из базы игером.
+
+
+Grigory Kislin [1 hour ago]
+в уроке же есть ссылка (edited)
+
+
+qf05 [Today at 11:56 AM]
+in #hw6
+кто сталкивался, подскажите, почему в mealForm стили отваливаются? это происходит если адрес http://localhost:8080/meals/mealForm, а если адрес http://localhost:8080/mealsForm то всё норм работает. (edited)
+
+
+4 replies
+Pavel Zaitcev [10 hours ago]
+Перейди в отладчик браузера (F12 в Firefox), и попробуй отследить подгрузку стилей для страничек. Причина в том, что страничка не может найти ресурс (style.css).
+
+
+Pavel Zaitcev [10 hours ago]
+Посмотри, как мапятся ресурсы в spring-mvc.xml. В этом, в общем-то и кроется ответ.
+
+
+Pavel Zaitcev [9 hours ago]
+Менять там ничего не нужно, нужно просто посмотреть, и понять, почему это  происходит. Если уж надо поменять, то делать это нужно в другом месте :slightly_smiling_face:
+
+
+qf05 [9 hours ago]
+@Pavel Zaitcev Спасибо! В отладчик браузера я зайти не догадался... 
+Как там всё интересно)))
+Я только не понял, можно ли в jsp пути как то прописывать через * ? Типа ищи где хочешь папку такую-то, а в ней такой-то файл.
+Конкретно в этом случае это не надо, тут я обошёлся этим:  ../
+
+
+Aleksei Kirillov [4:00 PM]
+commented on Vyacheslav’s file redDataSourse.jpg
+Никак не избавиться.  Ругается на отсутствие класса org.apache.tomcat.jdbc.pool.DataSource.
+А он у нас импортируется в pom при включенном postgtes.
+Это сделано для автоматического определения профиля:
+  public static String getActiveDbProfile() {
+      try {
+          Class.forName("org.postgresql.Driver");
+          return POSTGRES_DB;
+      } catch (ClassNotFoundException ex) {
+          try {
+              Class.forName("org.hsqldb.jdbcDriver");
+              return Profiles.HSQL_DB;
+          } catch (ClassNotFoundException e) {
+              throw new IllegalStateException("Could not find DB driver");
+          }
+      }
+  }
+
+Dzmitry Shalukhau [7:10 PM]
+Подскажите пожалуйста: почему у меня в DataJpa*RepositoryImpl красным выделено свойство на Crud*Repository. Idea не может кандидата к @Autowired найти... Что-то явно забыл настроить
+
+Ma3stro [7:32 PM]
+Вероятно, бин не попадает в контекст спринга. Смотри xml'ки
+Как в этом случае избавиться от редиректа, но чтобы путь после фильтра оставался на /meals ? с return "meals" этого сделать, увы, нельзя
+    ```@PostMapping("/meals/filter")
+    public String filter(HttpServletRequest request) {
+        LocalDate startDate = parseLocalDate(request.getParameter("startDate"));
+        LocalDate endDate = parseLocalDate(request.getParameter("endDate"));
+        LocalTime startTime = parseLocalTime(request.getParameter("startTime"));
+        LocalTime endTime = parseLocalTime(request.getParameter("endTime"));
+        request.setAttribute("meals", getBetween(startDate, startTime, endDate, endTime));
+
+        return "redirect:/meals";
+    }```
+(edited)
+
+Dzmitry Shalukhau [7:55 PM]
+Он не попадает, т.к. нет аннотации @Repository (но в видео ее нет и ничего страшного не отображается)
+
+Nedfrench [8:14 PM]
+uploaded and commented on this image: Коллеги,  добрый вечер! 
+
+У меня у одного такая структура wepapp?
+Arseniit [8:18 PM]
+у меня так же
+Nedfrench [8:21 PM]
+не смущает?
+Arseniit [8:33 PM]
+смущает)) особенно когда в патче указан ,например, адрес src/main/webapp/WEB-INF/jsp/fragments/bodyHeader.jsp
+
+Nedfrench [8:36 PM]
+Я до патча 6_13 откатился и заново загрузил 6_14 и 6_15. Проблема решилась.
+
+
+Nedfrench [Today at 9:19 PM]
+in #hw6
+Два раза пересмотрел видео, но так и не понял каким образом создается WebApplicationContext?
+
+
+1 reply
+Grigory Kislin [33 minutes ago]
+преред 10м видео есть вопрос. про это?
+
+
+Grigory Kislin [9:48 PM]
+commented on Vyacheslav’s file redDataSourse.jpg
+в профилях мавен выбери postgres и обнови зависимости. либо выбери в spring профиль hsgldb
+
+Grigory Kislin [10:05 PM]
+uploaded this image: image.png 

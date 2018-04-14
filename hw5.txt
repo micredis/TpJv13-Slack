@@ -2320,3 +2320,22 @@ Oleksii Leshchenko [19 hours ago]
 
 Grigory Kislin [15 hours ago]
 @Nedfrench посмотри внимательнее видео про data-jpa
+
+
+Евгений [6:47 PM]
+Всем привет! У кого-нибудь падала NoClassDefFoundError на классах для кэширования? Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ehCacheManager' defined in class path resource [spring/spring-tools.xml]: Cannot create inner bean 'org.springframework.cache.jcache.JCacheManagerFactoryBean#352e612e' of type [org.springframework.cache.jcache.JCacheManagerFactoryBean] while setting bean property 'cacheManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.jcache.JCacheManagerFactoryBean#352e612e' defined in class path resource [spring/spring-tools.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+
+Grigory Kislin [10:09 PM]
+@Евгений похоже у тебя java 9
+
+dmitry_ov [10:36 PM]
+Сделал профили datajpa, jpa, jdbc
+Выбираю в IDEA какие мне профили нужны, они выбираются.
+Запускаю тест MealService,  вижу ошибки: No qualifying bean of type ‘ru.javawebinar.topjava.repository.MealRepository’
+
+Что я делаю не так ?
+
+В начале лога настроживают меня сообщения:
+22:31:30.238 INFO  o.s.b.f.xml.DefaultBeanDefinitionDocumentReader.doRegisterBeanDefinitions:139 - Skipped XML bean definition file due to specified profiles [datajpa] not matching: class path resource [spring/spring-db.xml]
+
+Такое ощущение что вбранные в IDEA профили, с путями, ингорируются (edited)
