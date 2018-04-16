@@ -2339,3 +2339,43 @@ dmitry_ov [10:36 PM]
 22:31:30.238 INFO  o.s.b.f.xml.DefaultBeanDefinitionDocumentReader.doRegisterBeanDefinitions:139 - Skipped XML bean definition file due to specified profiles [datajpa] not matching: class path resource [spring/spring-db.xml]
 
 Такое ощущение что вбранные в IDEA профили, с путями, ингорируются (edited)
+
+
+dmitry_ov [Apr 14th at 10:36 PM]
+in #hw5
+Сделал профили datajpa, jpa, jdbc
+Выбираю в IDEA какие мне профили нужны, они выбираются.
+Запускаю тест MealService,  вижу ошибки: No qualifying bean of type ‘ru.javawebinar.topjava.repository.MealRepository’
+
+Что я делаю не так ?
+
+В начале лога настроживают меня сообщения:
+22:31:30.238 INFO  o.s.b.f.xml.DefaultBeanDefinitionDocumentReader.doRegisterBeanDefinitions:139 - Skipped XML bean definition file due to specified profiles [datajpa] not matching: class path resource [spring/spring-db.xml]
+
+Такое ощущение что выбранные в IDEA профили, с путями, ингорируются (edited)
+
+
+3 replies
+Grigory Kislin [1 day ago]
+@Евгений @dmitry_ov профили, которые выбирают в настойках xml idea, влияют только на отображение spring-db.xml. и никак на приложение (edited)
+
+
+dmitry_ov [1 day ago]
+@Grigory Kislin  Профили работы с даными надо в maven использовать ? (edited)
+
+
+dmitry_ov [1 day ago]
+@Grigory Kislin В лекциях вы говорите профили в spring-db определяют что попадет в понтекст спринга. Это 1-е видео видео, урока 6.  Выше пишите, что это только отображение в ide
+Не понимаю вас. 
+Как проверить что профили написаны правильно если они не влияют на приложение ? (edited)
+
+
+Евгений [10:46 PM]
+@dmitry_ov У меня та же проблема. No qualifying bean of type 'ru.javawebinar.topjava.repository.MealRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+При этом в классе MealServiceImpl репозиторий нормально заинжектился: при нажатии на зеленую спринговскую стрелку напротив private final MealRepository repository - код перепрыгивает на DataJpaMealRepositoryImpl
+
+dmitry_ov [10:49 PM]
+Да, все верно
+
+Евгений [10:50 PM]
+Не понимаю, как может быть "No qualifying bean", и при этом работать dependency injection. @Grigory Kislin, help pls! -_-

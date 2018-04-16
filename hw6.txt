@@ -759,3 +759,337 @@ commented on Vyacheslav’s file redDataSourse.jpg
 
 Grigory Kislin [10:05 PM]
 uploaded this image: image.png 
+
+
+aleksey [Yesterday at 2:32 AM]
+in #hw6
+Для optional, как я понял, необходимо создать новый Entity Role, соответствующий репозиторий и прочую приблуду?
+
+
+9 replies
+Aleksei Kirillov [1 day ago]
+Мне кажется, что ничего дополнительно создавать не надо. 
+Просто добавить еще одну роль в 
+public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN);
+
+А entity User уже работает с набором ролей
+   public User(Integer id, String name, String email, String password, Role role, Role... roles) {
+       this(id, name, email, password, DEFAULT_CALORIES_PER_DAY, true, new Date(), EnumSet.of(role, roles));
+   }
+
+Ну и подшаманить все (edited)
+
+
+aleksey [1 day ago]
+А сохранять этого юзера ты как будешь? Чтобы при этом его новые роли тоже сохранились?
+
+
+Aleksei Kirillov [1 day ago]
+Так
+public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN, Role.ROLE_USER); (edited)
+
+
+aleksey [1 day ago]
+поздравляю, ты создал инстанс. В базу как его будешь сохранять?
+
+Aleksei Kirillov [1 day ago]
+За нас все делает определение roles:
+   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+   @Enumerated(EnumType.STRING)
+   @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+   @Column(name = "role")
+   @ElementCollection(fetch = FetchType.EAGER)
+//    @Fetch(FetchMode.SUBSELECT)
+   @BatchSize(size = 200)
+   private Set<Role> roles;
+
+Ломается только для jdbc, поэтому есть пункт 2.4
+
+
+Aleksei Kirillov [1 day ago]
+посмотри отображение коллекций 
+@CollectionTable
+
+
+aleksey [1 day ago]
+да, извиняюсь, про 2.4 я и спрашиваю, все остальное я сделал. (edited)
+
+
+Aleksei Kirillov [1 day ago]
+не дошел пока до optional
+
+
+aleksey [1 day ago]
+Если разберёшься раньше меня, буду благодарен, если поделишься
+
+
+aleksey [3:21 AM]
+И вообще, кто optional сделал? До кого можно чуток докопаться?
+
+Alexander_Gubanow [9:54 AM]
+@aleksey Какой вопрос по 2.4?
+
+
+Zhivchik [Yesterday at 2:04 PM]
+in #hw6
+Запнулся на пункте 1.2. Насколько я понял не видит jpaUtil. В какую сторону смотреть кто то может сказать?
+
+
+8 replies
+Mikhail Makar [1 day ago]
+Погляди в spring-db.xml!
+
+
+Mikhail Makar [1 day ago]
+А точнее на профиль datajpa, jpa
+
+
+
+Fedor [1 day ago]
+Профиль вроде как и у всех. А можно плиз поконкретнее место, куда глядеть?
+
+
+Zhivchik [1 day ago]
+Наверное нужно в профиль jdbc добавить несколько бинов необходимых для jpaUtil
+
+
+Zhivchik [1 day ago]
+Но тогда у меня при запуске JdbcUserServiceTest возникает уже проблема с  entityManagerFactory
+
+
+Zhivchik [1 day ago]
+Спасибо. Вроде заработало - всего то одно слово добавить)
+
+
+Fedor [1 day ago]
+Можешь в личку это слово кинуть?
+
+
+Nedfrench [1 day ago]
+Такая же проблема.
+
+
+Nedfrench [9:20 PM]
+при нажатии "моя еда" получаю
+
+Nedfrench [9:20 PM]
+uploaded this image: image.png 
+
+
+Nedfrench [9:21 PM]
+Никто не сталкивался?
+
+
+Ma3stro [Yesterday at 9:25 PM]
+in #hw6
+Перезапусти томкат
+
+
+3 replies
+Nedfrench [1 day ago]
+"Перезапусти томкат" - в смысле передеплоить проект?
+
+
+Zhivchik [13 hours ago]
+Возникла та же проблема. Что значит "Перезапусти томкат"?)
+
+
+Zhivchik [13 hours ago]
+Дело было не в томкате)
+
+
+Nedfrench [9:29 PM]
+Не взлетело))
+
+Nedfrench [11:00 PM]
+Перезапустил томкат, проблема исчезла, спасибо.
+
+
+dmitry_ov [Yesterday at 11:04 PM]
+in #hw6
+Коллеги, а что значит термин “инвалидируем” в лекции HW06 ?
+
+
+1 reply
+ilya t. [1 day ago]
+Удаляем кеш. Инвалидация - очистка. (edited)
+
+
+Ilya [5:31 AM]
+У кого-нибудь получилось реализовать ROW_MAPER для Role ?
+
+
+Ilya [Today at 5:48 AM]
+in #hw6
+Так, гугл учит, что это не реально - тогда другой вопрос, кто-нибудь понял, как его заменить при запросах на роли ?
+
+
+2 replies
+qf05 [13 hours ago]
+да, там ROW_MAPER не нужен, нужно лябда выражение с двумя переменными, одна из которых это ResultSet(который по сути типа вся таблица), и из него достаём значение по имени столбца, а второе просто id, оно не используется напрямую в этой лямбде. после лямбды надо поставить , и указать юзер ид, который является параметром в sql запросе.
+
+
+Ilya [12 hours ago]
+@qf05 да, уже нагуглил. 
+полезные ссыли тем, кто будет делать http://www.byteslounge.com/tutorials/java-8-lambda-expressions-example и https://books.google.ru/books?id=x_IwBgAAQBAJ&pg=PA424&lpg=PA424&dq=(rs,+rowNum)+-%3E&source=bl&ots=cTDqjXDDzn&sig=KJ6AHcK1DWGpzlFMG6bM6I2zElo&hl=en&sa=X&ved=0ahUKEwjLxfDw5L3aAhUIZCwKHYsFD2UQ6AEIdzAI#v=onepage&q&f=false (edited)
+
+
+qf05 [Today at 10:08 AM]
+in #hw6
+А зачем нам вообще нужен MealRestController, почему не правильно его делать абстрактным, или он потом будет нужен? Сейчас я так понимаю, надо весь код из MealRestController перенести в другой абстрактный класс?
+
+
+1 reply
+Ilya [12 hours ago]
+рестовый контроллер нужен будет дальше. да, нужно запилить общий абстрактный класс, где будет будет выход на сервис. и пилить наследников jsp и rest
+
+
+Oleksii Leshchenko [11:04 AM]
+> 1.2 Починить Jdbc тесты (валидацию исключить)
+Не совсем понятен этот пункт. Там ссылки даны как исключить тесты по условию.
+Отсюда вопрос: должен JDBC тест запускаться всегда, или только когда соответсвующий профиль активирован?
+И второе, там ошибка с этим:
+`@Autowired`
+`protected JpaUtil jpaUtil;`
+Зачем для JDBC тестов jpaUtil. это надо выносить в отдельный класс...
+
+
+Oleksii Leshchenko [Today at 11:09 AM]
+in #hw6
+я починил  Jdbc тесты  переконфигурируя Спринг... Но это не правильно. Надо было как-то исключить protected JpaUtil jpaUtil;
+
+
+4 replies
+Ma3stro [9 hours ago]
+А как ты без JpaUtil будешь выполнять clear 2nd level cache, который и на JDBC реализации тоже используется?
+
+
+Oleksii Leshchenko [9 hours ago]
+Разве используется? Надо глянуть будет... Мне кажется это Hybernate кеш...
+
+
+Grigory Kislin [5 hours ago]
+валидация и JpaUtil  - это реализация JPA, которой в jdbc нет. поэтому и исключить (edited)
+
+
+Grigory Kislin [5 hours ago]
+@Oleksii Leshchenko сделай как считаешь правильно
+
+
+poleg [Today at 12:06 PM]
+in #hw6
+После применения 6_09_hibernate_cache.patch в помнике ошибка у hsqldb - dependency org.hsqldb 2.4.0 not found. Что не так?
+
+
+1 reply
+Grigory Kislin [5 hours ago]
+в мавен central есть:
+http://search.maven.org/#artifactdetails%7Corg.hsqldb%7Chsqldb%7C2.4.0%7Cjar
+обнови reimport maven
+если не поможет удали из maven локал
+
+
+dustnfox [Today at 6:12 PM]
+in #hw6
+Друзья, а я один тут не понимаю, как чинить InMemoryAdminRestControllerTest? Все остальное задание сделал, а это никак. Видимо, где-то сильно туплю.  С пятницы безрезультатно пытаюсь с ним бороться и даже не понимаю, в какую сторону копать и что читать. Все на что натыкаюсь крутиться вокруг `@WebAppConfiguration` которым я чинил InMemoryAdminRestControllerSpringTest. Как руками собрать иерархию WebApplicationContext, ума не приложу.
+
+
+3 replies
+Grigory Kislin [4 hours ago]
+я просто в mock.xml добавил сканирование пакета контроллеров
+
+
+Anton Kiselev [4 hours ago]
+у нас же web перестал сканироваться. он не виден из spring-app если я правильно понял (edited)
+
+
+dustnfox [4 hours ago]
+Мда... Таких ударов судьбы великий комбинатор не испытывал давно. Я то пытался иерархию контекстов поднять и через аннотацию спринга это получилось. А вот без аннотаций - беда. Оказалось все гораздо проще. Как-то даже не подумал, что весь тот stuff который этот контекст просит, нам в тесте нафиг не нужен. В общем, всем огромное спасибо, а мне позор и порицание. :)
+
+
+Nedfrench [9:21 PM]
+Добрый вечер, коллеги.
+
+
+Nedfrench [Today at 9:21 PM]
+in #hw6
+"попробуйте вообще без action=" - намекните пож-та куда смотреть.
+
+
+12 replies
+ilya t. [2 hours ago]
+смотри, ты можешь вообще во вьюхе удалить в ссылках action'ы тогда у тебя они будут напрямую мапиться на методы контроллера
+
+
+ilya t. [2 hours ago]
+но это в случае ссылок,а в случае например форм постов там action остается
+
+
+Oleksii Leshchenko [2 hours ago]
+смотри тут примеры (смотри только сам контроллер). Без экшен меняется урл:
+https://www.javatpoint.com/spring-mvc-crud-example
+http://javawebtutor.com/articles/spring/spring-mvc-hibernate-crud-example.php (edited)
+
+
+ilya t. [2 hours ago]
+т.е. <a href="${pageContext.request.contextPath}/meals/create"> например
+
+
+Nedfrench [2 hours ago]
+Спасибо. Я уж начал думать, что по http методам раскидать нужно.
+
+
+Nedfrench [2 hours ago]
+" во вьюхе удалить в ссылках action'ы" под вьюхой понимается jsp, верно?
+
+
+ilya t. [2 hours ago]
+да
+
+
+Nedfrench [2 hours ago]
+Oleksii Leshchenko, ссылки то что надо.
+
+
+ilya t. [2 hours ago]
+через @PathVariable можно сделать, забыл упомянуть, ну собственно в ссылке сверху есть
+
+dustnfox [1 hour ago]
+Да вот нельзя, как я понял, через `@PathVariable` сделать. Я как последний осел, написал через все через `@PathVariable` и `@RequestParam`. А как только все заработало, прочитал вот это:
+>принимать HttpServletRequest request (аннотации на параметры и адаптеры для LocalDate/Time мы введем позже)
+
+
+пришлось все удалить и переписать через HttpServletRequest
+
+
+ilya t. [1 hour ago]
+хмм... ну строгого запрета я здесь не вижу :slightly_smiling_face: некоторые написал с реквестом, некоторые с pathvariable, думается мне последний более прогрессивный путь
+
+
+dustnfox [1 hour ago]
+Прогрессивный - да. Но Григорий, как я понял, пытается заставить нас написать все что есть и использованием всех имеющихся технологий :slightly_smiling_face:  Ну и заодно показать как каменный топор превратился в spaceX falcon и объяснить для чего это нужно и почему это удобнее. Если сначала написать два вагона boilerplate кода, то ценность технологии, которая делает это за тебя становится намного понятнее. Так что, боюсь, реализация этого пункта  с использованием аннотаций будет рассматриваться как перепрыгивание через ступеньки. Хотя, повторюсь, да, я тоже считаю, что с аннотациями намного удобнее.
+
+
+ilya t. [Today at 9:34 PM]
+in #hw6
+подскажите как можно локализировать следующее выражение, что-то не могу сообразить :slightly_smiling_face:
+<h2>${meal.id == null ? 'Create meal' : 'Edit meal'}</h2>
+<spring message> туда не засунешь... получается что все приложение локализировано, и если у нас русский язык то эта запись остается на англ
+
+
+1 reply
+dustnfox [2 hours ago]
+Я сделал через `<spring:message code="some_code" var=editingText>`  Этот код создает переменную указанную в `var`. Ну а дальше переменную уже можно пихать в тернарный оператор
+
+
+druxa [Today at 9:43 PM]
+in #hw6
+Как в JdbcUserServiceTest можно получить Environment или context спринга
+
+
+1 reply
+ilya t. [1 hour ago]
+http://www.ekiras.com/2015/09/spring-how-to-get-current-profiles-in-spring-application.html
+ekiras.com
+Spring : How to get Current Profiles in Spring Application
+How to get the current environment or profile in spring, spring boot application. Get list of all active profiles in controller, service or pojo classes
