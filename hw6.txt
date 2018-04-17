@@ -1093,3 +1093,546 @@ http://www.ekiras.com/2015/09/spring-how-to-get-current-profiles-in-spring-appli
 ekiras.com
 Spring : How to get Current Profiles in Spring Application
 How to get the current environment or profile in spring, spring boot application. Get list of all active profiles in controller, service or pojo classes
+
+
+realcorwin [12:03 AM]
+uploaded and commented on this image: image.png 
+
+Один из MVC контекстов надо убить?
+Ilya [3:42 AM]
+так ты посмотри, что внутри этих контекстов. думаю, что все вопросы отпадут)
+
+Zhivchik [10:36 AM]
+added and commented on this Plain Text snippet: Untitled 
+2.2 Добавить еще одну роль к ADMIN (будет 2 роли: ROLE_USER, ROLE_ADMIN)
+У нас же уже есть роли ADMIN и USER Обьясните что здесь требуеться сделать
+
+Arthur [11:27 AM]
+Пользователь под именем Admin теперь в системе должен будет иметь целый набор ролей: User и Admin.
+Раньше админ имел только одну роль - Admin (edited)
+
+realcorwin [11:27 AM]
+@Ilya я слишком стар и мудр, чтоб считать себя умнее разрабов Идеи, которая автодетектнула эти контексты :slightly_smiling_face:
+
+
+alexey [Today at 11:39 AM]
+in #hw6
+Добрый день. Подскажите, а в пункте 1.1 эти тесты надо создать или они уже должны быть в проекте?
+
+
+1 reply
+Oleksii Leshchenko [10 hours ago]
+уже есть
+
+
+roma [11:53 AM]
+Друзья. а у меня после накатки патча 6 13 не появилась функциональность tomcat в плагинах мавена... Что делаю не так? (edited)
+
+Aleksei Kirillov [11:56 AM]
+Кажется в pom этот плагин закомментирован
+roma
+Друзья. а у меня после накатки патча 6 13 не появилась функциональность tomcat в плагинах мавена... Что делаю не так?
+Posted in #hw6Today at 11:53 AM
+
+Oleksii Leshchenko [12:20 PM]
+У меня почему-то в шапке страницы в браузере надписи не разрезолвились, пишет вместо заголовка:
+???app.title???
+Там используется 
+`<fmt:setBundle basename="messages.app"/>`
+и
+`<fmt:message key="app.home"/>`
+
+Oleksii Leshchenko [12:21 PM]
+uploaded this image: image.png 
+
+
+realcorwin [12:24 PM]
+Ты на каком сейчас патче? Там эти бандлы убрали же под конец
+
+Oleksii Leshchenko [12:26 PM]
+я вроде все накатил с самого начала. Но в процессе накатки в этом уроке пару раз что-то выскакивало, какое-то предупреждеие, что что-то перезатрется. Хотя мастер я не трогал... Может что-то не так накатилось.
+
+realcorwin [12:28 PM]
+Похоже на то. Должно быть без бандлов, с тегами спринга, которые подхватываются после перестарта Идеи
+
+
+dustnfox [Today at 12:32 PM]
+in #hw6
+Ты запускаешь из IDEA или Maven plugin? Копай в сторону переменной TOPJAVA_ROOT. Spring через нее ресурсы ищет. У меня та же фигня была. Всю голову изломал, а оказалось, что проект переносил в другую папку и переменную не исправил. Плюсом в самом tomcat она прописана была в setenv.bat - а у него приоритет выше.
+Oleksii Leshchenko
+У меня почему-то в шапке страницы в браузере надписи не разрезолвились, пишет вместо заголовка:
+???app.title???
+Там используется 
+`<fmt:setBundle basename="messages.app"/>`
+и Show more…
+Thread in #hw6Today at 12:20 PM
+
+
+1 reply
+Oleksii Leshchenko [9 hours ago]
+Запускал по всякому. Все равно одно и тоже.
+И Tomcat из IDE, и cargo:run  из IDE, и из терминала  `mvn clean package -DskipTests=true org.codehaus.cargo:cargo-maven2-plugin:1.6.7:run`
+
+
+Edgar Zed [12:35 PM]
+диар комрадс) а JpaUtil с очистой кэша нам только для тестов нужен? Чего он тогда не в тестах?
+
+
+Yevhen Maksymovych [Today at 12:45 PM]
+in #hw6
+ребят, чет просмотрел вопросы, вроде такого не было, ругается на "Error:(10, 24) java: package org.slf4j.bridge does not exist"
+
+
+7 replies
+dustnfox [9 hours ago]
+О! Хорошую тему @Yevhen Maksymovych затронул. У меня уже не первое занятие так - все руки не доходили покопаться.
+
+
+dustnfox [9 hours ago]
+То ли я чего-то не понимаю, то ли какой-то косяк. У нас для моста указан Runtime в maven. А мост этот торчит в тестах.
+        ```// needed only for java.util.logging (postgres driver)
+        SLF4JBridgeHandler.install();```
+У меня напрочь компилировать отказывался, пока я у `jul-to-slf4j` scope в compile не переставил.
+
+
+Yevhen Maksymovych [9 hours ago]
+у меня такая фигня началась после реимпорта проекта. причём странно, склонил один и тот же гит, на домашнем пк всё отрабатывает корректно, на рабочем ноуте - валится с ошибкой
+
+
+dustnfox [9 hours ago]
+Мне вот что непонятно. В соответствии с доками:
+>runtime This scope indicates that the dependency _is not required for compilation_, but is for execution. It is in the runtime and test classpaths, but not the compile classpath.
+То есть для компиляции зависимость не нужна. Только вот как она нам может быть не нужная, если мы в коде в явном виде вызываем метод из этого JAR?
+
+
+dustnfox [8 hours ago]
+Причем, что характерно, фаза test из maven отрабатывает без ошибок.
+
+
+druxa [3 hours ago]
+такая же фигня была, на 5 уроке, делал клон проекта помогло, а на 6 уроке опять вылетает, подключал в ручную jar, но так не правильно же, твой вариант с compile помог
+
+
+dustnfox [3 hours ago]
+Ребят, подскажите кто получше с этим разобрался. Возможно я неправильно это понимаю. Как я понял, `compile` заставляет maven вытянуть jar и включить его в classpath при компиляции, запуске тестов и запуске приложения. При scope `runtime` maven вытягивает jar, но не включает его в classpath при копиляции. В classpath jar попадает только при запуске тестов и запуске приложения. Поясните мне, друзья, я что-то не так понимаю? Ведь если все так, то  мы не можем напрямую вызывать в нашем коде код зависимости со скоупом runtime ибо компилятор просто не разрезолвит ссылки импорта.
+
+
+Yevhen Maksymovych [12:46 PM]
+поменял в поме скоп для jul-to-slf4j c runtime на compile - все завелось, но почему сломалось-то - непонятно
+
+
+Oleksii Leshchenko [Today at 1:15 PM]
+in #hw6
+> 2.1 Добавить транзакционность (DataSourceTransactionManager) в Jdbc реализации
+Как проверить, что все работает правильно?
+Я добавил, тесты работают, но в логах не вижу упоминания. И если в контексте закомментировать DataSourceTransactionManager бин, то все равно работает и не валится
+
+
+1 reply
+dustnfox [8 hours ago]
+`TransactionSynchronizationManager.isActualTransactionActive()` если я правильно понимаю, показывает исполяется ли код в транзакции. Поставь в искомое место и посмотри.  Как-то можно в лог подключить вывод инфы о транзакциях, но я не осилил. :disappointed:
+
+
+Oleksii Leshchenko [Today at 1:35 PM]
+in #hw6
+> 2.2 Добавить еще одну роль к ADMIN (будет 2 роли: ROLE_USER, ROLE_ADMIN)
+Пока не сильно понял, в чем прикол...
+Добавил в SQL и UserTestData. Все тесты проходят, Сервлет работает....
+
+
+1 reply
+dustnfox [8 hours ago]
+Прикол в том, что добавить юзера мало. Нужно еще подправить логику сравнения пользователей (следующий пункт задания). Пока процедуре сравнения по барабану, что у юзера вписано в поле роли.  Ну а сервлету вообще пофиг - он с datajpa работает, а там hibernate вытягивает eager поля сам.
+
+
+realcorwin [Today at 3:42 PM]
+in #hw6
+что именно надо чинить в 1.2?
+
+
+4 replies
+dustnfox [5 hours ago]
+Тест на валидацию не проходит в JDBC реализации, ибо это валидации там просто нет. Если запустишь тесты по JDBC, то валидационный тест там сфейлит.
+
+
+realcorwin [5 hours ago]
+А, так исключить валидацию - и есть "починить"?
+
+
+dustnfox [5 hours ago]
+http://iliachemodanov.ru/ru/blog-ru/12-tools/57-junit-ignore-test-by-condition-ru
+
+
+realcorwin [5 hours ago]
+о, вот это понятно. спасибо!
+
+
+ilya t. [Today at 5:01 PM]
+in #hw6
+скиньте пожалуйста какой-нибудь пример по пункту 2.1, не понимаю как впилить транзакционность в jdbc. Мы должны обозначить бин в дб контексте, потом заинжектить его в репозитории, а вот дальше что-то не уверен что делать. Что-то по типу пункта 7 указанного по ссылке? - https://examples.javacodegeeks.com/enterprise-java/spring/jdbc/spring-transaction-management-example-with-jdbc-example/ (edited)
+
+
+5 replies
+Oleksii Leshchenko [4 hours ago]
+я сделал так, но чего-то скорее всего не хватает. не уверен, что работает.
+1) в спринг контекст добавил:
+<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+           <property name="dataSource" ref="dataSource"/>
+       </bean>
+2) На класс повесил:
+@Transactional(readOnly = true)
+3) На некоторые методы добавил:
+@Transactional
+
+
+Oleksii Leshchenko [4 hours ago]
+и все :slightly_smiling_face:
+
+
+Oleksii Leshchenko [4 hours ago]
+НО сейчас тесты (правда, после добавления ролей и переделки имплементации) валятся, если делать все сразу пачкой. А если каждый тест поштучно, то проходит... Там походу в одном тесте видны результаты работы другого теста в БД...
+
+
+ilya t. [4 hours ago]
+аа, я думал что там нужно писать вместо аннотаций какой-то конкретный код, спасибо :slightly_smiling_face: А до добавления ролей не валились пачкой? (edited)
+
+
+Oleksii Leshchenko [4 hours ago]
+нет, не валились. но не факт, что транзакции подхватились. типа работало, но не понятно как
+
+
+Yevhen Maksymovych [Today at 5:44 PM]
+in #hw6
+а кто-то разобрался с редиректами во вью?
+
+
+10 replies
+Oleksii Leshchenko [4 hours ago]
+особо не разбирался... но кинул пару ссылок в соед. сообщении
+
+
+Yevhen Maksymovych [4 hours ago]
+да я почитал их ещё в уроке, но что-то не доганяю
+
+
+Yevhen Maksymovych [4 hours ago]
+там по тексту
+```@RequestMapping(value = "/files/{path}", method = RequestMethod.POST)
+public String upload(...) {
+    // ...
+    return "redirect:files/{path}";
+}```
+
+
+Yevhen Maksymovych [4 hours ago]
+должно работать
+
+
+Yevhen Maksymovych [4 hours ago]
+а у меня такая конструкция посылает на /files/files/{path}
+
+
+Yevhen Maksymovych [4 hours ago]
+вот и пытаюсь понять, что я делаю не так
+
+
+Oleksii Leshchenko [4 hours ago]
+попробуй:
+return "redirect:/files/{path}";
+
+
+Yevhen Maksymovych [4 hours ago]
+ага, уже разобрался, из-за "/" всё и было
+
+
+Yevhen Maksymovych [4 hours ago]
+спасибо :slightly_smiling_face:
+
+
+Oleksii Leshchenko [4 hours ago]
+я там сам запутался - тупо подбирал варианты перебором :slightly_smiling_face:
+
+
+Yevhen Maksymovych [Today at 5:44 PM]
+in #hw6
+у меня какая-то фигня выходит
+
+
+2 replies
+Oleksii Leshchenko [4 hours ago]
+https://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/mvc.html#mvc-redirecting-redirect-prefix
+
+
+Oleksii Leshchenko [4 hours ago]
+https://stackoverflow.com/questions/4764405/how-to-use-relative-paths-without-including-the-context-root-name (edited)
+
+
+Yevhen Maksymovych [5:45 PM]
+    ```@GetMapping("/delete/{id}")
+    String deleteMeal(Model model, @PathVariable Integer id) {
+        mealService.delete(id, AuthorizedUser.id());
+        model.addAttribute("meals", MealsUtil.getWithExceeded(mealService.getAll(AuthorizedUser.id()), AuthorizedUser.getCaloriesPerDay()));
+        return "redirect:meals";
+    }```
+возвращает на /delete/meals
+а мне надо просто на meals
+
+Yevhen Maksymovych [5:50 PM]
+а, пропустил "/"
+    ```@GetMapping("/delete/{id}")
+    String deleteMeal(Model model, @PathVariable Integer id) {
+        mealService.delete(id, AuthorizedUser.id());
+        return "redirect:/meals";
+    }```
+
+
+Anton Kiselev [Today at 6:19 PM]
+in #hw6
+Подскажите, пожалуйста, как редиректиться с /filter на /meals с передачей фильтрованного списка еды.
+Смотрю в сторону RedirectAttributes но пока безуспешно
+
+
+17 replies
+druxa [3 hours ago]
+return "meals";
+
+
+Anton Kiselev [3 hours ago]
+тогда у меня url: meals/filter
+
+
+druxa [3 hours ago]
+попробуй jstl тэг использовать в форме фильтра <c:url var="addAction" value="/meals/filter"/>
+
+
+druxa [3 hours ago]
+<form method="post" action=${addAction}>
+
+Anton Kiselev [2 hours ago]
+@druxa спасибо, попробую
+
+Anton Kiselev [2 hours ago]
+по сути тоже самое выходит, после фильтрации .../meals/filter (edited)
+
+
+druxa [1 hour ago]
+У меня тоже так же, не заметил, сейчас исправил :sunglasses::grin:
+
+
+druxa [1 hour ago]
+Подсказка по /meals может ловиться и get и post запросы и это могут быть в разным метода
+
+
+druxa [1 hour ago]
+причем когда было /meals/filter не окрашивались поля в красный или зеленый
+
+
+Anton Kiselev [1 hour ago]
+у  меня уже getAll на GET, createOrEdit на POST)
+
+druxa [1 hour ago]
+у createOrEdit @PostMapping("/meals") ?
+
+
+Anton Kiselev [1 hour ago]
+Да
+
+Anton Kiselev [1 hour ago]
+не хотелось растаскивать на два post
+
+
+druxa [41 minutes ago]
+@PostMapping("/meals/add") а если так будет у createOrEdit или так не работает у тебя?
+
+
+druxa [39 minutes ago]
+типа если узер обращается по "/meals/add" то еда создается или обновляется и потом redirect:/meals
+
+
+Anton Kiselev [38 minutes ago]
+у меня форма на добавление по этому url открывается
+
+
+Anton Kiselev [36 minutes ago]
+```@GetMapping("/add")
+public String addMeal(){
+...
+return "mealForm";}```
+
+
+Vyacheslav [6:41 PM]
+added and commented on this Plain Text snippet: Уже голову сломал 
+@Controller
+public class JspMealController {
+  @Autowired
+  private MealService service;
+  
+   @GetMapping("/meals")
+  public String getAllMeal(Model model){
+    model.addAttribute("meals", service.getAll(AuthorizedUser.id()));
+    return "meals";
+  }
+}
+Collapse 
+Tomcat бросает ошибку:
+
+Vyacheslav [6:42 PM]
+org.apache.jasper.JasperException: An exception occurred processing JSP page [/WEB-INF/jsp/meals.jsp] at line [46]
+
+43:         </tr>
+44:         </thead>
+45:         <c:forEach items="${meals}" var="meal">
+46:             <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.MealWithExceed"/>
+47:             <tr data-mealExceed="${meal.exceed}">
+48:                 <td>
+49:                         <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
+
+Vyacheslav [6:42 PM]
+java.lang.ClassCastException: ru.javawebinar.topjava.model.Meal cannot be cast to ru.javawebinar.topjava.to.MealWithExceed
+
+Tanya [6:43 PM]
+ну тут ясно написано Meal cannot be cast to MealWithExceed
+отдаешь список meal вместо mealWithExceed
+
+Vyacheslav [6:44 PM]
+Дак в MealServlet так и есть.
+
+
+Vyacheslav [Today at 6:45 PM]
+in #hw6
+default:
+               request.setAttribute("meals", mealController.getAll());
+               request.getRequestDispatcher("/meals.jsp").forward(request, response);
+               break;
+
+
+4 replies
+druxa [3 hours ago]
+там с контролера вызывается getAll, а ты из сервиса
+
+
+druxa [3 hours ago]
+сделай JspMealController extends MealRestController и вызывай методы через super
+
+
+Vyacheslav [3 hours ago]
+Я понял, что  MealRestController здесь использовать не надо. Типа он позже использоваться будет. Сделал через MealsUtil. (edited)
+
+
+druxa [3 hours ago]
+Наследовать можно :grin:
+
+
+Vitaly M. [8:10 PM]
+Запутался я в POST и GET...
+
+вначале отлавливаю:
+ ```@GetMapping("/meals")
+    public String meals...{
+...
+case "create":
+                create(request, response);
+                break;
+...
+}```
+
+потом попадаем сюда:
+```private void create(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        final Meal meal = new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000);
+        request.setAttribute("meal", meal);
+        request.getRequestDispatcher("/WEB-INF/jsp/mealForm.jsp").forward(request, response);
+    }```
+
+а вот дальше, я не пойму... 
+после нажатия SUBMIT возникает событие POST, которое требует
+```processing POST request for [/topjava/meals]```
+
+я создал
+```@PostMapping("/meals")
+    public String setMeal...{
+}```
+НО здесь request.getParameter("action") всегда null, т.е. я не пойму как отличить create от update
+и даже если просто попробовать реализовать здесь
+```create((Meal) request.getAttribute("meal"));```
+вылазит ошибка, что объект не новый...
+
+Помогите разобраться.
+
+
+Vitaly M. [Today at 8:10 PM]
+in #hw6
+Запутался я в POST и GET...
+
+вначале отлавливаю:
+ ```@GetMapping("/meals")
+    public String meals...{
+...
+case "create":
+                create(request, response);
+                break;
+...
+}```
+
+
+потом попадаем сюда:
+```private void create(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        final Meal meal = new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000);
+        request.setAttribute("meal", meal);
+        request.getRequestDispatcher("/WEB-INF/jsp/mealForm.jsp").forward(request, response);
+    }```
+
+
+а вот дальше, я не пойму... 
+после нажатия SUBMIT возникает событие POST, которое требует
+```processing POST request for [/topjava/meals]```
+
+
+я создал
+```@PostMapping("/meals")
+    public String setMeal...{
+}```
+НО здесь request.getParameter("action") всегда null, т.е. я не пойму как отличить create от update
+и даже если просто попробовать реализовать здесь
+```create((Meal) request.getAttribute("meal"));```
+вылазит ошибка, что объект не новый...
+
+Помогите разобраться.
+
+
+10 replies
+Pavel Klindziuk [1 hour ago]
+2 метода в контроллере создай :
+1 @PostMapping(/create)
+2 @PostMapping(/update/{id}) (edited)
+
+
+Vitaly M. [1 hour ago]
+сделал, но он в них не идет, а ищет Looking up handler method for path /meals
+
+
+ilya t. [1 hour ago]
+>не пойму как отличить create от update
+в методе который отвечает за пост можно отличать по id еды и в зависимости от этого создавать или обновлять, если я правильно понял суть вопроса
+
+ilya t. [1 hour ago]
+вообще по кускам кода тяжело смотреть что не так (edited)
+
+Vitaly M. [1 hour ago]
+Илья, а ты так делал? Что-то мне подсказывает, что подобная логика в контроллере не пройдет ревью
+
+
+ilya t. [1 hour ago]
+да, я в отдельный метод пост вынес реализацию создания или обновления еды, а почему не пройдет ревью, что не так? (edited)
+
+Vitaly M. [1 hour ago]
+а POST мапится /meals ?
+
+ilya t. [1 hour ago]
+у меня нет, я замапил /meals/post
+
+ilya t. [1 hour ago]
+могу в лс кинуть
+
+
+Vitaly M. [1 hour ago]
+кинь пжлста

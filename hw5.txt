@@ -2379,3 +2379,14 @@ dmitry_ov [10:49 PM]
 
 Евгений [10:50 PM]
 Не понимаю, как может быть "No qualifying bean", и при этом работать dependency injection. @Grigory Kislin, help pls! -_-
+
+
+Grigory Kislin [4 hours ago]
+опиши проблему подробнее
+
+
+Edgar Zed [11:50 AM]
+Это уже звучит как диагноз %)
+Grigory Kislin
+@Евгений похоже у тебя java 9
+Posted in #hw5Apr 14th

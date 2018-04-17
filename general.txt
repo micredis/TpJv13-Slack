@@ -4771,3 +4771,17 @@ Grigory Kislin [5 hours ago]
 
 sergentum [5 hours ago]
 да тут не только тесты а вообще запустить не получается. но этот вопрос уже не так важен, постараюсь пробежать по всем патчам, чтобы хоть что то уловить
+
+
+Darkhan [5:43 AM]
+Я собрал spring проект в jar файл и теперь не могу запустить через командную строку. Не находит схемы xml-файлов. Спринг пытается получить их с интернета. А доступа в интернет нет. По этому долго думает и выдает ошибку: `Failed to read schema document 'http://www.springframework.org/schema/tool/spring-tool.xsd' Caused by: java.net.ConnectException: Connection timed out: connect`
+Кто нибудь запускал спринг в командной строке без интернет подключения? Так: `java -jar proj-1.0-SNAPSHOT-jar-with-dependencies.jar`
+
+Ilya [5:50 AM]
+@Darkhan т.е. у тебя в архиве нет необходимых депенденси ? тогда гугли за fat-jar. (edited)
+
+Darkhan [7:06 AM]
+@Ilya спасибо за инфу. Сейчас как то решил проблему. Вручную обновил spring.schemes. Потом посмотрю про fat-jar.
+
+Darkhan [9:13 AM]
+Так я оказывается уже использую fat jar. Плагин: maven-assembly-plugin.
