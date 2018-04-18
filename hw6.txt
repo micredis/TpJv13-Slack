@@ -1636,3 +1636,21 @@ ilya t. [1 hour ago]
 
 Vitaly M. [1 hour ago]
 кинь пжлста
+
+
+Grigory Kislin [Yesterday at 11:15 PM]
+in #hw6
+по ТЗ - раскидать запросы по разным методам и лучше вообще без actions (edited)
+
+
+1 reply
+Zhivchik [12 minutes ago]
+А почему лучше не использовать action, этот вариант чем то хуже?
+
+
+realcorwin [11:22 PM]
+не находится css-файл... <link rel="stylesheet" href="resources/css/style.css">
+что не так?..
+
+Grigory Kislin [11:29 PM]
+смотри вкладку Network в браузере
