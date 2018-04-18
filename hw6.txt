@@ -1654,3 +1654,110 @@ realcorwin [11:22 PM]
 
 Grigory Kislin [11:29 PM]
 смотри вкладку Network в браузере
+
+
+Vladimir Gorbatenko [11:55 AM]
+added this Java snippet: Всем привет! Подскажите, куда посмотреть: 
+Error creating bean with name 'ru.javawebinar.topjava.service.jdbc.JdbcUserServiceTest': Unsatisfied dependency expressed through field 'jpaUtil'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'ru.javawebinar.topjava.repository.JpaUtil' available: expected at least 1 bean which qualifies as autowire candidate.
+Oleksii Leshchenko [11:57 AM]
+JpaUtil бин не находит. Это потому, что он определен в профиле для jpa, а у тебя в данный момент скорее всего подключен профиль jdbc.
+
+Vladimir Gorbatenko [11:58 AM]
+спасибо! ну да.... хм, а как же тогда быть?
+
+
+Oleksii Leshchenko [Today at 12:01 PM]
+in #hw6
+1) в спринг контексте скопировать бин в профил jdbc
+или
+2) вынести этот бин из профилей и сделать видимым глобально для всех
+или
+3) создать асбстрактный класс для jpa. В него переместить эту переменную jpaUtil. Текущие имплементации jpa/datajpa унаследовать от этого класса.
+
+
+5 replies
+Yevhen Maksymovych [1 hour ago]
+гхм, у меня вариант 4 :slightly_smiling_face:
+
+
+Yevhen Maksymovych [1 hour ago]
+jpaUtil не автовайрится, автовайрится контекст, а в случае, если в реализации теста  профиль не jdbc, jpaUtil резолвится из контекста непосредственно в методе, его вызывающем
+
+
+Oleksii Leshchenko [1 hour ago]
+нихера не понял...)) (edited)
+
+
+Yevhen Maksymovych [44 minutes ago]
+ну, в тестах с реализацией jdbc не поднимается контекст, потому что родительский класс пытается автовайрить jpaUtil, которого нет в профиле  jdbc
+
+
+Yevhen Maksymovych [44 minutes ago]
+мне показалось логичным просто не автовайрить jpaUtil в родительском классе в принципе ))
+
+
+realcorwin [12:06 PM]
+ещё можно просто его там похерить :slightly_smiling_face:
+
+Oleksii Leshchenko [12:06 PM]
+как, он для очистки кеша используется... )
+
+realcorwin [12:07 PM]
+вместе с кэшем вестимо :slightly_smiling_face:
+
+Vladimir Gorbatenko [12:13 PM]
+1) в спринг контексте скопировать бин в профил jdbc 
+Error creating bean with name 'ru.javawebinar.topjava.repository.JpaUtil#0': Injection of persistence dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'javax.persistence.EntityManagerFactory' available
+    at org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor.postProcessPropertyValues
+
+Oleksii Leshchenko [12:13 PM]
+там надо в придачу скопировать также и EntityManagerFactory - они вместе в комплекте идут
+
+Vladimir Gorbatenko [12:20 PM]
+все, приехал, теперь у меня каким-то чудом их 2 штуки
+Error creating bean with name 'ru.javawebinar.topjava.service.jdbc.JdbcUserServiceTest': Unsatisfied dependency expressed through field 'jpaUtil'; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'ru.javawebinar.topjava.repository.JpaUtil' available: expected single matching bean but found 2: ru.javawebinar.topjava.repository.JpaUtil#0,ru.javawebinar.topjava.repository.JpaUtil#1
+
+Oleksii Leshchenko [12:21 PM]
+а ты только перенес в профиль jdbc или таже еще сделал его глобальным?
+
+Vladimir Gorbatenko [12:23 PM]
+перенес
+что значит сделать глобальным? вынести за профили?
+
+Oleksii Leshchenko [12:23 PM]
+да, и удалить из всех профилей
+
+
+Yevhen Maksymovych [Today at 1:24 PM]
+in #hw6
+а как-то можно принудительно язык указать в браузере? как проверить, что моя локализация заработала?
+
+
+7 replies
+ilya t. [21 minutes ago]
+я в опере поменял язык браузера
+
+
+ilya t. [20 minutes ago]
+и проверил, локализация англ работала
+
+
+Yevhen Maksymovych [20 minutes ago]
+у меня и в хроме, и в ип, и в эдже англ
+
+
+Yevhen Maksymovych [20 minutes ago]
+не хочется устанавливать все браузеры подряд, чтобы проверить, вдруг какой-то на русском отобразит )
+
+
+Grigory Kislin [7 minutes ago]
+можно. в уроке для хрома есть инструкция
+
+
+
+Yevhen Maksymovych [3 minutes ago]
+блин, точно, невнимательность меня убьёт
+
+
+Yevhen Maksymovych [3 minutes ago]
+спасибо!
