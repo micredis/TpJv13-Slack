@@ -1761,3 +1761,89 @@ Yevhen Maksymovych [3 minutes ago]
 
 Yevhen Maksymovych [3 minutes ago]
 спасибо!
+
+
+alexey [Yesterday at 2:49 PM]
+in #hw6
+Как нибудь можно сделать что бы SQL запросы отображались в консоли Idea, при запуске тестов Jdbc?
+
+
+1 reply
+Grigory Kislin [23 hours ago]
+можно подключить jbdc4j (видео про БД Круглова было в уроке)
+
+
+Yevhen Maksymovych [Yesterday at 3:04 PM]
+in #hw6
+ребят, по jdbc с ролями, есть вообще способ, чтобы RowMapper автоматом свернул набор результатов запроса в одну, собрав из различных ролей коллекцию, или я зря копаю, и это надо делать ручками? (edited)
+
+
+3 replies
+dustnfox [1 day ago]
+Автоматом? То есть чтобы готовый некастомный RowMapper тебе это отдал? Если так, то я не нашел.
+
+
+alexey [24 hours ago]
+я тоже вручную делал
+
+
+Grigory Kislin [23 hours ago]
+вообще в одном ДЗ была доп. библиотека
+можно искать. а можно врчную
+
+
+Vladimir Gorbatenko [4:50 PM]
+на странице, вместо русских букв ромбы с вопросиками...
+
+Vladimir Gorbatenko [5:13 PM]
+uploaded this image: кодировка-кодировочка 
+
+roma [5:24 PM]
+выше писали об этом - свзано вроде с переменной TOPJAVA_ROOT
+
+roma [5:26 PM]
+Начал переносить все в контроллер  на первом же шаге съел такое:  
+```org.apache.jasper.JasperException: An exception occurred processing JSP page /WEB-INF/jsp/meals.jsp at line 46
+
+46:             <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.MealWithExceed"/>```
+реализация такая:
+```@Controller
+public class JspMealController {
+    @Autowired
+    MealService service;
+
+    @GetMapping("/meals")
+    public String users(Model model) {
+        int userId = AuthorizedUser.id();
+        model.addAttribute("meals", service.getAll(userId));
+        return "meals";
+    }
+}```
+Почему бин кидает такой эксепшен? (edited)
+
+Vladimir Gorbatenko [5:28 PM]
+та не. решил так - скопировал текст из app_ru.properties, зашел в настройки в File encoding, и в default property encoding выставил utf-8, потом в app_ru обратно вставил текст и все стало ок. Странно что у меня в настройках вдруг оказалась не та кодировка, потому что всё еще давно выставлял в UTF-8....
+
+roma [5:29 PM]
+На мой бы вопрос выше нашелся бы ответ )
+
+Vladimir Gorbatenko [5:32 PM]
+он тебе ниже пишет:
+ru.javawebinar.topjava.model.Meal cannot be cast to ru.javawebinar.topjava.to.MealWithExceed
+roma
+На мой бы вопрос выше нашелся бы ответ )
+Posted in #hw6Yesterday at 5:29 PM
+
+roma [5:34 PM]
+и правда пишет
+нужно кастить на уровне JspMealController?
+
+
+roma [Yesterday at 5:39 PM]
+in #hw6
+@Vladimir Gorbatenko Спасибо )
+
+
+1 reply
+Yevhen Maksymovych [21 hours ago]
+у тебя же была подсказка в задании, ты можешь унаследоваться от прошлого контроллера, который уже умел выдавать милыСЭксидами

@@ -1,0 +1,12 @@
+Grigory Kislin [2:15 AM]
+joined #hw7.
+
+Grigory Kislin [2:29 AM]
+7е занятие: REST контроллеры и их тестирование
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson07.md (edited)
+
+tema.emelyan [2:36 AM]
+joined #hw7 along with 18 others.
+
+qf05 [3:08 PM]
+Кто-нибудь уже разобрался почему при запуске testUser в  RootControllerTest не вызывается метод postConstruct() и mockMvc получается null? или это только у меня так?
