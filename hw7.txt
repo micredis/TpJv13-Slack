@@ -10,3 +10,85 @@ joined #hw7 along with 18 others.
 
 qf05 [3:08 PM]
 Кто-нибудь уже разобрался почему при запуске testUser в  RootControllerTest не вызывается метод postConstruct() и mockMvc получается null? или это только у меня так?
+
+Grigory Kislin [6 hours ago]
+у меня вызывается. с гитхаб проект сравнивал?
+попробуй новый в сторонке вычекать
+
+
+alexey [4:43 PM]
+Народ, кто натали первые 6 патчей, скиньте  код *app_ru.properties* пжлст.
+
+Oleksii Leshchenko [4:44 PM]
+added this JavaScript/JSON snippet: Untitled 
+app.title=Подсчет калорий
+app.home=Главная
+app.footer=Приложение по проекту <a href="https://github.com/JavaOPs/topjava" target=_blank>Maven/ Spring/ Security/ JPA(Hibernate)/ Jackson/jQuery</a>
+app.login=Зайти как
+​
+user.title=Пользователи
+user.name=Имя
+user.email=Почта
+user.roles=Роли
+user.active=Активный
+user.registered=Зарегистрирован
+​
+meal.title=Моя еда
+meal.edit=Редактирование еды
+meal.add=Добавление еды
+meal.filter=Отфильтровать
+meal.startDate=От даты
+meal.endDate=До даты
+meal.startTime=От времени
+meal.endTime=До времени
+meal.description=Описание
+meal.dateTime=Дата/Время
+meal.calories=Калории
+​
+common.select=Выбрать
+common.delete=Удалить
+common.update=Обновить
+common.save=Сохранить
+common.cancel=Отмена
+common.actions=Выполнить
+Collapse 
+
+Oleksii Leshchenko [5:38 PM]
+added and commented on this Java snippet: Untitled 
+public static void assertMatch(Iterable<Meal> actual, Iterable<Meal> expected) {
+    assertThat(actual).usingElementComparatorIgnoringFields("user").isEqualTo(expected);
+  }
+Интересует вопрос, должны ли обе коллекции отсортированы одинаково в этом методе? Что, если сравниваемые коллекции одинаковые, но элементы в разном порядке хранятся...?
+
+
+Oleksii Leshchenko [Today at 6:11 PM]
+in #hw7
+Я так понимаю, что вместо SoapUI можно использовать и Postman?
+https://www.getpostman.com/ (edited)
+
+
+1 reply
+Dmitry Neustupov [1 hour ago]
+Можно, кому как удобней. По мне и Соап норм.
+
+
+alexey [7:57 PM]
+commented on Oleksii Leshchenko’s snippet Untitled
+спасибо
+
+dustnfox [10:18 PM]
+commented on Oleksii Leshchenko’s snippet Untitled
+Сейчас подебажил это хозяйство и таки да - должны. Просто берутся два итератора (от actual и expected) и поочередно сравниваются очередные результаты вызова `next()` на каждой коллекции.
+dustnfox [10:19 PM]
+  ```private boolean compareElementsOf(Iterable<T> actual, Iterable<T> other) {
+    if (sizeOf(actual) != sizeOf(other)) return false;
+    // compare their elements with elementComparator
+    Iterator<T> iterator = other.iterator();
+    for (T actualElement : actual) {
+      T otherElement = iterator.next();
+      if (elementComparator.compare(actualElement, otherElement) != 0) return false;
+    }
+    return true;
+  }```
+dustnfox [10:29 PM]
+В общем, довольно ожидаемый результат. Думаю, если бы была какая-то экзотика, (например, сравнить поэлементно и если не равны, то отсортировать и сравнить снова) то это в явном виде описали бы в документации.

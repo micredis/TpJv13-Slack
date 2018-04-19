@@ -4828,3 +4828,24 @@ Dzmitry Shalukhau [3:00 PM]
 razorsql.com
 Database Conversion Tools for MySQL, Oracle, MS SQL Server, MS Access, PostgreSQL, DB2, and SQLite
 Information on how to do database conversion with RazorSQL.
+
+
+sergentum [3:27 PM]
+commented on image.png
+я понял, в патче написано 108 строку удалить и заменить другой. Ок, только после всех патчей от 1 задания у меня нет 100+ строк в этом файле. Либо какого то патча нет, либо так и задумано...
+
+Oleksii Leshchenko [3:32 PM]
+у меня в прошлом уроке пару патчей накатились с какими-то ошибками... Хотя мастер я не трогал. Я в итоге смерджил все, накатив изменения из гитхаба, используя нужный коммит из #project_change
+
+sergentum [3:35 PM]
+commented on image.png
+патч "optional" оказался не опциональным а обязательным
+
+Oleksii Leshchenko [3:36 PM]
+"optional" могла означать, что это решение домашки из раздела "optional"
+
+Grigory Kislin [4:35 PM]
+commented on sergentum’s file image.png
+там же редактирование работает- делай как нужно
+sergentum [5:40 PM]
+в этом окне не работает
