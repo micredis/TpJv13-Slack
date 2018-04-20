@@ -1865,3 +1865,7 @@ Ma3stro [7:31 PM]
 
 Dzmitry Shalukhau [8:22 PM]
 Уровень как раз таки один - web.
+
+
+Artem Murk [1:04 PM]
+Не удаётся накатить второй патч. MealServiceTest и UserServiceTest пишет что криво будет патчить. Пытался уже revert сделать для данных тестов, без толку. Кто может помочь?

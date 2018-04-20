@@ -4849,3 +4849,24 @@ commented on sergentum’s file image.png
 там же редактирование работает- делай как нужно
 sergentum [5:40 PM]
 в этом окне не работает
+
+
+Ilya [9:29 AM]
+сюда скину, мб кто подскажет) https://stackoverflow.com/questions/49934709/how-to-properly-handle-error-objects-in-webclient
+stackoverflow.com
+How to properly handle error objects in WebClient?
+So, I have next situation: I have method that works with external RESTful APS's via WebClient from Spring. Remote API returns me the ResultObject or ErrorResponseObject. For this purposes I've de...
+
+ivanpobeguts [10:58 AM]
+Привет. Подскажите, пожалуйста. Допустим, я хочу сделать веб приложение, где есть rest api, отдающее json, и я хочу написать фронт энд. Как мне повесить на тот же самый url веб страничку и как разделять - когда отдавать json, а когда страницу html?
+
+realcorwin [11:37 AM]
+Цитаты известных программистов про ООП: http://www.yegor256.com/2016/08/15/what-is-wrong-object-oriented-programming.html
+
+Повеселился читая :slightly_smiling_face:.
+Yegor Bugayenko
+What's Wrong With Object-Oriented Programming?
+This is my collection of arguments against object-oriented programming in general, and its elements in particular, expressed by different people at different times.
+Aug 15th, 2016
+http://www.yegor256.com/images/2016/08/swingers.jpg
+"Object-oriented programming is an exceptionally bad idea which could only have originated in California." :slightly_smiling_face:
