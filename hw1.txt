@@ -3521,3 +3521,10 @@ Baravader [5:19 PM]
 
 Baravader [5:20 PM]
 uploaded this image: Pasted image at 2018-04-19, 5:19 PM 
+
+
+Grigory Kislin [1:57 PM]
+commented on Baravader’s file Pasted image at 2018-04-19, 5:19 PM
+смотри на историю коммитов на github https://github.com/JavaWebinar/topjava/commits/master
+и как с ней работать:
+https://github.com/JavaOPs/topjava/wiki/git#patch-%D0%BD%D0%B5-%D0%BD%D0%B0%D0%BA%D0%B0%D1%82%D1%8B%D0%B2%D0%B0%D0%B5%D1%82%D1%81%D1%8F-%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%B0%D0%B3%D0%B0%D0%B5%D1%82-merge

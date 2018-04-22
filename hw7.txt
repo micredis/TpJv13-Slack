@@ -191,3 +191,162 @@ qf05 [10:53 AM]
    <version>1.3.1</version>
 </dependency>
 Актуально для java 9.
+
+
+Viktor [9:00 PM]
+@qf05 думаю у тебя проблема со слаком локальная, я тоже из РФ, все спокойно запускается без проблем. Либо моему оператоору пофиг на блокировки :smiley: (edited)
+
+druxa [9:12 PM]
+@GetMapping("/owners/{ownerId}/pets/{petId}")
+public Pet findPet(@PathVariable Long ownerId, @PathVariable Long petId) {
+   // ...
+} Если в @PathVariable не указано имя ("ownerId" и "petId") , то спринг подставляет имена по именам переменных?
+
+Vyacheslav [6:29 PM]
+Народ. SoapUI нормально качается? У меня что-то не прет.  https://www.soapui.org/downloads/thank-you-for-downloading-soapui.html
+soapui.org
+Download REST & SOAP Automated API Testing Tool | Open Source | SoapUI
+Compare SoapUI Pro vs Open Source. Try out the most widely used API testing tool in the world today!
+
+Ma3stro [8:12 PM]
+После накатки всех патчей вылетает `ConflictingBeanDefinitionException: Annotation-specified bean name 'jspMealController'` и открываться ничего не хочет, как это исправить? (edited)
+
+
+qf05 [Yesterday at 8:32 PM]
+in #hw7
+@Vyacheslav А что soap так и надо качать триал на 14 дней? Крякнутой нет?
+
+
+3 replies
+Vyacheslav [7 hours ago]
+Да вроде нет. https://www.soapui.org/downloads/soapui.html
+soapui.org
+Download REST & SOAP Automated API Testing Tool | Open Source | SoapUI
+Compare SoapUI Pro vs Open Source. Try out the most widely used API testing tool in the world today!
+
+
+Vyacheslav [7 hours ago]
+Заработала загрузка. Наверное опять Роскомнадзор гадит.
+
+
+Grigory Kislin [5 hours ago]
+я бесплатный ставил
+
+
+realcorwin [8:38 PM]
+В Идею вшит Test RESTful Web Service (в меню Tools)
+
+
+realcorwin [Yesterday at 8:51 PM]
+in #hw7
+testDelete падает - статус 204, а не 200
+
+
+
+9 replies
+aleksey [6 hours ago]
+у нас над delete аннотация
+   @ResponseStatus(value = HttpStatus.NO_CONTENT)
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204
+так что он не падает, а успешно выполняется.
+MDN Web Docs
+204 No Content
+The HTTP 204 No Content success status response code indicates that the request has succeeded, but that the client doesn't need to go away from its current page. A 204 response is cacheable by default. An ETag header is included in such a response.
+ 
+
+
+realcorwin [6 hours ago]
+это у вас аннотация, а у нас в патчах никакой аннотации нет :slightly_smiling_face:
+
+
+aleksey [6 hours ago]
+тоесть у меня какие-то другие патчи?
+
+qf05 [6 hours ago]
+я закоммитил эту аннотацию)
+
+
+qf05 [6 hours ago]
+теперь сижу и думаю, может раскомитить и в тестах изменение сделать?
+
+realcorwin [6 hours ago]
+пацаны, вы что издеваетесь? :slightly_smiling_face: что вы делаете с патчами Григория :slightly_smiling_face:
+
+
+aleksey [6 hours ago]
+черт, да, я же сам ее поставил, забыл уже :smiley:
+
+
+realcorwin [6 hours ago]
+короче, тесты изменяются, пока не дают правильный результат :slightly_smiling_face: предлагаю выпилить их нахрен :slightly_smiling_face: толку-то :slightly_smiling_face:
+
+
+realcorwin [5 hours ago]
+@aleksey не работает твоя аннотация. status().is2xxSuccessful() работает
+
+
+Grigory Kislin [10:54 PM]
+*В после патчей этого урока валятся AdminRestControllerTest.testDelete и ProfileRestControllerTest.testDelete (в контроллере поменялся код ответа)*
+Моя бага, добавлю в ДЗ: починить. (edited)
+
+realcorwin [10:55 PM]
+Ага. Ну, я собственно уже спалил строчку починки
+
+Grigory Kislin [10:56 PM]
+:slightly_smiling_face:
+
+realcorwin [11:35 PM]
+Ребята, кто уже делал MealRestControllerTest, там можно метод contentJson реализовывать аналогично как для User только для Meal, или там есть какие-то свои хитрости? Я почти всё сделал, но тут уже начал уставать...
+
+Ma3stro [11:38 PM]
+И все же не могу понять в чём дело. Возникает сие при запуске приложения
+В расшифровке ошибки сказано, что бин "jspMealController" из пакета ru.javawebinar.topjava.web.meal.JspMealController конфликтует с одноименным(!) бином из пакета ru.javawebinar.topjava.web.JspMealController, хотя в пакете .web нет такого класса вовсе, только в web.meal!!! Гугления мне не помогли:/
+```ConflictingBeanDefinitionException: Annotation-specified bean name 'jspMealController' for bean class [ru.javawebinar.topjava.web.meal.JspMealController] conflicts with existing, non-compatible bean definition of same name and class [ru.javawebinar.topjava.web.JspMealController]```
+(edited)
+
+Ma3stro [11:44 PM]
+Пришлось чинить это тем, что прописал отдельно сканы на web.meal и web.user
+
+realcorwin [11:52 PM]
+@Ma3stro это у тебя после твоих изменений такая бяка появилась?.. потому что в патчах такого нет
+я бы покопался в *.xml файлах. где-то что-то не туда указывает, дублирует итп.
+
+Grigory Kislin [12:33 AM]
+@Ma3stro mvn clean попробуй
+у тебя мог class остаться
+
+realcorwin [1:51 AM]
+ребята, кто-нибудь получал такую радость на тестах?
+
+Cannot deserialize instance of `java.util.LinkedHashMap` out of START_ARRAY token
+
+Вылетает у меня на testGet и testGetAll
+для информации:
+
+@test
+   public void testGet() throws Exception {
+       mockMvc.perform(get(REST_URL + MEAL1_ID))
+               .andExpect(status().isOk())
+               .andDo(print())
+               .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+               .andExpect(contentJson(MEAL1));
+   }
+-----------------
+@Override
+   @GetMapping("/{id}")
+   public Meal get(@PathVariable("id") int id) {
+       return super.get(id);
+   }
+-----------------
+MockHttpServletResponse:
+          Status = 200
+   Error message = null
+         Headers = {Content-Type=[application/json;charset=UTF-8]}
+    Content type = application/json;charset=UTF-8
+            Body = {"id":100002,"dateTime":"2015-05-30T10:00:00","description":"Завтрак","calories":500,"user":null} (edited)
+---------------
+Исключение вылетает на .andExpect(contentJson(MEAL1))
+---------------
+public static ResultMatcher contentJson(Meal... expected) {
+      return content().json(writeIgnoreProps(expected, "user"));
+  }
