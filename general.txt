@@ -4870,3 +4870,17 @@ This is my collection of arguments against object-oriented programming in genera
 Aug 15th, 2016
 http://www.yegor256.com/images/2016/08/swingers.jpg
 "Object-oriented programming is an exceptionally bad idea which could only have originated in California." :slightly_smiling_face:
+
+
+Sergey Mitrichev [Today at 5:24 PM]
+in #general
+Коллеги, РКН блокирует Google https://twitter.com/roscomnadzor/status/988011796152946688 и есть проблемы (у меня, по крайней мере) с доступом к Google Drive, Youtube, Google.com. Надеюсь, конечно, что это временно. @Grigory Kislin можно где-то еще видео посмотреть/скачать?
+
+
+2 replies
+Tony [6 hours ago]
+VPN? Опера?
+
+
+Sergey Mitrichev [2 hours ago]
+VPN. Что-то не знаю, какой хостинг и страну выбрать, чтобы сильно в скорости не потерять.
