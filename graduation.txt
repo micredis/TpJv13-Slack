@@ -645,3 +645,31 @@ Spring Security?
 
 ivanpobeguts [4 hours ago]
 Пока его в topjava не было, ногтя догадывался, что без него никак) Думал, по-простому можно как-то сделать для начала, без него
+
+
+Grigory Kislin [4 days ago]
+ждем 9е занятие
+
+
+qf05 [11:31 AM]
+Помогите плиз, я скопировал в свой проект из топджава классы из web связнные с юзером и админом, поправил немного методы, и скопировал их тесты , подтянул все недостающие зависимости, и теперь эти тесты валятся с ошибкой 
+Caused by: java.lang.ClassNotFoundException: org.springframework.hateoas.mvc.UriComponentsContributor
+если добавить зависимость:
+ <dependency>
+           <groupId>org.springframework.hateoas</groupId>
+           <artifactId>spring-hateoas</artifactId>
+           <version>0.23.0.RELEASE</version>
+       </dependency>
+то вылезает такая ошибка: Caused by: java.lang.IllegalStateException: @Bean method HateoasAwareSpringDataWebConfiguration.pageableResolver called as bean reference for type [org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver] but overridden by non-compatible bean instance of type [org.springframework.data.web.PageableHandlerMethodArgumentResolver]. Overriding bean of same name declared in: org.springframework.data.web.config.SpringDataWebConfiguration
+не понимаю, почему ему вообще могла понадобиться библиотека hateoas, у нас в проекте без неё всё работает?
+
+Grigory Kislin [21 hours ago]
+а кто у тебя этот класс дергает по стактрайсу?
+
+
+qf05 [20 hours ago]
+по страктрейсу у меня начиналось расхождение с топджавой после инициализации spring-mvc.xml и писалось что какие то левые три бина переопреопределяются(у меня таких нет, и первый раз такие вообще вижу), и потом использовался класс спринга делигирования, потом спринг поднимал свой рефлекшен, и потом вызывался этот класс и всё падало.
+
+Оказалось ошибка в том что я в component-scan указал сканировать пакет **.web. Я изменил на **.web.action и **.web.user и всё заработало.
+
+Подскажите почему в топджаве мы ставим сканировать пакет и он сканирует все подпакеты, а в моём приложении это не работает. (edited)

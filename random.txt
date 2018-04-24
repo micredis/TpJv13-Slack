@@ -755,3 +755,7 @@ Grigory Kislin [8:54 PM]
 
 VictorStatko [2:45 PM]
 Всем привет, кто может что-нибудь годного посоветовать почитать/посмотреть про spring cloud data flow?
+
+
+Arthur [2:41 PM]
+Друзья, имеется вакансия FrontEnd developer в Санкт-Петербурге. Вопросы в личку.

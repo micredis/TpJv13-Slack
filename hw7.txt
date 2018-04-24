@@ -441,3 +441,212 @@ roma [7:24 PM]
 qf05 [7:54 PM]
 блин, целый день убил, так и не понял как сформировать запрос на создание еды и юзера. например вот для юзера в боди пишу: {"name":"User2","email":"use2r@yandex.ru","password":"password","roles":["ROLE_USER"]}
 что не так?
+
+
+Grigory Kislin [21 hours ago]
+попробуй описать свою проблему полностью. 
+дополнил п. 1
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson01.md#-%D0%94%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D0%B5%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-hw01-%D0%B4%D0%B5%D0%BB%D0%B0%D0%B5%D0%BC-%D0%B2%D0%B5%D1%82%D0%BA%D1%83-hw01-%D0%BE%D1%82-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B5%D0%B3%D0%BE-%D0%BF%D0%B0%D1%82%D1%87%D0%B0-%D0%B2-master
+
+
+Dzmitry Shalukhau [10:58 AM]
+Только curl - только хардкор :slightly_smiling_face:
+
+
+roma [Yesterday at 3:09 PM]
+in #hw7
+public class MediaType extends MimeType implements Serializable - тут нет константы для проверки css? Захаркодить будет норм?
+```.andExpect(content().contentType("text/css"));```
+(edited)
+
+
+1 reply
+Oleksii Leshchenko [23 hours ago]
+я захардкодил
+
+
+Ma3stro [Yesterday at 4:12 PM]
+in #hw7
+Кто как передавал данные для фильтрации? Через @PathVariable или Post'om?
+
+
+6 replies
+Oleksii Leshchenko [22 hours ago]
+ты имеешь ввиду для getBetween()?
+
+
+Ma3stro [22 hours ago]
+Да
+
+
+Oleksii Leshchenko [22 hours ago]
+типа такого, если для optional части задания:
+`@RequestParam(value = "startDate", required = false) String startDate`
+
+
+Ma3stro [22 hours ago]
+Я пока основную часть делаю:)
+
+
+Oleksii Leshchenko [22 hours ago]
+там тоже будет @RequestParam
+
+
+Grigory Kislin [21 hours ago]
+технически можно и так и так. я с формы обычно чз post отдаю (edited)
+
+
+Grigory Kislin [4:58 PM]
+commented on alexey’s snippet MealRestControllerTest.update
+полагаю что с форматом чтото- либо @RequestBody либо MediaType.APPLICATION_JSON_VALUE отсутствуют
+
+
+Ma3stro [Yesterday at 8:02 PM]
+in #hw7
+А как передать для getBetween LocalDate'ы и  LocalTime'ы соответствующие в запрос? В каком формате вообще их указывать? (edited)
+
+
+14 replies
+dustnfox [18 hours ago]
+@Ma3stro Так все же написано :slightly_smiling_face:
+>2.2 в параметрах getBetween принимать LocalDateTime (конвертировать через @DATETIMEFORMAT WITH JAVA 8 DATE-TIME API), а передавать в тестах в формате ISO_LOCAL_DATE_TIME (например '2011-12-03T10:15:30'). Вызывать super.getBetween() пока без проверки на null, используя toLocalDate()/toLocalTime() (см. Optional п.3)
+
+
+dustnfox [18 hours ago]
+То есть у тебя клиент будет плевать DateTime в виде указанной строки. А пресловутый @DATETIMEFORMAT будет тебе из него делать LocalDateTime
+
+
+Gromov Vitaly [15 hours ago]
+Вот не могу понять, куда аннотацию @DATETIMEFORMAT  прикрутить?
+
+
+dustnfox [15 hours ago]
+Так натрави ее на параметр, пусть она его и пережевывает :slightly_smiling_face:
+
+
+dustnfox [15 hours ago]
+https://www.petrikainulainen.net/programming/spring-framework/spring-from-the-trenches-parsing-date-and-time-information-from-a-request-parameter/
+Petri Kainulainen
+Spring From the Trenches: Parsing Date and Time Information From a Request Parameter
+A few days ago I had to write a controller method that is used to upload files to a Spring web application. This is an easy task, but I had another requirement that turned out to be a problem: every file has an expiration date that must be given when the file is uploaded. What went wrong? The Probl…
+Sep 28th, 2015 at 12:24 PM
+ 
+
+
+dustnfox [15 hours ago]
+Example 1 смотри
+
+
+Gromov Vitaly [15 hours ago]
+Ok! Спасибо!  По началу так и сделал, но не взлетает, видимо дело еще в чем то ))
+
+
+dustnfox [15 hours ago]
+Ну так если совсем никак, то напиши, в чем проблема. А то ведь "не взлетает" - так себе описание :wink:
+
+
+
+Gromov Vitaly [15 hours ago]
+OK. Пытаюсь для эксперемента получить дату из параметра:   
+@PostMapping(value = "/filter")
+   public String getFiltered(@RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDateInpt) {
+       return "date is "+startDateInpt;
+   } (edited)
+
+
+Gromov Vitaly [15 hours ago]
+отправляю запрос POST с параметром startDate "2011-12-03T10:15:30", в ответ получаю "date is null"
+
+
+dustnfox [15 hours ago]
+Хм... Вроде все похоже. Может отправляешь что-то не так?
+
+
+dustnfox [14 hours ago]
+У меня была такая фигня, оказалось не то имя параметра в запрос писал
+
+
+Gromov Vitaly [14 hours ago]
+Я понял в чем проблема, я передавал в параметр в теле запроса, а нужно в URL
+
+
+Gromov Vitaly [14 hours ago]
+http://localhost:8080/topjava/rest/meals/filter?startdate=2011-12-03T10:15:30
+
+
+Nedfrench [9:54 PM]
+Добрый вечер, коллеги. 
+Никто не поделится ссылками на статьи про mockMVC?
+
+CRCx86 [7:52 AM]
+uploaded this image: добрый день! почему вываливается эта ошибка? 
+
+
+CRCx86 [7:53 AM]
+настройки проекта
+
+CRCx86 [7:53 AM]
+uploaded this image: image.png 
+
+
+CRCx86 [7:59 AM]
+uploaded this image: с чем связана эта надпись? 
+
+
+CRCx86 [Today at 8:02 AM]
+in #hw7
+При каждом перезапуске полностью слетают настройки IDEA. отвязывается DataBase, Maven, Facets в Project Structure. Уделение .idea не решает проблему. Что может быть не так?
+
+
+2 replies
+dustnfox [6 hours ago]
+Ты не пробовал проект с OneDrive перенести в обычную папку?
+
+
+dustnfox [6 hours ago]
+РКН с прошлой недели блокирует часть IP адресов используемых Microsoft для организации облачных хранилищ.  Может проблема связана с этим.
+
+
+Vladimir Gorbatenko [Today at 11:22 AM]
+in #hw7
+package ru.javawebinar.topjava;
+
+import org.springframework.test.context.ActiveProfilesResolver;
+
+public class AllActiveProfileResolver implements ActiveProfilesResolver {
+
+   @Override
+   public String[] resolve(Class<?> aClass) {
+       return new String[]{Profiles.REPOSITORY_IMPLEMENTATION, Profiles.getActiveDbProfile()};
+   }
+}
+Зачем в методе параметр Class<?> aClass? (edited)
+
+
+1 reply
+Grigory Kislin [2 hours ago]
+зайди в исходники ActiveProfilesResolver  и почитай в javadoc @param testClass (idea предлагает загрузить исходники в правом верхнем углу) (edited)
+
+
+Vladimir Gorbatenko [Today at 12:05 PM]
+in #hw7
+Уже несколько (3-4) уроков, после накатки патчей, идея как-то глючит при коммите, как будто не реагирует когда нажимаешь Commit and Push. Проверено на работе и дома. У всех так?
+
+
+3 replies
+Grigory Kislin [2 hours ago]
+В version control поле git команды появляется вкладка console. Там можно посмотреть
+либо отдать команду из терминала
+у меня все ок (edited)
+
+
+Dzmitry Shalukhau [32 minutes ago]
+У меня также. Я не использую Default как namespace для changeset. Idea то ли по каким то причинам не может сделать changeset активным перед коммитом, то ли не может анализ неактивного changeset запустить. Лечится установкой changeset активным.
+
+
+Oleksii Leshchenko [18 minutes ago]
+Commit может сразу не реагировать, если включена оптимизация импортов и/или структуризация кода и/или анализ кода на ошибки... В первый раз оно все фиксет все и анализирует. И дает посмотреть результат. И со второго раза заливает...
+
+
+roma [2:17 PM]
+Народ я не совсем понимаю - как наше приложение понимает, что работает по REST через класс AdminRestContoller и ProfileRestContoller (а не через RootConroller) - соответственно не понимаю, что нужно сделать что бы оно работало с MealRestController а не с JspMealController (edited)
