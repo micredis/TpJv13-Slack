@@ -4907,3 +4907,42 @@ vpn расширение для хрома
 chrome.google.com
 Unlimited Free VPN - Hola
 Access websites blocked in your country, company or school with Hola! Hola is free and easy to use!
+
+
+Джони [5:54 AM]
+uploaded and commented on this image: image.png 
+
+Коллеги, приветствую. Я маленько отстал.... Дайте пожалуйста наводку, как устранить эти ошибки?
+
+V-E-S-T [8:35 AM]
+слева во вкладке maven projects - profiles - поставь галочку postgres. Мы в помнике указали в properties два профиля. при профиле hsqldb maven не подгружает библиотеку для postgresql, а для профиля postgres он не подгружает библиотеку для hsql. Поэтому ругается что не может найти нужную либу.
+
+Джони [9:09 AM]
+спасибо! приложение запустилось, но вышла ошибка HTTP 500. Но это видимо другой вопрос...
+V-E-S-T
+слева во вкладке maven projects - profiles - поставь галочку postgres. Мы в помнике указали в properties два профиля. при профиле hsqldb maven не подгружает библиотеку для postgresql, а для профиля postgres он не подгружает библиотеку для hsql. Поэтому ругается что не может найти нужную либу.
+Posted in #generalYesterday at 8:35 AM
+
+Grigory Kislin [2:59 PM]
+если slack в web плохо пашет можно попробовать установить как прогу: https://slack.com/downloads
+Slack
+Downloads
+Download Slack for free for mobile devices or desktop. Keep up with the conversation with our apps for iPhone, Android, Windows Phone and more.
+
+Dzmitry Shalukhau [3:11 PM]
+Ну, или приехать к нам в Беларусь :slightly_smiling_face:
+
+pro [4:22 PM]
+уж лучше вы к нам))
+
+Dzmitry Shalukhau [4:28 PM]
+У вас закон Яровой и мавен только через vpn :slightly_smiling_face:
+
+Grigory Kislin [7:19 AM]
+Тем не менее, жизнь продолжается:
+*---------------------------------------*
+*Добро пожаловать в канал: #hw8*
+*---------------------------------------*
+
+pro [8:57 AM]
+я  из Донецка, но сейчас живу в Закарпатье, здесь через vpn разве что яндекс или вк))

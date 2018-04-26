@@ -1,0 +1,51 @@
+Grigory Kislin [7:16 AM]
+joined #hw8.
+
+Grigory Kislin [7:17 AM]
+Как и обещал, в 8м уроке: CSS (Bootstrap), JavaScript (jQuery + plugins), AJAX
++ добавление к REST контроллерам базовой авторизации (в UI и тесты добавим на следующем уроке)
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson08.md
+Успехов! (edited)
+
+Constantine [7:19 AM]
+joined #hw8 along with 8 others.
+
+Ilya [8:11 AM]
+Я один не могу патчи выкачать ?
+
+This site can’t be reached
+takeout.google.com refused to connect.
+Try:
+
+Checking the connection
+Checking the proxy and the firewall
+ERR_CONNECTION_REFUSED
+мдам, только vpn спасает :confused: видать последствия маразма ркн
+
+Alexander_Gubanow [8:15 AM]
+joined #hw8 along with 9 others.
+
+pro [9:13 AM]
+хорошо, что vpn еще не прикрыли) любая война людей с людьми по большому счету - маразм; интересно, на сколько лет бы люди могли законсервировать энергетические сырьевые месторождения, возьмись они кидать в "топку" свои заготовленные ракеты
+
+realcorwin [10:30 AM]
+никто не заставляет Гугл помогать телеграмм обходить законы
+
+Dzmitry Shalukhau [10:31 AM]
+@realcorwin проблема не в этом, а в том. что никто не заставляет РКН думать и отвечать за промахи
+Гугл не помогает - он просто предоставляет сервис всем. А люди из-за тупых блокировок теряют деньги (время/силы/бизнес)
+
+realcorwin [10:33 AM]
+это не тупые блокировки. это исполнение закона. которые призван уберечь людей
+впрочем, это флуд здесь
+
+Dzmitry Shalukhau [10:33 AM]
+Именно, что тупые. Если бы были не тупые - блокировали бы конкретные ресурсы, а не массово. В общем, во флуд
+
+
+Valery.Shkerdin [10:37 AM]
+#flooding вам туда )
+
+Grigory Kislin [10:39 AM]
+*добавил еще мелкие правки - патч: 8_10_fix.patch*
+*https://drive.google.com/open?id=1VWBMA2Kd6Jq5DAWYJkzwlHjWHFeFc80F* (edited)

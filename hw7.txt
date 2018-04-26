@@ -650,3 +650,636 @@ Commit может сразу не реагировать, если включе�
 
 roma [2:17 PM]
 Народ я не совсем понимаю - как наше приложение понимает, что работает по REST через класс AdminRestContoller и ProfileRestContoller (а не через RootConroller) - соответственно не понимаю, что нужно сделать что бы оно работало с MealRestController а не с JspMealController (edited)
+
+
+Ma3stro [1 day ago]
+Не понял вопроса, но у нас есть аннотация @RestController, возможно ты про это
+
+
+Oleksii Leshchenko [1 day ago]
+Там разный URL. У Rest свой путь...
+
+
+
+roma [1 day ago]
+@Oleksii Leshchenko @Ma3stro То-есть я могу работать и по ресту и не по ресту???? и с мил тоже так? (edited)
+
+
+roma [1 day ago]
+cейчас в томкате из за jsp у нас все летит в JSPMealController - а c REST можно работать только через адресную строку и SOAPUI ? (edited)
+
+
+Oleksii Leshchenko [1 day ago]
+Можно работать одновременно. И думаю одновременно и через SoapUi и браузер!
+
+
+roma [1 day ago]
+но приложение наше если не пользоваться адресной строкой работает пока не через рест - правильно?
+
+
+Oleksii Leshchenko [1 day ago]
+Просто один контроллер вернет HTML (через JSP),  а второй json
+
+
+Oleksii Leshchenko [1 day ago]
+Да, приложение не использует Rest. Для этого надо делать frontend на JavaScript
+
+
+Oleksii Leshchenko [1 day ago]
+И возможно даже с полноценными Angular, React или Vue
+
+
+roma [1 day ago]
+Спасибо большое - немного прояснилось - пилю контроллер дальше....
+
+
+Arthur [1 day ago]
+Помойму Григорий в видео произнес такую фразу, что со временем мы от "нерэст" контроллера избавимся. Я это понимаю так - рэст подход, это современный подход реализации веб приложения, и мы дальше пойдем по этому пути. Через JSP и вообще через сервлеты - это подход предыдущего поколения, и мы его изучили для общего нашего развития.
+
+
+Oleksii Leshchenko [1 day ago]
+Да, это так. Единственное, такой подход может потребовать привлечения дополнительно фронт-энд девелопера в команду...
+
+
+realcorwin [1 day ago]
+@roma я тоже не сразу въехал, что rest контроллеры у нас не заменяют обычные, а работают параллельно. со стартовый страницы у нас грузятся jsp по ссылкам, обрабатываемым обычным контроллером. а если мы воспользуемся ссылкой, н-р, rest/admin/users, то за эту ссылку отвечает уже rest контроллер, и он пришлёт нам json
+
+
+
+roma [1 day ago]
+Всем большое спасибо )
+
+
+Ma3stro [Apr 24th at 2:52 PM]
+in #hw7
+Почему мне выбрасывает 400 bad request?
+    ```@PostMapping(value = "/filter")
+    public List<MealWithExceed> getBetween(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate, @RequestParam("startTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime startTime, @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime endDate, @RequestParam("endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime endTime) {
+        return super.getBetween(startDate.toLocalDate(), startTime.toLocalTime(), endDate.toLocalDate(), endTime.toLocalTime());
+    }```
+С запроса `http://localhost:8080/topjava/rest/meals/filter?startDate=2011-12-03T10:15:30&startTime=2016-12-03T10:15:30&endDate=2011-12-03T10:15:30&endTime=2017-12-03T10:15:30`? (edited)
+
+
+18 replies
+Oleksii Leshchenko [1 day ago]
+startTime и startDate имеют одинаковый и неправильный формат
+
+
+Yevhen Maksymovych [1 day ago]
+и тип респонса не указан...
+
+
+Oleksii Leshchenko [1 day ago]
+Там должно быть только время и только дата соотв
+
+
+Ma3stro [1 day ago]
+@Oleksii Leshchenko, у меня же дата и время соответственно конвертируются toLocalDate() и toLocalTime()
+
+
+Oleksii Leshchenko [1 day ago]
+Тогда не знаю)
+
+Yevhen Maksymovych [1 day ago]
+так погодь
+
+
+Yevhen Maksymovych [1 day ago]
+ты через браузер пытаешься вытянуть это дело?
+
+
+Yevhen Maksymovych [1 day ago]
+или через соапюи?
+
+Yevhen Maksymovych [1 day ago]
+если через браузер, вешай на гет, а не на пост
+
+
+Yevhen Maksymovych [1 day ago]
+вообще логика этого метода предполагает гет, он же не изменяет данные
+
+
+Gromov Vitaly [1 day ago]
+Добавляй параметры в метод последовательно, контролируя что они у тебя правильно приплетают по url
+
+
+Ma3stro [1 day ago]
+Сделал не post, а get, также поменял уже на LocalDate и LocalTime
+
+
+Ma3stro [1 day ago]
+Заработало
+
+
+Yevhen Maksymovych [1 day ago]
+:+1:
+
+Gromov Vitaly [1 day ago]
+А у меня через post работает, хотя get правильнее
+
+
+Vladimir.M [1 day ago]
+Вообще то не совсем верно. У тебя в запросе четыре параметра LocalDateTime, а должно быть два LocalDate и два LocalTime. @DateTimeFormat прекрасно конвертирует в оба формата (DateTimeFormat.ISO.DATE, DateTimeFormat.ISO.TIME)
+
+
+Yevhen Maksymovych [1 day ago]
+вообще, если он не делает опционал, там как раз надо использовать сплошные локалдэйттаймы
+
+
+Yevhen Maksymovych [1 day ago]
+```2.2 в параметрах getBetween принимать LocalDateTime (конвертировать через @DATETIMEFORMAT WITH JAVA 8 DATE-TIME API), а передавать в тестах в формате ISO_LOCAL_DATE_TIME (например '2011-12-03T10:15:30').``` 
+(edited)
+
+
+Vladimir.M [4:30 PM]
+Всем у кого SoapUI не дает ответ на запрос в кодировке UTF-8 - http://automated-testing.info/t/otvet-na-asinhronnyj-zapros-dlya-soapui-v-kodirovke-utf-8/7734. Мне помогло. Плюс поменял шрифт отображения (Preference->Editor Setting->Editor Font) на Arial (edited)
+automated-testing.info
+Ответ на асинхронный запрос для SoapUI в кодировке UTF-8
+Добрый день! Столкнулся на проекте с неприятной штукой. Для тестирования сервисов и написания авто-тестов выбрали SoapUI + HermesJMS (сервисы асинхронные через MQ-очереди). И все было радужно, пока в новой сборке разработчики не приделали новый механизм работы с кодировками. В итоге сообщения приходят в бинарном виде, парсятся, но почему-то не в UTF-8, а в Windows-1251 (в предыдущей версии как раз она использовалась). Причем ответ-то от сервисов вроде как приходит в верном формате, т.е. в UTF-...
+
+
+Yevhen Maksymovych [Apr 24th at 4:47 PM]
+in #hw7
+а кто-то сделал кастомный форматтер для локалдейта?
+
+
+14 replies
+aleksey [1 day ago]
+Я сделал
+
+
+Vladimir.M [1 day ago]
+:ballot_box_with_check:
+
+
+Yevhen Maksymovych [1 day ago]
+ты делал именно форматтер стринга в локалдейт?
+```public class LocalDateCustomFormatter implements Formatter<LocalDate> {```
+
+
+Vladimir.M [1 day ago]
+Я делал через interface Converter<String, LocalDate>
+
+
+Yevhen Maksymovych [1 day ago]
+а как ты конвертил нулл в LocalDate.MIN/MAX?
+
+
+Vladimir.M [1 day ago]
+зачем
+
+
+Yevhen Maksymovych [1 day ago]
+а, всё, туплю, нам достаточно вернуть нулл, если что-то идёт не так, сервис сам разберётся что подставить
+
+
+Vladimir.M [1 day ago]
+у тебя в запросе либо приходит параметр дата/время, либо его нет
+
+
+aleksey [1 day ago]
+Тут уже похоже разобрались :smiley:
+
+Yevhen Maksymovych [1 day ago]
+а как этот конвертер теперь зарегить в контексте и нацепить на наше поле?
+
+
+Yevhen Maksymovych [1 day ago]
+conversionService?
+
+
+aleksey [1 day ago]
+Создать соответствующую аннотацию, заимплементить AnnotationFormatterFactory,
+в spring-mvc добавить FormattingConversionServiceFactoryBean в котором добавить эти AnnotationFormatterFactory и добавить annotation-driven с этим бином
+По крайней мере я так делал (edited)
+
+
+Vladimir.M [1 day ago]
+Да
+
+
+Vladimir.M [1 day ago]
+Также как цепляли JacksonObjectMapper
+
+
+Alexander Shnaider [Apr 24th at 4:52 PM]
+in #hw7
+Друзья, подскажите как в MealRestControllerTest проверить что в моделе вся еда присутствует и сравнить её с тем что должно быть.
+Я пытался так написать `.andExpect(model().attribute("meals", getWithExceeded(Arrays.asList( MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1), DEFAULT_CALORIES_PER_DAY)));` но тест не проходит
+
+
+7 replies
+Yevhen Maksymovych [1 day ago]
+я вот так делал:
+```mockMvc.perform(get(REST_URL))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(contentJson(MealsUtil.getWithExceeded(MEALS, MealsUtil.DEFAULT_CALORIES_PER_DAY)));```
+
+
+aleksey [1 day ago]
+Там если глубже покопать, то сравнение проходит через такой примерно метод
+public static boolean nullSafeEquals(@Nullable Object o1, @Nullable Object o2) {
+        if (o1 == o2) {
+            return true;
+        }
+        if (o1 == null || o2 == null) {
+            return false;
+        }
+        if (o1.equals(o2)) {
+            return true;
+        }
+        if (o1.getClass().isArray() && o2.getClass().isArray()) {
+            return arrayEquals(o1, o2);
+        }
+        return false;
+    }
+
+нас инетресует сравнение вида
+if (o1.equals(o2)) {
+            return true;
+        }
+Поскольку у MealWithExceed у нас не переопределено equals, то он будет проверять по ссылке. Так что я переопределил equals в MealWithExeed и все заработало
+
+
+
+dustnfox [1 day ago]
+@aleksey они про REST говорят. Там приходит не MealWithExceed, а  JSON. Поэтому все ок.
+
+aleksey [1 day ago]
+@dustnfox я тоже
+скопируй код Alexander Shnaider
+и запусти. Посмотри куда идет и почему не работает.
+
+
+dustnfox [1 day ago]
+@aleksey Ах вон ты о чем :slightly_smiling_face: Извини, я не понял. Думал ты Женин код комментируешь. Если так, то да. Прав. Просто эта же история в Root тесте еще.
+
+
+aleksey [1 day ago]
+@dustnfox а тут похоже я не прав, увидел model, подумал что это в Root, а это в Rest. С телефона в транспорте не очень удобно вникать, буду внимательней
+
+
+Alexander Shnaider [16 hours ago]
+aleksey, точно, а я ведь додебажился до этого метода, а про иквалс с хешкодом не догадался, спасибо всем за подсказки
+
+
+realcorwin [Apr 24th at 5:05 PM]
+in #hw7
+@Alexander Shnaider
+   public void testGetAll() throws Exception {
+       mockMvc.perform(get(REST_URL))
+               .andExpect(status().isOk())
+               .andDo(print())
+               .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+               .andExpect(contentJson(MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1));
+
+
+2 replies
+Yevhen Maksymovych [1 day ago]
+но ведь это некорректно. get(REST_URL) тебе вернёт лист миловсэксидами, а ты проверяешь их на сериализацию жсона от мила
+
+
+Yevhen Maksymovych [1 day ago]
+хотя тест почему-то и проходится
+
+
+qf05 [7:13 PM]
+Народ кто сделал в RootControllerTest.testMeals экспект всех элементов?
+
+
+Alexandr [Apr 24th at 9:04 PM]
+in #hw7
+Может кто-нибудь подсказать, почему мы в браузере вводим запрос http://localhost:8080/topjava/rest/admin/users? У нас же в контроллере прописано static final String REST_URL = "/rest/admin/users"; Откуда берется /topjava?
+
+
+3 replies
+alexey [1 day ago]
+topjava добавляет TomCat
+
+
+alexey [1 day ago]
+когда его настраивали прописывали, что он будет стартовать с http://localhost:8080/topjava
+
+
+Alexandr [1 day ago]
+@alexey спасибо
+
+
+Yevhen Maksymovych [9:05 PM]
+ребята, я сдаюсь, покажите, плз, кто-нибудь, кто смол привязать кастомные форматтеры на датувремя
+я уже полдня убил на это, но не выходит каменный цветок
+в какую сторону копать вообще не понятно. сделал два форматтера, имплементировав org.springframework.format.Formatter
+добавил бин org.springframework.format.support.FormattingConversionServiceFactoryBean в контекст, и добавил ему в список форматтеров эти два моих форматтера
+засунул этот бин сюда:
+```mvc:annotation-driven conversion-service="conversionService"```
+
+
+Yevhen Maksymovych [Apr 24th at 9:09 PM]
+in #hw7
+но мои форматтеры не вызываются при  попытке перегнать из стринга в локалдейт/локалтайм
+
+
+19 replies
+jawinterod [1 day ago]
+Над твоей кастомной аннотацией какие аннотации стоят? Которая @interface (edited)
+
+
+Yevhen Maksymovych [1 day ago]
+я не делал кастомную аннотацию, я так понял по условию, нам надо чтобы форматтеры работали не по аннотации, а подтягивались по типу
+
+
+Yevhen Maksymovych [1 day ago]
+там же написано
+```Заменить @DateTimeFormat на свои LocalDate/LocalTime конверторы или форматтеры.```
+
+
+Yevhen Maksymovych [1 day ago]
+или имеется в виду, что надо сделать свою аннотацию вместо @DateTimeFormatter какой-нибудь @CustomDateFormatter / @CustomTimeFormatter?
+
+
+jawinterod [1 day ago]
+Ну, я так сделал)
+
+
+ma1oyby [1 day ago]
+https://www.petrikainulainen.net/programming/spring-framework/spring-from-the-trenches-parsing-date-and-time-information-from-a-request-parameter/
+Petri Kainulainen
+Spring From the Trenches: Parsing Date and Time Information From a Request Parameter
+A few days ago I had to write a controller method that is used to upload files to a Spring web application. This is an easy task, but I had another requirement that turned out to be a problem: every file has an expiration date that must be given when the file is uploaded. What went wrong? The Probl…
+Sep 28th, 2015 at 12:24 PM
+ 
+
+
+ma1oyby [1 day ago]
+если правильно понял вопрос
+
+
+Yevhen Maksymovych [1 day ago]
+нет, не то
+
+
+Yevhen Maksymovych [1 day ago]
+я спрашивал, как заставить конфершенфэктори выбирать кастомный конвертер, который мы создали сами, а не как указать нужный шаблон :slightly_smiling_face:
+
+
+Yevhen Maksymovych [1 day ago]
+так-то у меня и без кастомных конвертеров всё корректно отрабатывалось...
+
+
+Vladimir.M [1 day ago]
+Ты сколько форматерров делал? Один на LocalDateTime?
+
+
+Yevhen Maksymovych [1 day ago]
+два, один на LocalDate, второй на LocalTime
+
+
+Vladimir.M [1 day ago]
+А чего пишет в ответ?
+
+Yevhen Maksymovych [1 day ago]
+```22:07:55.895 WARN  o.s.w.s.m.support.DefaultHandlerExceptionResolver.handleTypeMismatch:396 - Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.time.LocalTime'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.RequestParam java.time.LocalTime] for value '00:00:00'; nested exception is java.lang.NullPointerException```
+
+
+Yevhen Maksymovych [1 day ago]
+пытается забиндить своими биндерами
+
+
+Yevhen Maksymovych [1 day ago]
+а не моими форматтерами
+
+
+Vladimir.M [1 day ago]
+1. А ты убрал @DateTimeFormat из запроса?
+2. Чем ты парсишь строку в форматтере? У нас в DateTimeUtil есть методы...
+3. Как ты локализуешь LocalDate/LocalTime (методы print) Смотри в торону java.time.format.DateTimeFormatter...
+Я только что сделал свой форматтер (через org.springframework.format.Formatter) все прошло как по маслу
+Если не получается лучше реализовать через Converter SPI (https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#core-convert-Converter-API), проще и понятнее.... (edited)
+
+
+Grigory Kislin [1 day ago]
+1. главное- посмотри- попадаешь ли в свой форматтер
+2. если да- обрабатываешь ли null начения
+
+
+Yevhen Maksymovych [1 day ago]
+уже разобрался, в мой форматтер попадаю, но потом почему-то спринг прыгает в свой конвертер, и на этом падает эксепшен. исправил форматтеры на конвертеры (хоть это и нелогично, я же из стринга в локалдэйт/локалтайм делаю), после этого прошло, но я так и не понял, как его заставить довольствоваться форматтерами
+
+
+roma [Apr 24th at 9:31 PM]
+in #hw7
+у меня вопрос как despetcherServlet отличет методы update, delete, get - ведь у них у всех один и тот же url
+```http://localhost:8080/topjava/rest/admin/users/{id}```
+и обрабатывает этот запрос (URL) в нужном методе????? (edited)
+
+
+6 replies
+alexey [1 day ago]
+у них разные запросы(GET,POST,PUT,DELETE) по ним определяет
+
+
+roma [1 day ago]
+Тоесть их можно оттестить только через SOAPUI? -через адресную строку браузера сервлет не будет понимать что делать?
+
+
+Yevhen Maksymovych [1 day ago]
+да
+
+
+Yevhen Maksymovych [1 day ago]
+через адресную строку ты можешь только стандартный гет отправить
+
+
+roma [1 day ago]
+отлично - спасбио )
+
+
+Grigory Kislin [1 day ago]
+в уроке куча инструментов кроме soapui чем можно послать. curl самый распространенный. зщые можно в html из формы послать
+ну и из js можно конечно ajax слать (след. урок) (edited)
+
+
+CRCx86 [11:22 PM]
+Большое спасибо, что никто не ответил. Видимо проблема действительно не решаема(
+
+
+Alexander_Gubanow [Yesterday at 1:05 AM]
+in #hw7
+Как задать кодировку UTF-8  в curl команде при отправке json в методе post ?
+
+
+1 reply
+Vladimir.M [1 day ago]
+curl -H 'Content-Type:application/json;charset=UTF-8'
+https://curl.haxx.se/docs/manpage.html
+https://curl.haxx.se/docs/manual.html (edited)
+
+
+Джони [9:19 AM]
+uploaded and commented on this image: image.png 
+
+ребята, привет. после накатки патча столкнулся с исключением. в брузере пишет:
+Message An exception occurred processing JSP page [/WEB-INF/jsp/index.jsp] at line [6]
+Помогите, кто чем может.
+
+Джони [9:20 AM]
+патч 7_06 накатил
+
+Yevhen Maksymovych [9:53 AM]
+jstl в помнике подключен?
+
+Grigory Kislin [10:30 AM]
+commented on Джони’s file image.png
+если в сторонке общий проект склонировать- есть ошибка?
+
+Джони [11:26 AM]
+да
+Yevhen Maksymovych
+jstl в помнике подключен?
+Posted in #hw7Yesterday at 9:53 AM
+
+Джони [11:34 AM]
+commented on image.png
+не совсем понял, что это значит... IDEA подсказывает, что настройки надо поменять. "Edit Hibernate QL Fragment" or "Language Injection Setting" or "Un-inject Language/Reference"
+
+roma [11:37 AM]
+Народ не могу осилить метод create ((( при такой реализации
+    ```@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Meal> createWithLocation(Meal meal) {
+        Meal created = super.create(meal);
+
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.setLocation(uriOfNewResource);
+
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL_MEAL + "/{id}")
+                .buildAndExpand(created.getId()).toUri();
+
+        return ResponseEntity.created(uriOfNewResource).body(created);
+    }```
+ругается на меная
+```Hibernate: 
+    select
+        nextval ('global_seq')
+11:07:51.621 ERROR org.hibernate.internal.ExceptionMapperStandardImpl.mapManagedFlushFailure:39 - HHH000346: Error during managed flush [Validation failed for classes [ru.javawebinar.topjava.model.Meal] during persist time for groups [javax.validation.groups.Default, ]
+List of constraint violations:[
+    ConstraintViolationImpl{interpolatedMessage='РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚Рѕ', propertyPath=description, rootBeanClass=class ru.javawebinar.topjava.model.Meal, messageTemplate='{javax.validation.constraints.NotBlank.message}'}
+    ConstraintViolationImpl{interpolatedMessage='РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РјРµР¶РґСѓ 10 Рё 5000', propertyPath=calories, rootBeanClass=class ru.javawebinar.topjava.model.Meal, messageTemplate='{org.hibernate.validator.constraints.Range.message}'}
+    ConstraintViolationImpl{interpolatedMessage='РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ Р·Р°РґР°РЅРѕ', propertyPath=dateTime, rootBeanClass=class ru.javawebinar.topjava.model.Meal, messageTemplate='{javax.validation.constraints.NotNull.message}'}
+]]
+ 11:07:51.623 DEBUG o.s.w.s.handler.AbstractHandlerExceptionResolver.resolveException:137 - Resolving exception from handler [public org.springframework.http.ResponseEntity<ru.javawebinar.topjava.model.Meal> ru.javawebinar.topjava.web.meal.MealRestController.createWithLocation(ru.javawebinar.topjava.model.Meal)]: org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction```
+(edited)
+
+Yevhen Maksymovych [11:40 AM]
+укажи, что мил у тебя берётся из реквеста, а то ты пытаешься сохранить ничего
+понятно, что тебе констрейнты бд не дадут это сделать
+
+roma [11:41 AM]
+оуч )))) упустил анатацию - сейчас перекомпилюсь - отпишусь
+@Yevhen Maksymovych Спасибо ))) большое заработало )
+
+Yevhen Maksymovych [11:43 AM]
+:+1:
+
+
+Zhivchik [Yesterday at 11:47 AM]
+in #hw7
+1.2 ResourceControllerTest для style.css (проверить status и ContentType) - намекните ,что здесь требуется сделать
+
+
+3 replies
+ilya t. [24 hours ago]
+сделать наподобие того что ты делал в RootControllerTest (edited)
+
+
+Zhivchik [24 hours ago]
+Нужно еще делать какой то ResourceController?
+
+
+ilya t. [24 hours ago]
+нет, просто добавить класс теста ResourceControllerTest
+
+
+Джони [3:07 PM]
+25-Apr-2018 18:57:40.944 SEVERE [http-nio-8080-exec-1] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [mvc-dispatcher] in context with path [/topjava] threw exception [An exception occurred processing JSP page [/WEB-INF/jsp/index.jsp] at line [6]
+
+3: <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+4: 
+5: <html>
+6: <jsp:include page="fragments/headTag.jsp"/>
+7: <body>
+8: <jsp:include page="fragments/bodyHeader.jsp"/>
+9: <section>
+
+Подскажите пожалуйста, что она от меня хочет...
+
+roma [4:40 PM]
+Народ а метод getBetween тоже все параметры должен джейсоном принимать?
+
+
+Yevhen Maksymovych [Yesterday at 4:41 PM]
+in #hw7
+нет, принимать должен из реквеста
+
+
+5 replies
+roma [19 hours ago]
+@RequestParam ?
+
+
+roma [19 hours ago]
+перед каждым параметром? (edited)
+
+
+Yevhen Maksymovych [19 hours ago]
+ага
+
+
+roma [19 hours ago]
+оки - так и начал делать - но чего то клинануло - "не надо ли это как то в виде джейсона принимать" ) (edited)
+
+
+Yevhen Maksymovych [19 hours ago]
+не, технически ты можешь это принять и из джейсона, если их положить в реквестбади, а не в реквестпарам, разницы особой не будет
+
+
+Alexander_Gubanow [6:08 PM]
+Кто сделал curl для updateMeal  и createMeal? Поделитесь, если не трудно, можно в личку. У меня под windows c cmd  и GitBash не получается отправить json с русскими символами. Вот так работает -d '{"dateTime":"2018-04-24T10:00:00","description":"NewEat","calories":600}', а вот так не работает -d '{"dateTime":"2018-04-24T10:00:00","description":"Новая еда","calories":600}'
+
+Aleksei Kirillov [6:25 PM]
+Я вынес json в отдельный файл с utf8 и использовал команду с -d @имя файла
+
+Alexander_Gubanow [7:38 PM]
+Да, через файл все работает.Спасибо
+
+
+Nedfrench [Yesterday at 9:24 PM]
+in #hw7
+Коллеги, добрый вечер!
+Проблема "@ResponseStatus(value = HttpStatus.NO_CONTENT)" уже обсуждалась, но так и не понял, что с этим делать? В тестах добавил, не помогает.
+
+
+2 replies
+Oleksii Leshchenko [14 hours ago]
+что значит не помогает?
+В контроллере поставили NO_CONTENT, значит статус вернется 204. В тестах проверяли на 200, надо было переправить
+
+
+Nedfrench [14 hours ago]
+Все ж на поверхности. Спасибо, Oleksii Leshchenko.
+
+
+Vladimir Gorbatenko [10:05 PM]
+Накатил все патчи, и локаль отвалилась:  No message found under code 'app.title' for locale 'ru_RU'.
+При этом лог исправно пишется, т.е. с переменной TOPJAVA_ROOT все норм
+
+Edgar Zed [8:13 AM]
+@Grigory Kislin в JacksonObjectMapper, раздел wiki они видимо на гитхаб перенесли => ссылка http://wiki.fasterxml.com/JacksonHowToCustomSerializers изменилась на https://github.com/FasterXML/jackson-docs/wiki/JacksonHowToCustomSerializers
+
+Vladimir Gorbatenko [10:18 AM]
+как оказалось и "en" не видит...
+Vladimir Gorbatenko
+Накатил все патчи, и локаль отвалилась:  No message found under code 'app.title' for locale 'ru_RU'.
+При этом лог исправно пишется, т.е. с переменной TOPJAVA_ROOT все норм
+Posted in #hw7Yesterday at 10:05 PM
