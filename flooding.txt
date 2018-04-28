@@ -479,3 +479,28 @@ Vladimir Gorbatenko [4:34 PM]
 
 Grigory Kislin [5:07 PM]
 @Vladimir Gorbatenko выпускной делать - да. запоминать все что мы делаем- не надо, я вот не помню. на это гугл и стекорерфлов есть. а вот понимать как это работает- нужно (edited)
+
+
+Vladimir Gorbatenko [Apr 26th at 4:57 PM]
+in #flooding
+не могу найти наше расписание, кто помнит дайте ссылку пожалуйста
+
+
+2 replies
+pro [2 days ago]
+https://github.com/JavaWebinar/topjava/tree/doc
+
+
+Vladimir Gorbatenko [2 days ago]
+спасибо
+
+
+Tony [9:47 PM]
+Осторожно, нецензурная лексика https://coub.com/view/14jnrd
+Coub
+Как там она называется ?)
+by Mr.Booyaka
+
+
+pro [10:38 PM]
+лучше давай опять сосредоточимся

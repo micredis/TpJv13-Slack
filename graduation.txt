@@ -738,3 +738,45 @@ qf05 [8:50 PM]
 
 realcorwin [8:51 PM]
 а ресторан вы спросили про очень-очень много пользователей? :slightly_smiling_face: не усложняйте, парни :slightly_smiling_face:
+
+
+VadimSimonov [Apr 26th at 1:49 PM]
+in #graduation
+Ребята, может кто шарит хорошо.
+прописываю как в 9 занятии загрузку таблицу через ajax
+"ajax": {
+           "url": ajaxUrl,
+           "dataSrc": ""
+       },
+но запросы до контроллера недолетают, что ещё нужно прописать? (edited)
+
+
+8 replies
+Grigory Kislin [2 days ago]
+возьми как в user и скопируй. после можешь тихонько менять. то что ты написал проблему- информации никакой почти.
+
+
+Dmitry Neustupov [2 days ago]
+Попробуй вместо "url": ajaxUrl прописать "sAjaxSource": ajaxUrl
+
+
+Grigory Kislin [2 days ago]
+нет
+
+Dmitry Neustupov [2 days ago]
+@Grigory Kislin мне помогало, какое то время такая конструкция работала, потом заработало с "url"
+
+
+Grigory Kislin [2 days ago]
+думаю что Ctrl+F5 помогло бы (edited)
+
+
+VadimSimonov [2 days ago]
+да ctrl+f5 помог
+
+Dmitry Neustupov [2 days ago]
+надо видимо больше отдыхать....
+
+
+VadimSimonov [1 day ago]
+:+1:

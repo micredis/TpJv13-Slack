@@ -1283,3 +1283,73 @@ Vladimir Gorbatenko
 Накатил все патчи, и локаль отвалилась:  No message found under code 'app.title' for locale 'ru_RU'.
 При этом лог исправно пишется, т.е. с переменной TOPJAVA_ROOT все норм
 Posted in #hw7Yesterday at 10:05 PM
+
+
+Pavel Klindziuk [2 days ago]
+файл spring-mvc.xml :
+<property name="basenames" value="file:///#{systemEnvironment['TOPJAVA_ROOT']}/config/messages/app"/>
+Проверь - совпадает ли путь к твоим ресурсам с тем, что указал Григорий.
+У меня к примеру не совпадает : 
+<property name="basenames" value="file:///#{systemEnvironment['TOPJAVA_ROOT']}/topjava/config/messages/app"/>
+
+
+roma [Apr 26th at 12:53 PM]
+in #hw7
+Народ а 8 занятие еще не выходило? (edited)
+
+
+2 replies
+realcorwin [2 days ago]
+Есть уже
+
+
+roma [2 days ago]
+Спасибо) - ушел туда )
+
+
+V-E-S-T [4:17 PM]
+кто подскажет что могло приключиться - после последнего патча запускаю tomcat и Application Server was not connected before run configuration stop, reason: java.io.IOException: Failed to retrieve RMIServer stub: javax.naming.ServiceUnavailableException [Root exception is java.rmi.ConnectException: Connection refused to host: localhost; nested exception is: java.net.ConnectException: Connection refused: connect]
+Error: Exception thrown by the agent : java.rmi.server.ExportException: Port already in use: 1099; nested exception is: 
+    java.net.BindException: Address already in use: JVM_Bind
+
+Arthur [4:19 PM]
+у тебя прошлый запуск томката до сих пор крутится
+томкат погаси
+
+V-E-S-T [4:26 PM]
+нет.  не в этом проблема. погасил всё - не помогло.
+
+Arthur [4:27 PM]
+он тебе же пишет, что порт занят, значит на нем кто-то сидит
+посмотри кто сидит...
+
+V-E-S-T [4:32 PM]
+я вижу что пишет. но не вижу чтобы кто то сидел на нём
+
+Valery.Shkerdin [4:36 PM]
+@V-E-S-T пробуй netstat -ano, смотри чем занят порт
+
+V-E-S-T [4:36 PM]
+его и юзаю
+
+Valery.Shkerdin [4:36 PM]
+чисто?
+не зянят в смысле ни чем?
+
+V-E-S-T [4:38 PM]
+чисто в смысле никто из выданных не занимает 1099
+
+Valery.Shkerdin [4:38 PM]
+в таких случаях всегда поступаю как профи, перезагружаюсь )
+
+V-E-S-T [4:40 PM]
+)) вариант
+
+Arthur [4:40 PM]
+если не поможет, есть более глобальные пути решения :slightly_smiling_face: (edited)
+
+V-E-S-T [4:49 PM]
+аллилуя)))) Перезагрузка воистину порой творит чудеса.
+
+Dzmitry Shalukhau [5:13 PM]
+Cannot resolve symbol 'con:RestService'. Ошибка в xml. Кто-нибудь встречал???

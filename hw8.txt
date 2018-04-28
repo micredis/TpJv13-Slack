@@ -49,3 +49,234 @@ Valery.Shkerdin [10:37 AM]
 Grigory Kislin [10:39 AM]
 *добавил еще мелкие правки - патч: 8_10_fix.patch*
 *https://drive.google.com/open?id=1VWBMA2Kd6Jq5DAWYJkzwlHjWHFeFc80F* (edited)
+
+
+Dmitry Neustupov [3 days ago]
+У меня одного 404 по ссылке?
+
+
+Zhivchik [2 days ago]
+у меня тоже
+
+
+realcorwin [2 days ago]
+https://drive.google.com/drive/folders/0B9Ye2auQ_NsFfjZuOHczMzBHX2p1RXBFZWdISS1zTFZqYzYzSzA4dk9tb0N5ZkFUUW44YjQ
+
+
+Grigory Kislin [2 days ago]
+ссылку поправил. гугл чтото глючит. а так- да, вместе со всеми патчами лежит
+
+
+aleksey [3:35 PM]
+Следующее занятие будет по расписанию?
+
+
+Grigory Kislin [Apr 26th at 4:40 PM]
+in #hw8
+все по расписанию
+
+
+1 reply
+Vyacheslav [2 days ago]
+Товарищ лектор. Нужно ли ждать письмо на почту, или можно патчи из этого урока накатывать?
+
+
+Vyacheslav [6:27 PM]
+Архив не создается, но патчи можно выкачать по одному? Там еще icon-meal.png лежит. Он нужен?
+
+Yevhen Maksymovych [8:12 PM]
+Григорий, а доступ к папкам после окончания стажировки останется? я, как, думаю, и большинство, ролики смотрю, но часть материала текстового оставляю на "авось потом перечитаю", а щаз подумал, что половина стажировки-то уже прошла, и перечитывать уже скоро может стать нечего
+
+
+Dmitry Neustupov [2 days ago]
+останется
+
+
+Grigory Kislin [1 day ago]
+да, все останется на google drive
+как в папке topjava12
+
+
+qf05 [Apr 26th at 8:19 PM]
+in #hw8
+а это нормально, что кнопка edit не работает?
+
+
+1 reply
+Dmitry Neustupov [2 days ago]
+нормально
+
+
+qf05 [Apr 26th at 8:37 PM]
+in #hw8
+поясните пожалуйста, id элемента должно быть уникально на странице или во всём проекте? например можно ли использовать в meal.jsp id=editRow если такой же id используется в user.jsp?
+
+
+2 replies
+Oleksii Leshchenko [2 days ago]
+Id уникальный на весь проект - один сиквенс в БД на все
+
+
+tema.emelyan [2 days ago]
+На странице
+
+
+alexey [Apr 26th at 9:25 PM]
+in #hw8
+народ а версия  spring-security-web в pom.xml  у всех светится  красным или только у меня? и в security.xml половина кода красная (edited)
+
+
+3 replies
+Эрик [1 day ago]
+а какая версия у тебя прописана?
+Reimport all maven projects не помогает?
+
+
+alexey [1 day ago]
+там версия от спринга стоит. Пробовал не помогло
+
+
+alexey [1 day ago]
+Решилось откатом на насколько патчей назад)
+
+
+SergeyMuratkin [5:34 PM]
+Нет, у меня  нормально всё. security.xml нет такого файла мы меняли его на spring-security.xml
+alexey
+народ а версия  spring-security-web в pom.xml  у всех светится  красным или только у меня? и в security.xml половина кода красная
+Posted in #hw8Apr 26th
+
+
+Ma3stro [Yesterday at 5:41 AM]
+in #hw8
+Как не сойти с ума от передоза новой информации и непонятных конструкций? .-._-._-.
+
+
+1 reply
+Fedor [2 hours ago]
+Знакомо это. Я делаю шаг в сторону, смотрю бегло какой нибудь курс по новой теме, потом возвращаюсь. Видео курсы легче воспринимаются, чем скакание по ссылкам
+
+
+aleksey [5:51 AM]
+@Ma3stro и молись чтобы тебе не пришлось работать с фронтэндом на тех технологиях которым тут учат.
+
+V-E-S-T [9:33 AM]
+а на каких технологиях лучше работать с фронтэндом? какая связка с java бэкэндом предпочтительнее на ваш взгляд?
+
+
+alexey [Yesterday at 9:37 AM]
+in #hw8
+Доброе утро. Народ подскажите в datatablesUtil.js функция save будет ведь одинаковая и для user и для meal?
+
+
+1 reply
+Zhivchik [15 hours ago]
+Да. В datatablesUtil.js находятся общие скрипты
+
+
+aleksey [10:29 AM]
+@V-E-S-T чаще всего вместе с Java используют Angular. Я неплохо знаю vueJs, в кратце с тех пор как писался этот курс на фронте уже пару раз все с ног на голову перевернулось и инструменты и современный подход к построению приложений гораздо удобнее.
+
+
+Zhivchik [10:52 AM]
+added and commented on this Plain Text snippet: Untitled 
+Т.к. HTML атрибут id у каждого элемента документа должен быть уникален, нужно избавиться от дублирования id="${user.id}" в строках таблиц users и meals
+Это имеется в виду дублирование id в ссылках ячеек update и delete?
+
+realcorwin [11:39 AM]
+Сейчас вроде Angular с TypeScript используют. Файн книжку написал, скоро второе издание выйти должно
+https://www.manning.com/books/angular-development-with-typescript-second-edition
+Manning Publications
+Angular Development with Typescript, Second Edition
+A very fine update on developing top-grade applications with Angular using TypeScript.
+https://images.manning.com/720/960/resize/book/4/b5c65d8-4ddb-4bf6-ae79-d37f84e9bbc6/Fain-Angular-2ed-MEAP-HI.png
+недавно Немчинский лекцию про сравнение стеков J2EE и спринга читал. суть была в том, что юниоры гораздо быстрее въезжают в J2EE, чем в спринг. во многом и потому, что у J2EE своя морда есть, а у спринга - нет
+
+tema.emelyan [11:54 AM]
+мне кажется тут не было цели использовать передовые технологии фрон енд разработки, курс по беку всё-таки. целый фронт фрейм-ворк цеплять сюда это уже через чур наверное. а jquery как раз самый минимум, чтобы хоть что-то было.
+
+
+dustnfox [Yesterday at 1:33 PM]
+in #hw8
+Друзья, что сие означает?
+>Реализовать добавление записи еды через модальное окно Bootstrap и удаление еды по ajax _(БЕЗ редактирования)_
+Нам нужно update для еды реализовывать или как? Просто следующий пункт про дублирование id HTML, а он имеет смысл только если делать edit.
+
+
+7 replies
+Oleksii Leshchenko [11 hours ago]
+> добавление записи еды через модальное окно Bootstrap
+У Бутсрап есть возможность создать свои кастомные формы. Т.е. создать свое диалоговое окно. Оно спрятано до поры до времени. При нажатии на кнопку появляется...
+
+
+Oleksii Leshchenko [11 hours ago]
+> удаление еды по ajax
+при нажатии на кнопку Delete должен отправлять ajax-запрос
+
+
+dustnfox [11 hours ago]
+Да это все вроде как понятно.  Уточнение про _без редактирования_ что означает в данном контексте?
+
+
+Oleksii Leshchenko [11 hours ago]
+Думаю, редактирование вообще не имплементить. Там же у нас отдельная кнопка)
+
+
+dustnfox [11 hours ago]
+Ну так да. Вот я и понять не могу, к чему это было написано? То ли, что вообще не нужно update делать на еду пока, то ли что-то другое.  Просто дальше в задании про фильтр и enable юзеров. Про update ни слова. Нужна его реализация через AJAX или нет, так и не понял.
+
+
+Oleksii Leshchenko [11 hours ago]
+скорее всего не надо трогать вообще
+
+
+dustnfox [11 hours ago]
+@Oleksii Leshchenko ок. Спасибо!
+
+
+dmitry_ov [Yesterday at 1:51 PM]
+in #hw8
+Коллеги, подскажите как проект запустить:
+Выполняю в maven cargo:run
+Ожидаю что соберется war файл и запустится в tomcat
+Вместо этого вижу сообщение от cargo-maven2-plugin такого содержания:
+Failed to find file […/topjava/target/topjava.war]
+
+т.е. war файл не был создан
+Что я делаю не так ? (edited)
+
+
+3 replies
+Oleksii Leshchenko [11 hours ago]
+попробуй сделать clean и пересобрать проект
+
+
+dmitry_ov [11 hours ago]
+Сделал  clean,  compile,  package. war появился !
+Спасибо (edited)
+
+
+dustnfox [11 hours ago]
+В любой непонятной ситуации делайте mvn:clean :grin:
+
+
+Slav [3:21 PM]
+Друзья, при переходе на страницу users получаю следующую ошибку:
+Message javax.servlet.ServletException: javax.servlet.jsp.JspTagException: No message found under code 'common.add' for locale 'ru'.
+
+Почему не находит 'common.add' для кнопки? 
+К статье, 'common.select' находит.
+
+
+poleg [Yesterday at 5:41 PM]
+in #hw8
+8_7_add_security.mp4 8:45 - так почему юзера-то пропустил? Не должен ведь.
+
+
+1 reply
+realcorwin [1 hour ago]
+Рискну предположить, по этой причине: путь в intercept-url должен быть полный: pattern="/rest/admin/**"
+
+
+V-E-S-T [7:24 PM]
+спасибо всем кто отписал мнения.
