@@ -280,3 +280,228 @@ realcorwin [1 hour ago]
 
 V-E-S-T [7:24 PM]
 спасибо всем кто отписал мнения.
+
+
+Ma3stro [Yesterday at 10:52 AM]
+in #hw8
+почему при удалении юзера (или любых других действий) у нас именно на ajax контроллер прилетает, где мы эт указали? (edited)
+
+
+2 replies
+Aleksei Kirillov [1 day ago]
+Посмотри константу в userDatatables.js
+
+
+Ma3stro [1 day ago]
+Да, уже по-тихоньку разбираюсь:)
+
+
+Oleksii Leshchenko [5:43 PM]
+uploaded and commented on this image: image.png 
+
+Если уменьшить окно браузера, то разметка немного слетает. Видно, если вся таблица не умещается и прокрутить прокрутку вправа... 
+При полноэкранном режиме такого нет.
+
+Yevhen Maksymovych [6:07 PM]
+странно
+у меня не слетает
+
+Yevhen Maksymovych [6:08 PM]
+uploaded this image: image.png 
+
+
+Yevhen Maksymovych [6:08 PM]
+ну только спаны с инпутфилдами разъезжаются в отдельные строки
+
+Yevhen Maksymovych [6:08 PM]
+uploaded this image: image.png 
+
+
+Oleksii Leshchenko [6:13 PM]
+@Yevhen Maksymovych А на странице Пользовтели?
+
+Yevhen Maksymovych [6:25 PM]
+тоже норм всё
+
+
+Yevhen Maksymovych [Yesterday at 6:57 PM]
+in #hw8
+а зачем мы в модальной форме на спанах с иконками дополнительно указываем
+```aria-hidden="true"```
+
+
+3 replies
+Grigory Kislin [23 hours ago]
+можно убрать, роли не играет. погугли, если интересно (edited)
+
+
+Yevhen Maksymovych [17 hours ago]
+да я погуглил, так понял, что это accessible-опция для всяких скрин-ридеров, что элемент при чтении экрана не произносится. потому и удивился, почему мы принудительно его указали :slightly_smiling_face:
+
+
+Grigory Kislin [7 hours ago]
+во всех примерах обычно с ним
+
+
+Yevhen Maksymovych [6:57 PM]
+?
+
+Oleksii Leshchenko [7:16 PM]
+У меня при ajax-запросе на добавление еды вылетает ошибка *HTTP Status 415 Unsupported Media Type* если метод в контроллере определен так:
+`@PostMapping`
+   `public void createWithLocation(@RequestBody Meal meal) {`
+А если так, то все работает:
+   `@PostMapping`
+   `public void createWithLocation(@RequestParam("id") Integer id,`
+                                  `@RequestParam("dateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime,`
+                                  `@RequestParam("description") String description,`
+                                  `@RequestParam("calories") Integer calories ) {`
+При этом без @DateTimeFormat не работат о ошибка 400
+
+Yevhen Maksymovych [7:21 PM]
+так и должно быть
+мы же отключили стандартные форматтеры
+а собственные добавили только отдельно на локалдейт и локалтайм
+так что надо либо добавлять свой на локалдэйттайм, либо указывать через @DateTimeFormat что мы пользуем стандартный
+
+Yevhen Maksymovych [7:47 PM]
+а вот так работать и не будет
+````@PostMapping`
+   `public void createWithLocation(@RequestBody Meal meal) {```
+
+
+Yevhen Maksymovych [Yesterday at 7:49 PM]
+in #hw8
+насколько я понимаю, чтобы корректно сериализовать форму в json-объект надо ещё подкрутить руками
+
+
+2 replies
+Grigory Kislin [23 hours ago]
+а зачем форму в json передавать?
+
+
+Yevhen Maksymovych [17 hours ago]
+там Алексей сверху хотел из RequestBody получить целый Meal, в то вермя как мы отправляли через ajax сериализованную форму, я к тому написал, что можно собрать данные формы в Meal json и передать целиком, но придётся делать это руками
+
+
+Yevhen Maksymovych [8:13 PM]
+https://stackoverflow.com/questions/11338774/serialize-form-data-to-json
+stackoverflow.com
+Serialize form data to JSON
+I want to do some pre-server-validation of a form in a Backbone.js model. To do this I need to get the user input from a form into usable data. I found three methods to do this: var input = $("#i...
+
+Oleksii Leshchenko [9:12 PM]
+Интересно, Datatable js локализована?
+
+Yevhen Maksymovych [9:25 PM]
+можешь сам локализовать
+https://datatables.net/reference/option/language
+
+Yevhen Maksymovych [11:49 AM]
+кстати, локализуется довольно просто: качаешь нужный лангпак с сайта, кладёшь его к ресурсам в папку, а затем проверяешь navigator.language и подставляешь нужный пак в опции datatables
+
+roma [8:55 PM]
+Друзья пару вопросов есть )
+1) данные в модальном окне добавляются все гуд - а аякс не српабатывает не понимаю почему - делал все как в юзерах было... Если обновить страницу - то новые данные отображаются
+2) с DELETE тажа фигня
+```var ajaxMealUrl = "ajax/meals/";
+var mealDatatableApi;
+
+// $(document).ready(function () {
+$(function () {
+    mealDatatableApi = $("#mealdatatable").DataTable({
+        "paging": false,
+        "info": true,
+        "columns": [
+            {
+                "data": "date_time"
+            },
+            {
+                "data": "description"
+            },
+            {
+                "data": "calories"
+            },
+            {
+                "defaultContent": "Edit",
+                "orderable": false
+            },
+            {
+                "defaultContent": "Delete",
+                "orderable": false
+            }
+        ],
+        "order": [
+            [
+                0,
+                "desc"
+            ]
+        ]
+    });
+    makeEditableMeals();
+});```
+и фрагмент второго файла
+```function deleteRow(id) {
+    $.ajax({
+        url: ajaxMealUrl + id,
+        type: "DELETE",
+        success: function () {
+            updateMealTable();
+            successNoty("Deleted");
+        }
+    });
+}
+
+function updateMealTable() {
+    $.get(ajaxMealUrl, function (data) {
+        mealDatatableApi.clear().rows.add(data).draw();
+    });
+}
+
+function saveMeal() {
+    var form = $("#detailsMealForm");
+    $.ajax({
+        type: "POST",
+        url: ajaxMealUrl,
+        data: form.serialize(),
+        success: function () {
+            $("#editMealRow").modal("hide");
+            updateMealTable();
+            successNoty("Saved");
+        }
+    });
+}```
+
+
+Yevhen Maksymovych [2 hours ago]
+покажи гит
+
+
+Yevhen Maksymovych [2 hours ago]
+судя по тому, что данные уходят в БД, но не обновляются на форме, одно из двух: либо сервер не присылает ответ, либо jq некорректно его обрабатывает
+
+
+Yevhen Maksymovych [2 hours ago]
+надо смотреть, что уходит на сервер, и что оттуда приходит. или бряками в js, или инспектором в браузере
+
+
+Grigory Kislin [1 hour ago]
+вкладка Network в браузере- это №1 что надо смотреть
+
+
+realcorwin [10:07 PM]
+@roma попробуй, может, так:
+
+function updateTable() {
+   $.get(ajaxUrl, function (data) {
+       datatableApi.fnClearTable();
+       $.each(data, function (key, item) {
+           datatableApi.fnAddData(item);
+       });
+       datatableApi.fnDraw();
+   });
+
+Ma3stro [10:46 PM]
+Смотреть скрипт в демо или полностью делать самому? (edited)
+
+Будет ли "честно" сие?

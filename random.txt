@@ -784,3 +784,27 @@ in #random
 Grigory Kislin [1 day ago]
 а как секурити узнает, что ты его задизаблил???
 пересмотри видео про секурити
+
+
+Edgar Zed [7:58 AM]
+коллеги) может подскажет кто, как грамотно сделать фильтрацию... исходные: в БД есть таблица со столбцами (ид, фамилия, имя, отчество), на фронте есть форма поиска где можно заполнять только необходимые поля, используется JPA. Вопрос - как вытащить отфильтрованные данные? Строить динамически (ifы и конкатенация) запрос jpql в зависимости от того, какие поля заполнены(фильтр силами БД)? Или вытаскивать все и фильтровать в коде(стримами например, т.е. силами джавы)?
+
+Dmitry Neustupov [8:39 AM]
+@Edgar Zed я думаю, самый оптимальный вариант - из базы тянуть то, что надо, формировать запрос по необходимым полям.
+
+Edgar Zed [8:50 AM]
+@Dmitry Neustupov да тоже так изначально думал, просто отпугивало конструирование такого запроса - лепить кучу ифов, соединять все это дело... но щас нашел красивую имхо конструкцию для jpql - `WHERE (:fname is null or e.firstName = :fname) and (:mname is null or e.middleName = :mname) and` и так далее по всем необходимым полям, соответственно на слое сервисов подсовывать вместо пустых полей null. Выглядит хорошо, осталось проверить в работе :relaxed:
+
+
+Oleksii Leshchenko [1 day ago]
+Кажется, такая конструкция не будет работать правильно. 
+Надо вроде как ‘:fname is not null and e. firstName = :fname ‘ (edited)
+
+
+Grigory Kislin [23 hours ago]
+посмотри на https://www.objectdb.com/java/jpa/query/criteria
+и
+https://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl/
+objectdb.com
+JPA Criteria API Queries (CriteriaBuilder, CriteriaQuery)
+Explains how to use the JPA Criteria API (CriteriaBuilder, CriteriaQuery, etc.) to build JPQL like queries.
