@@ -505,3 +505,135 @@ Ma3stro [10:46 PM]
 Смотреть скрипт в демо или полностью делать самому? (edited)
 
 Будет ли "честно" сие?
+
+
+dmitry_ov [Today at 12:13 AM]
+in #hw8
+Коллеги, помогите с локалями разобраться.
+Запустил проект, захожу на страницу кнопку “Пользователи”  http://localhost:8080/topjava/users/ и вижу ошибку:
+HTTP Status 500 - javax.servlet.ServletException: javax.servlet.jsp.JspTagException: No message found under code ‘common.add’ for locale ‘ru’.
+
+В файле topjava/config/messages/app_ru.properties  есть строка:  “common.add=Добавить” (edited)
+
+
+4 replies
+Yevhen Maksymovych [17 hours ago]
+Переменная TOPJAVA_ROOT не определена или не указывает на корень проекта
+
+
+
+dmitry_ov [12 hours ago]
+Определена и указывает.   http://localhost:8080/topjava   Работает. И русские надписи показывает
+
+
+dmitry_ov [11 hours ago]
+Проблемы при переходе на  http://localhost:8080/topjava/users/  и  http://localhost:8080/topjava/meals/
+
+
+dmitry_ov [11 hours ago]
+@Grigory Kislin Подскажите куда копать ? 
+Я пропустил 2 занятия и взял ваш проект, ветка master, последний коммит “8_10_fix”
+Собственно т.к. вашу версию и пытаюсь запускать, у вас должно быть тоже поведение (edited)
+
+
+roma [10:34 AM]
+Всем спасибо победил обновление дататэйбл - о котором писал 2мя сообщениями выше - проблемма была в это строке:
+```...  "columns": [
+            {
+                "data": "date_time"
+            }, ...```
+поменял на
+```"data": "dateTime"```
+и все заработало - очень помогло то что сегодня вылетел (вчера такого не было не понимаю почему ))))  js .alert в котором черным по белому было написано
+```DataTables warning: table id=mealdatatable - Requested unknown parameter 'date_time' for row 0, column 0. For more information about this error, please see http://datatables.net/tn/4```
+Теперь появилиь мелкие вопросы: 
+1 - не понимаю от куда datatable берет имена столбцов - на примере dateTime - оно у нас в meals.jsp всплывает только в
+```<th><spring:message code="meal.dateTime"/></th>```
+и то там ссылка на проперти где присваивается значение
+```meal.dateTime=Date/Time```
+2 - странно что вчера алерт не летел - alert кидает datatable? (edited)
+
+
+Dmitry Neustupov [12 hours ago]
+1. Названия столбцов - это имена полей в энтити.
+
+
+Dmitry Neustupov [12 hours ago]
+2. Да, может, как обычно "ctrl+f5" нужно было? ) Я теперь первым делом обновляю и смотрю нетворк )
+
+
+
+Grigory Kislin [12 hours ago]
+1. "data": "dateTime" - отсюда и берет:)
+далее приходит json, она по именам колонок заполняет таблицу
+
+
+Oleksii Leshchenko [7:38 PM]
+added and commented on this Java snippet: Untitled 
+@PutMapping("/{id}/{enabled}")
+  public void updateEnabled(@PathVariable("id") Integer id,
+               @PathVariable("enabled") Boolean enabled) {
+	}
+У меня при такой реализации, когда для обновления флага enabled в пользователе использовался метод POST и переменные передаются в пути все работает. 
+А вот в варианте, который щас запосчу вторым сообщением, не работало
+
+Oleksii Leshchenko [7:39 PM]
+added and commented on this Java snippet: Untitled 
+@PutMapping
+  public void updateEnabled(@RequestParam("id") Integer id,
+              @RequestParam("enabled") Boolean enabled) {
+    super.updateEnabled(id, enabled);
+  }
+Т.е. метод по прежнему PUT, но переменные уже как параметры запроса.
+
+Oleksii Leshchenko [7:41 PM]
+Во втором случае AJAX-запрос выглядил так:
+
+
+Oleksii Leshchenko [7:41 PM]
+added this JavaScript/JSON snippet: Untitled 
+$.ajax({
+      url: ajaxUrl,
+      type: 'PUT',
+      data: "id="+$(this).parent().parent().attr("id")+"&enabled="+$(this).is(':checked'),
+      success: function(data) {
+        alert('User was updated');
+      }
+    });
+Collapse 
+
+Oleksii Leshchenko [7:57 PM]
+uploaded and commented on this image: SoapUI.png 
+
+Тот ajax запрос работает только, если передать параметры как обведено на скрине из SoapUI. А если передать как json параметры в той части, где нарисован крест, то переданные параметры контроллер не находит и мой метод в контроллере не вызывается...
+
+Yevhen Maksymovych [8:04 PM]
+тут как-то совсем странно
+если ты передаешь данные через пут, так и клади их, в реквестбади, а то ты их пытаешься передать в теле запроса как гет-урлу (edited)
+
+Oleksii Leshchenko [8:06 PM]
+как их положить в риквест-бади?
+
+Yevhen Maksymovych [8:06 PM]
+data: {"id" : id, "enabled" enabled}
+но ещё, мне думается, надо будет указать тогда contenttype json, и для метода указать, что он аксептит вот именно такой json
+либо делай просто
+```url: ajaxUrl+"?id="+$(this).parent().parent().attr("id")+"&enabled="+$(this).is(':checked')```
+и тогда id и enabled будут доступны через requestParam
+я делал вторым способом
+```$.post(ajaxUrl+"reactivate/"+id+"?enabled="+enabled, function () {
+            row.attr("data-userEnabled", enabled);
+            successNoty(enabled ? "Enabled" : "Disabled")
+        });```
+
+Oleksii Leshchenko [8:12 PM]
+ясно, спасибо)
+
+Yevhen Maksymovych [8:14 PM]
+:+1:
+
+
+Grigory Kislin [11:21 PM]
+@Oleksii Leshchenko в PUT и DELETE сервлеты не видят параметров, которые передаются в теле
+соответственно контроллеры тоже не видят
+проще всего перейти на POST либо в url запроса передавать (edited)

@@ -780,3 +780,60 @@ Dmitry Neustupov [2 days ago]
 
 VadimSimonov [1 day ago]
 :+1:
+
+
+Grigory Kislin [1 day ago]
+а еще- внимательнее читать жирный шрифт в начале уроке
+
+
+Ilya [7:58 AM]
+Вопрос, как правильней будет отдавать на фронт объекты, где в связях есть объекты с ленивой загрузкой и нам нужен только их id ? Например, есть класс MenuEntry у него есть в полях ресторан:
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = “restaurant_id”, nullable = false)
+   @NotNull
+   @JsonIgnore
+   private Restaurant restaurant;
+
+Когда достаю запись меню, то хочу видеть, к какому ресторану она принадлежит.
+И в другую сторону - хочу получать JSON, где будет MenuEntry и ID ресторана. 
+Пока вижу только один путь - в ручную конвертировать MenuEntry в MenuEntryTO, где все отличие будет заключаться только в том, что в MenuEntryTO вместо Restaurant restaurant будет int restaurantId .
+Еще, вероятно, можно колдовать с серилизацией и маппингом в JSON, но как-то смутно все представляется. 
+Подскажите, плз, какой путь избрать, чтобы не прогадать. (edited)
+
+Dmitry Neustupov [12 hours ago]
+Я поставил EAGER у меню, не знаю, насколько это неправильно, на один запрос в базу больше стало, но работать с меню удобнее.
+
+
+Grigory Kislin [12 hours ago]
+решения 2
+1. очевидное- to
+2. не совсем тривиально для ORM- хранить fk: https://stackoverflow.com/questions/6311776/hibernate-foreign-keys-instead-of-entities
+stackoverflow.com
+Hibernate - Foreign keys instead of Entities
+Currently, Hibernate allows me to load objects defined by *-to-one relationships directly with entity1.getEntity2() Is it possible to get the foreign key instead of the object? The current appr...
+ 
+
+
+Dmitry Neustupov [1 hour ago]
+Глянул свой код ещё раз, глупость сморозил, ставил EAGER чтобы вытаскивать название ресторана у меню. (edited)
+
+
+Dmitry Neustupov [40 minutes ago]
+Попутно вопрос задам - а зачем понадобилось в меню id ресторана на ресте отдавать? Интересно ) (edited)
+
+
+qf05 [Today at 9:38 PM]
+in #graduation
+Подскажите плз, у меня сама программа работает так, как я и задумывал, вопрос по тестам:
+я в тестах делаю сет тестовым ресторанам тестовой еды (в смысле в классах TestData), и тоже самое для голосов. Получается как бы рекурсия, что у ресторана есть еда у которой этот ресторан у которого эта еда и т.д. 
+В целом всё написал, всё работает как надо. Но я получаю ошибку StackOverflowError в классах Menu и Voices рестКонтроллерТест. Для её устранения я в beforeClass для этих классов очищаю у тестовых ресторанов списки меню и еды, а в afterClass снова заполняю как было. 
+Вопрос: это нормальная практика или надо делать ТО для еды и голосов специально для тестовых классов? Или может есть ещё какие то тайные способы как избавиться от рекурсии во время записи объекта в json?
+
+
+2 replies
+Dmitry Neustupov [2 hours ago]
+@JsonIgnoreProperties попробуй
+
+
+qf05 [2 minutes ago]
+не представляю как эту аннотацию можно использовать в тестах, но на всякий случай вставил её везде где только можно - не работает.
