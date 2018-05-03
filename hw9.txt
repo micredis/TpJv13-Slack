@@ -1,0 +1,24 @@
+Grigory Kislin [1:57 AM]
+joined #hw9.
+
+Grigory Kislin [1:59 AM]
+Welcome на 9е занятие:
+https://github.com/JavaWebinar/topjava/blob/doc/doc/lesson09.md
+Настоящая авторизация, ее тестирование и отрисовку таблиц по AJAX. (edited)
+
+Arthur [2:13 AM]
+joined #hw9 along with 18 others.
+
+saudabaew [11:50 AM]
+от занятия к занятию количество участников в группе уменьшается
+
+Valery.Shkerdin [11:52 AM]
+до конца дойдут только избранные )
+
+Yevhen Maksymovych [12:39 PM]
+да еще подтянется народ
+
+
+aleksey [12:51 PM]
+@Grigory Kislin Почему мы не затрагиваем тему DTO?
+Почему в слое сервиса у нас по прежнему нет бизнес-логики, а в слое репозитория она есть?
