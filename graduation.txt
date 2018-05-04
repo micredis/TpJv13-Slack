@@ -895,3 +895,54 @@ in #graduation
 1 reply
 pro [1 hour ago]
 благодарю, стало яснее, а то мне ничего не лезло в голову, довольно абстрактное требование
+
+
+VadimSimonov [4:48 PM]
+Ребята, какие условия должны быть соблюдены чтобы эта функция отработала?
+function updateTable() {
+      $.get(ajaxUrl, function (data) { datatableApi.clear();
+       $.each(data, function (i, item) { datatableApi.rows.add(item); }); datatableApi.draw(false); });
+На данный момент по js таблица отрисовывается и по ajax обновляется при нажатии на f5, но когда доходит до этого метода (при редактировании данных) ничего не происходит только таблица очищается и ошибки не валятся. (edited)
+
+
+Yevhen Maksymovych [Yesterday at 4:52 PM]
+in #graduation
+ajaxUrl должен вести на соответствующий метод, который возвращает данные (это можешь посмотреть на вкладке нетворк в браузере или брякой)
+
+
+2 replies
+VadimSimonov [20 hours ago]
+данные все приходят из контроллера
+
+
+VadimSimonov [20 hours ago]
+в JS dataTable не попадает
+
+
+Yevhen Maksymovych [4:54 PM]
+datatableApi должна указывать на корректную таблицу в jsp
+и столбцы в таблице должны соответствовать полям приходящего json
+
+VadimSimonov [5:05 PM]
+@Grigory Kislin не тут проблема в другом, всё это соотвествует и при несоотвествие ошибка вылетала бы (edited)
+
+
+Grigory Kislin [Today at 12:06 AM]
+in #graduation
+1. в graduation нет UI. почему по js вопросы? если это hw9- то канал не этот
+2. правильно ли я понял, что у тебя each не работает? подебажил? data приходит? ошибок в консоли нет? (edited)
+
+
+1 reply
+VadimSimonov [4 hours ago]
+1) Я решил потренироваться, это не hw9
+2)  each работает, data приходит
+
+
+VadimSimonov [9:14 AM]
+uploaded this image: dataTable.jpg 
+
+
+VadimSimonov [9:16 AM]
+@Grigory Kislin может это из за моей dataTable? Я в гист выложил
+https://gist.github.com/VadimSimonov/4d736af1ad5a93c096281b342fe3916d

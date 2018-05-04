@@ -808,3 +808,19 @@ https://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-qu
 objectdb.com
 JPA Criteria API Queries (CriteriaBuilder, CriteriaQuery)
 Explains how to use the JPA Criteria API (CriteriaBuilder, CriteriaQuery, etc.) to build JPQL like queries.
+
+
+Edgar Zed [1 day ago]
+уфф, спасибо за ссылки! В общем конструкция правильно отрабатывает, все красиво, пока БД была hsqldb, потом переключился на postgresql и настали грабли) hibernate в связке с postgresql нормально отрабатывает null если поле строковое или объект, но ломается на типе date :disappointed:
+https://stackoverflow.com/questions/44905452/postgresql-with-hibernate-could-not-determine-localdate-type-in-jpql-query
+в итоге пришлось быстренько перепиливать на criteria (та еще гадость имхо, но спасает в построении динамических запросов конечно)
+Stack Overflow
+Postgresql with Hibernate: could not determine LocalDate type in jpql query
+I migrated from hibernate-core:4.3.11.Final to hibernate-core:5.2.10.Final because I want to use LocalDate from java 8 Date/Time APi in jpql for parameters, like this: @Query("SELECT t FROM
+
+
+Valery.Shkerdin [8:41 AM]
+heroku.com работает?
+через тор работает, шикарно... росалкогольнадзор походу опять балуется...
+Сайт longboard.hit.heroku.com неожиданно разорвал соединение.
+Та часть что отвечает за авторизацию рубится
