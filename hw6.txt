@@ -1944,3 +1944,50 @@ Grigory Kislin [2 days ago]
 
 Oleg K [2 days ago]
 пробел после "topjava":face_palm: (edited)
+
+
+sergentum [8:26 AM]
+Поясните пожалуйста, почему в этом патче https://github.com/sergentum/topjava-6/commit/76660c98033c155316332571de8b71e3dfbe668a
+Мы пишем следующее для того чтобы заработали профили
+@Override
+   public void init(ServletConfig config) throws ServletException {
+       super.init(config);
+       springContext = new ClassPathXmlApplicationContext(new String[]{"spring/spring-app.xml", "spring/spring-db.xml"}, false);
+       springContext.getEnvironment().setActiveProfiles(Profiles.getActiveDbProfile(), Profiles.REPOSITORY_IMPLEMENTATION);
+       springContext.refresh();
+       mealController = springContext.getBean(MealRestController.class);
+   }
+
+почему мы пишем именно в этом сервлете?
+он же не единственный
+
+
+sergentum [May 5th at 8:30 AM]
+in #hw6
+он ничем не лучше юзер сервлета, так почему спринг смотрит в него и запускает контекст из него? а если то же самое написать в юзер сервлет, тогда поднимется второй котекст или мы можем написать противоречивые настройки для того же самого контекста в другом сервлете?
+
+
+2 replies
+Grigory Kislin [1 day ago]
+в юзер сервлете мы никак бины спринга не используем
+
+
+sergentum [1 day ago]
+ну это не совсем ответ. если бы был сервлет в котором используем бины, что тогда?
+
+
+sergentum [8:37 AM]
+почему вообще нужно писать какие профили загружать если раньше достаточно было ставить галку в мавене и все работало тут:
+5_5_profiles_connection_pool
+6d92b44 Grigory Kislin <javawebinar@yandex.ru> on 2018-03-27 at 17:50 PM
+?
+
+
+sergentum [May 5th at 8:37 AM]
+in #hw6
+когда был выбор бин профиль hsqldb или postgresql
+
+
+1 reply
+Grigory Kislin [1 day ago]
+пересмори видео про профили мавен и спринг. это совсем разные вещи: профили мавен меняют в проекте зависимости, планины, property. Профили спринг меняют реализацию (в нашем случае) доступа к базе и настройки базы.

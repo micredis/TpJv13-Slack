@@ -5091,3 +5091,214 @@ Ilya [9 hours ago]
 
 saudabaew [3 hours ago]
 @Ilya я так понял, что-то типа общего канала проекта
+
+
+Alexander Shnaider [9:56 PM]
+uploaded and commented on this image: image.png 
+
+друзья, в очередной раз пришлось настраивать среду за другим компом. Вроде всё скачал, установил, перенёс. Запускаю томкат чтобы проверить, появляется ошибка: `root Cause
+org.apache.jasper.JasperException: javax.servlet.ServletException: javax.servlet.jsp.JspTagException: No message found under code 'app.title' for locale 'en_US'.`
+
+
+Alexander Shnaider [May 4th at 9:58 PM]
+in #general
+хотя в ресурсах есть эта локаль и сообщение 'app.title'
+
+
+5 replies
+Arseniit [2 days ago]
+в переменных окружения установили TOPJAVA_ROOT?
+
+
+Dmitry Neustupov [2 days ago]
+Переменная окружения не прописана, таки да.
+
+
+Alexander Shnaider [2 days ago]
+чёрт, я ведь просматривал переменные среды два раза
+
+
+Alexander Shnaider [2 days ago]
+спасибо
+
+
+Arseniit [2 days ago]
+и после надо идею перезапустить
+
+
+eageev [May 5th at 1:23 PM]
+in #general
+@Grigory Kislin, DataTables возможно хороша. Для небольшого тестового проекта может и пойдет. Но думаю есть смысл смотреть в сторону компонентов DevExpress, обладающим более широким функционалом:
+https://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxDataGrid/
+
+
+4 replies
+Grigory Kislin [1 day ago]
+в каждом хороршем js фреймворке есть свои гриды. распыляться на все - никакого времени не хватит
+
+
+eageev [1 day ago]
+Ну в этом еще из достоинств Virtual DOM. Замахнулись на конкуренцию с Реактом)) А так да, их много..
+
+
+realcorwin [1 day ago]
+Интересно, появится ли альтернатива js. Пока что фронтендом совсем не хочется заниматься.
+
+
+realcorwin [1 day ago]
+Лет 20 назад vbs гораздо приятнее был, но он, видимо, издох. а жаль
+
+
+Vitaly M. [5:18 PM]
+Пытаюсь параллельно делать выпускной проект... и споткнулся при накатке bootstrap...
+Помогите разобраться, почему не применяются стили бутстрапа?
+
+В общем, добавил в pom.xml
+```<!-- Webjars (static dependencies distributed as JAR files) -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>${webjars-jquery.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${webjars-bootstrap.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.webjars</groupId>
+                    <artifactId>jquery</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>datatables</artifactId>
+            <version>${webjars-datatables.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.webjars.bower</groupId>
+                    <artifactId>jquery</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>datetimepicker</artifactId>
+            <version>${webjars-datetimepicker.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.webjars.bower</groupId>
+                    <artifactId>jquery</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>noty</artifactId>
+            <version>${webjars-noty.version}</version>
+        </dependency>```
+в spring-mvc.xls добавил
+```<!-- use WebJars so Javascript and CSS libs can be declared as Maven dependencies (Bootstrap, jQuery...) -->
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>```
+только вот у меня вот это - classpath:/META-INF/resources/webjars/ красное, мол idea не находит.
+Я решил, что это глюк идеи, так как у меня и в нашем topjava проекте эта строчка красная, но bootstrap работает нормально.
+
+headTag.jsp привел к виду
+```<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title><spring:message code="app.title"/></title>
+    <base href="${pageContext.request.contextPath}/"/>
+
+    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="resources/images/bitYard-100x32.png">
+
+</head>```
+здесь -     <link rel="stylesheet" href="webjars/bootstrap/4.1.0/css/bootstrap.min.css"> нормально резолвится идеей
+
+НО при запуске белый фон и только надписи...
+а, ну и в index.jsp начало сделал так:
+```<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<html>
+<jsp:include page="fragments/headTag.jsp"/>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <div class="navbar-brand"><img src="resources/images/bitYard-100x32.png"> <spring:message code="app.title"/></div>
+        <form class="form-inline my-2" action="spring_security_check" method="post">
+            <input class="form-control mr-1" type="text" placeholder="Email" name="username">
+            <input class="form-control mr-1" type="password" placeholder="Password" name="password">
+            <button class="btn btn-success" type="submit">
+                <span class="fa fa-sign-in"></span>
+            </button>
+        </form>
+    </div>
+</nav>
+...```
+
+sergentum [7:10 AM]
+uploaded and commented on this image: i12^cimgpsh_orig.png 
+
+Подскажите пожалуйста, что я делаю не так? версии сдк везде проверил, все компилится и вроде работает, но иде подсвечивает
+
+Yevhen Maksymovych [8:05 AM]
+скорее всего в pom.xml в разделе build не указана версия жавы. ну или просто надо реимпортнуть его.
+
+sergentum [12:47 PM]
+да вот указана...
+
+Yevhen Maksymovych [12:48 PM]
+и source, и target?
+
+sergentum [5:06 PM]
+project sdk & project language level
+
+Yevhen Maksymovych [5:35 PM]
+нет, это не то. project sdk / language level ты указываешь в свойствах проекта
+но судя по структуре, ты собираешь проект из мавена
+у maven-compiler-plugin по дефолту джава версии 1.5
+тебе надо принудительно в свойствах плагина указать что у тебя более поздняя жава
+https://maven.apache.org/plugins/maven-compiler-plugin/
+
+sergentum [7:11 PM]
+помогло, спасибо. непонятно только зачем так сделано Also note that at present the default source setting is 1.5 and the default target setting is 1.5, independently of the JDK you run Maven with.
+
+Ma3stro [7:15 PM]
+@sergentum, как сделать такой интерфейс открытых файлов?
+
+Ma3stro [7:15 PM]
+uploaded this image: image.png 
+
+
+sergentum [7:15 PM]
+Еще вопрос общего плана - можно ли сканировать бины @контроллер и соответственно чтобы маппинг работал, БЕЗ спринг-вебмвс? если создаю диспатчерСервлет то он просит другой хмл, только не пойму зачем мне еще один хмл, если я хочу избежать использования лишнего хмл и ручного прописывания всех контроллеров.
+
+sergentum [7:17 PM]
+uploaded and commented on this image: image.png 
+
+@Ma3stro легко
+
+sergentum [7:18 PM]
+первая галка
+
+Ma3stro [7:23 PM]
+Благодарю)
+
+Grigory Kislin [11:35 PM]
+http://www.baeldung.com/java-in-2018
+Baeldung
+The State of Java in 2018 | Baeldung
+A clear look at the Java ecosystem in 2018.
+Apr 28th
+http://www.baeldung.com/wp-content/uploads/2016/10/social-Java-On-Baeldung-2.jpg
+
+ilya t. [12:15 AM]
+Думал java 7 всё-таки ещё побольше чем указано используется, таки уже все на 8 :slightly_smiling_face: (edited)

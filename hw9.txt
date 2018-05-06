@@ -79,3 +79,344 @@ LeoJames [11:58 PM]
 
 Dzmitry Shalukhau [10:27 AM]
 :))))
+
+
+Zhivchik [May 4th at 1:51 PM]
+in #hw9
+После накатки всех патчей не срабатывает кнопка Добавить еду. Так и должно быть?
+
+
+2 replies
+Aleksei Kirillov [2 days ago]
+на это намекает пункт:
+   Почему еда не редактируется?
+   Подсказка: поглядите вкладку Network в браузере.
+
+
+Zhivchik [2 days ago]
+Ок. Спасибо.
+
+
+ilya t. [May 5th at 11:27 AM]
+in #hw9
+ребят, может вопрос тупой но все же не очень понимаю почему у нас getBetween в MealAjaxController обозначен постом? Не по принципам реста же, пост не идемпотентен, а здесь у нас именно операция гет, т.е. мы только берем из базы.
+
+
+13 replies
+Dmitry Neustupov [1 day ago]
+Может потому, что данные для getBetween из формы постом прилетают? В функции updateTable() аякс запрос c  type: "POST".
+
+
+ilya t. [1 day ago]
+ну окей, меняем в updateTable с поста на гет, результат не меняется. Данные также фильтруются. (edited)
+
+
+Dmitry Neustupov [1 day ago]
+Ctrl+F5?
+
+
+Dmitry Neustupov [1 day ago]
+Если поменять на GET - не работает.
+
+ilya t. [1 day ago]
+ээ перепроверю
+
+
+ilya t. [1 day ago]
+все работает, и с Ctrl+F5, ты еще в контроллере поменяй с PostMapping на Get и посмотри. (edited)
+
+
+Oleksii Leshchenko [1 day ago]
+Я думаю можна как через пост, так и через гет. Просто Григорий говорил, что из формы любит отправлять через пост...
+
+
+ilya t. [1 day ago]
+аа ну просто я задался вопросом - если переправить на гет будет ли это ошибкой, мб именно здесь по каким то причинам надо именно пост :slightly_smiling_face:
+
+
+eageev [1 day ago]
+Ошибки не будет, но данные будут передаваться в заголовке, а не в теле запроса.
+
+
+eageev [1 day ago]
+А метод можно назвать как угодно. Методы называют согласно тому, что они делают (получает данные между 2мя датами).
+
+Grigory Kislin [1 day ago]
+1. у нас же тут не rest. передаем не json, а параметры из формы. я из форм обычно чз пост данные отдаю. но get также будет работать
+2. в rest контроллере у нас get
+
+
+
+eageev [1 day ago]
+Ну да, лишний раз показывать параметры в адресной строке - плохая практика)
+
+
+ilya t. [1 day ago]
+@eageev с гет не передаются в адресной строке, можешь проверить
+
+
+Ma3stro [3:52 PM]
+Почему в User у нас ограничения на password 5..100, а в UserTo мы вдруг решили сделать ограничения от 5..32? Нет ли здесь каких-то конфликтов?
+
+
+Vyacheslav [Yesterday at 1:16 PM]
+in #hw9
+Народ. Мне показалось или где-то проскочило, что без MealTO можно обойтись? Просто по логике приложения кажется, что он нужен, раз уж BaseTo существует.
+
+
+8 replies
+Oleksii Leshchenko [11 hours ago]
+Как я понимаю, то можно обойтись. Все как для юзера. Мы добавили ТО для автоматического биндинга...
+
+
+Vyacheslav [11 hours ago]
+Разве по meal биндиться не должно?
+
+
+Oleksii Leshchenko [11 hours ago]
+должно. поэтому ТО тоже надо делать
+
+
+Pavel Zaitcev [10 hours ago]
+В данном случае TO не нужен, т.к. объект еды при отдаче его с UI не требует сокрытия каких либо деталей, или наоборот, преобразований. В нем всего несколько полей, которые в полном составе  (почти) мы и видим на UI. Единственное - у сущности Meal есть поле user, которое мы не отдаем с UI. Решение данной проблемы при биндинге - @Validated и группы валилации. Хотя все это можно, кончено сделать и через TO. Но нужно ли?
+
+
+Vladimir Gorbatenko [9 hours ago]
+кто сделает напрямую без MealTo - поделитесь вариантом.
+
+
+Arthur [7 hours ago]
+я сделал без MealTo
+
+
+Arthur [7 hours ago]
+не пойму в чем тут особенность?...
+
+
+qf05 [4 hours ago]
+Я вместо То использовал mealWidthExeeded)))
+надо разобраться с аннотацией @Validated, тогда может и напрямую с меал сделаю.
+
+
+Vitaly M. [Yesterday at 4:44 PM]
+in #hw9
+Не могу понять, что я сломал у себя... но у меня в AbstractUserController, в методах create(User user)  и update(User user, int id) появилась ошибка на checkNew(user):
+```checkNew(ru.javawebinar.topjava.HasId) in ValidationUtil cannot be applied to (ru.javawebinar.topjava.model.User)```
+
+
+5 replies
+Vladimir Gorbatenko [8 hours ago]
+public abstract class AbstractBaseEntity implements HasId 
+public class User extends AbstractNamedEntity 
+все так?
+
+
+Vitaly M. [8 hours ago]
+Ну как так? вот сам же проверял несколько раз!!!
+
+
+Vitaly M. [8 hours ago]
+естественно в implements HasId ,skf ghj,ktvf
+
+
+Vitaly M. [8 hours ago]
+была проблема
+
+
+Vitaly M. [8 hours ago]
+Спасибо тебе )
+
+
+Vladimir Gorbatenko [4:45 PM]
+Хмм, при подключении datetimepicker форма фильтра не сериализуется...
+Нет, не в этом было дело. 
+На стороне сервера приняло только когда в datetimepicker-е в датах указал формат: format:'Y-m-d'
+До этого были точки в дате.
+Как я понял решается с помощью конверторов. (edited)
+
+Vladimir Gorbatenko [5:51 PM]
+added and commented on this Java snippet: Untitled 
+8: Проверьте в RootController.meals(), его нужно тоже поправить
+Кто знает что тут надо править?
+Vyacheslav [5:55 PM]
+маппинг meals
+Vyacheslav [5:55 PM]
+Сделать так же как users
+
+Vladimir Gorbatenko [5:59 PM]
+added and commented on this Java snippet: Untitled 
+@GetMapping("/users")
+  public String users() {
+    return "users";
+  }
+не понятно....
+Vyacheslav [6:01 PM]
+Ну вроде как убрать модель из аргументов. И оставить только return.
+
+Vladimir Gorbatenko [6:06 PM]
+глючит уже под вечер )
+
+Ma3stro [6:58 PM]
+При отправки формы добавления еды все значения на контроллер приходят с null. Делал по аналогии с пользователями
+В какую сторону вообще копать?..
+
+Ma3stro [7:04 PM]
+Кто-то сталкивался с этим еще?
+
+
+Vladimir Gorbatenko [Yesterday at 7:27 PM]
+in #hw9
+Да, спринг не нашел к чему забиндидь, поэтому и нужен To. Ну или может есть специальные пляски....
+
+
+3 replies
+Ma3stro [5 hours ago]
+Ну у меня собственно MealWithExceed и сделан как To
+
+
+Vladimir Gorbatenko [4 hours ago]
+тоже делал из него To, но видимо из-за exceed не встало как надо.
+
+
+Vladimir Gorbatenko [4 hours ago]
+поэтому сделал отдельно To
+
+
+Ma3stro [8:39 PM]
+added and commented on this Java snippet: To and AjaxContoller 
+```public class MealWithExceed extends BaseTo implements Serializable {
+  private static final long serialVersionUID = 1L;
+​
+  @NotNull
+  private LocalDateTime dateTime;
+​
+  @NotBlank
+  @Size(min = 2, max = 120, message = "description must not be null")
+  private String description;
+​
+  @Range(min = 10, max = 4000)
+  private int calories;
+​
+  private boolean exceed;``
+​
+```  @PostMapping
+  public ResponseEntity<String> createOrUpdate(@Valid MealWithExceed mealTo, BindingResult mess) {
+    if (mess.hasErrors()) {
+      StringJoiner joiner = new StringJoiner("<br>");
+      mess.getFieldErrors().forEach(
+          fe -> {
+            String msg = fe.getDefaultMessage();
+            if (!msg.startsWith(fe.getField())) {
+              msg = fe.getField() + ' ' + msg;
+            }
+            joiner.add(msg);
+          });
+      return new ResponseEntity<>(joiner.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+​
+    if(mealTo.isNew())
+      super.create(MealsUtil.createNewFromTo(mealTo));
+    else
+      super.update(mealTo, mealTo.getId());
+    return new ResponseEntity<>(HttpStatus.OK);
+  }```
+Collapse 
+Так и не разобрался, почему я получаю null при отправке формы добавления еды, помогите разобраться, пожалуйста. Вот To и Controller:
+ilya t. [8:46 PM]
+сделал также, у меня агрится на exceed и на dateTime - реджектит значение и сетит нуллом. У тебя все свойства чтоли нуллом передает?
+
+Ma3stro [8:58 PM]
+Да, вообще все, разве что calories просто нулем, потому что примитив
+
+
+qf05 [Yesterday at 9:01 PM]
+in #hw9
+а имена полей формы у тебя совпадают с именами переменных в То и именами переменных в конструкторе То?
+
+
+2 replies
+Ma3stro [4 hours ago]
+Если ты про форму в meal.jsp, то да, названия все совпадают. В форме разве что нет exceed, и не должно, собственно
+
+
+qf05 [4 hours ago]
+у тебя ещё ошибка в exceed, boolean -  это примитив и он не может быть null.
+И передавать захардкоженый exceed - не единственный вариант решения.)
+
+
+ilya t. [9:02 PM]
+блин, а у меня все свойства биндятся кроме даты
+
+
+qf05 [Yesterday at 9:06 PM]
+in #hw9
+подскажите как писать рест запросы с учётом авторизации?
+
+
+2 replies
+Dmitry Neustupov [3 hours ago]
+Для примера пару курлов тут оставлю:
+
+get All Users
+curl -s http://localhost:8080/rest/admin/users --user admin@yandex.ru:admin
+
+get Profile
+curl -s http://localhost:8080/rest/profile --user user@yandex.ru:password
+
+
+qf05 [3 hours ago]
+спасибо
+
+
+ilya t. [Yesterday at 9:22 PM]
+in #hw9
+поясните кто столкнулся с проблемой биндинга даты - там нужно отдельный конвертер писать чтоли или что-то другое?
+
+
+12 replies
+Ma3stro [3 hours ago]
+Что у тебя? По-другому как-то приходят?
+
+
+ilya t. [3 hours ago]
+TypeMismatchException  у меня
+
+
+ilya t. [3 hours ago]
+и я рили не могу понять в чем проблема, такое ощущение что-то упустил, либо доп функциональность придется дописывать
+
+
+Ma3stro [3 hours ago]
+Посмотри через debug в каком формате данные приходят
+
+
+ilya t. [3 hours ago]
+строка
+
+
+ilya t. [3 hours ago]
+вроде и должно строкой приходить)
+
+qf05 [3 hours ago]
+да, надо добавить форматтер
+
+
+qf05 [3 hours ago]
+а последняя строчка задания ещё и заставляет кучу раз эту бедную дату делать то с Т, то без Т на стороне клиента.
+
+
+dustnfox [2 hours ago]
+Как по мне, так весь фронтэнд вообще и datetimepicker в частности проектировал какой-то _аццкий сотона_. Так вижу. После java с ее типизацией, документацией и нормальными исходниками, все что касается js/jq кажется жутким бардаком и разгильдяйством. (edited)
+ 
+
+
+ilya t. [2 hours ago]
+Говорят в руби вообще доков нет почти...
+
+
+dustnfox [2 hours ago]
+Отсутствие доков, тьма, плач и скрежет зубов... Ruby in a nutshell. :grin:
+
+
+realcorwin [1 hour ago]
+Да, фронтенд - полное барахло. Самое смешное, что когда я 20-15 лет назад занимался веб-разработкой, всё это как-то даже приятнее делалось

@@ -513,3 +513,16 @@ uploaded this image: Slack for iOS Upload
 Tony [2:26 PM]
 commented on Yevhen Maksymovych’s file Slack for iOS Upload
 https://hackadaycom.files.wordpress.com/2014/04/18mpenleoksq8jpg.jpg?w=636
+
+
+Vladimir Gorbatenko [10:06 AM]
+афигеть дорогая редакция, уже java 10 оказывается вышла... с новыми фишками типа var
+
+Dzmitry Shalukhau [10:10 AM]
+@Vladimir Gorbatenko мы в java 8 используем lombok для таких вещей. https://projectlombok.org/features/all
+
+Vladimir Gorbatenko [10:18 AM]
+да... интересно... но мне все равно как-то чуждо такое в языке со строгой типизацией...
+
+Dzmitry Shalukhau [10:19 AM]
+Ну. Все зависит от того, как красиво ты дашь имя. Да и Idea вполне хорошо справляется с этим.
