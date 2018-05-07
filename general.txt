@@ -5302,3 +5302,47 @@ http://www.baeldung.com/wp-content/uploads/2016/10/social-Java-On-Baeldung-2.jpg
 
 ilya t. [12:15 AM]
 Думал java 7 всё-таки ещё побольше чем указано используется, таки уже все на 8 :slightly_smiling_face: (edited)
+
+
+Vladimir Gorbatenko [Today at 9:22 AM]
+in #general
+Да, время летит, все меняется мегабыстро. Всегда надо быть в теме.
+Мне не ясно зачем использовать неудобный эклипс, или совсем неприкольный нетбинс???
+
+
+1 reply
+Oleksii Leshchenko [14 hours ago]
+У меня на работе по-прежнему используют Эклипс, так под него есть плагины для Drools. У нас на проекте Drools используют. Но параллельно можно работаь с Idea - никто не ограничивает...
+
+
+ilya t. [9:37 AM]
+Так эклипс, как и нетбинс вроде бесплатные
+
+
+goodhoopoe [Today at 4:05 PM]
+in #general
+idea комьюнити тоже бесплатная
+Ilya Travov
+Так эклипс, как и нетбинс вроде бесплатные
+Thread in #generalToday at 9:37 AM
+
+
+2 replies
+Vladimir Gorbatenko [7 hours ago]
+комьюнити урезанная
+
+
+goodhoopoe [6 hours ago]
+тем не менее она самодостаточная, просто без свистелок
+
+
+saudabaew [6:15 PM]
+Почему @Autowired
+   private Environment env; выдает null и нет возможности загрузить данные из properties? причем на другом компьютере все работало...
+
+sergentum [7:00 PM]
+подскажите пожалуйста: проект состоит из одного контроллера, выдает в барузер простую строку. в импортах подключено много всякого, но закомментирован спрнг дата жпа. так вот если запустить то работает, а если раскоментировать спрингдатажпа то все ломается и пишет 
+java.lang.ClassNotFoundException: com.fasterxml.jackson.databind.ObjectMapper
+org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1308)
+org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1136)
+я этот фастерхмл не подключал и в зависимостях у меня его нет, а он мне все ломает

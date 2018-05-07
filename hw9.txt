@@ -420,3 +420,228 @@ dustnfox [2 hours ago]
 
 realcorwin [1 hour ago]
 Да, фронтенд - полное барахло. Самое смешное, что когда я 20-15 лет назад занимался веб-разработкой, всё это как-то даже приятнее делалось
+
+
+Vladimir Gorbatenko [14 hours ago]
+мне кажется, что js 20 лет назад без нормального отладчика это капец-капец )
+
+
+dustnfox [14 hours ago]
+Да уж! Отладчик в том же Chrome делает жизнь намноооооого легче!
+
+
+Vladimir Gorbatenko [2:56 PM]
+Кто не совсем "догнал" как происходит авторизация, вот статейка, которая мне помогла понять. (надо учесть, что Григорий говорил про изменения в новой версии spring security, например "j_" )
+https://habr.com/post/203318/
+Хабр
+Краткий обзор Spring Security
+Итак, дорогой хабраюзер, предлагаю тебе рассмотреть такие аспекты Spring Security как: Ключевые объекты контекста Spring Security. Процесс аутентификации в...
+https://habr.com/images/habr.png
+
+roma [5:30 PM]
+А кнопка добавить (еду) не работает после всех патчей - это норм?
+```datatablesUtil.js:14 Uncaught ReferenceError: i18n is not defined
+    at add (datatablesUtil.js:14)
+    at HTMLButtonElement.onclick (meals:94)
+add    @    datatablesUtil.js:14
+onclick    @    meals:94```
+
+goodhoopoe [6 hours ago]
+выше уже как минимум один раз вопрос же был https://topjava13.slack.com/archives/CAH6DUJDS/p1525431067000146
+Dmytro
+После накатки всех патчей не срабатывает кнопка Добавить еду. Так и должно быть?
+From a thread in #hw9May 4th at 1:51 PM
+
+
+Vyacheslav [6 hours ago]
+Делай второе задание - заработает.
+
+
+dustnfox [6 hours ago]
+Да. JS пытается подставить title взятый из i18n массива, но не может т.к. инициализация и объявление этого массива пока живет только в части user
+
+
+dustnfox [6 hours ago]
+А вообще, конечно, прав @goodhoopoe Slack не даром слаком назвали создатели. Акроним от Searchable Log of All Conversation and Knowledge как бы намекает, что тут есть поиск :wink:
+
+
+roma [6 hours ago]
+Ну сори ))), а как мне проверить правильно ли я сделал биндинг????
+
+Ma3stro [6 hours ago]
+@roma, у тебя должно все заработать:)
+
+roma [6 hours ago]
+@Ma3stro Сарказм ? )
+
+
+Ma3stro [6 hours ago]
+@roma, нисколько! Если будут вопросы - задавай
+
+
+roma [5 hours ago]
+@Ma3stro спасибо ) сейчас валидацию воткну и перейду ко второму пункту - а так как первый не проверить особо - чую будет весело
+
+
+Ma3stro [5 hours ago]
+Когда правил кнопочку edit, я просто смотрел в браузере вкладочки source, network и отдельно дебаг, после этого все стало понятно (дело в i18n) (edited)
+
+
+Vyacheslav [5:33 PM]
+Кто-то с биндингом даты разобрался?
+
+
+Ma3stro [Today at 5:39 PM]
+in #hw9
+Я просто добавил в MealWithExceed на dateTime @DateTimeFormat
+
+
+1 reply
+Vyacheslav [6 hours ago]
+Спасибо
+
+
+Ma3stro [Today at 5:41 PM]
+in #hw9
+У меня была проблема, что везде приходило null при отправке формы.
+Исправил добавлением сеттеров в MealWithExceed.
+Может кому пригодится
+
+
+3 replies
+Tanya [4 hours ago]
+а при чем здесь MealWithExceed?
+
+
+Ma3stro [4 hours ago]
+@Tanya в качестве To у меня служит MealWithExceed
+
+
+Tanya [4 hours ago]
+плохая идея, 
+MealWithExceed - это ТО наружу
+
+
+roma [Today at 5:49 PM]
+in #hw9
+Народ а как вы тестируеите биндинг без кнопки добавить? SoapUi ? (edited)
+
+
+3 replies
+Vyacheslav [6 hours ago]
+Я просто сделал 2-й пункт. И она заработала.
+
+
+dustnfox [6 hours ago]
+А кто тебе мешает оживить кнопку "добавить"? :slightly_smiling_face: (edited)
+
+
+roma [6 hours ago]
+то что не разобрался пока с реализацией второго пункта - буду разбираться
+
+
+qf05 [7:08 PM]
+@Ma3stro , а так же остальные сокурсники, не могу не поделиться: http://blog.codeleak.pl/2014/08/validation-groups-in-spring-mvc.html
+Эту ссылку я выпросил у Татьяны, спасибо ей огромное! Этот биндинговая магия не перестаёт меня поражать!)))
+P.S. Делать То для биндинга из MealWithExceed говорят нельзя. Лучше отдельный То сделать или делать сразу на Meal используя магию из ссылки выше.
+blog.codeleak.pl
+Validation groups in Spring MVC
+Java, Java Enterprise, Spring related technologies blog by Rafał Borowiec
+
+Ma3stro [7:16 PM]
+То есть мы можем в Meal указать для полей биндинг группы и в контроллере validated Meal meal с указанием группы?
+Если я правильно понял, то это шок какой-то
+
+Vyacheslav [8:27 PM]
+Блин. Я так сразу и сделал. Только пока строки не красятся.
+
+
+Ma3stro [Today at 9:43 PM]
+in #hw9
+Как корректно сделать раскрашивание строк? Не могу пока разобраться, как здесь можно с data поманипулировать
+        ```"createdRow": function (row, data, dataIndex) {
+            if(!data.enabled)
+                $(row).attr("data-mealExceed", true);
+            else
+                $(row).attr("data-mealExceed", false);
+        }```
+
+
+2 replies
+Alexander Shnaider [2 hours ago]
+я так же сделал, только в условии у меня data.exceed
+
+
+Ma3stro [2 hours ago]
+Подлядел на хероку, там проще - через jQuery.addClass)
+
+
+Alexander Shnaider [9:56 PM]
+Подскажите как корректно добавить ajax в dataTable. Не получается сделать редактирование. модальное окно не появляется, хотя в метод updateRow(id) я попадаю. Вылетает ошибка 405
+
+Alexander Shnaider [9:57 PM]
+uploaded this image: image.png 
+
+Alexander Shnaider [9:59 PM]
+Вот такой у меня файл mealDatatables.js
+```var ajaxUrl = "ajax/profile/meals/";
+var datatableApi;
+
+function updateTable() {
+    debugger;
+    $.get(ajaxUrl, updateTableByData);
+}
+
+function clearFilter() {
+    $("#filter")[0].reset();
+    $.get(ajaxUrl, updateTableByData);
+}
+
+$(function () {
+    datatableApi = $("#datatable").DataTable({
+        "ajax": {
+            "url": ajaxUrl,
+            "dataSrc": ""
+        },
+        "paging": false,
+        "info": true,
+        "columns": [
+            {
+                "data": "dateTime"
+            },
+            {
+                "data": "description"
+            },
+            {
+                "data": "calories"
+            },
+            {
+                "defaultContent": "Edit",
+                "orderable": false,
+                "render": renderEditBtn
+            },
+            {
+                "defaultContent": "Delete",
+                "orderable": false,
+                "render": renderDeleteBtn
+            }
+        ],
+        "order": [
+            [
+                0,
+                "desc"
+            ]
+        ],
+        "createdRow": function (row, data, dataIndex) {
+            data.exceed ? $(row).attr("data-mealExceed", true) : $(row).attr("data-mealExceed", true);
+        },
+        "initComplete": makeEditable
+    });
+});``` 
+Dmitry Neustupov [10:03 PM]
+А в контроллере, который обрабатывает ajaxUrl = "ajax/profile/meals/" - гет метод есть?
+Alexander Shnaider [10:05 PM]
+вот же я дурень. спасибо за наводку
+
+Alexander Shnaider [10:44 PM]
+Как-то упоминалось что писать JS в JSP  это дурной тон, не подскажите как так заполнить массив i18n нужными нам сообщениями уже в JS? Нужно как-то к DOM обращаться?
