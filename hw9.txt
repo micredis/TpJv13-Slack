@@ -645,3 +645,28 @@ Alexander Shnaider [10:05 PM]
 
 Alexander Shnaider [10:44 PM]
 Как-то упоминалось что писать JS в JSP  это дурной тон, не подскажите как так заполнить массив i18n нужными нам сообщениями уже в JS? Нужно как-то к DOM обращаться?
+
+
+roma [1:31 PM]
+Народ в общем приложение мое после первых двух заданий почти лежит ))) 
+1) не работает кнопка добавить и update
+```Field error in object 'mealWithExceed' on field 'dateTime': rejected value [2018-01-01T23:59]; codes [typeMismatch.mealWithExceed.dateTime,typeMismatch.dateTime,typeMismatch.java.time.LocalDateTime,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [mealWithExceed.dateTime,dateTime]; arguments []; default message [dateTime]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'java.time.LocalDateTime' for property 'dateTime'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.format.annotation.DateTimeFormat java.time.LocalDateTime] for value '2018-01-01T23:59'; nested exception is java.lang.IllegalArgumentException: Parse attempt failed for value [2018-01-01T23:59]]```
+пытался решить как писал выше маэстро поставив анатацию над полем в классе MealWitExceded
+   
+```@DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm" , iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime dateTime;```
+но ничего из этого не вышло я так понимаю нужно писать конвертер? подскажите плиз как мне его вызывать (от куда, в какой момент)
+2) лежит раскраска по цветам - таблица серая - еще пока не разбирался по чему но за наводуку буду благодарен ) - ну я понимаю что мы отрисовку таблицы отдали аяксу - а как нам ему сказать что бы он ее раскрашивал - хз
+3) Радует что хотябы кнопка delete работает ) (edited) (edited)
+
+Ma3stro [1:41 PM]
+Паттерн указывать не нужно
+Глянь как мы для юзера делаем его деактивированную раскраску, попробуй сделать по аналогии
+
+roma [1:47 PM]
+Блин круто ))) Паттерн убрал и проблемма номер 1 отпала )))перехожу к отрисовке цветов ) @Ma3stro- спасибо (edited)
+
+Ma3stro [2:52 PM]
+uploaded and commented on this image: image 
+
+Откуда у нас взялся поиск??!?
