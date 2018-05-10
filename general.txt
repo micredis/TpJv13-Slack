@@ -5346,3 +5346,23 @@ java.lang.ClassNotFoundException: com.fasterxml.jackson.databind.ObjectMapper
 org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1308)
 org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1136)
 я этот фастерхмл не подключал и в зависимостях у меня его нет, а он мне все ломает
+
+
+LeoJames [7:46 PM]
+https://www.youtube.com/watch?v=3HgKKOWl9WE
+https://events.google.com/io/schedule/?section=may-9&room=fb8f9af2-c4b3-4cd3-b571-421e2c6ebad1
+YouTubeGoogle Developers
+Google I/O'18: Amphitheatre
+
+events.google.com
+Google I/O 2018
+Google I/O brings together developers from around the globe for 3-days of technical sessions, codelabs, interactive demos, and more. Explore the Schedule.
+https://storage.googleapis.com/io-2018.appspot.com/v1/io-social-banner.png
+Если кто увлекается
+
+Grigory Kislin [1:44 AM]
+@here
+*------------------------------------------------------------------*
+*С праздником Победы!*
+*Приглашаю в #hw10*
+*------------------------------------------------------------------*

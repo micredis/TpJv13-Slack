@@ -670,3 +670,184 @@ Ma3stro [2:52 PM]
 uploaded and commented on this image: image 
 
 Откуда у нас взялся поиск??!?
+
+
+roma [May 8th at 3:26 PM]
+in #hw9
+я не пойму как у нас users вызывают стиль enabled из style.css
+```tr[data-userEnabled="false"] {
+    opacity: 0.3;
+}```
+если в патче №7 мы убрали эту строку из users.jsp:
+```<tr data-userEnabled="${user.enabled}">```
+(edited)
+
+
+5 replies
+Ma3stro [1 day ago]
+В userDatables.js смотри "createdRow"
+
+
+Ma3stro [1 day ago]
+И при убирании checkbox'а у нас незаметно к тегу <tr> добавляется атрибут data-userEnabled="${user.enabled}" (edited)
+
+
+Ma3stro [1 day ago]
+Это все я из дебага в браузере достал)
+
+
+roma [1 day ago]
+@Ma3stro Красавчег что из дебага - надо его получше мне освоить))) все - раскрасил - сделал неоптионал часть )))) Спасибо ))) (edited)
+
+
+
+Grigory Kislin [1 day ago]
+рекомендую использовать контекстный поиск Ctrl+F  на корне (или папке) проекта справа по всему проекту. например: data-userEnabled
+мне часть помогаем (edited)
+
+
+Alexander Shnaider [May 8th at 3:30 PM]
+in #hw9
+Я правильно понял что в mealDataTables.js нам не нужно вызывать метод `$.get(ajaxUrl, updateTableByData)` т.к данные в таблице обновляются за счёт запроса фильтра
+```$.ajax({
+            type: "POST",
+            url: ajaxUrl + "filter",
+            data: $("#filter").serialize()
+        }).done(updateTableByData);```
+тогда и доп метод get не нужно вставлять в ajaxController. Так получается?
+
+
+2 replies
+Aleksei Kirillov [1 day ago]
+get нужен, он в update используется
+$.get(ajaxUrl + id, function (data)
+
+
+
+Alexander Shnaider [1 day ago]
+а, точно
+
+
+qf05 [3:31 PM]
+commented on Ma3stro’s file image
+От Ajax. Стандартная отрисовка таблицы.
+Alexander Shnaider [3:33 PM]
+ну я так понял это вместе с бутстрапом появилось как стандартная часть таблицы, только где это всё описывается не знаю, возможно внутри бутстрапа где- то. Там ведь ещё есть значки упорядочивания над каждой колонкой и надпись внизу таблицы. Мы ничего этого не создавали вручную
+
+
+Ma3stro [May 8th at 3:37 PM]
+in #hw9
+Я правда не понял, как в случае ниже при отрисовке таблицы js понимает, что row - это именно row (запись в таблице), а data - это data?
+```"createdRow": function (row, data, dataIndex) {
+            if (!data.enabled) {
+                $(row).attr("data-userEnabled", false);
+            }
+        }```
+Ну и в подобных ситуациях в принципе (edited)
+
+
+2 replies
+Aleksei Kirillov [1 day ago]
+DataTable передается объект, в котором есть поля.
+полю createdRow присвоена наша функция.
+в jQuery.dataTables.js определен ее формат:
+        /**
+         * This function is called when a TR element is created (and all TD child
+         * elements have been inserted), or registered if using a DOM source, allowing
+         * manipulation of the TR element (adding classes etc).
+         *  @type function
+         *  @param {node} row "TR" element for the current row
+         *  @param {array} data Raw data array for this row
+         *  @param {int} dataIndex The index of this row in the internal aoData array
+         *
+         *  @dtopt Callbacks
+         *  @name DataTable.defaults.createdRow
+         *
+         *  @example
+         *    $(document).ready( function() {
+         *      $('#example').dataTable( {
+         *        "createdRow": function( row, data, dataIndex ) {
+         *          // Bold the grade for all 'A' grade browsers
+         *          if ( data[4] == "A" )
+         *          {
+         *            $('td:eq(4)', row).html( '<b>A</b>' );
+         *          }
+         *        }
+         *      } );
+         *    } );
+         */
+        "fnCreatedRow": null,
+
+
+
+Grigory Kislin [1 day ago]
+это документация к datatables (на всякий случай:)
+
+
+qf05 [May 8th at 9:15 PM]
+in #hw9
+Я тут заметил, что если в тестах убрать очистку кэша 2-го лвла у хибернейт, то всё работает. Почему? раньше ведь не работало.
+
+
+1 reply
+Grigory Kislin [1 day ago]
+этож зависит от порядка тестов
+причем у одних может работать, у других- нет
+
+
+Alexander Shnaider [Yesterday at 12:09 AM]
+in #hw9
+Подскажите как правильно добавить timedatepicker в jsp. нашёл эту либу в мавен библиотеках, но как к ней путь прописать не очень пойму, пробовал `/META-INF/resources/webjars/datetimepicker/2.5.14/jquery.datetimepicker.css` НА стеке советовали создать папку либ и в неё скопировать jar. Как правильно?
+
+
+4 replies
+Alexander Shnaider [1 day ago]
+отвечая на свой вопрос https://stackoverflow.com/a/27228842
+Stack Overflow
+Referencing a js maven dependency from a JSP
+I don't know if this a dumb question but as I'm new to Maven I don't really know how to deal with this: I'm currently working on a webapp (struts2) project using Maven project structure, and I've ...
+ 
+
+
+Vladimir Gorbatenko [1 day ago]
+У меня получилось только когда полную версию добавил.
+<link rel="stylesheet" href="webjars/datetimepicker/2.5.14/build/jquery.datetimepicker.min.css">
+<script type="text/javascript" src="webjars/datetimepicker/2.5.14/build/jquery.datetimepicker.full.js" defer></script>
+
+
+Vladimir Gorbatenko [1 day ago]
+А зачем через /META-INF/? Подключается точно также как и бутстрап и дататейблс. В pom.xml зависимость была добавлена ранее.
+
+
+Vladimir Gorbatenko [1 day ago]
+http://i6.pixs.ru/storage/9/4/3/datetimepi_6769763_30171943.jpg (80 kB)
+
+
+Vladimir Gorbatenko [Yesterday at 9:01 AM]
+in #hw9
+Не могу понять, почему одни вещи для меня капец какие очевидные и решаются легче простого, а другие люди на них залипают. А вот когда действительно "непонятно откуда взялась сова" - многие легко въезжают, а я совсем не понимаю откуда ноги растут... (edited)
+
+
+
+1 reply
+Dmitry Neustupov [1 day ago]
+Это нормально
+
+
+Vyacheslav [Yesterday at 12:39 PM]
+in #hw9
+Народ. Чиню тесты. Добавляю .with(userHttpBasic(USER)) и with - красный. Импорты вроде совпадают.
+
+
+3 replies
+Vladimir Gorbatenko [22 hours ago]
+не в том месте вставляешь, перед второй закрывающей скобкой )
+
+
+Vladimir Gorbatenko [22 hours ago]
+mockMvc.perform(get(REST_URL + "filter")
+               .with(userHttpBasic(USER))
+
+
+Vyacheslav [22 hours ago]
+Точно. Как часто бывает - невнимательность. Спасибо.

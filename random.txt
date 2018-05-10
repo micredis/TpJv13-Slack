@@ -888,3 +888,11 @@ goodhoopoe [3:00 PM]
 Oleksii Leshchenko
 Babel поднимается один раз и далее ипользуется всякими сборщиками, npm и т.п....
 Posted in #randomToday at 11:29 AM
+
+
+aleksey [3:07 PM]
+С этим прекрасно справляется webpack
+goodhoopoe
+чтобы написать 200-500 строк кода поднять babel, gulp, uglify и прочее? зачем стрелять пушкой по воробьям? ES6 это хорошо, но не всегда его использование окупается. нередко проще на ванильном ES5 написать.
+https://topjava13.slack.com/archives/C8LLARRU7/p1525768175000231
+Posted in #randomMay 8th
