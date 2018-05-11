@@ -9,3 +9,37 @@ Grigory Kislin [1:43 AM]
 
 Tanya [1:47 AM]
 joined #hw10 along with 18 others.
+
+
+realcorwin [11:40 AM]
+... участников :slightly_smiling_face:
+
+
+Dzmitry Shalukhau [Today at 11:55 AM]
+in #hw10
+Выживут сильнейшие???
+
+
+5 replies
+Vladimir Gorbatenko [3 hours ago]
+а что если это мы не плохо въезжаем, а те кто уже отсеялся, давным-давно все поняли и для них это оказалось очень просто? )
+
+
+LeoJames [1 hour ago]
+Остальные уже работу нашли:thinking_face:
+
+
+Sergey [1 hour ago]
+Ну не знаю, с 8-го занятия нахожусь в прострации )
+
+
+Dzmitry Shalukhau [37 minutes ago]
+@Vladimir Gorbatenko с таким настроением ты слона не продашь :slightly_smiling_face:
+
+
+realcorwin [35 minutes ago]
+Думаю, здесь много людей, у кого есть работа, но кто хочет развиться в Spring/Hibernate
+
+
+Alexander Shnaider [1:39 PM]
+в 4 видео Григорий говорит что у нас Spring-mvc наследуется от Spring-app. А где это можно увидеть? А то я полазил по ресурсам и по pom.xml и не вижу где мы это прописываем и как.
