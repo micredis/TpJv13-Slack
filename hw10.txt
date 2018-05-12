@@ -43,3 +43,72 @@ realcorwin [35 minutes ago]
 
 Alexander Shnaider [1:39 PM]
 в 4 видео Григорий говорит что у нас Spring-mvc наследуется от Spring-app. А где это можно увидеть? А то я полазил по ресурсам и по pom.xml и не вижу где мы это прописываем и как.
+
+
+Aleksei Kirillov [1 day ago]
+мне кажется, что это описано в web.xml
+есть общий контекст web-приложения:
+   <context-param>
+       <param-name>contextConfigLocation</param-name>
+       <param-value>
+           classpath:spring/spring-app.xml
+       </param-value>
+   </context-param>
+а в нем определен dispatcher с контекстом
+       <init-param>
+           <param-name>contextConfigLocation</param-name>
+           <param-value>classpath:spring/spring-mvc.xml</param-value>
+       </init-param>
+думаю, что отсюда и наследование (edited)
+
+
+
+Alexander_Gubanow [1 day ago]
+При использовании Spring MVC мы указываем в файле web.xml один контроллер, который будет обрабатывать все запросы – DispatcherServlet.  DispatcherServlet осуществляет роутинг на основании mvc-контекcта.
+Для Spring MVC приложений мы должны конфигурировать два контекста:1) spring-контекст для DispatcherServlet, на основании которого DispatcherServlet будет перенаправлять запросы соответствующим классам и их методам.2) spring-контекст самого приложения, на основании которого создаются бины остальной части приложения. При этом контекст приложения является родительским по отношению к контексту mvc.
+Оба контекста инициализируются при старте приложения и параметры инициализации указываются в файле web.xml. Загрузка контекста приложения производиться классом ContextLoaderListener, который мы объявляем с помощью тега <listener>
+Инициализация контекста приложения:
+<context-param>
+<param-name>contextConfigLocation</param-name>
+<param-value>classpath:spring/spring-app.xml</param-value>
+</context-param>
+//задали имя и путь к файлу с настройками контекста
+Инициализация контекста класса DispatcherServlet (контекста mvc):
+<servlet>
+<init-param>
+<param-name>contextConfigLocation</param-name>
+<param-value>classpath:spring/spring-mvc.xml</param-value>
+</init-param>
+</servlet>
+Context-param element contains the declaration of a Web application's context initialization parameters.
+Init-param contains a name/value pair as an initialization attribute of the servlet.
+По факту мы не устанавливаем отношение родитель/потомок, просто контекст класса DispatcherServlet это часть всего приложения (edited)
+
+
+Alexander Shnaider [1 day ago]
+спасибо за пояснения
+
+
+Grigory Kislin [11 hours ago]
+https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-servlet-context-hierarchy
+автоматом спринг конфигурирует
+
+
+qf05 [Yesterday at 11:14 PM]
+in #hw10
+Подскажите, никак не пойму, почему в Ajax контроллерах когда мы пытаемся сохранить дубликат email в строчке
+super.create(UserUtil.createNewFromTo(userTo));
+бросается эксепшен, а в Rest контроллере строчка
+User created = super.create(user);
+с дубликатом email выполняется без эксепшена.
+
+
+2 replies
+Grigory Kislin [11 hours ago]
+вкладку Network смотрел?
+
+
+qf05 [5 hours ago]
+смотрел, но не понял намёка, там мы отправляем запрос в теле которого данные полей, это всё приходит в наш метод, где собирается юзер с этими данными, далее мы попадаем в метод, смотрим что у полей нет ошибок с валидацией, далее пытаемся запихать этого юзера в базу , но тут совпадение емайлов и вылетает эксепшен. 
+Тоже самое в рест, мы получаем юзера пытаемся засунуть его в базу, но никто не возмущается что юзер с таким емайлом уже есть, и мы даже можем потом достать его из базы, всё ок. И только если сделать запрос getAll база замечает, что что-то не так, и бросается эксепшен.
+При этом я никак не вижу разницы в методах записи юзера в базу, но работают они по разному.

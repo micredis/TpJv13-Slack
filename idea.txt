@@ -458,3 +458,18 @@ Andrii [16 hours ago]
 Andrii [16 hours ago]
 Спасибо! Все заработало :smiley:
 С тестами помогло: вырезал/вставил org.apache.maven.plugins, с clean просто перезагрузка.
+
+Grigory Kislin [1 month ago]
+clean- обычно каталог target нельзя удалить- нарпимер приложение запущено
+
+
+Джони [2:12 PM]
+коллеги, у вас тоже https://www.jetbrains.com/ без vpn не работает? :thinking_face:
+JetBrains
+JetBrains: Developer Tools for Professionals and Teams
+JetBrains, creator of the leading Java IDE - IntelliJ IDEA - is a cutting-edge software vendor specializing in the creation of intelligent development tools.
+Technologies:
+IDEs, Team Tools, Languages
+JetBrains:
+"The drive to develop"
+http://resources.jetbrains.com/storage/products/jetbrains/img/meta/jetbrains_1280x800.png

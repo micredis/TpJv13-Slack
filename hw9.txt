@@ -851,3 +851,88 @@ mockMvc.perform(get(REST_URL + "filter")
 
 Vyacheslav [22 hours ago]
 Точно. Как часто бывает - невнимательность. Спасибо.
+
+
+poleg [5:58 PM]
+500 ошибка, почему-то MealTo не проходит валидацию...
+
+   @PostMapping
+   public void createOrUpdate(@Valid MealTo mealTo) {
+       if (mealTo.isNew()) {
+           super.create(MealsUtil.createNewFromTo(mealTo));
+       }
+   }
+
+public class MealTo extends BaseTo implements Serializable {
+
+   @NotBlank
+   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+   private LocalDateTime dateTime;
+
+   @NotBlank
+   @Size(min = 2, max = 120)
+   private String description;
+
+   @Range(min = 10, max = 5000)
+   private int calories;
+
+   public MealTo() {
+   }
+
+   public MealTo(Integer id, LocalDateTime dateTime, String description, int calories) {
+       super(id);
+       this.dateTime = dateTime;
+       this.description = description;
+       this.calories = calories;
+   }
+
+   public LocalDateTime getDateTime() {
+       return dateTime;
+   }
+
+   public void setDateTime(LocalDateTime dateTime) {
+       this.dateTime = dateTime;
+   }
+
+   public String getDescription() {
+       return description;
+   }
+
+   public void setDescription(String description) {
+       this.description = description;
+   }
+
+   public int getCalories() {
+       return calories;
+   }
+
+   public void setCalories(int calories) {
+       this.calories = calories;
+   }
+
+   @Override
+   public String toString() {
+       return "MealTo{" +
+               "dateTime=" + dateTime +
+               ", description='" + description + '\'' +
+               ", calories=" + calories +
+               ", id=" + id +
+               '}';
+   }
+}
+
+   public static Meal createNewFromTo(MealTo newMeal) {
+       return new Meal(null, newMeal.getDateTime(), newMeal.getDescription(), newMeal.getCalories());
+   } (edited)
+
+poleg [1 day ago]
+Сам спросил - сам ответил )
+  @NotBlank
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private LocalDateTime dateTime;
+
+  @NotBlank тут лишний
+
+
+Yevhen Maksymovych [7:01 PM]
+ребят, я тут с опозданием начал всё делать. кто-то может пояснить, как у нас работает локализация в нотифаях? я тупо не могу понять, где происходит вся магия, откуда BeanPropertyBindingResult знает, на каком языке нам отдавать FieldError.getDefaultMessage()? (edited)
