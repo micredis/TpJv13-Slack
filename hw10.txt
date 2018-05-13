@@ -41,6 +41,10 @@ realcorwin [35 minutes ago]
 Думаю, здесь много людей, у кого есть работа, но кто хочет развиться в Spring/Hibernate
 
 
+Grigory Kislin [1 day ago]
+здесь и хорошо. зачем вам про других гадать? порадуйтесь за себя (edited)
+
+
 Alexander Shnaider [1:39 PM]
 в 4 видео Григорий говорит что у нас Spring-mvc наследуется от Spring-app. А где это можно увидеть? А то я полазил по ресурсам и по pom.xml и не вижу где мы это прописываем и как.
 
@@ -112,3 +116,246 @@ qf05 [5 hours ago]
 смотрел, но не понял намёка, там мы отправляем запрос в теле которого данные полей, это всё приходит в наш метод, где собирается юзер с этими данными, далее мы попадаем в метод, смотрим что у полей нет ошибок с валидацией, далее пытаемся запихать этого юзера в базу , но тут совпадение емайлов и вылетает эксепшен. 
 Тоже самое в рест, мы получаем юзера пытаемся засунуть его в базу, но никто не возмущается что юзер с таким емайлом уже есть, и мы даже можем потом достать его из базы, всё ок. И только если сделать запрос getAll база замечает, что что-то не так, и бросается эксепшен.
 При этом я никак не вижу разницы в методах записи юзера в базу, но работают они по разному.
+
+
+Yevhen Maksymovych [12:24 PM]
+чет я прямо на первом пункте споткнулся.
+```1: Сделать валидацию в AdminAjaxController/MealAjaxController через ExceptionInfoHandler. Вернуть клиенту ErrorInfo и статус HttpStatus.UNPROCESSABLE_ENTITY (тип методов контроллеров вернуть обратно на void).```
+
+Vladimir Gorbatenko [12:24 PM]
+Аналогично, вот только собрался об этом написать.
+Пример бы увидеть. Что кладем и что получаем.
+
+Yevhen Maksymovych [12:25 PM]
+так-то я поглядел брякой, какой эксепшн генерится, когда приходит невалидный юзер, это почему-то
+```TransactionSystemException.class```
+добавил этот эксепшн в список к уже имеющимся в методе
+```@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)  // 422
+    @ExceptionHandler({IllegalRequestDataException.class, MethodArgumentTypeMismatchException.class, HttpMessageNotReadableException.class, TransactionSystemException.class})
+    public ErrorInfo illegalRequestDataError(HttpServletRequest req, Exception e) {```
+(edited)
+вроде всё корректно отрабатывает, но внутреннее ощущение, что я какой-то костыль подставил (edited)
+
+Yevhen Maksymovych [12:36 PM]
+отсюда, соответственно, несколько вопросов:
+
+Evgeniy [12:36 PM]
+@Yevhen Maksymovych, Видимо в этом момент ты еще пока не сделал валидацию на контроллере, поэтому он отрабатывает и дергает сервис, тот в свою очередь дергает репозиторий, и только в это время происходит валидация, а транзакция откатывается
+
+Yevhen Maksymovych [12:36 PM]
+вот это был первый вопрос
+почему валидация бинов не бросает эксепшн )
+
+Evgeniy [12:37 PM]
+ексепшны обрабаываются, при обработке бросается  TransactionSystemException я так понимаю
+
+Aleksei Kirillov [12:45 PM]
+У меня генерируется BindException для createOrUpdate. А как ты изменил createOrUpdate в AdminAjaxController.java?
+
+Vladimir Gorbatenko [12:48 PM]
+Ребята, что тут происходит, как вы вообще пришли к TransactionSystemException? Расскажите как такое поймать.
+
+Aleksei Kirillov [12:49 PM]
+Мне кажется, что TransactionSystemException не должно быть.
+
+Vladimir Gorbatenko [12:51 PM]
+Я считал что IllegalRequestDataException был специально создан для нашей цели, а теперь как-то сомневаюсь, даже более - совершенно не понимаю что надо.
+
+Vyacheslav [12:52 PM]
+Тоже не вдуплил. Тут случаем не редирект на exseption.jsp должен быть?
+
+Evgeniy [12:56 PM]
+нет, надо json ErrorInfo отдать
+
+Aleksei Kirillov [12:56 PM]
+В видео было сказано, что при валидации не выводится детализация из ErrorInfo. 
+Это из-за того, что createOrUpdate сам обрабатывал ошибки.
+Так понял, что нужно убрать в createOrUpdate контроль результата и в ExceptionInfoHandler добавить обработку BindException.
+Кто как думает?
+
+Evgeniy [1:00 PM]
+вообще это правильно, но это уже 2-е задание(валидация на котнроллере)
+я еще не сделал это, у меня бросается TransactionSystemException т.к. из-за неудачной валидации транзакция откатывается
+
+Aleksei Kirillov [1:04 PM]
+п.2 - это для REST контроллеров, а п.1 - это ajax
+
+Evgeniy [1:04 PM]
+да
+значит 1-й пункт неправильно сделан у нас
+а какую валидацию ты добавлял в контроллер чтобы получить  BindException?
+
+Aleksei Kirillov [1:07 PM]
+А добавили в ExceptionInfoHandler обработку BindException?
+Может так как нет обработки BindException, то он по стеку переходит к исключению на следующем уровне и это TransactionSystemException ?
+
+Evgeniy [1:10 PM]
+опробовал вместо TransactionSystemException, теперь вообще код возврата 500
+т.е.  BindException не бросается, валидации в контроллере не происходит, и это неправильно
+
+Aleksei Kirillov [1:12 PM]
+Так обработка выглядет?
+   @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+   @ExceptionHandler(BindException.class)
+   public ErrorInfo handleError(HttpServletRequest req, BindException e) {
+       return logAndGetErrorInfo(req, e, false, DATA_NOT_FOUND);
+   }
+Только наверное вместо DATA_NOT_FOUND надо VALIDATION_ERROR
+
+Evgeniy [1:14 PM]
+я BindException вписал в @ExceptionHandler уже существующего метода
+
+Aleksei Kirillov [1:14 PM]
+а какого метода?
+
+Evgeniy [1:15 PM]
+@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)  // 422
+   @ExceptionHandler({IllegalRequestDataException.class, MethodArgumentTypeMismatchException.class, HttpMessageNotReadableException.class, BindException.class})
+   public ErrorInfo illegalRequestDataError(HttpServletRequest req, Exception e) {
+       return logAndGetErrorInfo(req, e, false, VALIDATION_ERROR);
+   }
+я думал так надо, потому что это относится к данным запроса
+заработало
+
+Aleksei Kirillov [1:18 PM]
+что поменял?
+
+Evgeniy [1:18 PM]
+убрал BindingResults из createOrUpdate
+обработку results я сразу убрал, а сейчас еще убрал параметр из метода
+в 1 задании не сказано про обработку на клиенте - надо ли ее делать?
+
+Aleksei Kirillov [1:24 PM]
+по идее она уже сделана, нам надо корректно заполнить ErrorInfo
+
+Evgeniy [1:29 PM]
+да, можно на бэке заполнить
+
+Aleksei Kirillov [2:19 PM]
+а кто понял какие исключения добавлять? 
+Судя по подсказкам надо кроме BindException еще и MethodArgumentNotValidException добавить?
+
+Evgeniy [2:24 PM]
+MethodArgumentNotValidException понадобилось при  валидации в REST
+
+Aleksei Kirillov [2:28 PM]
+ок
+
+
+Vladimir Gorbatenko [2:44 PM]
+added and commented on this PHP snippet: Посмотрите 
+@PostMapping
+  public ResponseEntity<String> createOrUpdate(@Valid UserTo userTo, BindingResult result) {
+    if (result.hasErrors()) {
+      // TODO change to exception handler
+      throw new IllegalRequestDataException(ValidationUtil.getErrorResponse(result).toString());
+      //return ValidationUtil.getErrorResponse(result);
+    }
+    if (userTo.isNew()) {
+      super.create(UserUtil.createNewFromTo(userTo));
+    } else {
+      super.update(userTo, userTo.getId());
+    }
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+Collapse 
+так-то все работает, но это ведь неправильно?
+
+Aleksei Kirillov [2:48 PM]
+да, неправильно
+пляши от "тип методов контроллеров вернуть обратно на void"
+
+Vladimir Gorbatenko [3:32 PM]
+мда уж уважаемая редакция...
+
+Yevhen Maksymovych [3:34 PM]
+а что по поводу отображения ошибки на клиенте при ошибке биндинга? кто-то приводил её в порядок, или мы так и вываливаем весь стектрейс по дефолту?
+
+Vladimir Gorbatenko [3:36 PM]
+ну не весь стектрейс, а всего лишь инглишь+русский )
+но да - не красиво
+
+Yevhen Maksymovych [3:38 PM]
+uploaded this image: ну, у меня это выглядит так: 
+
+
+Yevhen Maksymovych [3:38 PM]
+раньше было лучше :slightly_smiling_face:
+
+Vladimir Gorbatenko [3:38 PM]
+422
+undefined
+undefined
+было маленькое красное окошко )
+
+Yevhen Maksymovych [3:40 PM]
+я просто слабо представляю, чего мы можем тут сделать. раньше мы парсили результат биндинга, но сейчас, если мы будем его брать, у нас не будет падать эксепшн. а если будем пытаться вручную разобрать строку руткейса, чтобы составить из нее сообщение пользователю - тогда непонятно, зачем мы себе усложнили жизнь
+
+Aleksei Kirillov [3:41 PM]
+надо копать для вывода "Не дублируйте обработку ошибок BindingResult: result.getFieldErrors().."
+
+Aleksei Kirillov [3:47 PM]
+uploaded this image: screen.jpg 
+
+
+Aleksei Kirillov [3:47 PM]
+у меня так
+
+Yevhen Maksymovych [3:48 PM]
+ага, получилось
+магия спринга, биндингресалт можно вшарабенить в эксепшнхандлер, и он при наличии подхватится
+
+Yevhen Maksymovych [3:49 PM]
+uploaded this image: image.png 
+
+
+Vladimir Gorbatenko [3:55 PM]
+та что за? )) как? ....
+
+Yevhen Maksymovych [3:58 PM]
+магия спринга. все везде автовайрится
+
+Vladimir Gorbatenko [4:38 PM]
+нет, не колдуется
+
+Aleksei Kirillov [4:43 PM]
+надо заменять logAndGetErrorInfo на свой обработчик BindingResult
+
+ilya t. [4:44 PM]
+да, свой errorinfo возвращай с обработанным текстом
+
+Vladimir Gorbatenko [5:12 PM]
+uploaded and commented on this image: такое 
+
+потупил )))
+у всех с паролем такое, без перевода?
+
+ilya t. [5:15 PM]
+ага тоже без
+
+Aleksei Kirillov [5:20 PM]
+Это в UserTo стреляет
+   @Size(min = 5, max = 32, message = "length must between 5 and 32 characters")
+   private String password;
+
+Vladimir Gorbatenko [5:25 PM]
+красавчик, теперь совсем другое дело )
+
+Aleksei Kirillov [5:29 PM]
+а как ты привязал локаль?
+
+Vladimir Gorbatenko [5:32 PM]
+закомментировал /* , message = "length must between 5 and 32 characters" */ (edited)
+
+Vladimir Gorbatenko [6:15 PM]
+А как вы побороли 3 задание Сделать обработку ошибки при дублирования email ("User with this email already exists") ?
+До того как мы изменили createOrUpdate, все отрабатывало с типом ошибки DATA_ERROR  и эксепшеном PSQLException.  А как сейчас быть? 
+Добавил ConstraintViolationException - не помогло.
+@ResponseStatus(value = HttpStatus.CONFLICT)  // 409
+   @ExceptionHandler({DataIntegrityViolationException.class, ConstraintViolationException.class})
+   public ErrorInfo conflict(HttpServletRequest req, DataIntegrityViolationException e) {
+       return logAndGetErrorInfo(req, e, true, DATA_ERROR);
+   } (edited)
+
+Vladimir Gorbatenko [6:19 PM]
+uploaded this image: dataerror.JPG 
