@@ -473,3 +473,7 @@ IDEs, Team Tools, Languages
 JetBrains:
 "The drive to develop"
 http://resources.jetbrains.com/storage/products/jetbrains/img/meta/jetbrains_1280x800.png
+
+
+Valery.Shkerdin [8:45 AM]
+@Джони работает
