@@ -716,3 +716,81 @@ qf05 [< 1 minute ago]
 
 Aleksei Kirillov [4:37 PM]
 Сделать через validate
+
+
+alexey [10:36 AM]
+а у меня у одного запуск приложения стал занимать больше времени?раньше 24 207 milliseconds,  сейчас 146 213 milliseconds. еще и тупит потом
+
+Yevhen Maksymovych [10:48 AM]
+```Artifact topjava:war exploded: Deploy took 20 564 milliseconds```
+
+alexey [10:49 AM]
+:thinking_face:
+
+Aleksei Kirillov [10:57 AM]
+Перезапусти idea
+
+Yevhen Maksymovych [10:57 AM]
+ну, у меня раньше занимал чуть поменьше. но учитывая, сколько мы уже туда напихали в зависимости, это не удивительно
+но не прям так, чтобы в шесть раз больше
+
+alexey [11:00 AM]
+перезапускал не помогает(( откатываюсь на HW09 нормально работает "Artifact topjava:war exploded: Deploy took 22 547 milliseconds"
+
+SergeyMuratkin [11:06 AM]
+uploaded this image: У меня Deploy took 32 247 milliseconds 
+
+
+alexey [11:08 AM]
+новый рекорд 'Artifact topjava:war exploded: Deploy took 249 178 milliseconds'
+
+Yevhen Maksymovych [11:09 AM]
+давайте меряться :slightly_smiling_face:
+я за 7 секунд задеплоил только что (edited)
+
+Yevhen Maksymovych [11:09 AM]
+uploaded this image: image.png 
+
+
+Dmitry Neustupov [11:10 AM]
+Artifact topjava:war exploded: Deploy took 34 317 milliseconds
+
+alexey [11:11 AM]
+память 96 Гб ?????
+
+Yevhen Maksymovych [11:11 AM]
+это сервак под хайпер-в
+
+Dmitry Neustupov [11:12 AM]
+Можно ещё длинной чего нибудь померяться)
+
+alexey [11:12 AM]
+Так что делать с моими 249 178 милсек ??
+Есть идеи?
+
+Vladimir Gorbatenko [11:13 AM]
+uploaded this image: 9518614.jpg 
+
+
+Yevhen Maksymovych [11:13 AM]
+попробуй клин сделать
+может какие старые зависимости упаковываются
+
+alexey [11:18 AM]
+не помогло (162 000)
+
+
+alexey [11:19 AM]
+added and commented on this Plain Text snippet: Потери 
+11:16:28.393 INFO o.s.w.s.m.m.a.RequestMappingHandlerAdapter.initControllerAdviceCache:567 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'mvc-dispatcher-servlet': startup date [Tue May 15 11:15:26 MSK 2018]; parent: Root WebApplicationContext
+11:16:43.346 INFO o.s.w.s.m.m.a.RequestMappingHandlerAdapter.initControllerAdviceCache:567 - Looking for @ControllerAdvice: WebApplicationContext for namespace 'mvc-dispatcher-servlet': startup date [Tue May 15 11:15:26 MSK 2018]; parent: Root WebApplicationContext
+11:16:50.299 DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver.initExceptionHandlerAdviceCache:274 - Looking for exception mappings: WebApplicationContext for namespace 'mvc-dispatcher-servlet': startup date [Tue May 15 11:15:26 MSK 2018]; parent: Root WebApplicationContext
+11:16:50.855 INFO o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver.initExceptionHandlerAdviceCache:289 - Detected @ExceptionHandler methods in exceptionInfoHandler
+11:16:50.870 INFO o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver.initExceptionHandlerAdviceCache:289 - Detected @ExceptionHandler methods in globalControllerExceptionHandler
+11:17:23.034 INFO o.s.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler:373 - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+Collapse 
+вот эти операции много времени жрут
+
+
+Aleksei Kirillov [12:25 PM]
+Может надо уменьшить уровень логирования? Слишком много выводиться информации?
