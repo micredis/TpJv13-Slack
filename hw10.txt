@@ -794,3 +794,122 @@ Collapse
 
 Aleksei Kirillov [12:25 PM]
 Может надо уменьшить уровень логирования? Слишком много выводиться информации?
+
+
+Aleksei Kirillov [12:33 PM]
+хотя нет
+
+Aleksei Kirillov [12:48 PM]
+поставь брейкпоинт в RequestMappingHandlerAdapter в методе
+    private void initControllerAdviceCache() {
+        if (getApplicationContext() == null) {
+            return;
+        }
+        if (logger.isInfoEnabled()) {
+            logger.info("Looking for @ControllerAdvice: " + getApplicationContext());
+        }
+               ...
+и поймешь, что он делает не так
+
+alexey [2:28 PM]
+После долгих мучений, вылечилось откатом патчей в самый зад и накаткой заново. Видимо, первый раз какой то из патчей криво встал.:unamused:
+
+Yevhen Maksymovych [2:38 PM]
+ребят, подскажите
+как в жсп мне получить текущую урлу?
+в стэковерфлоу говорят использовать request.getContextPath(), но использовать скриплеты в 2018-м - это зло
+
+
+Yevhen Maksymovych [Yesterday at 2:40 PM]
+in #hw10
+${pageContext.request.contextPath} возвращает только до последнего / (edited)
+
+
+4 replies
+ilya t. [19 hours ago]
+${pageContext.request.requestURL}
+а так что возвратит?
+
+
+Yevhen Maksymovych [19 hours ago]
+полный путь к jsp
+```http://localhost:8080/topjava/WEB-INF/jsp/profile.jsp?lang=ru```
+
+
+Yevhen Maksymovych [19 hours ago]
+ну, мне надо прям не настолько текущую, мне надо такую, чтобы она валидным адресом оставалось :slightly_smiling_face: вариант с ${requestScope['javax.servlet.forward.request_uri']} нормально проканал
+
+
+ilya t. [19 hours ago]
+даа я понял уже)
+
+
+Yevhen Maksymovych [2:41 PM]
+т.е. http://localhost:8080/topjava вместо http://localhost:8080/topjava/meals
+
+Aleksei Kirillov [2:41 PM]
+не знаю насколько корректно, но использую
+${requestScope['javax.servlet.forward.request_uri']}
+
+Yevhen Maksymovych [2:43 PM]
+уии, спасибо, то, что надо. локализация заработала :slightly_smiling_face:
+
+ilya t. [4:00 PM]
+поясните кто-нибудь пожалуйста насчет тестов - почему у нас если мы отмечаем тест @Transactional(propagation = Propagation.NEVER) DataIntegrity ловится а если не отмечаем то нет? Может очевидно но я не улавливаю связи между транзакцией и исключением, оно генерится вне зависимости от транзакций, ведь так?
+
+
+Yevhen Maksymovych [Yesterday at 4:25 PM]
+in #hw10
+ну, мы тут вчера коллективным разумом решили, что если исключение происходит внутри транзакции, транзакция просто откатывается, и снаружи мы не заметим, что что-то произошло
+
+
+
+1 reply
+ilya t. [17 hours ago]
+Спасибо)
+
+
+alexey [Yesterday at 4:30 PM]
+in #hw10
+Народ, подскажите, что в первом задании нужно менять? Все же и так работает через  ExceptionInfoHandler?
+
+
+6 replies
+Yevhen Maksymovych [17 hours ago]
+нам надо вернуть HttpStatus.UNPROCESSABLE_ENTITY
+
+
+Yevhen Maksymovych [17 hours ago]
+а возвращается HttpStatus.INTERNAL_SERVER_ERROR
+
+
+alexey [17 hours ago]
+а на каких данных это проверять?где ее ловить то?
+
+
+Yevhen Maksymovych [17 hours ago]
+да просто попробуй в форме что-то невалидное вбить, и посмотри, что тебе всплывающий нотифай покажет (edited)
+
+
+alexey [17 hours ago]
+спасибо, первый пункт сделал)) может второй так же пояснишь, а то что туго с пониманием ?!
+
+
+ilya t. [17 hours ago]
+по ссылке смотри пример с UserFormValidator
+
+
+Yevhen Maksymovych [4:35 PM]
+ффух, кажись, доделал всё с опционалом
+
+poleg [5:44 PM]
+После 7 патча в spring-mvc.xml ругается на строку  <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/> cannot resolve location 'classpath:/META-INF/resources/webjars/'
+Почему не видит?
+
+Grigory Kislin [7:51 PM]
+насчет долгого старта у меня была проблема на ubuntu: 
+https://confluence.atlassian.com/crowdkb/crowd-startup-takes-an-extremely-long-time-on-linux-762872528.html
+проверьте:
+head -1 /dev/random
+head -1 /dev/urandom (edited)
+я запускаюсь с: -Djava.security.egd=file:/dev/./urandom
