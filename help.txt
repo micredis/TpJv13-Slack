@@ -258,3 +258,82 @@ Andrii [8 minutes ago]
 
 Andrii [7 minutes ago]
 Про постмена узнал вот вот, еще не успел с ним ознакомится.
+
+
+Dmitry Dimidyuk [2 months ago]
+https://javarush.ru/groups/posts/504-sozdanie-telegram-bota-na-java-ot-idei-do-deploja
+Javarush
+Создание Telegram-бота на Java: от идеи до деплоя
+Статья о том как создать бота для мессенджера Telegram с описанием всех подводных камней. Что же такое вообще боты? Для начала вам необходимо ознакомиться с официальной документацией к библиотеке для разработки ботов на Telegram(далее API) ... (34 kB)
+
+
+Dmitry Neustupov [10:17 AM]
+Коллеги, помогите победить POST тесты на AJAX контроллер при включённом csrf.
+В Ajax запросы токен добавлен.
+
+Dmitry Neustupov [10:17 AM]
+added this JavaScript/JSON snippet: Untitled 
+var token = $("meta[name='_csrf']").attr("content");
+  var header = $("meta[name='_csrf_header']").attr("content");
+  $(document).ajaxSend(function(e, xhr, options) {
+    xhr.setRequestHeader(header, token);
+  });
+
+Dmitry Neustupov [10:18 AM]
+На HTML тоже.
+
+Dmitry Neustupov [10:18 AM]
+added this HTML snippet: Untitled 
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
+
+Dmitry Neustupov [10:19 AM]
+Во всех формах используются тэги <form:form>
+Пытаюсь тестировать, получаю 403.
+
+
+Dmitry Neustupov [10:21 AM]
+added this Java snippet: Untitled 
+@Test
+  public void testCreate() throws Exception {
+    mockMvc.perform(post("/ajax/admin/meals")
+        .with(userHttpBasic(ADMIN))
+        .param("menuId", "100007")
+        .param("name", "NewMeal")
+        .param("price", "100"))
+        .andDo(print())
+        .andExpect(status().isFound());
+  }
+Collapse 
+
+Dmitry Neustupov [10:22 AM]
+И вот такую штуку выдаёт на принте:
+
+Dmitry Neustupov [10:23 AM]
+added this Java snippet: Untitled 
+Session Attrs = {org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN=org.springframework.security.web.csrf.DefaultCsrfToken@abc7005}
+
+Dmitry Neustupov [10:23 AM]
+Сам Ajax:
+
+Dmitry Neustupov [10:23 AM]
+added this Java snippet: Untitled 
+function saveMeal(menuId) {
+  $.ajax({
+    type: "POST",
+    url: ajaxUrl,
+    data: form.serialize()
+  }).done(function () {
+      $("#editRow").modal("hide");
+      updateTable(menuId);
+      successNoty("common.saved");
+    }
+  );
+}
+Collapse 
+
+Dmitry Neustupov [10:24 AM]
+Подскажите направление, 2-й день бьюсь, может глаз замылен и не вижу элементарных вещей?
+
+Dmitry Neustupov [3:23 PM]
+Вопрос снят - проблема решилась добавлением в тесты .with(csrf())

@@ -936,3 +936,13 @@ poleg [1 day ago]
 
 Yevhen Maksymovych [7:01 PM]
 ребят, я тут с опозданием начал всё делать. кто-то может пояснить, как у нас работает локализация в нотифаях? я тупо не могу понять, где происходит вся магия, откуда BeanPropertyBindingResult знает, на каком языке нам отдавать FieldError.getDefaultMessage()? (edited)
+
+
+ma1oyby [Today at 11:49 AM]
+in #hw9
+Народ, кто делал валидациб через Validation Groups сразу на Meal, как вы чинили AbstractMealServiceTest.testValidation()? Не выбрасываются ожидаемые исключения на ограничения по валидации.
+
+
+1 reply
+Grigory Kislin [1 hour ago]
+если это связано с jdbc тестами- то валидации там нет

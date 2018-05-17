@@ -913,3 +913,114 @@ https://confluence.atlassian.com/crowdkb/crowd-startup-takes-an-extremely-long-t
 head -1 /dev/random
 head -1 /dev/urandom (edited)
 я запускаюсь с: -Djava.security.egd=file:/dev/./urandom
+
+
+alexey [Yesterday at 2:04 PM]
+in #hw10
+Народ подскажите как BindingResult добавить в ExceptionInfoHandler??
+
+
+2 replies
+qf05 [23 hours ago]
+Autowired не работает?
+Не уверен, но зачем тебе его туда добавлять?
+Может лучше перехватить нужное в ExceptionInfoHandler, потом: 
+BindingResult ex =  ((BindException) e).getBindingResult();
+и дальше уже плясать с готовым BindingResult-ом?
+
+
+alexey [23 hours ago]
+спасибо, за наводку, а то сижу туплю
+
+
+roma [Yesterday at 6:14 PM]
+in #hw10
+народ в первом задании требуется сделать что то в этом роде:
+ ```.... public class MealAjaxController ....   
+@PostMapping
+    public void createOrUpdate(@Valid Meal meal, BindingResult result) {
+        if (result.hasErrors()) {
+            // TODO change to exception handler
+            throw new IllegalRequestDataException("has exception");
+          //  return ValidationUtil.getErrorResponse(result);
+        }
+        if (meal.isNew()) {
+            super.create(meal);
+        } else {
+            super.update(meal, meal.getId());
+        }
+   //     return new ResponseEntity<>(HttpStatus.OK);
+    }```
+или я адски туплю? (edited)
+
+
+9 replies
+ilya t. [19 hours ago]
+нет, зачем, через handler наш, который должен перехватывать исключение, все в нем обрабатывается
+
+roma [19 hours ago]
+ну вроде я и бросаю эксепшен который ловиться в infohendler (edited)
+
+ilya t. [19 hours ago]
+ты вручную его бросаешь прямо в этом методе
+
+
+roma [19 hours ago]
+да
+
+
+roma [19 hours ago]
+```throw new IllegalRequestDataException("has exception");```
+(edited)
+
+
+roma [19 hours ago]
+а как надо?
+
+
+ilya t. [19 hours ago]
+написанный нами handler действует на все классы обозначенные аннотацией  @RestController, ловится и обрабатывается исключение именно в нем. Соответственно тебе нужно подумать как дописать ExceptionInfoHandler
+
+
+ilya t. [19 hours ago]
+посмотри в сторону @ExceptionHandler
+
+
+roma [19 hours ago]
+) блин ) -ок буду смотреть - я просто думал что если написать как я - инфохендлер поймает мой эксепшен в методе
+            ```public ErrorInfo illegalRequestDataError(HttpServletRequest req, Exception e)``` 
+и вернет ErrorInfo (edited)
+
+
+roma [8:48 PM]
+Немного поправил первое задание в mealAjaxController:
+    ```@PostMapping
+    public void createOrUpdate(@Valid Meal meal, BindingResult result) {
+        if (meal.isNew()) {
+            super.create(meal);
+        } else {
+            super.update(meal, meal.getId());
+        }
+    }```
+и в exceptionInfoHendler
+    ```@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)  // 422
+    @ExceptionHandler({IllegalRequestDataException.class, MethodArgumentTypeMismatchException.class, HttpMessageNotReadableException.class, BindException.class})
+    public ErrorInfo illegalRequestDataError(HttpServletRequest req, Exception e) {
+        if(e instanceof BindException)
+        {
+            return  logAndGetErrorInfo(req, e, true, APP_ERROR);
+        }
+        else {
+            return logAndGetErrorInfo(req, e, false, VALIDATION_ERROR);
+        }
+        }```
+так норм? (edited)
+
+qf05 [9:24 PM]
+убери лишние эсепшены, и разве не должно ещё какое то сообщение, которое ты хочешь увидить в logAndGetErrorInfo добавляться.
+
+EdK [9:31 PM]
+Не пойму 3 задание, нужно сделать отдельную страницу для редактирования\добавления пользователя, с выводом ошибок под полями формы. Или изменить модальное окно, которое есть сейчас, что бы ошибка дублирования почты выводилась в него, вместо всплывающего окошка?
+
+qf05 [9:46 PM]
+изменить java код, чтоб ошибка дублирования почты выводилась в модальное окно

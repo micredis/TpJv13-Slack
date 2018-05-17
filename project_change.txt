@@ -294,3 +294,22 @@ JavaWebinar
 `48f866ac` - 10_15_csrf
 Show less
 JavaWebinar/topjava
+
+
+GitHub APP [3:20 AM]
+JavaWebinar
+*12 new commits pushed to `master`*
+`ccdee61f` - 11_0_fix_nav
+`696e71bb` - 11_01_HW10_fix_encoding
+`26184e8b` - 11_02_HW10_validation
+`9d13b7f1` - 11_03_HW10_duplicate_email
+`290ddd9f` - 11_04_HW10_duplicate_datetime
+`bb4521dd` - 11_05_HW10_change_locale
+`7a8326af` - 11_06_i18n
+`57c6ca6e` - 11_07_XSS
+`23141d57` - 11_08_404
+`4fd10efd` - 11_09_auth_user
+`e8e8a7de` - 11_10_restrict_modification
+`31afeea9` - 11_11_heroku
+Show less
+JavaWebinar/topjava
