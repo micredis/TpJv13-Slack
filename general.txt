@@ -5424,3 +5424,169 @@ Grigory Kislin [3:55 AM]
 
 realcorwin [2:49 PM]
 бесплатно можно записаться не только на топява14, но и на топява19, правильно?
+
+
+Grigory Kislin [2 days ago]
+можно и 19, если доживем (edited)
+
+
+realcorwin [2 days ago]
+Дай бог всем здоровья :slightly_smiling_face:
+
+
+LeoJames [4:55 PM]
+:thinking_face: так можно поколениями учиться, передавать по наследству от отца к сыну
+
+Yevhen Maksymovych [4:56 PM]
+@LeoJames такой стартап запорол...
+
+realcorwin [4:59 PM]
+тут кстати весь проект так построен - как передача умений от мастера к подмастерью. это ремесленничество, типичный пример. один показывает, другой повторяет
+
+LeoJames [5:02 PM]
+А как же захват мира?
+
+realcorwin [5:03 PM]
+Это не к Григорию :slightly_smiling_face:
+
+LeoJames [5:08 PM]
+:thinking_face:Можно будет поколениями обучать шиноби, выполнять задания других стран, передавать свой опыт молодым поколениям
+:grin:Григорий будет первым Хокаге
+
+Vladimir Gorbatenko [5:14 PM]
+эй, а ну прекратите, я все еще собираюсь на второй круг )
+
+ilya t. [5:23 PM]
+так а что изменится на втором?) у тебя же останутся видосы, ты можешь пересмотреть, почитать и вспомнить, разве нет?
+
+Yevhen Maksymovych [5:23 PM]
+а как же общение? )
+
+ilya t. [5:24 PM]
+нуу это да) разве что общение)
+
+Vladimir Gorbatenko [5:25 PM]
+понимаете, это как одно высшее образование, и два высших ))
+читая одну и ту же книгу 2 раза - во второй раз находишь в ней много нового.... особенно это актуально у кого проблемы со внимательностью...
+
+Grigory Kislin [5:26 PM]
+история изменений: https://github.com/JavaOPs/topjava/blob/master/ReleaseNotes.md
+уже совсем немного что меняется. планирую JUnit 5 (edited)
+
+LeoJames [5:27 PM]
+:thinking_face:На 7 круге обретаешь внутренний покой и гармонию
+
+Vladimir Gorbatenko [5:28 PM]
+у меня большая часть занятий прошла как "о блин, завтра четверг, надо срочно сделать", ну и собственно куча последствий спешки. а первая половина так вообще - как-то не до занятий было, может таки авитаминоз или что еще.. (edited)
+и скажу что на деле, около 70 % материала мне были знакомы до курса, а все равно знания структурировались совсем мало, тесты можно сказать остались на совсем начальном уровне.
+скрещу подсчет калорий и пэтклиник )))
+LeoJames
+:thinking_face:На 7 круге обретаешь внутренний покой и гармонию
+Posted in #generalMay 17th
+кстати, а когда планируется topjava14 ?
+
+ilya t. [5:33 PM]
+21.06
+
+Vladimir Gorbatenko [5:51 PM]
+о, почти шикарно )
+
+
+saudabaew [May 17th at 9:52 PM]
+in #general
+Коллеги, а кто нибудь реализовывал rest сервис с модулем Спринг секьюрити, который работает с таблицей пользователей в БД (jdbc)?
+
+
+5 replies
+mrLanu [2 days ago]
+А в чем проблема ?
+
+
+saudabaew [2 days ago]
+ругается на sql-запрос в методе auth.jdbcAuthentication().dataSource(dataSource)
+       .usersByUsernameQuery(“select username, password, enabled”
+           + ” from public.users where login=?“), хотя в pgAdmin отрабатывается нормально.
+
+
+mrLanu [2 days ago]
+@Override
+
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.jdbcAuthentication().dataSource(dataSource)
+
+                .usersByUsernameQuery("select email as principal, password as credentials, true from user where email=?")
+
+                .authoritiesByUsernameQuery("select user_email as principal, role_name as role from user_roles where user_email=?")
+
+                .passwordEncoder(passwordEncoder()).rolePrefix("ROLE_");
+
+
+mrLanu [2 days ago]
+Я так делал
+
+
+saudabaew [2 days ago]
+спасибо! завтра попробую
+
+
+Vladimir Gorbatenko [May 18th at 9:59 AM]
+in #general
+Ребята, а вот тут
+INSERT INTO users (name, email, password, calories_per_day) VALUES
+ ('User', 'user@yandex.ru', '{noop}password', 2005),
+ ('Admin', 'admin@gmail.com', '{noop}admin', 1900);
+что такое {noop} ?
+
+
+1 reply
+Grigory Kislin [1 day ago]
+я вроде в видео про это говорю (обновлял). нет там?
+
+
+Yevhen Maksymovych [9:59 AM]
+энкодинг
+спирнг секьюрити энкодит пароли, в результате получается строка вида {метод}закодированныйПароль
+{noop} означает без кодирования (edited)
+
+Vladimir Gorbatenko [10:03 AM]
+спасибо.  хмм, что-то я тут совсем упустил момент про спринг и поле password...
+
+Vladimir Gorbatenko [10:55 AM]
+да, покопал, интересно. (edited)
+
+Vladimir Gorbatenko [5:16 PM]
+все сюда же
+{bcrypt}$2a$10$w9.OeYRbCuqs4p0O1/P.Pe6oY1x7mYsJyQqDhxyqvYiFEekdTYaFS
+Вот в таком виде сохраняется пароль.  А как убрать {bсrypt} {noop} и т.п.? (edited)
+
+Yevhen Maksymovych [5:20 PM]
+никак, это маркер для спрингового PasswordEncoder'а
+без него он не будет знать, каким методом закодирован пароль, и, соответственно, подобрать алгоритм для проверки
+ну, т.е. ты можешь в принципе написать какой-то свой адаптер, который будет доставать засторенную в базу строку, добавлять флаг и скармливать пассвордэнкодеру - тебе никто помешать не может :slightly_smiling_face:
+
+Vladimir Gorbatenko [5:25 PM]
+Считал что спрингу можно задать тип шифрования, как например "sha-256", "scrypt" и других из метода "createDelegatingPasswordEncoder" (про который пишут, что нужно создать свой и подставлять нужный тип шифрования).  Понятной инфы про это не нашел. Есть старые варианты, которые были переопределены в последних версия спринга.
+
+Yevhen Maksymovych [5:29 PM]
+ну, собсна, вот тут написано
+https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/crypto/password/DelegatingPasswordEncoder.html
+```Password Storage Format
+The general format for a password is:
+ {id}encodedPassword
+ 
+Such that "id" is an identifier used to look up which PasswordEncoder should be used and "encodedPassword" is the original encoded password for the selected PasswordEncoder. The "id" must be at the beginning of the password, start with "{" and end with "}". If the "id" cannot be found, the "id" will be null. For example, the following might be a list of passwords encoded using different "id". All of the original passwords are "password".
+ {bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG
+ {noop}password
+ {pbkdf2}5d923b44a6d129f3ddf3e3c8d29412723dcbde72445e8ef6bf3b508fbf17fa4ed4d6b99ca763d8dc
+ {scrypt}$e0801$8bWJaSu2IKSn9Z9kM+TPXfOc/9bdYSrN1oD9qfVThWEwdRTnO7re7Ei+fUZRJ68k9lTyuTeUp4of4g24hHnazw==$OAOec05+bXxvuu/1qZ6NUR+xQYvYv7BeL1QxwRpY5Pc=
+ {sha256}97cde38028ad898ebc02e690819fa220e88c62e0699403e94fff291cfffaf8410849f27605abcbc0```
+не очень понял, что именно тебя смущает. что в базе останется указание на метод кодирования, и это несколько несекьюрно?
+так большинство методов кодирования необратимо. от того, что человек получит хэш и метод кодирования - это ему в большинстве случаев не поможет восстановить первоначальный пароль. (edited)
+да и если кто-то получит доступ к БД, чтобы оттуда вытащить инфу вот в таком виде, как она у тебя хранится, то, сталобыть, уже поздно пить боржоми :slightly_smiling_face:
+
+Vladimir Gorbatenko [5:42 PM]
+в целом да )
+непривычно было видеть что в базу так записысвается
+я эту статейку читал
+https://spring.io/blog/2017/11/01/spring-security-5-0-0-rc1-released

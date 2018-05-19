@@ -32,3 +32,59 @@ Grigory Kislin [1 hour ago]
 
 Ilya [12:45 PM]
 @Grigory Kislin да, и в правду мой косяк. с просони забыл, что проект перенес в другую папку, а системную переменную забыл поменять. Спасибо!
+
+
+roma [9:44 AM]
+Когда захожу в задеплоеное приложение по
+```http://topjavalrv.herokuapp.com/login```
+получаю
+
+roma [9:44 AM]
+uploaded this image: image.png 
+
+
+roma [9:45 AM]
+а по
+```https://topjavalrv.herokuapp.com/login```
+нормально заходит (edited)
+
+Yevhen Maksymovych [9:56 AM]
+это ещё что, такими темпами и локалхост скоро заблокируют )
+
+Valery.Shkerdin [10:05 AM]
+heroku давно штормит, как росалкогольнадзор начал всё лочить, так и началось.
+
+Grigory Kislin [10:38 AM]
+а я так понял, что уже на спад пошли блокировки...
+а http://topjava.herokuapp.com - заходишь?
+вообще- https://antizapret.prostovpn.org в помощь
+я на http://topjavalrv.herokuapp.com зашел (edited)
+antizapret.prostovpn.org
+АнтиЗапрет — скажи цензуре нет!
+АнтиЗапрет позволяет заходить на сайты, заблокированные в России Роскомнадзором, Роспотребнадзором и ФСКН
+
+roma [1 day ago]
+http://topjava.herokuapp.com - захожу!
+на http://topjavalrv.herokuapp.com - то захожу, то не захожу )))
+видимо от провайдера зависит - у меня какой то ТелросТелеком - да пофиг можно и через vpn и через Tor - он сразу редиректит на https и все открывается (edited)
+
+
+alexey [May 18th at 3:04 PM]
+in #hw11
+что за "API key" требует IntelliJ IDEA при попытке регистрации Heroku в clouds?
+
+
+1 reply
+Grigory Kislin [1 day ago]
+полагаю, что key в хероку надо сгенерить для работы по api
+
+
+saudabaew [4:03 PM]
+в spring security вшита поддержка Single Sign-On?
+
+realcorwin [9:28 PM]
+Захожу с паролем в хероку через браузер. А Идее (Clouds) пароль не нравится и в Heroku CLI (командной строке) тоже ошибка (HTTP 400). Может такое быть, что символ "+" в пароле создаёт проблемы?
+Или там ещё где собака порылась? Кто-нибудь сталкивался с подобным поведением?
+
+realcorwin [9:31 PM]
+uploaded this image: image.png 

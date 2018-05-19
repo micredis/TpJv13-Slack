@@ -313,3 +313,12 @@ JavaWebinar
 `31afeea9` - 11_11_heroku
 Show less
 JavaWebinar/topjava
+
+
+GitHub APP [2:26 PM]
+Pull request opened by Li0n13
+Li0n13
+#1 Fix some typos
+JavaWebinar/topjavaMay 18th
+continuous-integration/travis-ci/pr: The Travis CI build failed
+Codacy/PR Quality Review: Codacy was unable to analyse your pull request.

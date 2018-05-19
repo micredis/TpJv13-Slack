@@ -1024,3 +1024,15 @@ EdK [9:31 PM]
 
 qf05 [9:46 PM]
 изменить java код, чтоб ошибка дублирования почты выводилась в модальное окно
+
+
+poleg [May 17th at 12:32 PM]
+in #hw10
+Я вот не понял по лекции Обработка исключений в Spring. Там мы пишем спринговую аннотацию @ResponseStatus(value= HttpStatus.NOT_FOUND, reason="No data found") для public class NotFoundException extends RuntimeException. В коде патча такой аннотации нет.
+В лекции она пишется только для того чтобы вывести сообщение No data found или еще для чего?
+
+
+1 reply
+Grigory Kislin [2 days ago]
+патч 10_10_not_found
+в патче 10_12 она уже переездает в ExceptionInfoHandler
