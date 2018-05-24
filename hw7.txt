@@ -1353,3 +1353,37 @@ V-E-S-T [4:49 PM]
 
 Dzmitry Shalukhau [5:13 PM]
 Cannot resolve symbol 'con:RestService'. Ошибка в xml. Кто-нибудь встречал???
+
+Grigory Kislin [12 days ago]
+судя по ошибке- хрень в xml
+
+
+Dzmitry Shalukhau [Yesterday at 6:35 PM]
+in #hw7
+Я на некоторое время выпал из обучения. Решил закончить. Накатил все патчи для lesson7, при запуске получаю:
+Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+    at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:100)
+    at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:54)
+    at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:137)
+    at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+    at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88)
+    at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259)
+    ... 74 common frames omitted
+
+
+3 replies
+Grigory Kislin [17 hours ago]
+нет коннекта к базе
+
+
+Dzmitry Shalukhau [16 hours ago]
+Я из консоли с теми же параметрами подключаюсь к базе :disappointed: Со стороны tomcat нужно настравивать pool?
+
+
+Dzmitry Shalukhau [16 hours ago]
+Из консоли стартануть удалось. Так что похоже подключение на стороне standalone tomcat сервера не настроено.
+
+
+Dzmitry Shalukhau [6:35 PM]
+Не может создать em. Возможно я что - то забыл за это время :disappointed:
+Возможно я не указал профили для tomcat. Не помню, как это сделать...

@@ -896,3 +896,7 @@ goodhoopoe
 чтобы написать 200-500 строк кода поднять babel, gulp, uglify и прочее? зачем стрелять пушкой по воробьям? ES6 это хорошо, но не всегда его использование окупается. нередко проще на ванильном ES5 написать.
 https://topjava13.slack.com/archives/C8LLARRU7/p1525768175000231
 Posted in #randomMay 8th
+
+
+Valery.Shkerdin [11:13 AM]
+Ни кто глубоко DataTables  не изучал? Как корректно скрывать div с DataTables? У меня просто получается так, если я скрываю div сразу, слетают стили с DataTables.

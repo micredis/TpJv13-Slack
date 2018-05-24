@@ -1333,3 +1333,81 @@ Vladimir Gorbatenko [1 hour ago]
 
 Vladimir Gorbatenko [10:53 AM]
 я правильно понял, цену на блюда каждый ресторан ставит свою? (edited)
+
+
+Dmitry Neustupov [12:32 PM]
+@Vladimir Gorbatenko насколько я понял, каждый реализует по разному, у кого то админ добавляет блюда в меню ресторана и прописывает у каждого название и цену, а у кого то выбирает из списка уже готовых блюд с уже установленными названием и ценой.
+
+Dmitry Neustupov [10:43 AM]
+@VadimSimonov в tj сделано через  @ElementCollection(fetch = FetchType.EAGER)
+так не пробавал?
+
+itAvgur [9:30 AM]
+Чего-то я сломался....
+Код ниже.
+```public class Restaurant
+
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
+    private List<LunchMenu> lunchMenu;
+
+
+public class LunchMenu
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id",nullable = false)
+    private Restaurant restaurant;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "lunch_dish_refer", joinColumns = 
+        @JoinColumn(name = "lunch_id"), 
+        inverseJoinColumns = @JoinColumn(name = "dish_id"))
+    private List<Dish> dishes;```
+
+Должен получить 1 LunchMenu (на один день), со списком еду в 3 пункта.
+На выходе получаю 1*3 = 3 LunchMenu с 3 единицами.
+Т.е. он их умножает.
+БД проверил, при включении Lazy для dishes - список приходит один, как и следовало.
+Прошу, коллеги, помочь с версиями...
+
+Ilya [9:32 AM]
+Версия одна - это декартово произведение, косяк(особенность) маппинга хибернейта. Решения - либо юзать сет вместо листа, либо вставлять дистинкт в запрос
+Точнее не косяк, а просто у тебя резалст сет (табличка, которая получается при запросе в БД) сама по себе содержит повторяющиеся записи
+
+itAvgur [9:35 AM]
+Кхм, т.е. он так запрос в скуль сформировал?
+
+Ilya [9:37 AM]
+ну, попробуй сам руками вбить запрос и увидишь табличку, которая получилась
+в oneToMany такая тема, в общем. нужно либо избавляться от него, либо смириться)
+
+itAvgur [9:38 AM]
+@Ilya Да, Set помог! Спасибо огромнейшее!
+Пива в студию! :+1:
+Пошел запрос его анализировать. :nerd_face:
+
+Ilya [9:38 AM]
+@itAvgur :+1:
+
+roma [12:26 PM]
+Народ вот написано в ТЗ - не нужен FrontEnd, но в тоже время по REST мы должны пулять JSON туда сюда - соответственно все равно нужно подключать datables и JQuery, что бы этот JSON преобразовывать во что то читабельное????
+
+goodhoopoe [12:31 PM]
+зачем тебе jq? сервер должен отдавать json и всё. стандартный REST сервис
+roma
+Народ вот написано в ТЗ - не нужен FrontEnd, но в тоже время по REST мы должны пулять JSON туда сюда - соответственно все равно нужно подключать datables и JQuery, что бы этот JSON преобразовывать во что то читабельное????
+Posted in #graduationToday at 12:26 PM
+
+SergeyMuratkin [12:43 PM]
+Всё верно, а  JSON он читаемый формат, к тому же можно получать через командную строку curl -s http://localhost:8080/saloon
+
+realcorwin [1:00 PM]
+хреначишь аннотацию @RestController - вот тебе и JSON :slightly_smiling_face:
+
+roma [1:48 PM]
+погодите - что не надо вообще никакого интерфейчас делать что ли? Просто отдаю наружу JSON и все? (edited)
+
+realcorwin [1:53 PM]
+отдаёшь, правишь, удаляешь... обычный REST интерфейс, короче. отправляешь команды - смотришь, что происходит с JSON. всё
+
+roma [1:54 PM]
+понял - спасибо
