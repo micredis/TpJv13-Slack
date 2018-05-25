@@ -475,3 +475,210 @@ ReactJS/Redux- промелькунло. делал не нем что-то?
 1 reply
 Alexey Shulayakov [1 day ago]
 Спасибо! Свой бэкенд проект сделан на ReactJS/Redux. Считаю необходимым указать свой опыт самостоятельной работы, но возможно не в этом разделе. Не подскажешь куда лучше? (edited)
+
+
+Alexander Shnaider [3:25 PM]
+Вот такое резюме получилось https://alexshnaider.github.io/
+в общем-то у Григория утащил и переделал чуть
+
+goodhoopoe [3:27 PM]
+а зачем DOM в технологиях? :slightly_smiling_face:
+
+Alexander Shnaider [3:32 PM]
+а разве мы не касались этого?
+
+LeoJames [3:57 PM]
+:thinking_face:Там что то странное
+Может Григорию есть смысл сделать список, что есть технологии, что есть языки, что есть фреймворки и поверх каких технологий они работают
+А то забавно получается
+:face_with_rolling_eyes:Может имеет смысл тащить у Григория резюме и просто удалять того, что ты не знаешь?
+
+goodhoopoe [4:02 PM]
+ну как бы это не технология, не фреймворк и не библиотека, просто бессмысленно, кмк вносить в резюме
+Alexander Shnaider
+а разве мы не касались этого?
+Posted in #hw11Yesterday at 3:32 PM
+
+LeoJames [4:03 PM]
+Если уж SQL в языки засунул, то чего HTML5 и CSS3 не угодили
+
+Alexander Shnaider [4:03 PM]
+ну собственно я так и сделал, только не стал отдельно систему контроля версий выписывать и томкат и всё это в технологии запилил
+LeoJames
+:face_with_rolling_eyes:Может имеет смысл тащить у Григория резюме и просто удалять того, что ты не знаешь?
+Posted in #hw11Yesterday at 4:02 PM
+
+LeoJames [4:04 PM]
+И почему Гит в технологиях, а гитхаб в инструментах
+
+Alexander Shnaider [4:04 PM]
+да, я их туда сюда тасовал, можно и в языки наверно
+
+goodhoopoe [4:05 PM]
+так верно же всё
+LeoJames
+И почему Гит в технологиях, а гитхаб в инструментах
+Posted in #hw11Yesterday at 4:04 PM
+
+LeoJames [4:05 PM]
+Да и jQuery это не фреймворк же
+
+Alexander Shnaider [4:05 PM]
+опять же у Григория так)
+
+LeoJames [4:05 PM]
+Григорий старенький, он может ошибаться
+
+goodhoopoe [4:05 PM]
+jq это библиотека
+
+LeoJames [4:05 PM]
+:grin:
+
+goodhoopoe [4:05 PM]
+это я тебе как фронтендер говорю )
+как и реакт. это библиотека
+
+LeoJames [4:06 PM]
+И Java 8 это не фреймворк
+Не верю что у Григория так
+:thinking_face:
+
+Alexander Shnaider [4:06 PM]
+ок, можно тогда в языках написать JavaScript (jQuery)
+
+LeoJames [4:06 PM]
+Линукс это инструмент? А он хорош
+
+Alexander Shnaider [4:06 PM]
+)
+
+goodhoopoe [4:07 PM]
+да, вполне нормально будет
+Alexander Shnaider
+ок, можно тогда в языках написать JavaScript (jQuery)
+Posted in #hw11Yesterday at 4:06 PM
+
+Alexander Shnaider [4:08 PM]
+думал добавить Linux куда-нибудь)
+
+LeoJames [4:08 PM]
+uploaded this image: Untitled.png 
+
+
+LeoJames [4:08 PM]
+Технологии
+Поверх них работают фреймворки. Я знаю 5 штук в Java :thinking_face: Т.е. пишется фреймворк, а в скобках его версии и технологии которые дают ему API
+:face_with_rolling_eyes:Ну я так думаю
+
+Alexander Shnaider [4:10 PM]
+я понимаю что будет много спорных моментов, просто меня не очень радует просто список абривиатур в куче
+
+LeoJames [4:10 PM]
+Гит, Гитхаб - системы контроля версий и репозиторий соответственно
+Мавен, Ант - системы сборки
+У Григория же все хорошо написано, зачем лепить что то еще
+
+realcorwin [4:13 PM]
+Инструмент влияния опенсорс :slightly_smiling_face:.
+LeoJames
+Линукс это инструмент? А он хорош
+Posted in #hw11Yesterday at 4:06 PM
+
+LeoJames [4:14 PM]
+Я, кстати, ошибся с Java 8. Григорий так подчеркивал не ее саму, а Time API, Streams, но почему он назвал это фреймворком - я один фиг не пойму
+У меня в голову намертво забито, что фреймворк и библиотека как в ООП наследовании не (Это является), а (Это содержит)
+
+realcorwin [4:18 PM]
+мне кажется, там не обязано быть ни одно, ни другое. какая-то (пассивная) сущность тянет на библиотеку, какая-то (активная) - на фреймворк
+
+LeoJames [4:20 PM]
+Ну библиотека же это просто кусок кода для решения задачи, а фреймворк уже ближе к архитектуре и может вообще не содержать решения. И тот и другой предоставляют вышележащему уровню абстракции некий набор рычажков или API, что бы пользователь воспринимал все что ниже как черный ящик и работал только с его интерфейсом
+:face_with_rolling_eyes:
+
+Alexander Shnaider [4:25 PM]
+uploaded this image: image.png 
+
+
+Alexander Shnaider [4:25 PM]
+так лучше?
+
+realcorwin [4:26 PM]
+ну, фреймворк скорее спрашивает "чо надо-то?" и сам дергает спрятанные рычажки :slightly_smiling_face:
+
+LeoJames [4:26 PM]
+:grin:Неа
+
+realcorwin [4:27 PM]
+Leo, не дури человеку голову, напиши как надо :slightly_smiling_face:
+
+LeoJames [4:28 PM]
+Напиши там отдельную графу Операционные системы: Винда10, Линукс Убунту, Мак (со словарем)
+
+Alexander Shnaider [4:28 PM]
+думаю не стоит)
+к тому же с Маком не дружим
+
+realcorwin [4:29 PM]
+только с опиумным :slightly_smiling_face:
+
+LeoJames [4:30 PM]
+Да тут же ж проблема в том, что если не понимаешь даже разницу, то зачем писать это в резюме. Так же на тех собеседовании можно опозориться
+:thinking_face:Не, я никого не критикую, но пфф
+
+realcorwin [4:32 PM]
+так до тех собеседования ещё добраться надо, а HR парсит только лексемы нужные :slightly_smiling_face: на тех собеседовании врать конечно не надо
+
+Alexander Shnaider [4:32 PM]
+ну это понятно, позора мне не избежать это уж точно, но с чего-то начать нужно
+
+
+LeoJames [Yesterday at 4:33 PM]
+in #hw11
+Так можно и просто набор технологий весь перечислить
+
+
+1 reply
+Alexander Shnaider [23 hours ago]
+то есть тебе не нравится такое разделение и лучше сделать как все остальные облако аббревиатур?
+
+
+LeoJames [4:37 PM]
+uploaded this image: Untitled.png 
+
+
+LeoJames [4:37 PM]
+Копипастим и вызываем каскадный оргазм у всего мирового сообщества HR
+Много странных и интересных слов
+
+realcorwin [5:45 PM]
+Кстати, а где Григория резюме? помню, что видел, но где? :slightly_smiling_face:
+
+Grigory Kislin [5:45 PM]
+http://gkislin.ru/ru/cv.html
+
+
+realcorwin [5:48 PM]
+ага, спасибо.
+кстати, вдруг кому пригодится: https://novoresume.com/
+Novorésumé
+Novorésumé [2018] - Free Professional Resume Builder
+A Professional Resume Builder That Will Increase Your Chances of Getting Your Dream Job by Creating a Well-structured and Easy to Read Job Application.
+https://novoresume.com/images/thumbnail.png
+
+aleksey [6:10 PM]
+commented on LeoJames’s file Untitled.png
+LSD и MDMA не хватает
+
+realcorwin [6:19 PM]
+Алексей сравнил со своим резюме :wink:
+
+LeoJames [6:20 PM]
+:thinking_face:Знак Зодиака не забывайте указывать в резюме
+
+LeoJames [6:28 PM]
+uploaded this image: 1.png 
+
+
+LeoJames [6:28 PM]
+uploaded this image: 2.png 
