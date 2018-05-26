@@ -682,3 +682,7 @@ uploaded this image: 1.png
 
 LeoJames [6:28 PM]
 uploaded this image: 2.png 
+
+
+Kirilo [11:13 AM]
+Пересобрал заново проект и возникла проблема. При сборке ругается на class UserServiceTest Error:(5, 24) java: package org.slf4j.bridge does not exist. Почему Maven неправильно подтянул slf4j.bridge или где-то я упустил настройки?
