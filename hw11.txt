@@ -686,3 +686,33 @@ uploaded this image: 2.png
 
 Kirilo [11:13 AM]
 Пересобрал заново проект и возникла проблема. При сборке ругается на class UserServiceTest Error:(5, 24) java: package org.slf4j.bridge does not exist. Почему Maven неправильно подтянул slf4j.bridge или где-то я упустил настройки?
+
+
+Grigory Kislin [12:57 AM]
+1. из командной строки mvn clean test
+2. если не помогло удали slf4j в локальном репозитории (edited)
+
+Kirilo [4:42 AM]
+в общем все удалил вплоть до java и idea, установил наново, локально все работает
+А на heroku:
+HTTP Status 500 – Internal Server Error
+
+Type Exception Report
+
+Message An exception occurred processing JSP page [/WEB-INF/jsp/login.jsp] at line [7]
+
+Description The server encountered an unexpected condition that prevented it from fulfilling the request.
+
+Exception
+
+org.apache.jasper.JasperException: An exception occurred processing JSP page [/WEB-INF/jsp/login.jsp] at line [7]
+
+4: <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+5: 
+6: <html>
+7: <jsp:include page="fragments/headTag.jsp"/>
+8: <body>
+9: <jsp:include page="fragments/bodyHeader.jsp"/> (edited)
+
+Kirilo [6:25 AM]
+Заработало! После добавления переменных оружения, как в видео. (edited)
