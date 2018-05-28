@@ -920,3 +920,15 @@ mrLanu [6:16 PM]
 
 Dmitry Neustupov [6:29 PM]
 @mrLanu :grin::+1:
+
+
+realcorwin [5:47 PM]
+хочу удалённо с ноута работать на компе. какая прога сейчас самая удобная для этого?
+TeamViewer?
+
+goodhoopoe [5:50 PM]
+MSTSC
+
+realcorwin [6:13 PM]
+лет 10 ей не пользовался :slightly_smiling_face:
+жив ещё курилка :slightly_smiling_face:

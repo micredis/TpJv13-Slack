@@ -5639,3 +5639,36 @@ Grigory Kislin [12:11 PM]
 
 realcorwin [5:14 PM]
 Когда-то сюда кидали ссылки на курсы по лябдам и стримам. Кто кидал, скиньте, пожалуйста, ещё раз.
+
+
+Nedfrench [11:43 AM]
+Добрый день, коллеги. 
+Выполняя выпускной проект, еще раз задался вопросом, зачем мы в topjava в CrudMealRepository для большинства методов используем @Query? Такое чувство, что мы DATA-JPA используем как JDBC.
+
+
+realcorwin [Today at 11:48 AM]
+in #general
+в чисто учебных целях, там всё прекрасно через data-jpa делается (edited)
+
+
+2 replies
+Nedfrench [8 hours ago]
+Ок.
+
+
+Nedfrench [8 hours ago]
+Спасибо
+
+
+Aleksei Kirillov [12:02 PM]
+Мне кажется ещё что разница в том, что в jdbc мы оперируем таблицами, а в DATA - JPA - объектами.
+
+Nedfrench [12:06 PM]
+Такое чувство, что мы DATA-JPA используем как JPA. - так точнее будет
+
+Grigory Kislin [1:46 PM]
+нуда. мне @Query больше нравится чем магия по рефлекшену. быстрее и надежнее тк грузятся при старте. а бонус в готовых дженериках, data-jpa-common и интерфейс-based подходе- @Query в интерфейсах (edited)
+
+Nedfrench [4:31 PM]
+Я правильно понимаю, что Spring DATA-JPA создает бины и без Hibernate?
+Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: At least one JPA metamodel must be present! Не понимаю за что?
