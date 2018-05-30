@@ -5672,3 +5672,91 @@ Grigory Kislin [1:46 PM]
 Nedfrench [4:31 PM]
 Я правильно понимаю, что Spring DATA-JPA создает бины и без Hibernate?
 Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: At least one JPA metamodel must be present! Не понимаю за что?
+
+
+Grigory Kislin [11:49 PM]
+> Spring DATA-JPA создает бины и без Hibernate
+не понял вопроса (edited)
+
+
+Nedfrench [Yesterday at 8:36 AM]
+in #general
+Без подключенного Hibernate не создается бин CrudUserRepository. Получаю
+Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: At least one JPA metamodel must be present! 
+Подозреваю, что не хватает EntityManagerFactory. Разве его нет в составе Spring DATA-JPA ?
+
+
+8 replies
+Grigory Kislin [16 hours ago]
+без подключенного- не может законектится к базе и падает
+
+
+Nedfrench [15 hours ago]
+По другому поставлю вопрос: зачем для Spring DATA-JPA нужен Hibernate ?
+
+
+Nedfrench [15 hours ago]
+Сколько ни гуглил, так и не нашел ответа.
+
+
+Nedfrench [14 hours ago]
+https://stackoverflow.com/questions/23862994/what-is-the-difference-between-hibernate-and-spring-data-jpa
+Stack Overflow
+What is the difference between Hibernate and Spring Data JPA
+What are the main differences between Hibernate and Spring Data JPA? When should we not use Hibernate or Spring Data JPA? Also, when may Spring JDBC template perform better than Hibernate / Spring ...
+ 
+
+
+Nedfrench [14 hours ago]
+Для Spring DATA JPA нужен JPA provider
+
+Nedfrench [14 hours ago]
+Главное, что уяснил:  Spring DATA JPA  не является ORM.
+
+
+Nedfrench [1 hour ago]
+https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-getting-the-required-dependencies/
+petrikainulainen.net
+Spring Data JPA Tutorial: Getting the Required Dependencies
+Before we can create an application that uses Spring Data JPA, we need to get the required dependencies. This blog post identifies the required components and describes how we can get them by using Maven. Let’s get started. Additional Reading: If you are not familiar with Spring Data JPA, you should read the following blog post before you continue reading this blog post: Spring Data JPA Tutorial: Introduction provides a quick introduction to Spring Data JPA and gives an overview of the Spring Data Show more…
+ 
+
+
+Nedfrench [1 hour ago]
+Нашел ответы на все свои вопросы.
+Кстати ссылку можно найти в 5 уроке, после видело "6. Spring Data JPA" .
+
+
+Grigory Kislin [9:34 PM]
+@here
+Java Back-End Developer: горячая вакансия Нижний Новгород (несколько человек) 
+Готовы на ~70-80тр по результатам собеседования
+после полугода-года возможна релокация в Москву
+Требования
+- Core Java
+- Spring
+- Maven
+- Git
+О проекте
+- системная интеграция
+- ​разработка REST сервисов
+- высоко нагруженные приложения
+Стучите в skype: grigory.kislin- буду переправлять сразу работодателю
+
+
+aleksey [Yesterday at 11:19 PM]
+in #general
+Всем привет. Может кто подскажет с таким вопросом. В моем приложении пользователь имеет возможность загружать на сервер картинки, которые в последствии должны быть доступны всем остальным пользователям, я не хочу хранить картинки в базе, слишком много накладных расходов. Тоесть по факту мне параллельно со спрингом нужно организовать сервер статики. У кого-нибудь есть подобный опыт или сообажения?
+
+
+2 replies
+saudabaew [5 hours ago]
+что то типа такого? https://ru.wikipedia.org/wiki/Nginx
+Wikipedia
+Nginx
+nginx (engine x — англ. Engine X; по-русски произносится как э́нгинкс или э́нжин-и́кс) — веб-сервер и почтовый прокси-сервер, работающий на Unix-подобных операционных системах (тестировалась сборка и работа на FreeBSD, OpenBSD, Linux, Solaris, Mac OS X, AIX и HP-UX). Начиная с версии 0.7.52 появилась экспериментальная бинарная сборка под Microsoft Windows.
+Игорь Сысоев начал разработку в 2002 году. Осенью 2004 года вышел первый публично доступный релиз. С июля 2011 работа над nginx продолжается в Show more…
+x
+
+aleksey [10 minutes ago]
+Да, типа nginx, но я не знаю какие технологии приняты в java мире, потому хотел уточнить
