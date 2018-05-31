@@ -5760,3 +5760,20 @@ x
 
 aleksey [10 minutes ago]
 Да, типа nginx, но я не знаю какие технологии приняты в java мире, потому хотел уточнить
+
+
+alexey [4:50 PM]
+Народ, может кто еще помнит, в одном из занятий мы юзера с едой достаем и получаем кучу вложенных в друг друга объектов. Т.е. в юзере есть еда, в еде юзер, в юзере еда и так далее до бесконечности. А если это дело через rest запросить, то получаем очень страшный json. Так вот вопрос, как с этим бороться или это нормально. Просто не понятно как с этой портянкой на UI работать?
+
+Dmitry Neustupov [4:51 PM]
+@alexey @JsonIgnoreProperties
+
+Nedfrench [8:04 PM]
+<property name="jpaVendorAdapter">
+   <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+         p:showSql="${jpa.showSql}"
+         p:databasePlatform="org.hibernate.dialect.PostgreSQL9Dialect">
+   </bean>
+</property>
+
+  В видео эта строка есть  p:databasePlatform="org.hibernate.dialect.PostgreSQL9Dialect">, а в проекте нет? Без нее у меня выпускной проект валился.
