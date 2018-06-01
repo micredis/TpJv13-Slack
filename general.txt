@@ -5777,3 +5777,9 @@ Nedfrench [8:04 PM]
 </property>
 
   В видео эта строка есть  p:databasePlatform="org.hibernate.dialect.PostgreSQL9Dialect">, а в проекте нет? Без нее у меня выпускной проект валился.
+  
+Nedfrench [9:46 PM]
+Яков Файн про REST 
+https://www.youtube.com/watch?v=4C9iGwpc15c&index=18&list=PLkKunJj_bZefB1_hhS68092rbF4HFtKjW
+YouTubeYakov Fain
+Intro to Java. Unit 18. Restful Web Services (in Russian)
