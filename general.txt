@@ -5783,3 +5783,13 @@ Nedfrench [9:46 PM]
 https://www.youtube.com/watch?v=4C9iGwpc15c&index=18&list=PLkKunJj_bZefB1_hhS68092rbF4HFtKjW
 YouTubeYakov Fain
 Intro to Java. Unit 18. Restful Web Services (in Russian)
+
+
+Alexander Shnaider [Today at 2:36 PM]
+in #general
+Вопрос, а почему мы через rest get получаем юзера без пароля? и где это настраивается?
+
+
+1 reply
+Alexander Shnaider [6 hours ago]
+Я так понял вот эта аннотация отвечает в моделе за это `@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)` (edited)
