@@ -1554,3 +1554,67 @@ Dmitry Neustupov [9:25 AM]
 
 Евгений Глушков [10:09 AM]
 @Dmitry Neustupov, буду, но к завтра на ревью не успеваю, еще надо все контроллеры доделать, кроме одного.
+
+
+ujwegh [2:56 PM]
+Коллеги, решил прикрутить sucurity, сделал как в проекте. При обновлении пользователя все хорошо обновляется, однако слетает авторизация. Чтобы снова авторизоваться нужно перед паролем вводить {noop}. Что можно сделать в данном случае?
+
+Dmitry Neustupov [3:06 PM]
+@ujwegh может быть дело в пасворд энкодере? он перегоняет на слое сервиса туда-сюда пароль?
+
+
+saudabaew [Jun 6th at 3:07 PM]
+in #graduation
+а что значит обновить пользователя?
+
+
+4 replies
+ujwegh [2 days ago]
+Внести изменения в пользователя. Поменять имя или ещё что
+
+
+saudabaew [2 days ago]
+есть код н гитхаб?
+
+
+ujwegh [2 days ago]
+Ещё не залил
+
+
+saudabaew [2 days ago]
+попробуй: When you are configuring the ClientDetailsServiceConfigurer, you have to also apply the new password storage format to the client secret.
+
+.secret("{noop}secret")
+
+
+ujwegh [3:26 PM]
+При обновлении пасворд энкодер меняет мой пароль на {bcrypt}... И пишет в базу. По идее при дальнейшем действии пароль должен декодироваться. В итоге после обновления на любые запросы пишет 401 unauthorized. Добавка к паролю {noop} позволяет произвести авторизацию и выполнить запросы. Не понимаю почему так
+Я могу заменить delegatingPasswordEncoder на NoopPasswordEncoder чтобы гоняли просто текстовые пароли но это не секьюрно как пишут в документации
+
+Alexander Shnaider [2:26 PM]
+Друзья, подскажите. Вот есть метод
+```@EntityGraph(attributePaths = {"meals"}, type = EntityGraph.EntityGraphType.LOAD)
+    @Query("SELECT r FROM Restaurant r WHERE r.id=?1")
+    Restaurant getWithMeals(int id);```
+есть ли возможность  задать условия, чтобы не все блюда потягивались, а только определённой даты например. Что-то гуглёж мне не помог
+
+
+Erick [Yesterday at 11:57 PM]
+in #graduation
+Как запустить приложение с минимальными усилиями, не устанавливая томкат, не прописывая переменные среды... как и что нужно сконфигурировать, чтобы запускаться из командной строки?
+Разбираюсь с spring-boot-starter-web 
+https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-first-application.html#getting-started-first-application-dependencies
+подскажите, где/что можно почитать?
+
+
+1 reply
+pro [8 hours ago]
+cкачай спринг pet clinic и по аналогии сделай, там все автоматически подтягивается
+
+
+realcorwin [12:15 AM]
+https://javabrains.thinkific.com/courses/springboot-quickstart
+Java Brains
+Spring Boot Quick Start
+Learn how to create full end-to-end Spring applications using Spring Boot.
+https://s3.amazonaws.com/thinkific/courses/course_card_image_000/213/4021512179090.original.jpg?1512179090
