@@ -5793,3 +5793,13 @@ in #general
 1 reply
 Alexander Shnaider [6 hours ago]
 Я так понял вот эта аннотация отвечает в моделе за это `@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)` (edited)
+
+goodhoopoe [4 days ago]
+я думаю этот вопрос лучше задать в соответствующем канале
+
+
+phoenix [7:50 PM]
+Есть кто работал с Spring cloud и Netflix OSS?
+
+Grigory Kislin [12:20 AM]
+@phoenix как раз счас трудимся с проектом автосервис
