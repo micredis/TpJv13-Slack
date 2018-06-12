@@ -1618,3 +1618,121 @@ Java Brains
 Spring Boot Quick Start
 Learn how to create full end-to-end Spring applications using Spring Boot.
 https://s3.amazonaws.com/thinkific/courses/course_card_image_000/213/4021512179090.original.jpg?1512179090
+
+
+Nedfrench [12:25 PM]
+Добрый день, коллеги. 
+Уточните, пож-та, обязательно ли в topjava в классе User было добавлять protected List<Meal> meals?
+
+Grigory Kislin [12:31 PM]
+@Nedfrench только если ест потребность в приложении
+
+
+Nedfrench [Yesterday at 12:35 PM]
+in #graduation
+Я верно понимаю, что если в классе Meal есть поле типа User, то совсем не обязательно в User должно быть List<Meal> meals?
+
+
+2 replies
+Alexander Shnaider [23 hours ago]
+ну да, все от логики зависит, как я понимаю. Если в юзере эта еда не где не используется то зачем она там нужна
+
+
+Nedfrench [23 hours ago]
+Спасибо.
+
+
+Grigory Kislin [12:44 PM]
+см 1 см выше
+
+
+Nedfrench [Yesterday at 1:06 PM]
+in #graduation
+"11: если приложению в объекте требуется только его id, используйте reference (как мы при сохранении еды вставляем туда юзера)"
+
+ int userId = AuthorizedUser.id(); -- если бы в приложении не было spring-security пришлось передавать  userId  в rest запросе? Или есть др. варианты?
+Откуда вопрос возник: при сохранении Menu,  не соображу каким образом получить restoran_id ? Т.к. в классе Menu поле Restoran restoran (fetch = FetchType.LAZY).
+
+
+11 replies
+Alexander Shnaider [23 hours ago]
+ну тут я так понял нужно как в топ джаве мы делали
+```@Override
+    @Transactional
+    public Meal save(Meal meal, int userId) {
+        if (!meal.isNew() && get(meal.getId(), userId) == null) {
+            return null;
+        }
+        meal.setUser(crudUserRepository.getOne(userId));
+        return crudMealRepository.save(meal);
+    }```
+
+
+Nedfrench [23 hours ago]
+Вопрос в том откуда restoran_id брать, чтобы сделать как в topjava
+
+
+Alexander Shnaider [23 hours ago]
+ну вместо crudUserRepository у тебя ресторанРепозитори
+
+
+Alexander Shnaider [23 hours ago]
+у меня вот так
+```meal.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
+        return crudMealRepository.save(meal);```
+
+
+Nedfrench [23 hours ago]
+restaurantId откуда берешь?
+
+Alexander Shnaider [23 hours ago]
+в метод передаётся
+
+
+Alexander Shnaider [23 hours ago]
+по анологией с топджавой\
+
+
+Nedfrench [23 hours ago]
+На уровне Контроллера restaurantId откуда берешь?
+
+
+Nedfrench [23 hours ago]
+в Topjava в AbstractMealController:  int userId = AuthorizedUser.id();
+
+
+Dmitry Neustupov [19 hours ago]
+@Nedfrench в запросе передавай в контроллер и будет тебе счастье
+
+
+Nedfrench [19 hours ago]
+Dmitry Neustupov, в @PathVariable? Или все же в @RequestBody?
+
+
+Nedfrench [Yesterday at 7:07 PM]
+in #graduation
+Если в классе Menu поле Restoran restoran (fetch = FetchType.LAZY), то получаю
+org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: could not initialize proxy - no Session; nested exception is com.fasterxml.jackson.databind.JsonMappingException: could not initialize proxy - no Session (through reference chain: java.util.ArrayList[0]->ru.graduation.model.Menu["restoran"]->ru.graduation.model.Restoran_$$_jvst496_1["name"]).
+Подскажите пож-та как победить.
+
+
+2 replies
+Pavel Zaitcev [6 hours ago]
+1) Не отдавай на клиента Entity, отдавай DTO.
+2) Зачем тебе для каждого меню отдавать объект ресторана? Если очень надо, в DTO отдавай id ресторана.
+3) Если хочешь оставить как есть, ставь EAGER в коллекции. Получишь декартово произведение, но будет отдаваться ресторан без проблем.
+4) пункт 3, только через JOIN FETCH запрос в репозитории.
+Пункт 3, является не рекомендуемым подходом, да ты и сам об этом знаешь.
+
+А вообще, пересмотри архитектуру приложения (работу с сущностями).
+
+
+Nedfrench [4 hours ago]
+Спасибо за исчерпывающий ответ.
+
+
+Nedfrench [11:11 AM]
+В topjave MealRestController.get возвращает Entity Meal, в котором User user (fetch = FetchType.LAZY). Но ошибку  "could not initialize proxy" не получаем, почему?
+
+Dmitry Neustupov [11:51 AM]
+@Nedfrench в предпоследнем сообщении, ты, видимо, пытаешься вытащить имя ресторана, но у тебя в меню прицеплен, скорее всего, только лишь айдишник ресторана, если ты делал по аналогии с топджавой. Для того, чтобы тебе получить имя ресторана, как и предыдущий коллега, могу посоветовать завести ТО для меню с именем ресторана или EAGER поставить, но тогда кол-во запросов в базу возрастёт. По последнему вопросу - в топджаве у нас запросе гет у еды постоянный юзер - авторизованный юзер, мы знаем все его поля, и, так или иначе, можем с ним работать не вытаскивая его данные из еды, полученной в запросе, в нём тоже только айдишник юзера.
