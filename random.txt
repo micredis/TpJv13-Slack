@@ -966,3 +966,11 @@ https://www.kinopoisk.ru/film/vse-psy-popadayut-v-ray-1989-29573/
 Vladimir Gorbatenko [4:40 PM]
 Всем привет! А кто как борется с тем, что Идея постоянно подставляет "Language Level" = "5 - enum, keyword, generic ..." ? Надоело постоянно менять на уровень "8 - Lambdas, type annotation..."
 В "File -> Other Settings -> Default Project Structure" -> Project, Project language level - установлено на  "8 - Lambdas, type annotation..."
+
+
+ilya t. [10:14 AM]
+https://habr.com/post/413937/
+Хабр
+Заблуждения программистов о трудоустройстве
+Это перевод. Статья опубликована в июне 2018 года Я не сразу устроился на достойную работу. Мне вполне хватало технических навыков, но я просто сдерживал себя...
+https://habr.com/images/habr.png

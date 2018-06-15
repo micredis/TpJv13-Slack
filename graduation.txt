@@ -1736,3 +1736,22 @@ Nedfrench [11:11 AM]
 
 Dmitry Neustupov [11:51 AM]
 @Nedfrench в предпоследнем сообщении, ты, видимо, пытаешься вытащить имя ресторана, но у тебя в меню прицеплен, скорее всего, только лишь айдишник ресторана, если ты делал по аналогии с топджавой. Для того, чтобы тебе получить имя ресторана, как и предыдущий коллега, могу посоветовать завести ТО для меню с именем ресторана или EAGER поставить, но тогда кол-во запросов в базу возрастёт. По последнему вопросу - в топджаве у нас запросе гет у еды постоянный юзер - авторизованный юзер, мы знаем все его поля, и, так или иначе, можем с ним работать не вытаскивая его данные из еды, полученной в запросе, в нём тоже только айдишник юзера.
+
+
+Nedfrench [12:13 PM]
+В предпоследнем сообщении в MenuRestController.get пытаюсь получить Menu, по аналогии с MealRestController.get в topjave.
+
+Nedfrench [12:30 PM]
+В topjave AdminRestController.get возвращает Entity User, в котором  List<Meal> meals (fetch = FetchType.LAZY). Но ошибку  "could not initialize proxy" не получаем, почему?
+
+Dmitry Neustupov [12:40 PM]
+@Nedfrench скинь ссылку на код
+
+Nedfrench [12:51 PM]
+https://github.com/Aflek87/graduation
+Aflek87/graduation
+Language
+Java
+Last updated
+a minute ago
+Aflek87/graduationJun 12thAdded by GitHub

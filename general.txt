@@ -5803,3 +5803,75 @@ phoenix [7:50 PM]
 
 Grigory Kislin [12:20 AM]
 @phoenix как раз счас трудимся с проектом автосервис
+
+
+dmitry_ov [Jun 12th at 8:42 PM]
+in #general
+Коллеги, а почему try может выглядеть не только так: 
+
+try {…
+команды
+…}
+
+но еще и так 
+
+try  (команда) {
+}
+
+в чем разница. Что нам дает 2-я запись ?
+
+Пример из файла: 
+topjava/src/test/java/ru/javawebinar/topjava/SpringMain.java (edited)
+
+
+1 reply
+Tanya [3 days ago]
+https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
+docs.oracle.com
+The try-with-resources Statement (The Java™ Tutorials >                     Essential Classes > Exceptions)
+This Java tutorial describes exceptions, basic input/output, concurrency, regular expressions, and the platform environment
+
+
+Alexander Shnaider [8:46 PM]
+насколько я понял Григория в таком случае ресурс  сам открывается и закрывается. Причём гарантируется что он закроется при любом стечении обстоятельств
+
+Vitaly [8:56 PM]
+@dmitry_ov  - https://habr.com/post/178405/
+Хабр
+Правильно освобождаем ресурсы в Java
+Неправильное освобождение ресурсов — одна из наиболее часто допускаемых ошибок среди Java-программистов. Под ресурсом в данной статье я буду подразумевать всё,...
+https://habr.com/images/habr.png
+
+
+Erick [7:38 PM]
+чего может не хватать приложению для старта через командную строку 
+mvn cargo:run
+build в pom и context.xml идентичный topjava
+при запуске томкат стартует, в логах WebApplicationContext и mvc-dispatcher инициализируются, секьюрити поднимается, запросы мапятся, нет ни [ERROR] ни [WARN]... а приложение не работает. 
+при запуске из IDE и запускается и работает.
+
+goodhoopoe [7:55 PM]
+переменные прописывал в системе или в IDE?
+
+Erick [8:12 PM]
+если правильно понимаю, то да. переменные среды M2_HOME и JAVA_HOME прописанны.
+из логов:
+[INFO] [talledLocalContainer] РёС?Р? 13, 2018 7:27:13 PM org.apache.catalina.startup.VersionLoggerListener log
+[INFO] [talledLocalContainer] INFO: Java Home:             C:\Java\jdk1.8.0_151\jre
+[INFO] [talledLocalContainer] РёС?Р? 13, 2018 7:27:13 PM org.apache.catalina.startup.VersionLoggerListener log
+[INFO] [talledLocalContainer] INFO: JVM Version:           1.8.0_151-b12
+[INFO] [talledLocalContainer] РёС?Р? 13, 2018 7:27:13 PM org.apache.catalina.startup.VersionLoggerListener log
+[INFO] [talledLocalContainer] INFO: JVM Vendor:            Oracle Corporation
+[INFO] [talledLocalContainer] РёС?Р? 13, 2018 7:27:13 PM org.apache.catalina.startup.VersionLoggerListener log
+[INFO] [talledLocalContainer] INFO: CATALINA_BASE:         D:\Java\0_Java_Projects\lunch-voting\target\cargo\configurations\tomcat8x
+[INFO] [talledLocalContainer] РёС?Р? 13, 2018 7:27:13 PM org.apache.catalina.startup.VersionLoggerListener log
+[INFO] [talledLocalContainer] INFO: CATALINA_HOME:         D:\Java\0_Java_Projects\lunch-voting\target\cargo\installs\tomcat-8.5.23\apache-tomcat-8.5.23
+
+dmitry_ov [6:46 PM]
+Коллеги, а кто делал лицензионный ключ на IntelliJ idea 
+Эту лицензию только на 1-м компе можно использовать ?
+
+Dzmitry Shalukhau [7:09 PM]
+@dmitry_ov На многих компах, но не одновременно.
+Т.е. не должно быть одновременного запуска...
+Они за этим следят... Причем, если у тебя Enterprise лицензия - с этим попроще. У меня дома бывает забываю включенной и на офисе запускаю - без проблем...
