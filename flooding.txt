@@ -566,3 +566,10 @@ Grigory Kislin [6:54 PM]
 PlantUML.com
 Open-source tool that uses simple textual descriptions to draw UML diagrams.
 Easily create UML Diagrams from simple textual description. There are also numerous kind of available diagrams. It's also possible to export images in PNG, LaTeX, EPS, SVG.
+
+
+tema.emelyan [1:08 PM]
+какая ситуация по диаграмам обычно? в реальных проектах используют?
+
+Grigory Kislin [10:54 PM]
+ну, бывает. архитекторы особенно рисуют. но не всегда
