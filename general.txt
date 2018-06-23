@@ -5875,3 +5875,127 @@ Dzmitry Shalukhau [7:09 PM]
 @dmitry_ov На многих компах, но не одновременно.
 Т.е. не должно быть одновременного запуска...
 Они за этим следят... Причем, если у тебя Enterprise лицензия - с этим попроще. У меня дома бывает забываю включенной и на офисе запускаю - без проблем...
+
+
+dmitry_ov [1:28 PM]
+Коллеги, кому нибудь удавалось запустить JPA Console в Intelij Idea ? 
+Не просто запустить, а что бы еще и работали запросы)
+
+dmitry_ov [1:30 PM]
+added and commented on this Perl snippet: Untitled 
+select m from Meal m
+[2018-06-20 13:13:05] org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+[2018-06-20 13:13:05] java.lang.RuntimeException: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+У меня любой запрос вылетает с ошибкой.  Не понимаю где  можно диалект указать
+
+saudabaew [2:36 PM]
+uploaded and commented on this image: Безымянный.png 
+
+Ты про это?
+dmitry_ov [3:15 PM]
+Нет. Это SQL
+
+saudabaew [3:17 PM]
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL9Dialect
+в application.properties
+
+dmitry_ov [3:17 PM]
+uploaded this image: image.png 
+
+
+dmitry_ov [3:18 PM]
+@saudabaew  А где у нас в проекте topjava  файл application.properties  ?
+
+saudabaew [3:27 PM]
+ссори, подумал это общий вопрос, имел ввиду технологию spring boot. в твоем варианте попробуй это: http://www.cyberforum.ru/java-database/thread1145063.html
+cyberforum.ru
+Hibernate + PostgreSQL: не могу достучаться до БД - Java и базы данных - Киберфорум
+Доброго времени суток. Имеются следующие файлы в проекте: package org.hibernate.util; import org.hibernate.SessionFactory; import org.hibernate.boot.registry.StandardServiceRegistryBuilder; import org.hibernate.cfg.Configuration; public class HibernateUtil { private static... Java и базы данных
+
+dmitry_ov [3:33 PM]
+Это не то. 
+В Intelij Idea Ultimate есть инструмент "Jpa console". Он находит entity в проекте и дает возможность делать запросы на языке JPQL
+Этот инструмент и не работает
+
+dmitry_ov [3:35 PM]
+uploaded this image: image.png 
+
+
+Andrii Hreshchik [3:39 PM]
+uploaded and commented on this image: Снимок экрана 2018-06-20 в 15.37.44.png 
+
+здесь настроено?
+
+Andrii Hreshchik [3:48 PM]
+хотя нет, эта настройка вообще не влияет на работу
+
+Vitaly [4:09 PM]
+@dmitry_ov благодаря тебе я научился пользоваться jpql консолью))
+
+Vitaly [4:09 PM]
+uploaded this image: image.png 
+
+
+Vitaly [4:11 PM]
+https://www.youtube.com/watch?time_continue=388&v=BvFQncF4SX4
+YouTubeDaniel Michalski
+[5] IntelliJ IDEA Spring and JPA/ Hibernate support tutorial [HD 1080p]
+
+мне помогло, по сути: должно быть действующее соединение с БД в самой идее, поля в entity должны быть assign на него. С HSQL в памяти не прокатывает, с postgres - все норм
+
+dmitry_ov [4:19 PM]
+Нужно добавить в файд persistance.xml настройки подключения к БД
+dmitry_ov
+Коллеги, кому нибудь удавалось запустить JPA Console в Intelij Idea ? 
+Не просто запустить, а что бы еще и работали запросы)
+Posted in #generalJun 20th
+
+
+dmitry_ov [4:19 PM]
+added this XML snippet: persistence.xml 
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+​
+  <persistence-unit name="persistenceUnitName" transaction-type="RESOURCE_LOCAL">
+​
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/topjava" /> <!-- BD Mane -->
+      <property name="javax.persistence.jdbc.user" value="user" /> <!-- DB User -->
+      <property name="javax.persistence.jdbc.password" value="password" /> <!-- DB Password -->
+​
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> <!-- DB Dialect -->
+      <!--<property name="hibernate.hbm2ddl.auto" value="update" /> &lt;!&ndash; create / create-drop / update &ndash;&gt;-->
+​
+      <property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
+      <property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
+    </properties>
+​
+  </persistence-unit>
+​
+</persistence>
+​
+Collapse 
+
+saudabaew [4:20 PM]
+кто после стажировки уже трудоустроился? какой функционал реализуете, на каком стеке?
+
+Vitaly [4:24 PM]
+commented on dmitry_ov’s snippet persistence.xml
+так в рамках текущего проекта:
+1. persistance.xml отсутствует как таковой, он не нужен
+2. все настройки с базами в hsqldb/posgtresql.properties
+Vitaly [4:24 PM]
+если будет persistance.xml - будет жесткая настройка на БД, по идее
+Vitaly [4:26 PM]
+Idea просто не видит связь между entityManager и dataSource, assign - как раз показывает ей это
+
+dmitry_ov [4:26 PM]
+@Vitaly Да я уже после того как запустил, посмотрел твой коммент, узнал от тебя что можно связывать entity и источник данных, в виде имеющегося подключения к БД )
+да, можно без файла persistance.xml
+
+Vitaly [4:27 PM]
++1 к моим знаниям, пригодится
+
+dmitry_ov [4:27 PM]
+и +1 к моим)
