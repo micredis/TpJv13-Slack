@@ -350,3 +350,18 @@ JavaWebinar/topjava
 Pull request closed by JavaWebinar
 #1 Fix some typos
 JavaWebinar/topjavaMay 18th
+
+
+GitHub APP [4:56 PM]
+JavaWebinar
+*8 new commits pushed to `master`*
+`b445811e` - 1_0_fix
+`538b4d76` - 1 1 HW0 stream
+`4902a6ba` - 1_2_HW0_cycle
+`442a66ac` - 1_3_HW0_optional2
+`da062e03` - 1_4_switch_to_war
+`be61e63f` - 1_5_add_servlet_api
+`f2aaa0a8` - 1_6_forward_to_redirect
+`3caf90e8` - 1_7_logging
+Show less
+JavaWebinar/topjava
