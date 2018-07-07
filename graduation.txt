@@ -1778,3 +1778,11 @@ Nedfrench [7:08 PM]
 
 Dmitry Neustupov [8:27 PM]
 @Nedfrench По мне, так без разницы, ничего сложного, просто 1-й вариант первым в голову пришёл )
+
+
+Anton Kiselev [11:35 PM]
+Подскажите, пожалуйста. Делаю тесты в сервисах на Datajpa repository, при выполнении любого теста на получение данных вылетает
+```org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet```
+    
+```Caused by: org.postgresql.util.PSQLException: ОШИБКА: столбец restaurant0_.id не существует```
+в какую сторону смотреть (edited)
