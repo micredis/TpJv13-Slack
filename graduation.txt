@@ -1786,3 +1786,24 @@ Anton Kiselev [11:35 PM]
     
 ```Caused by: org.postgresql.util.PSQLException: ОШИБКА: столбец restaurant0_.id не существует```
 в какую сторону смотреть (edited)
+
+
+dustnfox [23 hours ago]
+Антон, так вроде бы ясно написано, столбец отсутствует. Посмотри, что за схема в БД. Возможно, что нормально не инициализировалась.
+
+
+Anton Kiselev [5 hours ago]
+схема public как в topjava
+
+
+dustnfox [5 hours ago]
+Прошу прощения за недопонимание. Я имел в виду схему в более общем смысле. То есть совокупность таблиц, их полей и ограничений. https://en.m.wikipedia.org/wiki/Database_schema
+
+Открой прямо в IDEA БД с которой пытается работать Hibernate и убедись в наличии нужных таблиц, а в таблицах полей.
+Wikipedia
+Database schema
+The database schema of a database system is its structure described in a formal language supported by the database management system (DBMS). The term "schema" refers to the organization of data as a blueprint of how the database is constructed (divided into database tables in the case of relational databases). The formal definition of a database schema is a set of formulas (sentences) called integrity constraints imposed on a database. These integrity constraints ensure compatibility between parts Show more…
+
+
+Anton Kiselev [5 hours ago]
+я троян. разобрался, спасибо за помощь.

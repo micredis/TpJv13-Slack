@@ -365,3 +365,17 @@ JavaWebinar
 `3caf90e8` - 1_7_logging
 Show less
 JavaWebinar/topjava
+
+
+GitHub APP [12:40 PM]
+JavaWebinar
+*7 new commits pushed to `master`*
+`fe9947b8` - 2_1_HW1
+`72aced68` - 2_2_HW1_optional
+`656d289c` - 2_3_app_layers
+`b5e0fbc2` - 2_4_add_spring_context
+`31d2420a` - 2_5_dependency_injection
+`9abb792b` - 2_6_annotation_processing
+`329c1114` - 2_7_constructor_injection
+Show less
+JavaWebinar/topjava
