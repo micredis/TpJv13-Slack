@@ -6046,3 +6046,32 @@ Grigory Kislin [12:53 PM]
 Sergey Kubatko [9:43 AM]
 @Grigory Kislin могу сказать что звезды сошлись хорошо, команда достойная, опытом делятся :wink: Стек то, что надо, Spring, WildFly, Oracle, GridGain и много всяких еще приключений, так что каждый день приносит новые знания и бесценный опыт!! 
 Про историю помню, сейчас допройду курс по Java EE и напишу, пока домашки всё время забирают :sunglasses:
+
+
+realcorwin [Aug 10th at 3:08 PM]
+@Sergey Kubatko А что за курс?
+
+
+6 replies
+Sergey Kubatko [2 days ago]
+я учусь в Geek University на geekbrains.ru, сейчас вторая четверть и Java EE в предверии Spring
+
+
+realcorwin [2 days ago]
+и как? смысл есть? и что можно сказать, если сравнивать с топ-ява?
+
+
+Sergey Kubatko [1 day ago]
+зависит от того, какую цель преследуем, мне важно было в феврале получить работу, и топджава мне в этом помогла
+
+
+Sergey Kubatko [1 day ago]
+я бы рекомендовал пройти и начальную джаву здесь
+
+
+Sergey Kubatko [1 day ago]
+плюс после топджавы пойду на след уровень :wink:
+
+
+Sergey Kubatko [1 day ago]
+все-таки Enterprise не так гладко дается как Standart, у меня только сейчас каша по Java EE начинает рассеиваться ...
