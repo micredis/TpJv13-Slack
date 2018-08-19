@@ -6075,3 +6075,9 @@ Sergey Kubatko [1 day ago]
 
 Sergey Kubatko [1 day ago]
 все-таки Enterprise не так гладко дается как Standart, у меня только сейчас каша по Java EE начинает рассеиваться ...
+
+
+Grigory Kislin [10:14 AM]
+Коллеги, привет!
+группу скоро удалю. Общаемся в javaops.slack.com
+PS: уже можно из профиля записываться на повтор topjava15 (старт 27 сентября)
